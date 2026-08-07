@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "run_id": "intake-20260730-18src-12blob-idx-idxtrd-v1",
+  "source_root": "${USER_PROFILE}\\Downloads",
+  "sources": [
+    {
+      "filename": "国内指数日行情文件181414105(仅供清华大学使用).zip",
+      "kind": "package",
+      "bytes": 79187568,
+      "sha256": "16dccf84888d5a6ed09b3bb7857bed92f9c15d42d294146bc582ec00d18dab9c"
+    },
+    {
+      "filename": "国内指数日行情文件181534628(仅供清华大学使用).zip",
+      "kind": "package",
+      "bytes": 103482025,
+      "sha256": "91b3301336a8ffddeffbf3eeebddf0575410ace34f6efb1b5dc23cf1291996e5"
+    },
+    {
+      "filename": "国内指数日行情文件181616434(仅供清华大学使用).zip",
+      "kind": "package",
+      "bytes": 269279,
+      "sha256": "a9c7059977be8be0cf045e298e6b290786216fd40dde5a23e9b0314da85e997e"
+    },
+    {
+      "filename": "国内指数日行情文件181707570(仅供清华大学使用) (1).zip",
+      "kind": "package",
+      "bytes": 235651,
+      "sha256": "900ff16599a402b670207ace585f5180cb3a7a7f25f9fd1138b9b7552cea99fc"
+    },
+    {
+      "filename": "国内指数日行情文件181707570(仅供清华大学使用) (2).zip",
+      "kind": "package",
+      "bytes": 235651,
+      "sha256": "900ff16599a402b670207ace585f5180cb3a7a7f25f9fd1138b9b7552cea99fc"
+    },
+    {
+      "filename": "国内指数日行情文件181707570(仅供清华大学使用) (3).zip",
+      "kind": "package",
+      "bytes": 235651,
+      "sha256": "900ff16599a402b670207ace585f5180cb3a7a7f25f9fd1138b9b7552cea99fc"
+    },
+    {
+      "filename": "国内指数日行情文件181707570(仅供清华大学使用).zip",
+      "kind": "package",
+      "bytes": 235651,
+      "sha256": "900ff16599a402b670207ace585f5180cb3a7a7f25f9fd1138b9b7552cea99fc"
+    },
+    {
+      "filename": "国内指数日行情文件181749953(仅供清华大学使用) (1).zip",
+      "kind": "package",
+      "bytes": 405731,
+      "sha256": "ad1eaabe5af3b11a4b3d6757ffd59d1e1953d45f43d82c7b167eb896445da4a0"
+    },
+    {
+      "filename": "国内指数日行情文件181749953(仅供清华大学使用).zip",
+      "kind": "package",
+      "bytes": 405731,
+      "sha256": "ad1eaabe5af3b11a4b3d6757ffd59d1e1953d45f43d82c7b167eb896445da4a0"
+    },
+    {
+      "filename": "国内指数日行情文件181812010(仅供清华大学使用) (1).zip",
+      "kind": "package",
+      "bytes": 1723276,
+      "sha256": "365f9c81453abd17c78c8ce53d929293bc45246adfc952869e04bcde8a71e281"
+    },
+    {
+      "filename": "国内指数日行情文件181812010(仅供清华大学使用).zip",
+      "kind": "package",
+      "bytes": 1723276,
+      "sha256": "365f9c81453abd17c78c8ce53d929293bc45246adfc952869e04bcde8a71e281"
+    },
+    {
+      "filename": "国内指数日行情文件181826557(仅供清华大学使用).zip",
+      "kind": "package",
+      "bytes": 4821148,
+      "sha256": "c0e14e0da754c25ae2e98ca4a86c4898e1acafbd93d805e004a9c8d3ad514814"
+    },
+    {
+      "filename": "国内指数日行情文件181857916(仅供清华大学使用).zip",
+      "kind": "package",
+      "bytes": 9648054,
+      "sha256": "13e7c7f1e053a2d1a06bdaf565d4c46c7bb469aef1e413adc9712c4bff23cc5a"
+    },
+    {
+      "filename": "国内指数日行情文件181859088(仅供清华大学使用) (1).zip",
+      "kind": "package",
+      "bytes": 35338644,
+      "sha256": "457b50b2f329f67edaf317ece357c5adcfda5de781569c4f9df9b753db3aafe3"
+    },
+    {
+      "filename": "国内指数日行情文件181859088(仅供清华大学使用).zip",
+      "kind": "package",
+      "bytes": 35338644,
+      "sha256": "457b50b2f329f67edaf317ece357c5adcfda5de781569c4f9df9b753db3aafe3"
+    },
+    {
+      "filename": "国内指数日行情文件182012660(仅供清华大学使用).zip",
+      "kind": "package",
+      "bytes": 73214942,
+      "sha256": "3acefc9faec85143fce7f2e76dbf480930254703320330ee04d2b5e9be5f55aa"
+    },
+    {
+      "filename": "国内指数日行情文件182303030(仅供清华大学使用).zip",
+      "kind": "package",
+      "bytes": 88277071,
+      "sha256": "88f179ccabc7ae1c5d31ef141afc7ffb41a2c998588505892760709969011f9f"
+    },
+    {
+      "filename": "国内指数日行情文件190452046(仅供清华大学使用).zip",
+      "kind": "package",
+      "bytes": 794496,
+      "sha256": "3e4a91cf90dd7fcb97096f4bebc61eb29b771c5b6cf03bad6702c1b38cffccd0"
+    }
+  ]
+}

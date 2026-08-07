@@ -1,0 +1,146 @@
+{
+  "schema_version": 1,
+  "request_spec_id": "D2A03_OFFICIAL_PIT_SMALL_SAMPLE_V1",
+  "purpose_ceiling": "INSPECTION_ONLY",
+  "requests": [
+    {
+      "source": "SZSE_OFFICIAL",
+      "role": "BUSINESS_QUERY",
+      "exchange": "SZSE",
+      "security_code": "002586",
+      "method": "POST",
+      "url": "https://www.szse.cn/api/disc/announcement/annList",
+      "headers": {
+        "Referer": "https://www.szse.cn/www/disclosure/listed/notice/index.html"
+      },
+      "json": {
+        "pageSize": 10,
+        "pageNum": 1,
+        "stock": [
+          "002586"
+        ],
+        "channelCode": [
+          "listedNotice_disc"
+        ],
+        "seDate": [
+          "2024-04-01",
+          "2024-04-30"
+        ],
+        "bigCategoryId": [
+          "010301"
+        ]
+      },
+      "records_path": [
+        "data"
+      ],
+      "required_fields": [
+        "id",
+        "annId",
+        "title",
+        "publishTime",
+        "attachPath",
+        "attachFormat",
+        "attachSize",
+        "secCode",
+        "secName"
+      ]
+    },
+    {
+      "source": "SSE_OFFICIAL",
+      "role": "BUSINESS_QUERY",
+      "exchange": "SSE",
+      "security_code": "600090",
+      "method": "GET",
+      "url": "https://query.sse.com.cn/security/stock/queryCompanyBulletin.do",
+      "headers": {
+        "Referer": "https://www.sse.com.cn/assortment/stock/list/info/announcement/index.shtml?productId=600090"
+      },
+      "params": {
+        "isPagination": "true",
+        "productId": "600090",
+        "keyWord": "2020年年度报告",
+        "securityType": "0101,120100,020100,020200,120200",
+        "reportType2": "ALL",
+        "reportType": "ALL",
+        "beginDate": "2021-01-01",
+        "endDate": "2021-12-31",
+        "pageHelp.pageSize": "20",
+        "pageHelp.pageNo": "1",
+        "pageHelp.beginPage": "1",
+        "pageHelp.cacheSize": "1",
+        "pageHelp.endPage": "1"
+      },
+      "records_path": [
+        "result"
+      ],
+      "required_fields": [
+        "SECURITY_CODE",
+        "SECURITY_NAME",
+        "TITLE",
+        "SSEDATE",
+        "ADDDATE",
+        "URL",
+        "BULLETIN_HEADING",
+        "BULLETIN_TYPE",
+        "BULLETIN_YEAR"
+      ]
+    },
+    {
+      "source": "CNINFO_OFFICIAL",
+      "role": "CALIBRATION",
+      "exchange": "SZSE",
+      "security_code": "002586",
+      "method": "POST",
+      "url": "https://www.cninfo.com.cn/new/hisAnnouncement/query",
+      "headers": {
+        "Referer": "https://www.cninfo.com.cn/new/commonUrl/pageOfSearch?url=disclosure/list/search",
+        "X-Requested-With": "XMLHttpRequest"
+      },
+      "form": {
+        "pageNum": "1",
+        "pageSize": "5",
+        "column": "szse",
+        "tabName": "fulltext",
+        "plate": "",
+        "stock": "",
+        "searchkey": "",
+        "secid": "",
+        "category": "category_ndbg_szsh",
+        "trade": "",
+        "seDate": "2024-04-01~2024-04-30",
+        "sortName": "",
+        "sortType": "",
+        "isHLtitle": "true"
+      },
+      "records_path": [
+        "announcements"
+      ],
+      "required_fields": [
+        "secCode",
+        "secName",
+        "orgId",
+        "announcementId",
+        "announcementTitle",
+        "announcementTime",
+        "adjunctUrl",
+        "adjunctSize",
+        "adjunctType",
+        "columnId",
+        "pageColumn",
+        "announcementType"
+      ]
+    },
+    {
+      "source": "BSE_OFFICIAL",
+      "role": "ENDPOINT_DISCOVERY",
+      "exchange": "BSE",
+      "security_code": "833523",
+      "method": "GET",
+      "url": "https://www.bse.cn/disclosure/announcement.html",
+      "headers": {
+        "Referer": "https://www.bse.cn/"
+      },
+      "params": {}
+    }
+  ]
+}

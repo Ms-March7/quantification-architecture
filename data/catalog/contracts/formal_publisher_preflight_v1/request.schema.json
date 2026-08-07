@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.quantification/schemas/formal-publisher-preflight-v1.json",
+  "title": "Non-executable formal publisher preflight request v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "contract_id",
+    "preflight_id",
+    "candidate_manifest",
+    "stage_a_bundle",
+    "source_rights_receipt",
+    "user_authorization_receipt",
+    "target",
+    "allowed_formal_roots",
+    "qdata_postconditions"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "contract_id": {"const": "formal_publisher_preflight_v1"},
+    "preflight_id": {"$ref": "#/$defs/component"},
+    "candidate_manifest": {"$ref": "#/$defs/evidenceBinding"},
+    "stage_a_bundle": {"$ref": "#/$defs/evidenceBinding"},
+    "source_rights_receipt": {"$ref": "#/$defs/evidenceBinding"},
+    "user_authorization_receipt": {"$ref": "#/$defs/evidenceBinding"},
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["dataset_id", "snapshot_id", "formal_root", "target_relative_path"],
+      "properties": {
+        "dataset_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{2,127}$"},
+        "snapshot_id": {"$ref": "#/$defs/component"},
+        "formal_root": {"enum": ["data/market/snapshots", "data/published"]},
+        "target_relative_path": {"type": "string", "minLength": 1}
+      }
+    },
+    "allowed_formal_roots": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"enum": ["data/market/snapshots", "data/published"]}
+    },
+    "qdata_postconditions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "dataset_id",
+        "snapshot_id",
+        "intent",
+        "consumer",
+        "require_exact_identity",
+        "forbid_latest",
+        "require_immutable_snapshot",
+        "require_catalog_atomic_visibility",
+        "require_research_resolution_after_publish",
+        "failure_action"
+      ],
+      "properties": {
+        "dataset_id": {"type": "string"},
+        "snapshot_id": {"type": "string"},
+        "intent": {"const": "research"},
+        "consumer": {"$ref": "#/$defs/component"},
+        "require_exact_identity": {"const": true},
+        "forbid_latest": {"const": true},
+        "require_immutable_snapshot": {"const": true},
+        "require_catalog_atomic_visibility": {"const": true},
+        "require_research_resolution_after_publish": {"const": true},
+        "failure_action": {"const": "ROLLBACK_OR_FAIL_CLOSED"}
+      }
+    }
+  },
+  "$defs": {
+    "component": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._=-]{0,127}$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "evidenceBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["relative_path", "sha256", "bytes", "contract_id"],
+      "properties": {
+        "relative_path": {"type": "string", "minLength": 1},
+        "sha256": {"$ref": "#/$defs/sha256"},
+        "bytes": {"type": "integer", "minimum": 1},
+        "contract_id": {"type": "string", "minLength": 1}
+      }
+    }
+  }
+}

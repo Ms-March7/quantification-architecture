@@ -1,0 +1,304 @@
+{
+  "schema_version": 1,
+  "contract_id": "source-admission-v1-l1-d2a-01",
+  "work_package": "L1-D2A-01_SOURCE_ADMISSION_AND_PILOT_ADAPTERS",
+  "status": "PAUSED__BLOCKING_CONFLICTS_REPORTED__NO_FORMAL_ADMISSION",
+  "execution_authorization_active": false,
+  "resume_requires_user_start": true,
+  "global_purpose_ceiling": "INSPECTION_ONLY",
+  "formal_admission": false,
+  "bulk_backfill_authorized": false,
+  "quality_promotion_authorized": false,
+  "authorized_execution_plans": [
+    {
+      "execution_plan_id": "baostock-daily-coverage-v1-20260727",
+      "execution_plan_path": "data/catalog/contracts/source_admission_v1/execution_plans/baostock_daily_coverage_v1.json",
+      "execution_plan_sha256": "8f7e3130830406ebc649dd9b5408b78b9e84fa272c62c21fce4cd1ec73b1a7ca",
+      "runner_path": "control/tools/run_baostock_daily_coverage_pilot.py",
+      "status": "COMPLETED__DISCOVERY_REJECTED_BEFORE_BUSINESS_DATA__PROTOCOL_VERSION_GUARD",
+      "formal_admission": false,
+      "bulk_backfill_authorized": false,
+      "quality_promotion_authorized": false
+    },
+    {
+      "execution_plan_id": "baostock-daily-coverage-v2-20260727",
+      "execution_plan_path": "data/catalog/contracts/source_admission_v1/execution_plans/baostock_daily_coverage_v1.json",
+      "execution_plan_sha256": "22721ca9c5dc2729fa7f5b68b55b6e55ba66acb4a3a9ee8e85fa9ea6d2764f40",
+      "runner_path": "control/tools/run_baostock_daily_coverage_pilot.py",
+      "runner_sha256": "a7b0827d53551a9d318ef6ef15c6e8195b2e7207f067bef21be06e0d3287380f",
+      "status": "COMPLETED__DISCOVERY_REJECTED_BEFORE_BUSINESS_DATA__DECLARED_PAYLOAD_WAS_INCORRECTLY_TREATED_AS_TOTAL_FRAME",
+      "formal_admission": false,
+      "bulk_backfill_authorized": false,
+      "quality_promotion_authorized": false,
+      "paid_source_authorized": false,
+      "user_credentials_or_keys_authorized": false
+    },
+    {
+      "execution_plan_id": "baostock-daily-coverage-v3-20260727",
+      "execution_plan_path": "data/catalog/contracts/source_admission_v1/execution_plans/baostock_daily_coverage_v1.json",
+      "execution_plan_sha256": "864da7f2997c69fd1875557fa0f2ddba108335f35a0cdc0e6e25f8b828cf9bfb",
+      "runner_path": "control/tools/run_baostock_daily_coverage_pilot.py",
+      "runner_sha256": "643325a286a31b377562a31f424e10582e6862efa9b432269cb27956b5073a59",
+      "status": "COMPLETED__LOGIN_FRAME_PASSED__COMPRESSED_RESPONSE_USED_SIGNED_DECIMAL_CRC32",
+      "formal_admission": false,
+      "bulk_backfill_authorized": false,
+      "quality_promotion_authorized": false,
+      "paid_source_authorized": false,
+      "user_credentials_or_keys_authorized": false
+    },
+    {
+      "execution_plan_id": "baostock-daily-coverage-v4-20260727",
+      "execution_plan_path": "data/catalog/contracts/source_admission_v1/execution_plans/baostock_daily_coverage_v1.json",
+      "execution_plan_sha256": "51854629ac283dcad09d6b4653bf6b6db322ccc206076ff58c0f93a6319ae56b",
+      "runner_path": "control/tools/run_baostock_daily_coverage_pilot.py",
+      "runner_sha256": "124d2d1b2c0e5a888c4dd0b6f58bdc1f6d6e439cd9fb2ef371cd00ad74fa9490",
+      "status": "COMPLETED__LOGIN_PASSED__FIRST_COMPRESSED_BUSINESS_RESPONSE_FRAME_UNRESOLVED__NO_ACCEPTED_ROWS",
+      "results_path": "tmp/source-admission-pilot/baostock-daily-coverage-v4-20260727/RESULTS.json",
+      "results_sha256": "da81d285169fb1e0d5a7a9b9c4fe231781a94bbbeedd8f78cc6819608b394686",
+      "formal_admission": false,
+      "bulk_backfill_authorized": false,
+      "quality_promotion_authorized": false,
+      "paid_source_authorized": false,
+      "user_credentials_or_keys_authorized": false
+    }
+  ],
+  "sources": [
+    {
+      "source_key": "baostock_secondary_daily",
+      "source_id": "BAOSTOCK_0_9_3_INSPECTION",
+      "plan_ids": [
+        "CORE-01",
+        "CORE-03",
+        "CORE-05"
+      ],
+      "pilot_decision": "BLOCKED_AFTER_LOGIN__FIRST_COMPRESSED_BUSINESS_RESPONSE_FRAME_UNRESOLVED",
+      "business_probe_ids": [],
+      "purpose_ceiling": "INSPECTION_ONLY",
+      "formal_admission": false,
+      "formal_or_bulk_status": "BLOCKED_FOR_FORMAL_OR_BULK",
+      "rights": {
+        "bounded_automatic_fetch": "ONE_OFF_USER_AUTHORIZATION_CONSUMED",
+        "local_storage": "TMP_SUMMARY_HASH_AND_MAX_THREE_SAMPLES_ONLY",
+        "internal_sharing": "UNRESOLVED",
+        "retention": "UNRESOLVED",
+        "external_redistribution": "NOT_GRANTED"
+      },
+      "pit_status": "NOT_TESTED__NO_ACCEPTED_BUSINESS_ROWS__REVISION_HISTORY_UNPROVEN",
+      "field_semantics_status": "DOCUMENTED_18_FIELD_DAILY_SCHEMA__LIVE_ROWS_NOT_ACCEPTED__UNITS_UNVERIFIED",
+      "legal_evidence_urls": [
+        "https://pypi.org/project/baostock/0.9.3/",
+        "https://www.baostock.com/",
+        "https://baostock.com/disclaimer"
+      ],
+      "blockers": [
+        "The verified 0.9.3 client logged in, but the first compressed all-A daily response did not satisfy the reviewed frame/footer contract.",
+        "No business-row result was accepted; market, BSE, delisted-history, stability and freshness coverage therefore remain unverified.",
+        "The BSD package licence covers client code and does not close market-data retention, internal sharing or redistribution rights.",
+        "Source publication timestamps, revision history and authoritative PIT semantics are not provided by the tested path."
+      ],
+      "evidence": {
+        "results_path": "tmp/source-admission-pilot/baostock-daily-coverage-v4-20260727/RESULTS.json",
+        "results_sha256": "da81d285169fb1e0d5a7a9b9c4fe231781a94bbbeedd8f78cc6819608b394686",
+        "formal_targets_unchanged": true
+      }
+    },
+    {
+      "source_key": "sse_public_reference",
+      "source_id": "SSE_OFFICIAL",
+      "plan_ids": [
+        "CORE-01",
+        "CORE-02"
+      ],
+      "pilot_decision": "PILOT_ALLOWED__NONCOMMERCIAL_PUBLIC_WEB",
+      "business_probe_ids": [
+        "sse_security_master_sample",
+        "sse_2026_calendar_notice"
+      ],
+      "purpose_ceiling": "INSPECTION_ONLY",
+      "formal_admission": false,
+      "formal_or_bulk_status": "BLOCKED_FOR_FORMAL_OR_BULK",
+      "rights": {
+        "bounded_automatic_fetch": "WORKSPACE_ONE_OFF_RISK_DECISION__NOT_A_SOURCE_TERMS_GRANT",
+        "local_storage": "TMP_EVIDENCE_ONLY",
+        "internal_sharing": "SUMMARY_AND_HASH_ONLY_UNTIL_FORMAL_REVIEW",
+        "retention": "PILOT_EVIDENCE_ONLY__NO_PRODUCTION_RETENTION_DECISION",
+        "external_redistribution": "NOT_GRANTED__WORKSPACE_POLICY_PROHIBITS"
+      },
+      "pit_status": "PARTIAL__CURRENT_LIST_AND_CURRENT_YEAR_NOTICE_ONLY",
+      "field_semantics_status": "PARTIAL__OFFICIAL_RAW_FIELDS_NOT_CANONICAL_HISTORY",
+      "legal_evidence_urls": [
+        "https://www.sse.com.cn/home/legal/",
+        "https://star.sse.com.cn/transparency/services/",
+        "https://www.sse.com.cn/lawandrules/sselawsrules2025/stocks/exchange/c/c_20260424_10816482.shtml"
+      ],
+      "blockers": [
+        "No complete historical security identity, name and listing-status intervals.",
+        "No complete historical session calendar or temporary-closure archive.",
+        "Specific market-data product rights are not granted by the general website statement."
+      ]
+    },
+    {
+      "source_key": "szse_public_reference",
+      "source_id": "SZSE_OFFICIAL",
+      "plan_ids": [
+        "CORE-01",
+        "CORE-02"
+      ],
+      "pilot_decision": "PILOT_ALLOWED__NONCOMMERCIAL_PUBLIC_WEB",
+      "business_probe_ids": [
+        "szse_security_master_current_export",
+        "szse_2026_calendar_notice"
+      ],
+      "purpose_ceiling": "INSPECTION_ONLY",
+      "formal_admission": false,
+      "formal_or_bulk_status": "BLOCKED_FOR_FORMAL_OR_BULK",
+      "rights": {
+        "bounded_automatic_fetch": "WORKSPACE_ONE_OFF_RISK_DECISION__NOT_A_SOURCE_TERMS_GRANT",
+        "local_storage": "TMP_EVIDENCE_ONLY",
+        "internal_sharing": "SUMMARY_AND_HASH_ONLY_UNTIL_FORMAL_REVIEW",
+        "retention": "PILOT_EVIDENCE_ONLY__NO_PRODUCTION_RETENTION_DECISION",
+        "external_redistribution": "NOT_GRANTED__WORKSPACE_POLICY_PROHIBITS"
+      },
+      "pit_status": "PARTIAL__CURRENT_EXPORT_AND_CURRENT_YEAR_NOTICE_ONLY",
+      "field_semantics_status": "PARTIAL__OFFICIAL_RAW_FIELDS_NOT_CANONICAL_HISTORY",
+      "legal_evidence_urls": [
+        "https://www.szse.cn/application/laws/index.html",
+        "https://www.szse.cn/English/services/dataServices/index.html",
+        "https://www.szse.cn/disclosure/notice/t20251222_618087.html"
+      ],
+      "blockers": [
+        "The current export does not provide complete historical identity and revision intervals.",
+        "The holiday notice is not a machine-complete historical session calendar.",
+        "SZSE market data distribution is managed through separately authorized data services."
+      ]
+    },
+    {
+      "source_key": "bse_public_reference",
+      "source_id": "BSE_OFFICIAL",
+      "plan_ids": [
+        "CORE-01",
+        "CORE-02",
+        "CORE-03"
+      ],
+      "pilot_decision": "BLOCKED_BEFORE_BUSINESS_DATA_FETCH",
+      "business_probe_ids": [],
+      "purpose_ceiling": "LEGAL_AND_STATIC_PAGE_INSPECTION_ONLY",
+      "formal_admission": false,
+      "formal_or_bulk_status": "BLOCKED_FOR_FORMAL_OR_BULK",
+      "rights": {
+        "bounded_automatic_fetch": "NOT_AUTHORIZED__PUBLIC_PAGE_TRANSPORT_FAILED_AND_BUSINESS_SCHEMA_UNVERIFIED",
+        "local_storage": "TMP_STATIC_PAGE_EVIDENCE_ONLY",
+        "internal_sharing": "SUMMARY_AND_HASH_ONLY_UNTIL_FORMAL_REVIEW",
+        "retention": "PILOT_EVIDENCE_ONLY__NO_PRODUCTION_RETENTION_DECISION",
+        "external_redistribution": "NOT_GRANTED__WORKSPACE_POLICY_PROHIBITS"
+      },
+      "pit_status": "NOT_TESTED__BLOCKED_BEFORE_FETCH",
+      "field_semantics_status": "NOT_TESTED__BLOCKED_BEFORE_FETCH",
+      "legal_evidence_urls": [
+        "https://www.bse.cn/about_neeq/legal_disclaimer.html",
+        "https://www.bse.cn/application/guide.html",
+        "https://www.bse.cn/jygl_list/200028217.html",
+        "https://www.bse.cn/disclosure/Rest_arrangement.html"
+      ],
+      "blockers": [
+        "A prior manual observation suggested that the current security-master response may mix static identity and quote fields, but no raw response was retained in this work package.",
+        "The suspected mixed response is a conservative risk flag, not a verified schema fact.",
+        "No independent machine-readable static master endpoint with a closed retention/internal-use scope was admitted.",
+        "The raw schema and rights must be verified before any BSE business-data request."
+      ]
+    },
+    {
+      "source_key": "cninfo_public_disclosure",
+      "source_id": "CNINFO_OFFICIAL",
+      "plan_ids": [
+        "CORE-04"
+      ],
+      "pilot_decision": "PILOT_ALLOWED__NONCOMMERCIAL_PUBLIC_WEB",
+      "business_probe_ids": [
+        "cninfo_corporate_action_metadata_sample"
+      ],
+      "purpose_ceiling": "INSPECTION_ONLY",
+      "formal_admission": false,
+      "formal_or_bulk_status": "BLOCKED_FOR_FORMAL_OR_BULK",
+      "rights": {
+        "bounded_automatic_fetch": "WORKSPACE_ONE_QUERY_PER_APPROVED_RUN__THREE_IDENTICAL_RUNS_EXECUTED__NO_MORE_AUTHORIZED",
+        "local_storage": "TMP_EVIDENCE_ONLY",
+        "internal_sharing": "SUMMARY_AND_HASH_ONLY_UNTIL_FORMAL_REVIEW",
+        "retention": "PILOT_EVIDENCE_ONLY__NO_PRODUCTION_RETENTION_DECISION",
+        "external_redistribution": "NOT_GRANTED__WORKSPACE_POLICY_PROHIBITS"
+      },
+      "pit_status": "PARTIAL__PUBLICATION_TIMESTAMP_PRESENT__REVISION_AND_EFFECTIVE_TIME_OPEN",
+      "field_semantics_status": "PARTIAL__METADATA_ONLY__NO_ACTION_NORMALIZATION",
+      "legal_evidence_urls": [
+        "https://www.cninfo.com.cn/new/snapshot/companyDetailCn?code=000060",
+        "https://www.cninfo.com.cn/new/index"
+      ],
+      "blockers": [
+        "Automated bulk access, durable shared retention and broad internal redistribution are not closed.",
+        "Many announcementTime values form a midnight-valued cluster; their precision is UNKNOWN and a date-only placeholder interpretation is not proven.",
+        "associateAnnouncement is too sparse to serve as a general revision/supersession chain.",
+        "Revision chains and complex corporate-action semantics are not complete.",
+        "PDF bodies are intentionally not downloaded in this pilot."
+      ]
+    },
+    {
+      "source_key": "exchange_daily_trading_information",
+      "source_id": "SSE_SZSE_BSE_OFFICIAL_MARKET_DATA",
+      "plan_ids": [
+        "CORE-03"
+      ],
+      "pilot_decision": "BLOCKED_BEFORE_BUSINESS_DATA_FETCH",
+      "business_probe_ids": [],
+      "purpose_ceiling": "LEGAL_AND_SCHEMA_INSPECTION_ONLY",
+      "formal_admission": false,
+      "formal_or_bulk_status": "BLOCKED_FOR_FORMAL_OR_BULK",
+      "rights": {
+        "bounded_automatic_fetch": "NOT_AUTHORIZED_BY_AN_ADMITTED_PRODUCT_LICENCE",
+        "local_storage": "NOT_AUTHORIZED_BY_AN_ADMITTED_PRODUCT_LICENCE",
+        "internal_sharing": "NOT_AUTHORIZED_BY_AN_ADMITTED_PRODUCT_LICENCE",
+        "retention": "NOT_AUTHORIZED_BY_AN_ADMITTED_PRODUCT_LICENCE",
+        "external_redistribution": "NOT_GRANTED__WORKSPACE_POLICY_PROHIBITS"
+      },
+      "pit_status": "NOT_TESTED__BLOCKED_BEFORE_FETCH",
+      "field_semantics_status": "NOT_TESTED__OFFICIAL_PRODUCT_SCHEMA_NOT_ADMITTED",
+      "legal_evidence_urls": [
+        "https://www.sse.com.cn/lawandrules/sselawsrules2025/stocks/exchange/c/c_20260424_10816482.shtml",
+        "https://www.szse.cn/English/services/dataServices/index.html",
+        "https://www.bse.cn/jygl_list/200028217.html"
+      ],
+      "blockers": [
+        "The exchanges reserve trading-information use or distribution to authorized users.",
+        "No exact no-key daily-history product, field dictionary, retention right and internal-use licence has been admitted.",
+        "Daily-price requests are skipped before fetch."
+      ]
+    },
+    {
+      "source_key": "tencent_secondary_daily",
+      "source_id": "TENCENT_SECONDARY_INSPECTION",
+      "plan_ids": [
+        "CORE-03"
+      ],
+      "pilot_decision": "BLOCKED_BEFORE_BUSINESS_DATA_FETCH",
+      "business_probe_ids": [],
+      "purpose_ceiling": "EXISTING_EVIDENCE_REVIEW_ONLY",
+      "formal_admission": false,
+      "formal_or_bulk_status": "BLOCKED_FOR_FORMAL_OR_BULK",
+      "rights": {
+        "bounded_automatic_fetch": "UNRESOLVED",
+        "local_storage": "UNRESOLVED",
+        "internal_sharing": "UNRESOLVED",
+        "retention": "UNRESOLVED",
+        "external_redistribution": "NOT_GRANTED"
+      },
+      "pit_status": "PARTIAL__TRADE_DATE_ONLY",
+      "field_semantics_status": "BLOCKED__11_RAW_FIELDS_VS_6_FIELD_LOCAL_ADAPTER",
+      "legal_evidence_urls": [],
+      "blockers": [
+        "Underlying data reuse and storage terms are unresolved.",
+        "The observed response has 11 fields while the installed adapter truncates and labels six.",
+        "Meanings and units after OHLC are not frozen, so the endpoint is not fetched again.",
+        "Start-bound semantics are unverified; the retained sample proves only that count/window parameters affect coverage, so local clipping and coverage checks remain mandatory."
+      ]
+    }
+  ]
+}

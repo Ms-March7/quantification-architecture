@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "action": "SEND_TO_RECYCLE_BIN",
+  "source_root": "${USER_PROFILE}\\Downloads",
+  "intake_manifests": [
+    "data\\market\\quarantine\\csmar-manual-export\\intake-20260730-08pkg-03manual-v1\\INTAKE_MANIFEST.json",
+    "data\\market\\quarantine\\csmar-manual-export\\intake-20260730-18src-12blob-idx-idxtrd-v1\\INTAKE_MANIFEST.json"
+  ],
+  "expected_total_file_count": 67,
+  "expected_target_count": 35,
+  "expected_target_bytes": 632131463,
+  "expected_excluded_file_count": 32,
+  "expected_partial_file_count": 0,
+  "report_root": "reports\\data-governance\\csmar-downloads-cleanup-20260730-v1"
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "contract_id": "revision-event-ledger-v1",
+  "status": "INSPECTION_ONLY",
+  "event_schema": "event.schema.json",
+  "input_format": "UTF-8 JSON Lines in append/observed order",
+  "chain_key": [
+    "dataset_id",
+    "source_id",
+    "canonical_business_key",
+    "vintage"
+  ],
+  "visibility_rule": "available_at <= decision_time AND observed_at <= decision_time",
+  "revision_policy": "contiguous revision_no starting at 1; UPSERT supersedes current head; WITHDRAWAL targets current active UPSERT",
+  "idempotency_policy": "same event_id plus identical canonical content is ignored; any changed duplicate fails closed",
+  "conflict_policy": "unknown targets, cross-chain targets, revision gaps, reused revision_id, backdated revision visibility and schema drift fail closed",
+  "limits": {
+    "max_events": 100000,
+    "max_input_bytes": 67108864
+  },
+  "prohibitions": [
+    "no network",
+    "no credential handling",
+    "no formal catalog write",
+    "no data/market write",
+    "no quality promotion",
+    "no research-ready claim"
+  ]
+}

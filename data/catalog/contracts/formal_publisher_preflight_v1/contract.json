@@ -1,0 +1,27 @@
+{
+  "allowed_candidate_artifact_roots": [
+    "tmp",
+    "data/market/quarantine"
+  ],
+  "allowed_evidence_roots": [
+    "tmp",
+    "reports/data-governance",
+    "data/market/quarantine"
+  ],
+  "allowed_formal_roots": [
+    "data/market/snapshots",
+    "data/published"
+  ],
+  "contract_id": "formal_publisher_preflight_v1",
+  "execution_surface": "NONE",
+  "expected_evidence_contracts": {
+    "candidate_manifest": "candidate_manifest_v1",
+    "source_rights_receipt": "source_rights_receipt_v1",
+    "stage_a_bundle": "selected_core_stage_a_bundle_v1",
+    "user_authorization_receipt": "formal_publish_authorization_receipt_v1"
+  },
+  "fail_closed": true,
+  "formal_write": false,
+  "output": "STDOUT_ONLY",
+  "schema_version": 1
+}

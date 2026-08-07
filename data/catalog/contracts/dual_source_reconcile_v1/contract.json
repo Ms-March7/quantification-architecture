@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "contract_id": "dual_source_reconcile_v1",
+  "status": "ACTIVE__GENERIC_DUAL_SOURCE_INSPECTION_ONLY__NO_FORMAL_EFFECT",
+  "purpose_ceiling": "INSPECTION_ONLY",
+  "engine_id": "dual_source_reconcile/v1",
+  "input_boundary": {
+    "input_count": 2,
+    "allowed_root": "tmp/",
+    "input_selection": "TWO_EXPLICIT_ALLOWLIST_ENTRIES_ONLY",
+    "required_per_input_bindings": [
+      "side",
+      "source_id",
+      "workspace_relative_path",
+      "sha256",
+      "bytes"
+    ],
+    "required_format": "UTF8_NORMALIZED_CSV_WITH_UNIQUE_HEADER_AND_UNIQUE_KEYS",
+    "directory_discovery_forbidden": true,
+    "network_forbidden": true,
+    "input_mutation_forbidden": true,
+    "reparse_or_symlink_inputs_forbidden": true
+  },
+  "comparison_boundary": {
+    "key_fields": "EXPLICIT_REQUIRED",
+    "field_rules": "EXPLICIT_REQUIRED_PER_FIELD_MODE_TOLERANCE_CRITICALITY",
+    "supported_modes": [
+      "exact",
+      "numeric"
+    ],
+    "row_outcomes": [
+      "MATCH",
+      "ONE_SIDE_MISSING",
+      "FIELD_CONFLICT"
+    ],
+    "one_side_missing_behavior": "ALWAYS_FAIL_CLOSED",
+    "blank_critical_field_behavior": "FIELD_CONFLICT_AND_FAIL_CLOSED",
+    "critical_field_conflict_behavior": "FAIL_CLOSED",
+    "canonical_source_selection_forbidden": true,
+    "silent_conflict_overwrite_forbidden": true,
+    "both_values_and_source_evidence_required": true
+  },
+  "output_boundary": {
+    "allowed_root": "tmp/dual-source-reconcile/",
+    "required_shape": "<run_id>/",
+    "existing_output_behavior": "FAIL_CLOSED_NO_OVERWRITE",
+    "publish_mechanism": "SAME_VOLUME_STAGING_THEN_RENAME",
+    "required_artifacts": [
+      "RECONCILIATION.csv",
+      "RECONCILIATION_MANIFEST.json",
+      "RECONCILIATION_MANIFEST.sha256"
+    ],
+    "evidence_level": "TMP_WRITE_ONCE_HASH_BOUND_INSPECTION_EVIDENCE_NOT_FORMAL_SNAPSHOT"
+  },
+  "formal_effect": {
+    "source_admission": false,
+    "catalog_registration": false,
+    "quality_promotion": false,
+    "formal_snapshot_write": false,
+    "scheduler_creation": false,
+    "research_ready": false
+  }
+}

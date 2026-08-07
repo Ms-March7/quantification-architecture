@@ -1,0 +1,195 @@
+{
+  "schema_version": 1,
+  "contract_id": "public-official-api-inspection-v1",
+  "work_package_id": "L1-D2A-04B_PUBLIC_OFFICIAL_NO_KEY_API_INSPECTION_ADAPTERS",
+  "status": "INSPECTION_ONLY__NOT_ADMITTED",
+  "allowed_output_root": "tmp/public-official-api-inspection",
+  "network_policy": {
+    "default_mode": "fixture",
+    "live_requires_explicit_flag": true,
+    "method": "GET",
+    "requests_per_source_max": 1,
+    "retries": 0,
+    "pagination": false,
+    "credentials": false,
+    "cookies": false,
+    "authorization_headers": false,
+    "timeout_seconds": 25,
+    "response_bytes_max": 1048576
+  },
+  "publication_policy": {
+    "formal_catalog_write": false,
+    "formal_data_write": false,
+    "quality_promotion": false,
+    "scheduler_creation": false,
+    "bulk_or_history_backfill": false,
+    "purpose_ceiling": "INSPECTION_ONLY",
+    "source_admission": false
+  },
+  "sources": [
+    {
+      "source_id": "ecb_data_portal",
+      "source_name": "ECB Data Portal API",
+      "target_plan_ids": [
+        "GCTX-05",
+        "GCTX-06"
+      ],
+      "endpoint": "https://data-api.ecb.europa.eu/service/data/EXR/D.USD.EUR.SP00.A?startPeriod=2025-01-02&endPeriod=2025-01-02&format=csvdata",
+      "allowed_host": "data-api.ecb.europa.eu",
+      "allowed_path": "/service/data/EXR/D.USD.EUR.SP00.A",
+      "parser": "ecb_sdmx_csv",
+      "fixture_path": "fixtures/ecb_sdmx_csv.csv",
+      "expected_content_types": [
+        "text/csv",
+        "application/vnd.sdmx.data+csv"
+      ],
+      "row_count_min": 1,
+      "row_count_max": 1,
+      "required_raw_fields": [
+        "KEY",
+        "FREQ",
+        "CURRENCY",
+        "CURRENCY_DENOM",
+        "EXR_TYPE",
+        "EXR_SUFFIX",
+        "TIME_PERIOD",
+        "OBS_VALUE",
+        "OBS_STATUS",
+        "COLLECTION",
+        "UNIT",
+        "UNIT_MULT"
+      ],
+      "observation_time_field": "TIME_PERIOD",
+      "source_published_at_field": null,
+      "revision_id_field": null,
+      "documentation_url": "https://data.ecb.europa.eu/help/api/overview",
+      "terms_url": "https://www.ecb.europa.eu/services/disclaimer/html/index.en.html",
+      "rights_status": {
+        "public_no_key_access": "OBSERVED",
+        "automated_incremental_access": "NOT_ADMITTED",
+        "local_raw_retention": "UNRESOLVED",
+        "internal_research_share": "UNRESOLVED",
+        "external_redistribution": "UNRESOLVED"
+      },
+      "pit_status": "OBSERVATION_DATE_PRESENT__PUBLICATION_TIME_AND_REVISION_CHAIN_UNRESOLVED"
+    },
+    {
+      "source_id": "bis_statistics",
+      "source_name": "BIS Statistics SDMX API",
+      "target_plan_ids": [
+        "GCTX-05",
+        "GCTX-06"
+      ],
+      "endpoint": "https://stats.bis.org/api/v1/data/WS_XRU/D.XM.EUR.A/all?startPeriod=2025-01-02&endPeriod=2025-01-02",
+      "allowed_host": "stats.bis.org",
+      "allowed_path": "/api/v1/data/WS_XRU/D.XM.EUR.A/all",
+      "parser": "bis_sdmx_xml",
+      "fixture_path": "fixtures/bis_sdmx.xml",
+      "expected_content_types": [
+        "application/xml",
+        "text/xml"
+      ],
+      "row_count_min": 1,
+      "row_count_max": 1,
+      "required_series_attributes": [
+        "FREQ",
+        "REF_AREA",
+        "CURRENCY",
+        "COLLECTION"
+      ],
+      "required_observation_attributes": [
+        "TIME_PERIOD",
+        "OBS_VALUE",
+        "OBS_STATUS"
+      ],
+      "observation_time_field": "TIME_PERIOD",
+      "source_published_at_field": null,
+      "revision_id_field": null,
+      "documentation_url": "https://stats.bis.org/api-doc/v1/",
+      "terms_url": "https://www.bis.org/terms_conditions.htm",
+      "rights_status": {
+        "public_no_key_access": "OBSERVED",
+        "automated_incremental_access": "NOT_ADMITTED",
+        "local_raw_retention": "UNRESOLVED",
+        "internal_research_share": "UNRESOLVED",
+        "external_redistribution": "UNRESOLVED"
+      },
+      "pit_status": "OBSERVATION_DATE_PRESENT__PUBLICATION_TIME_AND_VINTAGE_CHAIN_UNRESOLVED"
+    },
+    {
+      "source_id": "us_treasury_yield_curve",
+      "source_name": "U.S. Treasury Daily Treasury Par Yield Curve",
+      "target_plan_ids": [
+        "GCTX-05"
+      ],
+      "endpoint": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/pages/xml?data=daily_treasury_yield_curve&field_tdr_date_value_month=202501",
+      "allowed_host": "home.treasury.gov",
+      "allowed_path": "/resource-center/data-chart-center/interest-rates/pages/xml",
+      "parser": "us_treasury_atom_xml",
+      "fixture_path": "fixtures/us_treasury_atom.xml",
+      "expected_content_types": [
+        "application/xml",
+        "text/xml"
+      ],
+      "row_count_min": 1,
+      "row_count_max": 31,
+      "required_raw_fields": [
+        "NEW_DATE",
+        "BC_1MONTH",
+        "BC_3MONTH",
+        "BC_2YEAR",
+        "BC_10YEAR",
+        "BC_30YEAR"
+      ],
+      "observation_time_field": "NEW_DATE",
+      "source_published_at_field": null,
+      "revision_id_field": null,
+      "documentation_url": "https://home.treasury.gov/treasury-daily-interest-rate-xml-feed",
+      "terms_url": "https://home.treasury.gov/footer/privacy-policy",
+      "rights_status": {
+        "public_no_key_access": "OBSERVED",
+        "automated_incremental_access": "NOT_ADMITTED",
+        "local_raw_retention": "UNRESOLVED",
+        "internal_research_share": "UNRESOLVED",
+        "external_redistribution": "UNRESOLVED"
+      },
+      "pit_status": "OBSERVATION_DATE_PRESENT__PUBLICATION_TIME_AND_CORRECTION_CHAIN_UNRESOLVED"
+    },
+    {
+      "source_id": "hkma_public_api",
+      "source_name": "Hong Kong Monetary Authority Open API",
+      "target_plan_ids": [
+        "GCTX-05",
+        "GCTX-06"
+      ],
+      "endpoint": "https://api.hkma.gov.hk/public/market-data-and-statistics/monthly-statistical-bulletin/er-ir/er-eeri-daily?offset=0&pagesize=1&sortby=end_of_day&sortorder=desc",
+      "allowed_host": "api.hkma.gov.hk",
+      "allowed_path": "/public/market-data-and-statistics/monthly-statistical-bulletin/er-ir/er-eeri-daily",
+      "parser": "hkma_json",
+      "fixture_path": "fixtures/hkma.json",
+      "expected_content_types": [
+        "application/json"
+      ],
+      "row_count_min": 1,
+      "row_count_max": 1,
+      "required_raw_fields": [
+        "end_of_day",
+        "usd",
+        "cny"
+      ],
+      "observation_time_field": "end_of_day",
+      "source_published_at_field": null,
+      "revision_id_field": null,
+      "documentation_url": "https://apidocs.hkma.gov.hk/documentation/market-data-and-statistics/monthly-statistical-bulletin/er-ir/er-eeri-daily/",
+      "terms_url": "https://apidocs.hkma.gov.hk/documentation/about-hkma-api/",
+      "rights_status": {
+        "public_no_key_access": "OBSERVED",
+        "automated_incremental_access": "NOT_ADMITTED",
+        "local_raw_retention": "UNRESOLVED",
+        "internal_research_share": "UNRESOLVED",
+        "external_redistribution": "UNRESOLVED"
+      },
+      "pit_status": "OBSERVATION_DATE_PRESENT__PUBLICATION_TIME_AND_CORRECTION_CHAIN_UNRESOLVED"
+    }
+  ]
+}

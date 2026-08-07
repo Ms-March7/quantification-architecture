@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "mode": "local_download_candidate",
+  "dataset_id": "csmar-trd-cptl",
+  "run_id": "REPLACE_WITH_RUN_ID",
+  "source_id": "CSMAR_MANUAL_EXPORT",
+  "dataset_schema_version": "csmar-manual-20240205-provisional-candidate-v1",
+  "authorized_local_research_download": false,
+  "source_access_note": "LOCKED PROVISIONAL TEMPLATE. Before creating an executable request, record the user-authorized local academic research download, bind the exact package filename, and verify the actual TRD_Cptl DES file and CSV header field by field against expected_columns. No redistribution, formal admission, quality promotion, PIT closure, or research-readiness is asserted.",
+  "include_patterns": [
+    "REPLACE_WITH_ACTUAL_PACKAGE_FILENAME.zip"
+  ],
+  "zip_member_patterns": [
+    "TRD_Cptl.csv"
+  ],
+  "table": {
+    "table_name": "trd_cptl_candidate",
+    "expected_columns": [
+      "Stkcd",
+      "Disttyp",
+      "Annodt",
+      "Exdistdt",
+      "Paydt",
+      "Amount",
+      "Roprc",
+      "Markettype"
+    ],
+    "column_types": {
+      "Stkcd": "VARCHAR",
+      "Disttyp": "VARCHAR",
+      "Annodt": "DATE",
+      "Exdistdt": "DATE",
+      "Paydt": "DATE",
+      "Amount": "DECIMAL(18,6)",
+      "Roprc": "DECIMAL(18,4)",
+      "Markettype": "INTEGER"
+    },
+    "date_column": "Annodt",
+    "key_columns": [
+      "Stkcd",
+      "Disttyp",
+      "Annodt"
+    ],
+    "required_columns": [
+      "Stkcd",
+      "Disttyp",
+      "Annodt"
+    ],
+    "delimiter": ",",
+    "encoding": "utf-8-sig",
+    "allow_extra_columns": false,
+    "partition_mode": "year_month"
+  },
+  "limits": {
+    "max_packages": 1,
+    "max_csv_sources": 1,
+    "max_archive_members": 10000,
+    "max_total_input_bytes": 10737418240,
+    "max_total_unpacked_bytes": 21474836480,
+    "max_compression_ratio": 1000,
+    "max_rows": 100000000
+  }
+}

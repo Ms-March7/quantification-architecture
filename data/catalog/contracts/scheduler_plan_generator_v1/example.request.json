@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "mode": "scheduler_plan_generator",
+  "purpose_ceiling": "INSPECTION_ONLY",
+  "plan_id": "synthetic-scheduler-plan-v1",
+  "timezone": "Asia/Shanghai",
+  "windows_timezone_id": "China Standard Time",
+  "account_placeholder": "__WINDOWS_ACCOUNT_PLACEHOLDER__",
+  "trigger_local_time": "18:30:00",
+  "orchestration_request": "data/catalog/contracts/local_daily_orchestration_v1/example.request.json",
+  "jobs": [
+    {
+      "trade_date": "2026-07-30",
+      "update_request": "data/catalog/contracts/scheduler_plan_generator_v1/example.update-20260730.request.json",
+      "inbox": "tmp/scheduler-inbox/synthetic-scheduler-plan-v1/2026-07-30"
+    }
+  ],
+  "safety": {
+    "task_registration": false,
+    "network_allowed": false,
+    "credentials_allowed": false,
+    "formal_data_write": false,
+    "formal_catalog_write": false,
+    "source_admission": false,
+    "quality_promotion": false,
+    "research_ready": false
+  },
+  "authorization_note": "Synthetic plan review only; task installation and execution are not authorized."
+}

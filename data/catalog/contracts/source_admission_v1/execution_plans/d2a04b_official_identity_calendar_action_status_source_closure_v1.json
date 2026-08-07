@@ -1,0 +1,381 @@
+{
+  "schema_version": 1,
+  "plan_id": "d2a04b-official-identity-calendar-action-status-source-closure-v1",
+  "work_package": "L1-D2A-04B_OFFICIAL_IDENTITY_CALENDAR_ACTION_STATUS_SOURCE_CLOSURE",
+  "created_at": "2026-07-28T21:38:30+08:00",
+  "status": "ACTIVE__BOUNDED_COLLECTION__INSPECTION_ONLY",
+  "authorization": {
+    "user_start_evidence": "User explicitly requested on 2026-07-28: 你把这些数据收集过来，看看够不够",
+    "execution_authorization_active": true,
+    "authorized_action": "Collect and mechanically verify the bounded first-wave candidate data below, then determine whether it is sufficient.",
+    "purpose_ceiling": "INSPECTION_ONLY",
+    "formal_admission": false,
+    "formal_catalog_write": false,
+    "formal_quality_promotion_or_waiver": false,
+    "factor_efficacy_research": false,
+    "formal_factor_run": false,
+    "full_database_backfill": false,
+    "unbounded_full_history_backfill": false,
+    "paid_source_or_new_subscription": false,
+    "credential_cookie_token_or_secret_storage": false,
+    "automated_login": false,
+    "captcha_bypass": false,
+    "unattended_scheduler": false,
+    "automatic_cleanup": false,
+    "independent_backup_requirement": false
+  },
+  "scope": {
+    "as_of_date": "2026-07-28",
+    "track_a_official_closure": {
+      "sources": [
+        "SSE_OFFICIAL",
+        "SZSE_OFFICIAL",
+        "BSE_OFFICIAL"
+      ],
+      "coverage_start_date": "2015-01-01",
+      "coverage_end_date": "2026-07-28",
+      "families": [
+        {
+          "family": "PERMANENT_SECURITY_IDENTITY_AND_CODE_EPISODES",
+          "core_target": "CORE-01",
+          "required_content": [
+            "issuer and security identity",
+            "exchange-qualified code history",
+            "listing, transfer and delisting episode dates",
+            "security type and board",
+            "direct official source record identifiers and revision observations"
+          ]
+        },
+        {
+          "family": "OFFICIAL_TRADING_CALENDAR_AND_SESSION_HISTORY",
+          "core_target": "CORE-02",
+          "required_content": [
+            "exchange trading-day flags",
+            "holiday and exceptional-closure observations",
+            "session schedule and effective dates",
+            "source publication or revision observations where exposed"
+          ]
+        },
+        {
+          "family": "CORPORATE_ACTION_TERMS_AND_REVISION_CHAIN",
+          "core_target": "CORE-04",
+          "required_content": [
+            "event class and lifecycle status",
+            "announcement, record, ex, effective and payment dates as applicable",
+            "cash, share, rights, split, consolidation and other adjustment terms as applicable",
+            "direct document or record identity",
+            "publication evidence and correction, cancellation or supersession links"
+          ]
+        },
+        {
+          "family": "HISTORICAL_TRADING_STATUS_AND_RULE_VERSIONS",
+          "core_target": "CORE-06",
+          "required_content": [
+            "suspension and resumption episodes",
+            "ST and other risk-warning episodes",
+            "IPO, relisting and delisting transition states",
+            "price-limit and no-price-limit rule versions with effective dates",
+            "board or security-class eligibility and exception rules"
+          ]
+        },
+        {
+          "family": "SOURCE_RIGHTS_AND_RETENTION_CLOSURE",
+          "core_target": "SOURCE_ADMISSION",
+          "required_content": [
+            "official source identity and exact endpoint or document location",
+            "public access and local-retention terms visible at collection time",
+            "internal research use boundary",
+            "retrieval timestamp, request parameters and payload hash"
+          ]
+        }
+      ],
+      "collection_mode": {
+        "prefer_downloadable_official_structured_files": true,
+        "serial_per_source": true,
+        "maximum_parallel_sources": 3,
+        "maximum_requests_total": 20000,
+        "maximum_downloaded_files_total": 500,
+        "maximum_raw_response_gib": 30,
+        "preserve_raw_response_and_headers": true,
+        "preserve_null_unknown_and_conflict": true,
+        "no_statistical_imputation_at_l1": true
+      }
+    },
+    "track_b_csmar_structured_candidate": {
+      "access_mode": "EXISTING_USER_AUTHORIZED_INSTITUTIONAL_BROWSER_SESSION_OR_USER_MANUAL_EXPORT",
+      "table_selection_must_follow_visible_portal_metadata": true,
+      "mandatory_exports": [
+        {
+          "table": "TRD_Dalyr",
+          "coverage_start_date": "2015-01-01",
+          "coverage_end_date": "2019-12-31",
+          "field_scope": "ALL_VISIBLE_FIELDS",
+          "reason": "Create a non-overlapping history extension before the existing 2020-2024 candidate."
+        },
+        {
+          "table": "TRD_Dalyr",
+          "coverage_start_date": "2025-01-01",
+          "coverage_end_date": "LATEST_VISIBLE_NOT_AFTER_2026-07-28",
+          "field_scope": "ALL_VISIBLE_FIELDS",
+          "reason": "Replace the existing January-only 2025 sample with a bounded current extension."
+        },
+        {
+          "table": "TRD_Co",
+          "coverage": "COMPLETE_CURRENT_CROSS_SECTION_VISIBLE_ON_EXPORT_DATE",
+          "field_scope": "ALL_VISIBLE_FIELDS",
+          "reason": "Replace the three-field pilot with a complete current company/security cross-section candidate."
+        },
+        {
+          "table": "TRD_Cale",
+          "coverage_start_date": "2015-01-01",
+          "coverage_end_date": "LATEST_VISIBLE_NOT_AFTER_2026-07-28",
+          "field_scope": "ALL_VISIBLE_FIELDS",
+          "reason": "Provide a structured calendar candidate for comparison with official exchange calendars."
+        }
+      ],
+      "census_then_selected_export": {
+        "target_families": [
+          "corporate action terms, lifecycle and revisions",
+          "suspension and resumption history",
+          "ST and risk-warning history",
+          "listing, transfer and delisting history",
+          "price-limit rule or status code dictionaries"
+        ],
+        "census_required_before_export": true,
+        "selection_rule": "Export only tables whose visible metadata contains direct fields needed to close CORE-01, CORE-04 or CORE-06; record all rejected alternatives and the reason.",
+        "coverage_start_date": "2015-01-01",
+        "coverage_end_date": "LATEST_VISIBLE_NOT_AFTER_2026-07-28",
+        "maximum_selected_tables": 16,
+        "maximum_export_packages": 32,
+        "maximum_source_archive_gib": 80
+      },
+      "conditional_extension": {
+        "coverage_start_date": "2010-01-01",
+        "coverage_end_date": "2014-12-31",
+        "default": "DO_NOT_EXPORT",
+        "eligible_tables": [
+          "TRD_Dalyr",
+          "TRD_Cale",
+          "the already-selected identity, action and status tables"
+        ],
+        "execute_only_if_all": [
+          "Mandatory 2015-through-current collection and mechanical verification have completed.",
+          "The identity-and-calendar-aligned daily candidate has fewer than 1856 distinct usable trading dates, or no contiguous selected-universe segment reaches 1856 dates, or the action/status boundary-event matrix lacks a pre-2015 observation required to interpret a post-2015 episode.",
+          "No critical rights, identity, date, unit, primary-key or revision-chain conflict is open for the table being extended.",
+          "The storage and request guards remain satisfied before every export."
+        ],
+        "reason": "Conditional robustness extension only; it is not a general full-history authorization."
+      },
+      "browser_and_auth_rules": {
+        "automated_login": false,
+        "reuse_only_user_visible_authenticated_session": true,
+        "persist_credentials_cookie_token_or_secret": false,
+        "captcha_action": "PAUSE_FOR_USER",
+        "authentication_loss_action": "PAUSE_FOR_USER",
+        "payment_or_subscription_prompt_action": "STOP_AND_REPORT"
+      }
+    },
+    "explicitly_out_of_scope": [
+      "CSMAR 48-library full-database export",
+      "any paid source, new subscription, purchase or credential use",
+      "news bodies, bulk PDFs and high-frequency or tick data",
+      "PIT financial statement fact backfill",
+      "GCTX, HK and GLEQ bulk backfill",
+      "formal data/catalog/datasets.json registration",
+      "formal quality promotion or waiver",
+      "D2B formal snapshot build",
+      "factor IC, backtest, portfolio simulation or investment conclusion"
+    ]
+  },
+  "storage_guard": {
+    "drive": "G:",
+    "drive_total_gib_at_plan_freeze": 453.852535,
+    "drive_free_gib_at_plan_freeze": 382.869408,
+    "user_fixed_free_gib": null,
+    "planned_new_footprint_gib": 150,
+    "hard_max_new_footprint_gib": 240,
+    "minimum_free_fraction": 0.25,
+    "minimum_free_gib_implied_at_plan_freeze": 113.463134,
+    "rule": "The user imposed no fixed free-space reserve. The engineering hard guard remains the earlier of 240 GiB new footprint or falling below 25% free space.",
+    "measurement": "Use filesystem-reported physical bytes; measure before the first write, before each export batch and after each candidate build.",
+    "automatic_cleanup": false
+  },
+  "catalog_guard": {
+    "formal_catalog_path": "${QUANTIFICATION_ROOT}/data/catalog/datasets.json",
+    "expected_sha256": "debdbea74d3597dab66efc850517d3ab8ed6062a58229a61303556351883be00",
+    "must_remain_unchanged": true,
+    "planned_catalog_path": "${QUANTIFICATION_ROOT}/data/catalog/planned_datasets.json",
+    "must_not_be_used_as_research_input": true,
+    "qdata_research_intent_must_reject_candidates": true
+  },
+  "output_contract": {
+    "candidate_root_pattern": "${QUANTIFICATION_ROOT}/tmp/d2a04b-source-closure/<run_id>",
+    "csmar_download_inbox_pattern": "${QUANTIFICATION_ROOT}/tmp/csmar_pilot/d2a04b-inbox/<run_id>",
+    "report_root_pattern": "${QUANTIFICATION_ROOT}/reports/data-governance/d2a-04b-source-closure-20260728/<run_id>",
+    "candidate_status": "INSPECTION_ONLY",
+    "quality_status": "NOT_ADMITTED",
+    "required_machine_readable_artifacts": [
+      "WORK_PACKAGE.json",
+      "SOURCE_CENSUS.json",
+      "RAW_FILE_MANIFEST.json",
+      "REQUEST_RECEIPTS.json",
+      "RIGHTS_EVIDENCE.json",
+      "IDENTITY_COVERAGE.json",
+      "CALENDAR_COVERAGE.json",
+      "CORPORATE_ACTION_COVERAGE.json",
+      "STATUS_RULE_COVERAGE.json",
+      "CSMAR_EXPORT_MANIFEST.json",
+      "CONFLICTS_AND_QUARANTINE.json",
+      "SUFFICIENCY_MATRIX.json",
+      "FOOTPRINT.json",
+      "VERIFICATION.json"
+    ],
+    "required_human_readable_artifacts": [
+      "README.md",
+      "GAPS_AND_DECISION.md"
+    ],
+    "provenance_minimum": [
+      "source_id",
+      "exact URL, portal table identity or official document identity",
+      "request or export parameters",
+      "retrieved_at in Asia/Shanghai",
+      "source-visible publication or effective timestamp with precision",
+      "raw payload SHA-256",
+      "parser and schema version",
+      "rights evidence reference",
+      "candidate output content hash"
+    ]
+  },
+  "mechanical_verification": {
+    "daily_candidate": [
+      "primary key uniqueness by permanent-security candidate and trade date",
+      "exchange and security namespace mapping",
+      "OHLC non-negativity and high-low envelope checks",
+      "volume and amount units preserved and compared across periods",
+      "NULL and sentinel frequencies reported without coercion",
+      "date coverage, security coverage and discontinuity diagnostics",
+      "overlap comparison for 2020-2024 and January 2025 without silent overwrite"
+    ],
+    "identity_calendar_action_status": [
+      "every accepted code episode maps to one provisional permanent-security candidate for its effective interval",
+      "official calendar conflicts remain explicit and are not resolved by observed trade dates alone",
+      "corporate-action terms retain event, record, ex, effective and payment date distinctions",
+      "each correction, cancellation or supersession claim has direct evidence",
+      "status episodes and rule versions have explicit effective intervals",
+      "cross-source conflicts are quarantined with source precedence undecided unless direct official evidence closes them"
+    ],
+    "rights": [
+      "record visible terms and collection boundary",
+      "do not infer redistribution rights from browser access",
+      "stop formal admission when local retention or internal research use remains unclear"
+    ]
+  },
+  "sufficiency_matrix": [
+    {
+      "use_case": "INITIAL_REAL_PRICE_VOLUME_FACTOR_DISCOVERY_CANDIDATE_BASE",
+      "pre_run_decision": "UNKNOWN_UNTIL_COLLECTION_AND_VERIFICATION",
+      "minimum_required": [
+        "CORE-01 candidate permanent identity and code-history closure for the selected universe and dates",
+        "CORE-02 official trading calendar and session-history closure",
+        "CORE-03 unadjusted daily observations aligned to identity and calendar with critical field semantics resolved",
+        "CORE-04 corporate-action terms and revision evidence sufficient to reproduce adjustment inputs",
+        "CORE-06 historical status and rule-version evidence sufficient to define tradability",
+        "at least 1856 distinct identity-and-calendar-aligned usable trading dates",
+        "no critical primary-key, OHLC, unit, identity, calendar, action-term, revision or status-rule conflict",
+        "rights boundary recorded"
+      ],
+      "pass_result": "CANDIDATE_SUFFICIENT_TO_REQUEST_SEPARATE_FORMAL_ADMISSION_AND_D2B_START",
+      "fail_result": "INSUFFICIENT__REPORT_EXACT_GAPS_AND_DO_NOT_RUN_FACTORS"
+    },
+    {
+      "use_case": "EXISTING_STRICT_V6_DISCOVERY_VALIDATION_HOLDOUT_GEOMETRY",
+      "pre_run_decision": "UNKNOWN_UNTIL_USABLE_DATE_COUNT_IS_MEASURED",
+      "minimum_required": [
+        "at least 1856 usable trading dates after identity/calendar alignment",
+        "horizon 5 and purge 6 remain unchanged",
+        "80/10/10 split leaves at least 180 validation dates"
+      ],
+      "pass_result": "DATE_GEOMETRY_ONLY_PASSES__NO_FACTOR_RESULT_OR_RESEARCH_AUTHORIZATION",
+      "fail_result": "TRIGGER_2010_2014_CONDITIONAL_EXTENSION_IF_ALL_OTHER_EXTENSION_GATES_PASS"
+    },
+    {
+      "use_case": "CLASSIC_A_SHARE_MULTIFACTOR_WITH_VALUE_QUALITY_GROWTH_INDUSTRY_NEUTRALIZATION",
+      "pre_run_decision": "NOT_SUFFICIENT_BY_THIS_BATCH",
+      "missing_after_scope": [
+        "PIT financial facts with initial publication and revision chains",
+        "historical shares, float shares and valuation inputs",
+        "admitted industry classification histories",
+        "admitted benchmark and index constituent histories"
+      ]
+    },
+    {
+      "use_case": "REQUIRED_35_OR_FULL_52_DATABASE_COMPLETION",
+      "pre_run_decision": "NOT_SUFFICIENT_BY_THIS_BATCH",
+      "reason": "This is a bounded CORE-01/02/03/04/06 source-closure batch, not a full planned-database backfill."
+    },
+    {
+      "use_case": "FORMAL_FACTOR_RESEARCH_OR_INVESTMENT_CONCLUSION",
+      "pre_run_decision": "NOT_AUTHORIZED_AND_NOT_SUFFICIENT",
+      "reason": "Formal source admission, immutable research snapshots, D2B, L2 PIT and leakage gates, and a separately authorized factor run remain required."
+    }
+  ],
+  "hard_stop_conditions": [
+    "A paid tier, new subscription, purchase, credential, token or secret is required.",
+    "A CAPTCHA or authentication loss occurs; pause for the user and do not bypass it.",
+    "HTTP 429, explicit rate limiting, access denial or source terms prohibit the planned collection.",
+    "Local retention or internal research use cannot be bounded from direct evidence.",
+    "The selected portal table identity or visible field metadata does not match the planned family.",
+    "An official endpoint cannot be reproduced from the official page or has unverified request serialization.",
+    "A raw response is an error, login or challenge page instead of the expected business payload.",
+    "A critical identity, exchange, date, timezone, unit, primary-key, OHLC, corporate-action-term, revision-chain or rule-version conflict cannot be conservatively quarantined.",
+    "New physical footprint reaches 240 GiB.",
+    "Projected or measured free space falls below 25% of the G drive.",
+    "The formal catalog SHA-256 differs from the frozen value.",
+    "The next action would exceed the exact table, date, request, file or byte scope in this plan."
+  ],
+  "quarantine_conditions": [
+    "unknown, conflicting or undocumented field semantics",
+    "ambiguous permanent identity or overlapping code episodes",
+    "date-only publication evidence where an intraday available_at would be required",
+    "corporate-action record without complete terms or direct revision evidence",
+    "status code without an effective-dated official rule version",
+    "source conflict that lacks direct official closure",
+    "duplicate or overlapping export whose precedence cannot be proven"
+  ],
+  "completion_gate": {
+    "required": [
+      "Every mandatory Track A family has a coverage report, direct-source provenance and explicit unresolved-gap list for 2015-01-01 through 2026-07-28.",
+      "Every mandatory Track B export has an exact source package manifest, raw hash, visible table metadata receipt and mechanical verification result.",
+      "The selected action and status table census records accepted and rejected tables.",
+      "The conditional 2010-2014 decision is recorded as EXECUTED_WITH_TRIGGER or NOT_EXECUTED_WITH_REASON.",
+      "The storage guard and formal catalog guard pass.",
+      "Candidate paths remain INSPECTION_ONLY, NOT_ADMITTED and rejected by qdata research intent.",
+      "The sufficiency matrix records PASS, FAIL or BLOCKED with measured evidence for each use case.",
+      "No factor IC, backtest, efficacy or investment conclusion is produced."
+    ],
+    "on_complete": "PAUSE_AFTER_RUN_AND_REPORT_SUFFICIENCY",
+    "on_any_hard_stop": "PAUSE_IMMEDIATELY_AND_REPORT",
+    "does_not_unlock_automatically": [
+      "FORMAL_SOURCE_ADMISSION",
+      "FORMAL_CATALOG_REGISTRATION",
+      "QUALITY_PROMOTION_OR_WAIVER",
+      "D2B",
+      "FORMAL_FACTOR_RESEARCH",
+      "ANY_ADDITIONAL_BACKFILL"
+    ]
+  },
+  "after_run_pause": {
+    "required": true,
+    "status_on_pause": "PAUSED__COLLECTION_VERIFIED__SUFFICIENCY_REPORTED__AWAITING_SEPARATE_DECISION",
+    "report_to_user": [
+      "what was actually downloaded and built",
+      "physical and logical footprint",
+      "date, security and field coverage",
+      "critical conflicts and quarantined records",
+      "whether the initial price-volume candidate base meets every stated sufficiency condition",
+      "what remains missing for classic A-share multifactor work",
+      "whether the 2010-2014 conditional extension was triggered",
+      "the exact next package requiring separate authorization"
+    ]
+  }
+}

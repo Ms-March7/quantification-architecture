@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "mode": "local_download_candidate",
+  "dataset_id": "csmar-trd-cptl-pilot",
+  "run_id": "d2a04b-csmar-trd-cptl-full-1990-2026-20260729-v1",
+  "source_id": "CSMAR_MANUAL_EXPORT",
+  "dataset_schema_version": "current-export-20260729-d2a04b-full-v1",
+  "authorized_local_research_download": true,
+  "source_access_note": "User authorized this full eight-field TRD_Cptl export for local academic research use through the Tsinghua institutional CSMAR session. The actual export header and DES descriptor were reviewed on 2026-07-29. Exdistdt is the complete parseable event-date field and mechanical partition date; Annodt and Paydt are preserved as VARCHAR because the source contains blanks and 0000-00-00 sentinels. The observed Exdistdt range is 1990-01-01 through 2026-08-04, including source-scheduled future events; no redistribution, formal source admission, as-of availability, PIT closure, corporate-action revision-chain closure, quality promotion or research-readiness assertion is made.",
+  "include_patterns": [
+    "分配文件005440183(仅供清华大学使用).zip"
+  ],
+  "zip_member_patterns": [
+    "TRD_Cptl.csv"
+  ],
+  "table": {
+    "table_name": "trd_cptl_d2a04b_full_candidate",
+    "expected_columns": [
+      "Stkcd",
+      "Disttyp",
+      "Exdistdt",
+      "Annodt",
+      "Paydt",
+      "Amount",
+      "Roprc",
+      "Markettype"
+    ],
+    "column_types": {
+      "Stkcd": "VARCHAR",
+      "Disttyp": "VARCHAR",
+      "Exdistdt": "DATE",
+      "Annodt": "VARCHAR",
+      "Paydt": "VARCHAR",
+      "Amount": "DECIMAL(20,10)",
+      "Roprc": "DECIMAL(20,10)",
+      "Markettype": "INTEGER"
+    },
+    "date_column": "Exdistdt",
+    "key_columns": [
+      "Stkcd",
+      "Disttyp",
+      "Exdistdt"
+    ],
+    "required_columns": [
+      "Stkcd",
+      "Disttyp",
+      "Exdistdt",
+      "Amount",
+      "Roprc",
+      "Markettype"
+    ],
+    "delimiter": ",",
+    "encoding": "utf-8-sig",
+    "allow_extra_columns": false,
+    "partition_mode": "year_month"
+  },
+  "limits": {
+    "max_packages": 1,
+    "max_csv_sources": 1,
+    "max_archive_members": 10,
+    "max_total_input_bytes": 10485760,
+    "max_total_unpacked_bytes": 20971520,
+    "max_compression_ratio": 100,
+    "max_rows": 100000
+  }
+}

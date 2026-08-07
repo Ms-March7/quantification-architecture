@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "contract_id": "ricequant-r1-index-market-candidate-v1",
+  "status": "AUTHORIZED_INSPECTION_ONLY_CANDIDATE_BUILD",
+  "target_plan_ids": ["CORE-09", "CORE-12", "CORE-19"],
+  "scope": {
+    "index_master_anchor_date": "2026-08-03",
+    "index_daily_start": "2005-01-04",
+    "index_daily_end": "2022-01-31",
+    "index_ids": [
+      "000001.XSHG", "399001.XSHE", "000300.XSHG", "000905.XSHG",
+      "000852.XSHG", "000688.XSHG", "399006.XSHE", "000016.XSHG"
+    ],
+    "yield_curve": "all returned ChinaBond government tenors"
+  },
+  "limits": {
+    "maximum_business_api_calls_including_quota": 5,
+    "maximum_measured_quota_increment_bytes": 26214400,
+    "maximum_index_daily_rows": 50000,
+    "maximum_yield_rows": 10000
+  },
+  "output": {
+    "root": "data/market/quarantine/r1-market-reference/ricequant-index-market-20050104-20220131-20260805-v1",
+    "purpose_ceiling": "INSPECTION_ONLY",
+    "formal_admission": false,
+    "catalog_write": false,
+    "research_use": false
+  },
+  "pit_boundary": {
+    "index_master_is_latest_as_of_anchor_not_historical_pit": true,
+    "daily_market_dates_are_not_publication_available_at": true,
+    "provider_revision_chain_proven": false
+  },
+  "credential_policy": "PROCESS_ENV_ONLY__DO_NOT_CAPTURE_OR_PERSIST"
+}

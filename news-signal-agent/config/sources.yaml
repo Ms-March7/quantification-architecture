@@ -1,0 +1,85 @@
+sources:
+  eastmoney_news:
+    enabled: true
+    type: "media"
+    credibility: "data_vendor"
+    description: "东方财富证券与财经栏目新闻"
+    page_size: 30
+    timeout_seconds: 10
+    columns:
+      - id: 353
+        name: "证券聚焦"
+      - id: 344
+        name: "财经焦点"
+
+  cninfo_announcements:
+    enabled: true
+    type: "announcement"
+    credibility: "official"
+    description: "巨潮资讯上市公司公告，后续接入"
+    page_size: 20
+    lookback_days: 14
+    timeout_seconds: 10
+    extract_body: true
+    max_body_chars: 4000
+
+  web_search:
+    enabled: false
+    type: "search"
+    credibility: "normal_media"
+    provider: "disabled"
+    max_queries: 8
+    timeout_seconds: 10
+    description: "通用财经新闻搜索，可配置 Tavily 或 SerpAPI API key 后启用"
+
+  rss_feeds:
+    enabled: false
+    timeout_seconds: 10
+    description: "通用RSS/Atom消息源，适合接政策网站、海外科技新闻、商品资讯等"
+    feeds: []
+
+  overseas_market:
+    enabled: true
+    type: "overseas"
+    credibility: "data_vendor"
+    threshold_pct: 1.0
+    timeout_seconds: 8
+    description: "纳指、英伟达、费半、美债、美元等海外扰动"
+    instruments:
+      - ticker: "^IXIC"
+        name: "纳斯达克综合指数"
+        tags: ["美股", "科技", "AI"]
+      - ticker: "^SOX"
+        name: "费城半导体指数"
+        tags: ["半导体", "芯片", "美股"]
+      - ticker: "NVDA"
+        name: "英伟达"
+        tags: ["AI", "算力", "半导体"]
+      - ticker: "MU"
+        name: "美光科技"
+        tags: ["存储", "芯片"]
+
+  commodity:
+    enabled: true
+    type: "commodity"
+    credibility: "data_vendor"
+    threshold_pct: 1.0
+    timeout_seconds: 8
+    description: "黄金、铜、锂、稀土、原油等商品信息"
+    instruments:
+      - ticker: "GC=F"
+        name: "COMEX黄金"
+        tags: ["黄金", "有色"]
+      - ticker: "HG=F"
+        name: "COMEX铜"
+        tags: ["铜", "有色", "资源周期"]
+      - ticker: "CL=F"
+        name: "WTI原油"
+        tags: ["原油", "商品"]
+
+  eastmoney_quote:
+    enabled: true
+    type: "market"
+    credibility: "data_vendor"
+    timeout_seconds: 8
+    description: "东方财富实时行情，用于 market_validate"

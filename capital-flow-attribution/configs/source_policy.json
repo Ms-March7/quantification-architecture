@@ -1,0 +1,91 @@
+{
+  "schema_version": "s1r-source-policy-v1",
+  "canonical_rule": "Official disclosures remain canonical. Optional adapters may backfill or cross-check but cannot silently override official observations.",
+  "conflict_policy": {
+    "preserve_all_observations": true,
+    "average_conflicting_values": false,
+    "quality_state": "CONFLICT",
+    "workflow_state": "REVIEW"
+  },
+  "sources": [
+    {
+      "tier": 1,
+      "source_id": "official_direct",
+      "role": "canonical",
+      "enabled": true,
+      "package": null,
+      "credential_env": null,
+      "families": ["*"]
+    },
+    {
+      "tier": 2,
+      "source_id": "tushare_pro",
+      "role": "secondary_backfill_and_cross_check",
+      "enabled": true,
+      "package": "tushare",
+      "credential_env": "TUSHARE_TOKEN",
+      "families": [
+        "security_master",
+        "trading_calendar",
+        "market_daily",
+        "etf_master",
+        "etf_shares_nav",
+        "margin",
+        "stock_connect",
+        "industry_sw2021"
+      ]
+    },
+    {
+      "tier": 3,
+      "source_id": "akshare",
+      "role": "secondary_cross_check_and_discovery",
+      "enabled": true,
+      "package": "akshare",
+      "credential_env": null,
+      "families": [
+        "security_master",
+        "market_daily",
+        "etf_master",
+        "etf_shares_nav",
+        "margin",
+        "stock_connect",
+        "market_liquidity"
+      ]
+    },
+    {
+      "tier": 4,
+      "source_id": "eastmoney_nav_secondary",
+      "role": "research_backfill_only",
+      "enabled": true,
+      "package": null,
+      "credential_env": null,
+      "license_status": "UNVERIFIED",
+      "families": ["etf_nav"]
+    },
+    {
+      "tier": 5,
+      "source_id": "jin10_margin_history",
+      "role": "research_history_only",
+      "enabled": true,
+      "package": null,
+      "credential_env": null,
+      "license_status": "UNVERIFIED",
+      "families": ["margin_history"]
+    },
+    {
+      "tier": 6,
+      "source_id": "registered_qlib_snapshot",
+      "role": "research_context_only",
+      "enabled": true,
+      "package": null,
+      "credential_env": null,
+      "families": ["trading_calendar", "market_daily"]
+    }
+  ],
+  "component_policy": {
+    "core": ["requests", "tenacity", "duckdb", "pandas", "pandera"],
+    "optional_adapters": ["akshare", "tushare"],
+    "research": ["networkx", "scikit-learn", "ruptures"],
+    "deferred_until_scale_requires": ["polars", "dlt", "prefect", "dagster", "airflow", "dbt"]
+  }
+}

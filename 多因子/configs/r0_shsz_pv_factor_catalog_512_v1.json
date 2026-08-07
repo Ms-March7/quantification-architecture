@@ -1,0 +1,4124 @@
+{
+  "built_at_utc": "2026-08-04T08:27:18.617382+00:00",
+  "candidate_count": 512,
+  "candidates": [
+    {
+      "candidate_id": "b2f5d64e3a6ae234",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "intraday_or_overnight",
+      "formula": "safe_div(sub($close,$open),$open)",
+      "generation": 0,
+      "origin": "seed"
+    },
+    {
+      "candidate_id": "10ab320859ee9acf",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "momentum_or_reversal",
+      "formula": "cs_rank(safe_div(delta($close,1),delay($close,1)))",
+      "generation": 0,
+      "origin": "seed"
+    },
+    {
+      "candidate_id": "eaa08e8f7e10d48d",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "intraday_or_overnight",
+      "formula": "safe_div(sub($open,delay($close,1)),delay($close,1))",
+      "generation": 0,
+      "origin": "seed"
+    },
+    {
+      "candidate_id": "94993ff716058612",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "intraday_or_overnight",
+      "formula": "neg(safe_div(sub($open,delay($close,1)),delay($close,1)))",
+      "generation": 0,
+      "origin": "seed"
+    },
+    {
+      "candidate_id": "12b0ed3b0aadf90c",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "momentum_or_reversal",
+      "formula": "safe_div(delta($close,3),delay($close,3))",
+      "generation": 0,
+      "origin": "seed"
+    },
+    {
+      "candidate_id": "00b8f9f7e6e5fc63",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "momentum_or_reversal",
+      "formula": "neg(safe_div(delta($close,3),delay($close,3)))",
+      "generation": 0,
+      "origin": "seed"
+    },
+    {
+      "candidate_id": "d3135a6a3a60a55b",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "ts_std(safe_div(delta($close,1),delay($close,1)),3)",
+      "generation": 0,
+      "origin": "seed"
+    },
+    {
+      "candidate_id": "e857383164836080",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volume",
+      "formula": "safe_div($volume,ts_mean($volume,3))",
+      "generation": 0,
+      "origin": "seed"
+    },
+    {
+      "candidate_id": "62714b15c37a0fbc",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_corr(safe_div(delta($close,1),delay($close,1)),$volume,3)",
+      "generation": 0,
+      "origin": "seed"
+    },
+    {
+      "candidate_id": "5cacc7313d35e688",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "momentum_or_reversal",
+      "formula": "safe_div(delta($close,5),delay($close,5))",
+      "generation": 0,
+      "origin": "seed"
+    },
+    {
+      "candidate_id": "76a4e20f3fb5693f",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "momentum_or_reversal",
+      "formula": "neg(safe_div(delta($close,5),delay($close,5)))",
+      "generation": 0,
+      "origin": "seed"
+    },
+    {
+      "candidate_id": "567fd9426ace9806",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "ts_std(safe_div(delta($close,1),delay($close,1)),5)",
+      "generation": 0,
+      "origin": "seed"
+    },
+    {
+      "candidate_id": "09dfa8e7dd845248",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volume",
+      "formula": "safe_div($volume,ts_mean($volume,5))",
+      "generation": 0,
+      "origin": "seed"
+    },
+    {
+      "candidate_id": "72406af61dbc927a",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_corr(safe_div(delta($close,1),delay($close,1)),$volume,5)",
+      "generation": 0,
+      "origin": "seed"
+    },
+    {
+      "candidate_id": "1eb064970acae13c",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "momentum_or_reversal",
+      "formula": "safe_div(delta($close,10),delay($close,10))",
+      "generation": 0,
+      "origin": "seed"
+    },
+    {
+      "candidate_id": "d53825ce3ffe69e6",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "momentum_or_reversal",
+      "formula": "neg(safe_div(delta($close,10),delay($close,10)))",
+      "generation": 0,
+      "origin": "seed"
+    },
+    {
+      "candidate_id": "feb426ed1f650075",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "ts_std(safe_div(delta($close,1),delay($close,1)),10)",
+      "generation": 0,
+      "origin": "seed"
+    },
+    {
+      "candidate_id": "f370c8b7d7f9cd01",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volume",
+      "formula": "safe_div($volume,ts_mean($volume,10))",
+      "generation": 0,
+      "origin": "seed"
+    },
+    {
+      "candidate_id": "4aab8fbb5d78611c",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_corr(safe_div(delta($close,1),delay($close,1)),$volume,10)",
+      "generation": 0,
+      "origin": "seed"
+    },
+    {
+      "candidate_id": "ccef666259e899e0",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "momentum_or_reversal",
+      "formula": "safe_div(delta($close,20),delay($close,20))",
+      "generation": 0,
+      "origin": "seed"
+    },
+    {
+      "candidate_id": "857658e5863b1a8f",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "momentum_or_reversal",
+      "formula": "neg(safe_div(delta($close,20),delay($close,20)))",
+      "generation": 0,
+      "origin": "seed"
+    },
+    {
+      "candidate_id": "8a8a89b7bd84c0ce",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "ts_std(safe_div(delta($close,1),delay($close,1)),20)",
+      "generation": 0,
+      "origin": "seed"
+    },
+    {
+      "candidate_id": "cbdc97ed3a94f8b4",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volume",
+      "formula": "safe_div($volume,ts_mean($volume,20))",
+      "generation": 0,
+      "origin": "seed"
+    },
+    {
+      "candidate_id": "1c360eae8db89606",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_corr(safe_div(delta($close,1),delay($close,1)),$volume,20)",
+      "generation": 0,
+      "origin": "seed"
+    },
+    {
+      "candidate_id": "ddadd8af6ad4ec7a",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "momentum_or_reversal",
+      "formula": "safe_div(delta($close,40),delay($close,40))",
+      "generation": 0,
+      "origin": "seed"
+    },
+    {
+      "candidate_id": "2657c212276a11e2",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "momentum_or_reversal",
+      "formula": "neg(safe_div(delta($close,40),delay($close,40)))",
+      "generation": 0,
+      "origin": "seed"
+    },
+    {
+      "candidate_id": "db428c7d8949fe42",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "ts_std(safe_div(delta($close,1),delay($close,1)),40)",
+      "generation": 0,
+      "origin": "seed"
+    },
+    {
+      "candidate_id": "0d11d654701bf37c",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volume",
+      "formula": "safe_div($volume,ts_mean($volume,40))",
+      "generation": 0,
+      "origin": "seed"
+    },
+    {
+      "candidate_id": "96321399b141c3e2",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_corr(safe_div(delta($close,1),delay($close,1)),$volume,40)",
+      "generation": 0,
+      "origin": "seed"
+    },
+    {
+      "candidate_id": "5f03f92ae0404cc3",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "momentum_or_reversal",
+      "formula": "safe_div(delta($close,60),delay($close,60))",
+      "generation": 0,
+      "origin": "seed"
+    },
+    {
+      "candidate_id": "9edfb66ad2e70969",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "momentum_or_reversal",
+      "formula": "neg(safe_div(delta($close,60),delay($close,60)))",
+      "generation": 0,
+      "origin": "seed"
+    },
+    {
+      "candidate_id": "cae367535c9143f6",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "ts_std(safe_div(delta($close,1),delay($close,1)),60)",
+      "generation": 0,
+      "origin": "seed"
+    },
+    {
+      "candidate_id": "7cdd062d36db01f3",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volume",
+      "formula": "safe_div($volume,ts_mean($volume,60))",
+      "generation": 0,
+      "origin": "seed"
+    },
+    {
+      "candidate_id": "c6c7b4a2ac1c3693",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_corr(safe_div(delta($close,1),delay($close,1)),$volume,60)",
+      "generation": 0,
+      "origin": "seed"
+    },
+    {
+      "candidate_id": "f3beb0d94edd4236",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "composite_price_volume",
+      "formula": "safe_div(sub($high,$low),$close)",
+      "generation": 0,
+      "origin": "seed"
+    },
+    {
+      "candidate_id": "8abcb24633ccda00",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_position",
+      "formula": "safe_div(sub($close,ts_min($low,5)),sub(ts_max($high,5),ts_min($low,5)))",
+      "generation": 0,
+      "origin": "seed"
+    },
+    {
+      "candidate_id": "8a338b69a146cab2",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_position",
+      "formula": "safe_div(sub($close,ts_min($low,10)),sub(ts_max($high,10),ts_min($low,10)))",
+      "generation": 0,
+      "origin": "seed"
+    },
+    {
+      "candidate_id": "d2632b8018e3f03f",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_position",
+      "formula": "safe_div(sub($close,ts_min($low,20)),sub(ts_max($high,20),ts_min($low,20)))",
+      "generation": 0,
+      "origin": "seed"
+    },
+    {
+      "candidate_id": "809af066f99d6148",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_position",
+      "formula": "safe_div(sub($close,ts_min($low,60)),sub(ts_max($high,60),ts_min($low,60)))",
+      "generation": 0,
+      "origin": "seed"
+    },
+    {
+      "candidate_id": "018bd6e0d266188d",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "turnover_amount",
+      "formula": "safe_div($amount,ts_mean($amount,5))",
+      "generation": 0,
+      "origin": "seed"
+    },
+    {
+      "candidate_id": "8bb4b81530c357bb",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "turnover_amount",
+      "formula": "ts_rank(safe_div($amount,ts_mean($amount,5)),5)",
+      "generation": 0,
+      "origin": "seed"
+    },
+    {
+      "candidate_id": "a081422bf03c39b7",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_corr(safe_div(delta($close,1),delay($close,1)),safe_div($amount,ts_mean($amount,5)),5)",
+      "generation": 0,
+      "origin": "seed"
+    },
+    {
+      "candidate_id": "8e949134774b7e45",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "turnover_amount",
+      "formula": "safe_div($amount,ts_mean($amount,20))",
+      "generation": 0,
+      "origin": "seed"
+    },
+    {
+      "candidate_id": "afa641491e12b9eb",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "turnover_amount",
+      "formula": "ts_rank(safe_div($amount,ts_mean($amount,20)),20)",
+      "generation": 0,
+      "origin": "seed"
+    },
+    {
+      "candidate_id": "4670bc17cd793931",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_corr(safe_div(delta($close,1),delay($close,1)),safe_div($amount,ts_mean($amount,20)),20)",
+      "generation": 0,
+      "origin": "seed"
+    },
+    {
+      "candidate_id": "6b9c0a5a47d74eff",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "turnover_amount",
+      "formula": "safe_div($amount,ts_mean($amount,60))",
+      "generation": 0,
+      "origin": "seed"
+    },
+    {
+      "candidate_id": "32835edc432b68f4",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "turnover_amount",
+      "formula": "ts_rank(safe_div($amount,ts_mean($amount,60)),60)",
+      "generation": 0,
+      "origin": "seed"
+    },
+    {
+      "candidate_id": "b0af6008e3a26a6c",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_corr(safe_div(delta($close,1),delay($close,1)),safe_div($amount,ts_mean($amount,60)),60)",
+      "generation": 0,
+      "origin": "seed"
+    },
+    {
+      "candidate_id": "a0d1dfbb814679c4",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_corr(cs_zscore(ts_rank(abs($high),40)),sub(abs(ts_mean($amount,5)),$amount),40)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "93654c6454219d72",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "ts_corr($close,abs(neg(ts_std($volume,3))),10)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "e92a6c7c2bbf82f3",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_position",
+      "formula": "abs(safe_div(ts_min($high,10),delta(abs($close),2)))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "f92978b9b00ea1f8",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "turnover_amount",
+      "formula": "safe_div($amount,$amount)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "f05f2e285d8222a0",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "delay(neg(ts_max(ts_corr($high,$close,60),5)),10)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "5d3a265a45926764",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_position",
+      "formula": "ts_mean(ts_rank(delay(ts_max($high,40),20),5),20)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "d60f718141070696",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "intraday_or_overnight",
+      "formula": "mul(signed_log1p(delta(ts_rank($high,3),40)),ts_rank($open,10))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "c04cd6b7f8014117",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_corr($high,safe_div($low,$open),10)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "babcb6842ef3f7f7",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "turnover_amount",
+      "formula": "ts_rank(ts_min(delta(safe_div($volume,$amount),60),3),2)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "d806e03f18b58fcb",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "ts_min(ts_rank(ts_std(abs($volume),40),40),20)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "22400fc02e94fa89",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "cs_rank(ts_std(ts_min(ts_rank($open,60),40),3))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "7df573c367bc245b",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "cs_zscore(ts_corr($close,$high,10))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "b7e82f5732f31d87",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "composite_price_volume",
+      "formula": "delta(cs_rank(abs(ts_rank($low,60))),5)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "b617a2db39598375",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "turnover_amount",
+      "formula": "ts_rank(ts_mean(delta($amount,10),60),5)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "6e9f1e83b75b103b",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "cs_zscore(abs(ts_std(ts_rank($close,5),3)))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "e6d9b89c70e7118d",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volume",
+      "formula": "ts_rank($volume,10)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "7a9007ac0d813afb",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_position",
+      "formula": "ts_rank(ts_min($close,60),10)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "72a3a13913aa9c99",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_mean(abs(ts_corr(ts_max($close,5),ts_corr($volume,$open,20),3)),10)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "81620ca8c66464b8",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_position",
+      "formula": "ts_rank(ts_min($high,2),2)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "5c7f93d480ee4bca",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "composite_price_volume",
+      "formula": "ts_mean(ts_rank(ts_mean(add($high,$high),60),60),5)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "ac31bfc235372e8e",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volume",
+      "formula": "ts_mean(neg(ts_rank(mul($close,$volume),5)),3)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "562704c37609f2c4",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "delay(ts_corr($high,$open,40),5)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "8766ebe2266b6660",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_position",
+      "formula": "signed_log1p(safe_div(neg(ts_rank($close,20)),safe_div(delta($close,20),ts_max($close,3))))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "042d02c7f7f53f52",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "delay(ts_min(ts_corr($open,abs($open),20),10),5)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "5fcafd13754f0642",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_corr(neg($volume),ts_rank($open,5),2)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "5c9e28a113cc2591",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "composite_price_volume",
+      "formula": "ts_rank($high,3)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "1106cddec2d6ee38",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_corr($volume,$open,10)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "6ff5ca18c293708b",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "composite_price_volume",
+      "formula": "ts_rank(ts_rank(neg(add($close,$low)),60),2)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "b2b9d0803efaa56c",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "intraday_or_overnight",
+      "formula": "ts_rank($open,40)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "10c3b701be0f3c52",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "composite_price_volume",
+      "formula": "signed_log1p(delay(ts_rank($low,5),80))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "70dec35ad4a17205",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_mean(ts_corr($high,$amount,5),40)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "529f914f570ef1b6",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "intraday_or_overnight",
+      "formula": "safe_div($open,$low)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "d2bfa0756cd35f2c",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "intraday_or_overnight",
+      "formula": "delay(ts_mean(ts_mean(safe_div($low,$open),40),40),40)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "bede1796b3525aa2",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "ts_mean(safe_div(ts_std(delay($close,3),60),$open),40)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "d44cf294d8825e79",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "composite_price_volume",
+      "formula": "ts_rank(neg(delta($low,20)),10)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "6bdc3da0b1f35252",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "ts_mean(ts_std(ts_rank($close,60),20),2)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "10aded1de6fb4667",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "ts_rank(ts_std($high,20),40)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "d59eaf5b5f73ca5a",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "cs_zscore(ts_corr(ts_std(delta($low,60),3),ts_min(ts_rank($open,60),60),20))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "a95cd0a028fa4ea6",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "turnover_amount",
+      "formula": "ts_rank(ts_mean(ts_rank(delta($amount,3),40),10),20)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "c3e1bf926f70c79f",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_position",
+      "formula": "delta(ts_max(safe_div(sub($close,$open),$open),2),5)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "907855a3f887f4ec",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "turnover_amount",
+      "formula": "ts_mean(ts_rank(ts_max($amount,20),40),20)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "8b2be1315749809b",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "composite_price_volume",
+      "formula": "ts_mean(ts_rank($high,3),60)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "a6f507b25b059ef0",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "add(ts_corr(safe_div(neg($open),neg($amount)),$high,40),ts_corr(ts_rank(ts_max($amount,20),3),ts_max(ts_mean($high,3),3),60))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "8428504625e52ee8",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "composite_price_volume",
+      "formula": "ts_rank($high,40)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "27136b7ad35a2744",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "cs_rank(ts_corr($low,ts_std($open,5),2))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "75984a2c719ce6e8",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volume",
+      "formula": "cs_rank(delay(ts_mean(ts_rank($volume,2),3),10))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "509d41893e8913bc",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "delay(delta(ts_rank(ts_std($open,3),5),2),60)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "61acd695cc124b1e",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "ts_corr(neg(ts_rank(ts_std($low,3),10)),$volume,10)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "da531b2255137d99",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_position",
+      "formula": "ts_max(ts_rank($close,2),5)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "77cd82781169fac0",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "composite_price_volume",
+      "formula": "safe_div($high,delta($high,3))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "65e0754a14e979d2",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "ts_std(ts_corr(mul(add($high,$high),ts_min($volume,3)),delta($low,3),3),3)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "c77984243ac669df",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "intraday_or_overnight",
+      "formula": "safe_div($open,$high)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "81990bc5f940595a",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_mean(ts_corr(ts_max(ts_rank($amount,2),40),neg($open),10),40)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "63cc3c0c43318ae5",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "composite_price_volume",
+      "formula": "delta(safe_div($high,$close),40)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "a4b9892b6311bffe",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "ts_corr(ts_corr(delta(neg($amount),5),delay(ts_std($amount,5),60),3),$amount,2)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "30a19805865b5fbc",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "turnover_amount",
+      "formula": "abs(ts_rank($amount,3))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "0c7fc1eccbad2d1e",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "composite_price_volume",
+      "formula": "ts_rank($close,40)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "263f0413c87fcb36",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_corr($high,$amount,20)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "3231c138ced54a14",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "turnover_amount",
+      "formula": "ts_rank($amount,2)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "6592c5589b9bf87c",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "composite_price_volume",
+      "formula": "cs_rank(ts_rank(delta(ts_rank($close,20),20),3))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "18b75cc3651962e2",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_position",
+      "formula": "ts_min(ts_mean(cs_zscore(ts_rank($close,3)),3),2)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "481ef9e9ec4e36e7",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "composite_price_volume",
+      "formula": "abs(safe_div($high,$high))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "cc169b7063c94ecc",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "neg(abs(ts_corr(ts_mean($amount,5),delta($close,10),10)))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "f62137f1052f3c35",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_position",
+      "formula": "signed_log1p(ts_rank(ts_min(abs($open),40),3))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "106a7498cf05c4aa",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "intraday_or_overnight",
+      "formula": "ts_rank($open,3)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "106ee534a2b7cd0b",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volume",
+      "formula": "ts_max(safe_div($volume,$volume),60)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "64fede8e140f1df6",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_max(ts_min(ts_corr(ts_mean($low,40),mul($close,$close),2),20),3)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "fe891bc6d53770b6",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "composite_price_volume",
+      "formula": "ts_rank($low,2)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "b0c09d5e4762e395",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "ts_std(ts_min(ts_corr(ts_rank($low,5),ts_max($volume,3),10),5),60)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "eb7e1a4d3e2b2e99",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "ts_corr(mul($volume,delta(ts_mean($close,20),40)),ts_std(ts_std(sub($close,$low),40),2),3)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "12f9ad261cfe49b6",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "delta(delta(ts_std(ts_corr($close,$volume,2),60),5),3)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "eb67c86943743177",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_position",
+      "formula": "ts_rank(ts_max($open,60),5)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "0cfc7d8249013876",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "delta(ts_corr($high,ts_std($volume,5),60),20)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "892e701f0d950eac",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "ts_std(ts_rank(ts_mean(ts_min($low,2),20),60),20)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "ff5fab17ae707d91",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volume",
+      "formula": "cs_rank(ts_mean(ts_mean(ts_rank($volume,10),40),20))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "6a07abcd9ddb061f",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_corr(delay(ts_mean(ts_max($open,5),40),2),delay($close,60),2)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "4a277e0dc3386547",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "safe_div($volume,safe_div($volume,signed_log1p(ts_corr($close,$open,5))))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "a91521dcc5384c6b",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "delta(cs_rank(ts_corr($volume,delay($close,2),40)),3)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "5d40e763e35218be",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_min(abs(cs_rank(ts_corr($low,$low,40))),10)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "83a71c5e480b1776",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "composite_price_volume",
+      "formula": "cs_rank(ts_rank(abs($high),5))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "677fc1b596c6c8b5",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "ts_corr(delay(mul($amount,ts_corr($volume,$volume,2)),2),ts_corr(ts_min($volume,5),ts_mean(ts_std($amount,60),2),10),5)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "cd899dd6f2327f42",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "turnover_amount",
+      "formula": "delay(ts_rank($amount,5),60)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "6fb824452a62cbfc",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_corr(ts_mean(neg(sub($close,$high)),5),$high,20)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "4f9abd2f1a65a34e",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_position",
+      "formula": "ts_max(delay(safe_div($close,$close),30),40)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "87974cd4c6cdf28b",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "ts_corr(ts_corr(ts_std($low,40),$open,2),$high,3)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "d3b7f7334e06355b",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "delta(ts_corr(ts_mean($open,20),signed_log1p(ts_corr($open,$amount,20)),10),60)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "89e10e4fa7266d21",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_corr($high,$high,10)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "0ad8a4e04a5421ca",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_min(ts_min(neg(ts_corr($open,$high,2)),20),60)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "0d70759a326644dc",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_min(ts_corr(neg(abs($low)),delta($open,10),40),10)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "80aca548b02948d6",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "composite_price_volume",
+      "formula": "delta(ts_rank($close,2),40)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "45be38e6b1cf51da",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_position",
+      "formula": "ts_rank(ts_min($high,60),3)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "4457e31c017a8434",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_corr($open,abs($open),60)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "742c37aa364e50d7",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "ts_rank(delta(delay(ts_std($close,60),5),20),2)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "4b23f078de69ba60",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_mean(ts_corr(mul($high,ts_max($low,60)),ts_corr($low,ts_min($low,20),2),40),10)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "ed326db233f68fa5",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "delay(ts_corr(ts_rank(ts_corr($close,$high,60),60),$volume,2),10)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "d57c5e2395b98345",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "cs_rank(ts_rank(ts_std(delta($amount,10),10),20))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "1f30547227e080db",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "composite_price_volume",
+      "formula": "ts_rank($close,5)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "faf343129b4fa8e2",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "composite_price_volume",
+      "formula": "ts_rank(delta($high,3),10)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "572a893df6ad2724",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volume",
+      "formula": "ts_min(ts_rank(ts_rank(neg($volume),20),3),60)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "47eeba9082110255",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "cs_zscore(ts_corr(ts_std(neg($high),10),$close,5))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "090733cdbd817e49",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_corr(delta(ts_rank(ts_rank($low,3),20),5),delta(neg(ts_min($close,60)),60),10)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "601514758e7d4cec",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "safe_div(cs_rank(ts_rank(ts_corr($volume,$close,5),60)),ts_corr(ts_corr($low,$low,3),cs_rank(safe_div($low,$open)),40))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "eb4f9ee3bbd49e5e",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "add(signed_log1p(ts_rank(ts_mean($low,20),20)),ts_std(ts_rank($close,60),20))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "235b218725ba0d5c",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "composite_price_volume",
+      "formula": "delta(ts_rank(delay($high,5),40),2)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "218b38720e8d360d",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "turnover_amount",
+      "formula": "ts_rank(ts_rank(ts_max(ts_min($amount,3),10),3),60)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "7ed3b2cc69cf791d",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_corr($close,$low,3)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "b1996b0f616f26a7",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "ts_std(abs(ts_rank($volume,3)),20)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "7768161b0a8733d3",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "ts_corr($amount,ts_std(ts_max(ts_max($high,60),10),40),5)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "90e26db3c557e32b",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "ts_rank(ts_std($high,2),5)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "2437f56c49107927",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_rank(ts_corr($amount,ts_max($amount,2),40),5)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "006f727017fd797c",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "cs_zscore(ts_mean(cs_rank(ts_corr($low,$high,20)),2))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "18b0a049224f9e9a",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "delay(cs_rank(delay(ts_corr($close,$volume,60),3)),3)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "f9ffcabe015ef3d1",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_corr($open,cs_rank(ts_max(ts_rank($amount,60),20)),5)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "32bffdea2c75b793",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "momentum_or_reversal",
+      "formula": "delta(ts_rank(abs(delta($close,3)),5),40)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "1dad9323d12b110b",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "composite_price_volume",
+      "formula": "ts_mean(abs(safe_div(ts_rank($high,40),ts_rank($high,5))),60)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "576e2f352a1b5910",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "composite_price_volume",
+      "formula": "ts_mean(ts_rank($low,20),5)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "fb41863eb52b77ad",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_min(ts_min(delta(ts_corr($amount,$open,40),40),3),10)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "5388439227fba5a4",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "turnover_amount",
+      "formula": "ts_rank($amount,20)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "43674c2131b42dc6",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_max(ts_corr($volume,$amount,2),5)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "d4ff38038dfd93f8",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "composite_price_volume",
+      "formula": "ts_mean(abs(ts_rank($close,10)),2)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "b9f0621dd3fcf5a3",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_corr($amount,delay(ts_rank(delay($open,3),10),5),20)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "74b7f24b4d2709fc",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_min(ts_corr(ts_max(abs($low),3),ts_max($close,20),2),60)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "17eb60f204eb7389",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "composite_price_volume",
+      "formula": "ts_mean(neg(ts_rank(safe_div($close,$low),5)),40)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "bd820a53d4805928",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "turnover_amount",
+      "formula": "ts_rank($amount,3)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "738f6b2df6b4f1e4",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "safe_div(ts_std($close,20),ts_std($low,60))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "0125139a94c89f51",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_corr($volume,delta($high,40),5)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "405f83e63bd85e57",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_position",
+      "formula": "signed_log1p(safe_div(add($high,ts_max($low,2)),abs(delta($close,3))))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "0786faa582652858",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "turnover_amount",
+      "formula": "cs_zscore(ts_rank($amount,40))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "ccad3b11d40c283c",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "ts_std(ts_rank(ts_mean(neg($amount),60),2),2)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "b353b58a6f46db12",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_corr(ts_min(ts_max(ts_corr($amount,$low,60),40),10),neg($low),60)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "d51d822bb3f2a79f",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "neg(delay(ts_rank(ts_corr($high,$open,60),5),5))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "cde9e6ff89c31785",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "turnover_amount",
+      "formula": "ts_max(ts_max(ts_rank($amount,5),5),5)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "ffa45642e43dc789",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "signed_log1p(signed_log1p(ts_std(ts_corr($low,$high,10),3)))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "35646999671361a3",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_position",
+      "formula": "ts_min(delta(ts_max(safe_div($close,$open),5),10),2)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "b3b51130d22f4f39",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "neg(ts_corr(ts_mean(delay($open,2),10),delay(ts_max($open,20),10),2))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "47d6d8f6ac60a499",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "signed_log1p(ts_corr(ts_mean(ts_mean($high,40),40),ts_mean(safe_div($amount,$open),10),40))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "23942f2f33466cb9",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "ts_std(ts_std(delta(ts_rank($open,3),40),40),20)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "994b51d5f1ef48e3",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volume",
+      "formula": "delay(ts_rank(ts_mean($volume,60),20),2)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "2b8170c1a7233f51",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "composite_price_volume",
+      "formula": "ts_rank(neg(ts_mean(safe_div($high,$high),60)),10)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "f8cfaf1616731c3e",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_corr(neg($close),delay(delta(ts_corr($low,$close,3),10),10),10)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "9b4b4e8b2d42e291",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_corr(neg($close),$low,5)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "2744b5399c9cd56c",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "ts_corr(ts_min(ts_rank($high,5),40),ts_corr(ts_corr(sub($open,$close),ts_corr($volume,$open,60),20),delay(ts_std($close,3),60),40),60)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "0b609f9a6f9d8be8",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "ts_std(neg(ts_corr(ts_max($amount,2),$amount,3)),3)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "28b7de972e0be9bf",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_min(ts_corr(delta(mul($low,$low),20),$volume,40),3)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "20d8788877141932",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "cs_zscore(delay(ts_corr(ts_mean($open,60),delta($low,3),60),3))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "b9a07637dfcc1037",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "ts_std(neg(ts_corr(ts_rank($high,40),delta($volume,60),3)),3)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "beb289b1bc384b18",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "ts_std(ts_max(ts_rank(ts_mean($open,40),3),10),20)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "92cd034b292c6c10",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "composite_price_volume",
+      "formula": "ts_rank(delay($close,2),2)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "35198f7796e5a216",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "cs_zscore(signed_log1p(delay(ts_corr($amount,$low,20),5)))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "01a701496b9318f6",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "abs(delta(ts_rank(ts_corr($volume,$low,40),5),40))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "a282a354c3a59c48",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volume",
+      "formula": "ts_min(ts_rank($volume,2),3)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "2238f1ee1eebe216",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "cs_zscore(ts_corr(ts_corr($high,ts_std($amount,60),5),$open,40))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "e4276ed522f22bca",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "ts_rank(delta(ts_corr(ts_std($low,10),safe_div($low,$close),20),2),5)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "1c176ff63c5d8d78",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_min(ts_rank(ts_corr(abs($open),delay($low,3),60),40),40)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "d507d325be62d858",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_min(ts_corr($amount,ts_mean(ts_mean($volume,40),3),40),2)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "4f14afed85cc76fe",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "cs_rank(ts_corr(ts_mean(ts_std($close,5),2),ts_std($high,2),5))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "3261ffa2489ce9e4",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volume",
+      "formula": "ts_max(ts_rank(ts_rank(abs($volume),5),60),40)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "ec07670293f88410",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_corr(ts_corr(ts_min(ts_rank($high,5),60),$close,10),ts_corr($amount,ts_rank($volume,60),10),10)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "8d1dd063c032bdb4",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "cs_zscore(ts_rank(ts_std(ts_corr($close,$open,20),20),60))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "6f2f2f4af1df350a",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "turnover_amount",
+      "formula": "ts_rank(ts_min(cs_zscore(safe_div($amount,$amount)),40),60)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "883b25e35f1d0ee9",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_corr($low,delay(delta(delta($high,40),20),5),2)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "f353b6290f3308f3",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volume",
+      "formula": "delta(ts_mean(cs_rank(ts_rank($volume,2)),40),20)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "969f7cc7f05026c2",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volume",
+      "formula": "cs_zscore(ts_rank(ts_mean($volume,3),10))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "3c376a712653a2e3",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "signed_log1p(ts_corr(delay($volume,5),neg(ts_min($high,20)),60))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "7ac1fb444a9ea533",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "intraday_or_overnight",
+      "formula": "signed_log1p(ts_rank(ts_rank($open,60),20))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "4e64fda7e66ff3b8",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_max(ts_corr(abs(delta($high,10)),delta(delta($low,10),10),60),40)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "6be4af1d6fa6fed7",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "delta(ts_min(ts_corr(ts_std($open,60),$amount,60),60),60)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "a3e4e715476fa350",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volume",
+      "formula": "delta(delta(ts_rank(ts_rank($volume,20),10),2),20)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "9ed609a7a9d3e4f9",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "abs(ts_corr($open,delta(safe_div($amount,$volume),40),40))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "f5eeff68247dc639",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "composite_price_volume",
+      "formula": "ts_rank(delay(neg($low),10),10)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "013754f5522c45c8",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "cs_rank(sub(ts_mean(safe_div($close,$low),10),safe_div(safe_div($close,$close),ts_corr($low,$volume,5))))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "af1850cab7b41791",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "mul(ts_corr(ts_min(add($close,$low),60),safe_div(ts_max($close,40),delta($high,2)),40),ts_rank(delta(ts_corr($amount,$volume,10),20),5))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "5f20280afe987176",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "composite_price_volume",
+      "formula": "ts_rank(ts_mean($high,60),20)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "e5fad743c56b4b61",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_position",
+      "formula": "cs_rank(ts_min(ts_rank($open,60),20))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "af36316022c6d550",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "composite_price_volume",
+      "formula": "delay(signed_log1p(safe_div($close,$close)),40)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "366fcc9a2b29f766",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_rank(mul(ts_corr(add($high,$open),$close,3),ts_mean(ts_rank($high,5),2)),5)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "e4df097defe0701b",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "add(ts_corr(abs(mul($close,$low)),mul($volume,ts_mean($volume,5)),2),ts_mean(ts_rank(ts_std($volume,40),3),2))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "dfb6f19e06369604",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_corr(ts_rank($open,2),ts_min($high,3),10)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "1beeb1ce0866aecb",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_rank(cs_rank(ts_corr(ts_corr($low,$open,60),ts_mean($open,3),10)),20)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "16a41b799f999f4a",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "composite_price_volume",
+      "formula": "delta(ts_mean(ts_mean(ts_rank($low,20),40),10),40)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "0165682fd43edef9",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volume",
+      "formula": "abs(ts_rank(neg($volume),2))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "5562bf033537419c",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "add(ts_corr($low,$volume,2),ts_corr(ts_max($close,60),delay(ts_std($low,40),60),2))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "0a689775f3ca099a",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "turnover_amount",
+      "formula": "ts_rank(delay($amount,3),3)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "b876eccc9cd8e064",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_position",
+      "formula": "ts_min(ts_rank($high,5),60)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "b4a4958d1041d8d3",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_min(ts_corr($volume,ts_max(sub($low,$low),60),3),60)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "585b178cb9d7afbd",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_rank(ts_max(ts_rank(ts_corr($close,$amount,5),2),40),2)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "0f5851a57471f891",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "cs_zscore(ts_corr(ts_mean(ts_mean($volume,40),60),ts_min($high,20),2))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "f179095328fabdc8",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "delay(cs_rank(delay(ts_corr($close,$low,3),3)),2)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "d55b826b22c2907c",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_corr(neg($low),delta(ts_corr(ts_max($volume,40),$open,60),20),40)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "aa91780359cc3617",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "intraday_or_overnight",
+      "formula": "ts_rank(add($open,ts_mean(sub($close,$high),3)),60)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "a94c5629f0d5eb01",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "composite_price_volume",
+      "formula": "cs_rank(ts_rank($close,2))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "9a3292a4802e0c19",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_rank(safe_div(ts_rank(ts_corr($open,$low,40),60),$open),3)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "941d75d70b89ce99",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "cs_rank(ts_corr($open,ts_rank(ts_rank($amount,40),10),60))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "3537aaf5c214de49",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "intraday_or_overnight",
+      "formula": "ts_rank(delta($open,20),20)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "55f6b46d5eaf596c",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "ts_std(ts_max(ts_rank($open,3),5),5)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "d71a6d7b89ccd16e",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_min(ts_min(neg(ts_corr($amount,$high,3)),3),40)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "43de09db4a1b1b9f",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_position",
+      "formula": "ts_max(abs(ts_rank($close,2)),5)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "43ad76aba0d6243a",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "cs_rank(ts_std(cs_rank(ts_corr($volume,$volume,60)),20))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "b2d80390517a8ba8",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_corr(neg($close),$close,60)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "6a759bf101af3c44",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "ts_std(delay(ts_corr(ts_corr($amount,$open,5),delta($volume,10),3),10),3)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "cd0e025e3c4e332a",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "cs_zscore(ts_corr($open,signed_log1p(ts_corr($close,$amount,40)),10))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "0853854eae79300c",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "turnover_amount",
+      "formula": "ts_rank(ts_mean(safe_div(ts_max($amount,3),delay($amount,3)),3),10)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "d8559d7f7cbe0db3",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "composite_price_volume",
+      "formula": "delay(cs_rank(ts_rank($close,10)),40)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "93b6d84459dc066a",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "delay(ts_corr(delay($open,10),ts_max($amount,40),3),60)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "00245632a36751ea",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_min(signed_log1p(abs(ts_corr($volume,$open,40))),5)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "6ebbf1fa1c5ab046",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_corr($amount,neg($amount),2)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "890e33cea599e1f2",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "delay(cs_rank(ts_std(ts_corr($open,$close,10),10)),20)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "ae0c50e120ac6a83",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "turnover_amount",
+      "formula": "sub(ts_mean(ts_rank($high,10),40),abs(safe_div(ts_mean($amount,40),neg($amount))))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "80ab8d22a1aedbe8",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_corr(ts_corr(ts_corr(ts_corr($amount,$high,5),neg($volume),20),$volume,10),$open,40)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "afb170a1191b1fc5",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_corr(neg(safe_div(ts_corr($low,$close,60),ts_corr($low,$low,3))),$high,40)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "cb22ae8b32e45d92",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "cs_zscore(ts_min(ts_corr(sub($volume,$volume),$amount,40),2))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "acaff6f1e673ace4",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "ts_rank(ts_std(safe_div(delay($volume,5),ts_max($high,2)),10),5)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "4abc79e838074572",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "ts_corr(delta(safe_div(ts_rank($high,60),ts_std($open,5)),5),signed_log1p(ts_rank(ts_rank($open,10),10)),40)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "279590bb8f81cb53",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_corr(add(neg(add($close,$high)),safe_div(mul($close,$low),$open)),ts_rank(ts_max($close,20),40),10)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "5af08eb180f994e9",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_rank(cs_rank(ts_corr(ts_max($high,3),delay($open,3),20)),40)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "5a53f1aac515b466",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "ts_std(cs_zscore(safe_div(ts_mean($amount,20),$amount)),3)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "02a9309c56a60b57",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volume",
+      "formula": "safe_div(ts_min(safe_div($volume,$volume),2),ts_rank($low,2))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "447c41821e34658a",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_position",
+      "formula": "safe_div(neg($close),ts_min(abs(delay($low,40)),40))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "2ea5e83889d4b39c",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "composite_price_volume",
+      "formula": "ts_rank(delay(ts_mean(ts_rank($high,5),2),10),5)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "7cf3ede741cdc352",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_position",
+      "formula": "ts_max(safe_div($low,ts_min(ts_min($high,20),20)),3)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "c44687014bfa5b46",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "ts_max(ts_std(ts_rank(ts_mean($high,20),60),3),2)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "b08e4a424ae74baf",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_min(ts_corr($amount,delta(delay($high,3),10),20),2)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "0bcde72790dd79c6",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volume",
+      "formula": "ts_max(ts_rank(delta(abs($volume),5),60),20)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "710c51d38c7d8a93",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "delay(abs(ts_corr(add($amount,$amount),abs($close),20)),40)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "32d9d5ea5f9610cf",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "ts_max(ts_std(ts_corr(safe_div($amount,$close),ts_mean($low,2),60),3),40)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "d3c69af1a2cc8b6a",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "intraday_or_overnight",
+      "formula": "delay(ts_rank(delta($open,3),40),20)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "4074b01509e5732f",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_position",
+      "formula": "ts_rank(delay(ts_min(add($close,$close),2),60),20)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "90b0bede42e49256",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "composite_price_volume",
+      "formula": "ts_rank($low,20)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "132c1491c9329d3f",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "composite_price_volume",
+      "formula": "ts_rank(delay($low,10),60)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "043c0efbf9e1e9cc",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_min(ts_min(ts_corr($close,$high,10),5),3)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "df95618ae4f77c5e",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "ts_std(ts_rank(neg(delay($high,2)),2),10)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "ded402851f1fe5a7",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volume",
+      "formula": "ts_rank($volume,2)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "4151329ba9d093df",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "ts_max(ts_corr(ts_std(ts_mean($open,3),20),delay($volume,2),5),40)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "d80f03a972edc0c4",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "composite_price_volume",
+      "formula": "signed_log1p(safe_div($high,$low))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "fcda1986c5310f5e",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "delay(cs_rank(delta(ts_corr($amount,$open,2),10)),5)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "39597dc679787c07",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "ts_rank(ts_std($volume,10),2)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "d4a108e0b2c915bb",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "ts_min(ts_std(ts_std(ts_rank($close,5),20),40),60)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "faab1db227d1c22c",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "sub(delta(ts_mean(ts_rank($high,3),5),10),ts_corr(ts_min($amount,5),ts_std(abs($close),40),20))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "a57ae2d01705b6b8",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "composite_price_volume",
+      "formula": "signed_log1p(ts_rank($high,2))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "4ea16b36a41eb65f",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "signed_log1p(ts_corr($volume,$close,3))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "9c49bdffa9fc0299",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "composite_price_volume",
+      "formula": "ts_rank($low,3)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "9bfbaa9468ec34c7",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_corr(ts_mean(safe_div(ts_corr($volume,$open,40),ts_rank($amount,40)),60),safe_div(safe_div(ts_corr($close,$close,3),ts_corr($low,$open,20)),mul(ts_min($close,20),ts_min($close,40))),10)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "06c46def291d490f",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "composite_price_volume",
+      "formula": "ts_mean(cs_zscore(ts_rank(safe_div($low,$close),40)),5)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "8eda6211f6bcd660",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_position",
+      "formula": "ts_max(ts_rank($low,10),10)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "1174b8f682f325b3",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_corr(delta(delta(ts_corr($close,$volume,60),20),3),ts_mean($close,10),3)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "f1b48760818d546b",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "composite_price_volume",
+      "formula": "ts_rank(delay($high,40),60)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "197cebc3593d4928",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_position",
+      "formula": "ts_rank(ts_min(ts_max($close,60),5),10)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "72aa3b6f23270df4",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_max(ts_corr(ts_min(ts_min($open,5),3),$low,60),60)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "2ca87a473cb7cfb9",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_max(neg(delta(ts_corr($close,$amount,10),10)),20)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "cf653590becdf76b",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "signed_log1p(ts_corr(safe_div(abs($volume),ts_rank($close,2)),$close,60))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "0afc2dcde58d2f36",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "delta(ts_std(safe_div($low,neg($open)),60),3)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "216a5c7084fd3319",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_corr(ts_corr($open,delta(add($high,$high),40),2),ts_min($high,60),20)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "cdbc186e695019b7",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "ts_max(ts_std(ts_rank($volume,40),2),20)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "99105a1a7ee9e46f",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_corr($amount,$low,3)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "31640f99e935c93a",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "composite_price_volume",
+      "formula": "ts_rank($close,20)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "a5c37e71f84e390f",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_position",
+      "formula": "ts_rank(ts_max(sub($open,$open),10),40)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "c84ef55179b85309",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "neg(signed_log1p(ts_corr($high,ts_rank($volume,2),3)))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "1dd8c9464b95bbc1",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "delay(ts_max(ts_corr(ts_corr($high,$low,20),$volume,60),5),40)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "e73cc9c3057fbd6d",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volume",
+      "formula": "safe_div($volume,ts_min(neg(delta($volume,20)),60))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "52d8871335efa6c5",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_corr(neg($volume),$amount,40)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "e1e98e3d9a0b997c",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_position",
+      "formula": "cs_zscore(cs_zscore(ts_min(safe_div($close,$high),3)))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "955a47b77c1e8441",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "composite_price_volume",
+      "formula": "neg(ts_mean(cs_rank(ts_rank($close,40)),3))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "567dde1023cb48ba",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "cs_rank(sub(ts_corr(delta($high,20),add($low,$open),2),ts_max(ts_corr($amount,$volume,2),3)))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "90b3c19d9d67fe7c",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "intraday_or_overnight",
+      "formula": "signed_log1p(ts_rank($open,2))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "cfcfae646509dd73",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "ts_corr(ts_std($amount,10),$low,20)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "56cb3691ca8f1d20",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_corr($amount,$open,2)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "94f14d2bf73ba427",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "cs_zscore(delta(abs(ts_corr($amount,$close,20)),5))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "346051a4b50be3f3",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_corr(ts_corr(ts_corr($volume,ts_corr($volume,$volume,10),5),$low,5),delta(ts_rank(delay($volume,5),60),5),60)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "2262e7e0217744c0",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "ts_corr(ts_rank($volume,3),abs(safe_div(ts_rank($high,40),ts_std($high,20))),20)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "8cc822c336daac40",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "composite_price_volume",
+      "formula": "cs_rank(ts_rank($close,3))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "2f467955578056a0",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_corr(ts_rank($volume,20),ts_max($open,60),10)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "5c8498fb64c110c3",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "delay(mul(safe_div(ts_rank($amount,5),ts_corr($low,$low,10)),ts_rank(ts_std($low,20),40)),60)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "fcc598196d65dc5b",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "composite_price_volume",
+      "formula": "safe_div($close,$high)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "fe47d9ae2fee657d",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_max(ts_max(delay(ts_corr($open,$close,40),20),10),10)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "8618d5c0884c0e10",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_position",
+      "formula": "ts_rank(ts_max(mul(abs($low),safe_div($high,$high)),5),3)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "7cd11daa9d5724d1",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_corr(ts_max(mul($volume,$volume),20),ts_min($open,20),5)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "fb014458c3c916d0",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "delay(cs_rank(mul(safe_div($high,$high),ts_corr($close,$low,40))),2)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "cb620cc0822da00b",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "composite_price_volume",
+      "formula": "signed_log1p(cs_zscore(ts_rank(ts_rank($high,40),40)))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "6c6f6b142006c0dc",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volume",
+      "formula": "ts_rank($volume,5)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "e7e869e6004fa6b0",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_position",
+      "formula": "ts_min(ts_rank(mul($open,sub($high,$open)),5),60)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "6772de9fc3ec3052",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "turnover_amount",
+      "formula": "ts_max(delay(ts_mean(ts_rank($amount,2),40),40),20)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "ee701e6d6962a540",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_mean(ts_mean(ts_corr(ts_mean($amount,5),ts_mean($low,2),10),60),3)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "4665d8c58c9daf45",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_position",
+      "formula": "delay(abs(ts_min(safe_div($open,$low),20)),60)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "250047ecf96f7bba",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_corr(safe_div(ts_rank(ts_rank($open,10),3),ts_rank(delta($low,60),5)),$close,20)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "99c303bf05f9f22d",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_rank(ts_corr(ts_corr(ts_corr($high,$volume,2),mul($close,$close),60),$close,60),40)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "f3664cfb533c6360",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_rank(signed_log1p(sub(ts_corr($open,$close,2),ts_rank($high,2))),5)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "ed06d03b07bf72ff",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "intraday_or_overnight",
+      "formula": "ts_rank(abs(mul(add($high,$open),ts_rank($close,60))),20)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "0fcbe5cdbecb6023",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "ts_std(ts_mean(ts_rank($volume,60),20),10)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "7c125324b2e08abb",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "ts_std(neg(ts_corr($low,neg($close),40)),40)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "332fceac86447e44",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_corr(safe_div(ts_min(ts_corr($low,$close,60),40),$amount),$open,5)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "9ecc477ce2c0ace8",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_corr($amount,ts_min($high,10),60)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "7e09e7fdc5c6e2f4",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_corr($close,neg(delay(ts_min($amount,5),10)),40)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "ceaa2283b89ce93c",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_position",
+      "formula": "ts_rank(ts_max(neg($low),40),5)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "ce0fc50a8736928b",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volume",
+      "formula": "ts_max(ts_rank(safe_div($open,delay($volume,10)),60),5)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "df5059c7db8e99c7",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_position",
+      "formula": "ts_max(signed_log1p(delta(safe_div($close,$low),2)),5)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "3837ee9cbf0749d7",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "signed_log1p(ts_std(delta(ts_corr($close,$open,5),60),20))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "5829a984cd9221b6",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "intraday_or_overnight",
+      "formula": "signed_log1p(cs_zscore(ts_rank($open,5)))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "2a4cf55127900030",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "turnover_amount",
+      "formula": "ts_rank($amount,60)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "4bfb0a056d011d72",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "mul(ts_corr(abs($low),$low,20),ts_rank($close,60))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "369b4cba7fe45841",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_corr($volume,ts_corr($low,$volume,3),2)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "af84223f8740fb67",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "delta(ts_rank(delay(ts_corr($open,$open,10),3),5),40)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "6cf851ae6616f28d",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "composite_price_volume",
+      "formula": "neg(delta(ts_rank(ts_rank($low,60),10),2))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "9c4d766f7c172fc3",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_position",
+      "formula": "ts_rank(neg(sub($open,ts_min($close,3))),5)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "0cc763601a7c5c99",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "composite_price_volume",
+      "formula": "cs_zscore(delay(ts_mean(safe_div($high,$close),20),20))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "18509878c5767b28",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_rank(ts_corr(abs(ts_corr($volume,$high,20)),cs_rank(ts_corr($high,$amount,60)),40),60)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "60573102f1af3ce9",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "delta(ts_corr($amount,$high,60),2)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "ef54f1a9e079aa11",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "ts_corr($low,ts_max(sub($low,ts_std($low,60)),40),10)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "dcdff16c98b9e27a",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volume",
+      "formula": "signed_log1p(ts_rank($volume,2))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "19d3ef2124023f32",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "ts_rank(ts_std($close,40),60)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "2a304a0744dc5acd",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "delay(signed_log1p(ts_rank(ts_std($amount,5),40)),10)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "ba7ba12a3af15ff7",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "intraday_or_overnight",
+      "formula": "neg(cs_zscore(ts_rank(safe_div($high,$open),5)))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "8b6ffe2047a4b4a9",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_position",
+      "formula": "ts_min(ts_mean(ts_mean(safe_div($close,$high),3),5),60)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "69c06cb34e00e389",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_mean(ts_corr(ts_corr($close,$high,3),ts_corr(ts_rank($close,60),abs($low),40),60),2)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "738a97f86140ef6a",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "delay(neg(ts_corr(ts_mean($open,5),delay($open,20),60)),2)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "91fb3c727d23b62d",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "cs_zscore(ts_corr(ts_min(safe_div($volume,$open),60),ts_mean(ts_std($open,2),3),3))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "acbedc14eef53426",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "turnover_amount",
+      "formula": "ts_rank(ts_rank(ts_mean(ts_max($amount,40),40),5),60)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "54a8ffb3b676361f",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_min(abs(ts_min(ts_corr($low,$high,40),20)),5)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "410f37b3b8c3c44c",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volume",
+      "formula": "ts_rank(ts_rank($volume,60),3)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "880e09828e8694ff",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "delay(add(ts_corr(delta($amount,10),abs($low),3),ts_std(safe_div($open,$high),60)),3)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "2228d0829ad655e0",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_corr(ts_corr(ts_min($open,5),$close,60),ts_mean($close,2),3)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "9797ae717da8e5dc",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "add(ts_corr(add($low,$open),safe_div(ts_max($close,3),abs($low)),2),ts_std(delay(safe_div($open,$high),60),5))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "50144ba92376b5cb",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "neg(ts_corr(ts_min(abs($low),5),delta(ts_max($high,20),5),5))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "110f315978ae7bd2",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volume",
+      "formula": "cs_rank(ts_rank(ts_rank($volume,40),2))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "a0fdb704ef6c67d3",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "composite_price_volume",
+      "formula": "neg(delay(cs_zscore(safe_div($close,$low)),20))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "6863e7a33dd8e079",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "sub(ts_corr(ts_mean(delta($volume,60),10),ts_rank(ts_corr($close,$close,2),40),40),ts_std(cs_zscore(safe_div($low,$open)),3))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "410380553736df2b",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "composite_price_volume",
+      "formula": "ts_rank($close,10)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "3d508cac3fe9f61c",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "turnover_amount",
+      "formula": "neg(ts_rank($amount,3))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "917ca24a07933930",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volume",
+      "formula": "cs_rank(add(delay(ts_rank($low,2),40),signed_log1p(ts_rank($volume,2))))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "36a42319951081d5",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "ts_corr(ts_mean(ts_corr(add($close,$open),$amount,3),5),ts_std($low,40),60)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "e2fe868887fddfa5",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "turnover_amount",
+      "formula": "sub(signed_log1p(delta(ts_rank($amount,5),2)),neg(ts_rank($low,2)))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "4693cbedffac353d",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volume",
+      "formula": "ts_rank($volume,60)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "d52ff75682aaddba",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "ts_min(safe_div(abs($low),ts_std($high,5)),5)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "ee29fecd49d83423",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_rank(ts_corr(delay($high,10),$open,60),60)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "3179d059383c1b8c",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_corr(abs(ts_rank($high,3)),ts_max(ts_min($open,20),60),60)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "7df23fc9cee688bb",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_corr($close,$high,5)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "0bd57f6a40a6b598",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "turnover_amount",
+      "formula": "signed_log1p(delay(cs_zscore(ts_rank($amount,2)),20))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "91e7d31169e31a9a",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "composite_price_volume",
+      "formula": "ts_rank(neg($close),10)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "e1403c064454ce4c",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_corr($volume,neg($volume),2)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "9882653fdeec1614",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volume",
+      "formula": "ts_rank($volume,20)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "cdb44db45855d8da",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "composite_price_volume",
+      "formula": "ts_mean(ts_rank(neg(delay($high,3)),20),5)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "8ef4ea06ce304e70",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "composite_price_volume",
+      "formula": "signed_log1p(ts_rank($low,5))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "64a9ff7c5d11cd91",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "intraday_or_overnight",
+      "formula": "ts_rank($open,10)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "10227adf4f187708",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "turnover_amount",
+      "formula": "ts_rank(cs_zscore(ts_rank(ts_mean($amount,40),3)),60)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "b4be754c80aa2a3c",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "ts_corr(ts_std(ts_corr(ts_rank($close,3),$open,10),2),safe_div(ts_max($low,20),sub(neg($high),ts_min($close,5))),10)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "017c392c4df87733",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_corr(neg($high),$open,2)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "8663477821be161d",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "abs(ts_corr($volume,ts_max($close,10),5))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "0cd1b5e86c31d9cd",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_corr($amount,ts_mean($volume,2),5)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "71667b36f51a7cc3",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_mean(cs_zscore(ts_corr(mul($low,$volume),$open,3)),2)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "1c4092a4fe9abb81",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_position",
+      "formula": "abs(delay(safe_div(ts_min($low,10),neg($high)),60))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "8e8b84e03018a011",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "abs(ts_corr(ts_mean(ts_corr($close,$close,20),40),neg(mul($high,$low)),10))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "f048f90927d34e16",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "composite_price_volume",
+      "formula": "safe_div(mul($close,delay(ts_rank($high,40),10)),$close)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "b75eb9563f740e27",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_max(cs_zscore(ts_mean(ts_corr($volume,$high,5),40)),60)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "c5ab68f5ede46036",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_position",
+      "formula": "ts_mean(safe_div(ts_max(ts_mean($low,2),5),$high),20)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "4b54caa4b9d500cd",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "intraday_or_overnight",
+      "formula": "cs_rank(safe_div($open,$low))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "13a2b7477e8eb8a1",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "signed_log1p(ts_corr(ts_min($low,20),$open,20))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "ea8f2422a27f2423",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_min(ts_rank(ts_corr(ts_corr($low,$amount,2),ts_max($volume,2),10),60),40)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "a0f00a3132e67bca",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "composite_price_volume",
+      "formula": "ts_rank($high,5)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "7f12fcccf73576e8",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "delta(ts_corr($open,mul(delay($high,60),delay($volume,60)),5),3)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "047da0332bf34d30",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "ts_std(abs(ts_std(ts_corr($amount,$close,20),5)),60)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "7318b64f19531bff",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "cs_zscore(ts_min(neg(ts_corr($volume,$amount,2)),10))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "e051eea093870e57",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "ts_std(safe_div(ts_mean($amount,5),mul($amount,safe_div($volume,$volume))),5)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "52b5b24374947d1a",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_max(ts_corr(abs(ts_min($high,10)),delta($close,20),20),40)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "026ed1f050817e1d",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_corr(neg(ts_min(delta($volume,5),10)),$close,2)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "105fa7ad284e09a7",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_position",
+      "formula": "ts_mean(ts_max(ts_min(ts_rank($close,2),5),5),20)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "9bfc6776ed1e196b",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "intraday_or_overnight",
+      "formula": "signed_log1p(ts_rank(mul($low,sub($open,$high)),60))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "c2fe2724ff864ef7",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "intraday_or_overnight",
+      "formula": "delta(delay(abs(ts_rank($open,3)),20),40)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "7ea19e972e17b5ea",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_max(ts_corr($high,cs_zscore(ts_corr($open,$open,10)),5),20)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "32e123c5e2521afd",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "composite_price_volume",
+      "formula": "delta(ts_rank($high,20),2)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "c184e066c24f46ce",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "ts_rank(ts_mean(abs(ts_std($high,60)),3),60)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "57ec925ac8bd4711",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "cs_rank(cs_rank(safe_div(ts_std($open,10),$high)))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "56ad0030589fd578",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "composite_price_volume",
+      "formula": "neg(cs_zscore(ts_rank(abs($close),20)))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "ec5bc12d064c5a6c",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_position",
+      "formula": "ts_min(delta(cs_rank(ts_rank($low,2)),5),20)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "7a2efef533d5a39d",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "ts_min(ts_std(ts_rank(ts_rank($open,2),2),5),2)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "4c50cb2b8c0544aa",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_corr($high,$high,5)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "4434be8fa2ca6cbd",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "turnover_amount",
+      "formula": "ts_rank(safe_div(ts_min(add($amount,$amount),5),ts_rank($high,10)),3)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "28ee8152b2651fcb",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_min(ts_corr($high,$close,3),40)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "1b288a59c5794eb3",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "intraday_or_overnight",
+      "formula": "delay(ts_rank($open,2),5)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "79aca606e360d940",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_position",
+      "formula": "safe_div(ts_min(ts_mean($low,60),5),ts_min(delay(add($close,$high),5),40))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "04c858430bb402ec",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_position",
+      "formula": "ts_rank(ts_min(delta(neg($low),3),60),2)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "79cc7177dc03d45f",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "cs_zscore(ts_corr($volume,delta($close,5),3))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "d6be46ca4936f5ae",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volume",
+      "formula": "safe_div(ts_min(neg($volume),5),$volume)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "aa426d458c60a2b9",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_corr(safe_div(ts_corr(ts_max($high,60),sub($high,$low),20),ts_min(delay($volume,10),3)),safe_div(ts_rank(ts_corr($open,$close,40),20),$low),10)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "bd85e15125def6e8",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "ts_corr($low,ts_std(delay(sub($close,$open),40),10),5)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "6d5716b6c5ee212f",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "composite_price_volume",
+      "formula": "ts_rank(ts_mean($low,5),60)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "d3d53cebadebbb5e",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_corr($high,delay($open,40),20)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "8de38cfb76c72bc1",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "composite_price_volume",
+      "formula": "ts_rank(ts_rank(safe_div($high,delay($low,3)),20),10)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "1d9373aaf6df1b9d",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_corr($amount,$amount,3)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "242589bfcfb50ef8",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_corr($amount,$close,3)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "af5df127d77cfde2",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "ts_std(ts_corr(neg(add($close,$close)),ts_mean(ts_corr($amount,$open,60),2),5),2)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "c198b701b50c4fb2",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_corr($open,$open,40)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "284a4b4d40f9064c",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_mean(cs_rank(cs_rank(ts_corr($open,$low,60))),40)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "42b55c8e60ecc8da",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "composite_price_volume",
+      "formula": "ts_rank($high,60)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "7bdea3532564075b",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "ts_rank(ts_rank(ts_std($amount,3),10),10)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "9a866ab275a7f306",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "cs_rank(ts_max(delay(ts_corr($low,$close,2),20),3))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "986b4dd71c04bed5",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "composite_price_volume",
+      "formula": "abs(ts_rank(delay(add($high,$low),20),60))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "9d729c2cabb4910e",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "ts_mean(ts_corr(abs($volume),ts_std(ts_mean($volume,2),20),10),10)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "cc74a5ef974ca0ea",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "ts_rank(delay(ts_std(ts_max($high,2),60),5),5)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "cb03ab91efc4bde3",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "turnover_amount",
+      "formula": "cs_zscore(ts_max(ts_rank($amount,10),20))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "80c6f28f576142f0",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "ts_corr(safe_div($amount,ts_std(add($high,$high),60)),$volume,60)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "0ab1af45b56f9830",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "composite_price_volume",
+      "formula": "ts_rank(delta(ts_rank(add($high,$low),60),3),3)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "4d326df42a6143bd",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "ts_corr(ts_std(abs(ts_std($close,2)),40),abs(ts_rank(ts_corr($high,$low,3),40)),2)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "04c0d1abc92e0aca",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_position",
+      "formula": "ts_rank(ts_max(neg($close),2),60)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "c5e1debd7727e816",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_corr($open,$high,20)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "26568d577d2ac345",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "composite_price_volume",
+      "formula": "signed_log1p(ts_rank($close,60))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "40f2ef0bbbf7cf22",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "intraday_or_overnight",
+      "formula": "abs(ts_rank(ts_mean(abs($open),10),20))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "adb6ad287a444279",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_position",
+      "formula": "ts_max(ts_rank($high,3),10)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "11fcfc284ab92469",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_position",
+      "formula": "ts_max(ts_rank(ts_rank($open,2),5),3)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "9d02b0d96c5ef223",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "turnover_amount",
+      "formula": "ts_rank(neg($amount),10)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "c786eb8bb7b7393b",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volume",
+      "formula": "ts_rank(ts_mean(ts_mean(mul($low,$volume),3),10),5)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "48d322341a0a7f95",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_corr(ts_min($high,2),$volume,2)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "a8424a922a40a4a8",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "ts_rank(ts_std($amount,2),5)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "ccb96c0050893c13",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_position",
+      "formula": "ts_min(ts_rank(delay(sub($high,$close),10),3),40)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "c82ccbe69c7e3d1b",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_rank(signed_log1p(ts_min(ts_corr($high,$close,3),60)),10)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "f7755fb4721594e3",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_corr(ts_mean($low,2),delta(ts_corr($close,ts_rank($high,5),2),3),40)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "3e9aba774eba5128",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "safe_div(delta(ts_mean($close,20),10),ts_std(ts_max(add($low,$open),3),3))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "02979149dfb6352b",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_rank(ts_corr(delay($high,3),delta(neg($low),20),60),40)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "273fb117b646263a",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "cs_rank(ts_std(ts_rank(ts_std($amount,40),2),3))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "2aeef09ca34802ad",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "ts_min(delta(ts_std(ts_rank($open,20),20),2),20)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "9003989734dd0788",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_corr($low,$open,3)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "b7ee21e7eb1b0031",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_position",
+      "formula": "ts_rank(neg(add(abs($close),ts_max($high,60))),2)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "9bce0ca7c7fdef9f",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_rank(ts_corr(delta(safe_div($close,$volume),60),delta(ts_max($close,20),5),3),2)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "30051627fb412e31",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "cs_rank(abs(ts_min(ts_corr($low,$amount,5),60)))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "d47ca48f59785116",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_corr($volume,$high,10)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "c1fa0d46878ce4b4",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "cs_zscore(signed_log1p(ts_corr(delta($open,3),ts_min($high,5),20)))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "0b582b2f48fb7ebf",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_position",
+      "formula": "ts_rank(cs_zscore(ts_max(ts_rank($low,10),20)),10)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "5d6671804ddc015d",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "ts_rank(abs(ts_std($high,3)),5)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "9fd55e0bf4053736",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_corr($open,$amount,5)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "a4a72cd2e7853d7c",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volume",
+      "formula": "delta(neg(ts_rank(ts_max($volume,10),3)),20)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "a2fe7f0ef360ddd8",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "turnover_amount",
+      "formula": "delay(ts_rank(neg(safe_div($amount,$volume)),40),20)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "633309e153e8947e",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_corr($low,ts_mean(ts_max(abs($close),5),60),20)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "22b849945e357165",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "composite_price_volume",
+      "formula": "delta(cs_rank(ts_rank(neg($high),5)),40)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "362a97139e137f08",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "intraday_or_overnight",
+      "formula": "ts_rank(delta(delta($open,2),2),10)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "22f8cb9be210ea7a",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "signed_log1p(ts_corr(delay($high,12),ts_max(add($low,$open),60),10))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "74f54cd46e5ecc52",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "ts_std(safe_div(ts_std($high,2),$low),2)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "7ec39b39875442ff",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "ts_corr(ts_rank(add(abs($open),ts_max($open,40)),3),ts_std($low,5),10)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "00839f4b23dd748a",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_rank(ts_corr($high,ts_max(ts_rank($open,5),10),2),5)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "64e6edb14e4400aa",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "ts_rank(ts_std(abs(ts_rank($low,5)),2),3)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "2f3d3ad630f2dc87",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_mean(ts_corr($open,$volume,5),3)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "fb4c5f728538bd34",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "turnover_amount",
+      "formula": "ts_rank(delta($amount,20),3)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "079a348d68bbbbd7",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "ts_rank(neg(ts_std(ts_min($open,20),5)),5)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "6eec357d5b26a89b",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "add(ts_corr(neg($volume),ts_min($close,5),2),ts_rank($open,5))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "828cb237155c8f27",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "ts_corr(abs(ts_rank(ts_corr($close,$low,3),3)),safe_div(delta(ts_std($high,20),10),cs_rank(safe_div($open,$low))),5)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "e2642a9ecd54da76",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_corr($close,$high,20)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "b9ac21890d67ff09",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_position",
+      "formula": "delta(ts_rank(sub(abs($close),ts_min($close,5)),40),20)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "213269d810a188cf",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volume",
+      "formula": "ts_mean(ts_rank($volume,3),5)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "a63572182e005210",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "composite_price_volume",
+      "formula": "cs_rank(ts_rank(ts_mean($close,60),3))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "4ecc50166016bafe",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "intraday_or_overnight",
+      "formula": "safe_div(neg($close),$open)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "9a8da8119661a25c",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "cs_zscore(ts_corr($low,ts_mean($volume,3),2))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "c8b3d3b48414705f",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "composite_price_volume",
+      "formula": "ts_rank($close,60)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "75718ab8f7537bc6",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_corr(neg($low),$close,60)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "080046cbde7f96a8",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_corr($low,$high,40)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "b828a99db7ed8c7e",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_corr($open,safe_div(abs(delay($volume,10)),$volume),2)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "c31a23e221c8564e",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_corr($high,neg($low),2)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "8bc445dfbe5b4842",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volume",
+      "formula": "ts_rank(ts_max(delay(ts_min($volume,60),2),3),10)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "589168595ff7d371",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_corr(signed_log1p(signed_log1p(ts_corr($low,$open,10))),ts_min(safe_div(ts_corr($close,$open,40),ts_rank($open,60)),10),10)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "864ed01293706204",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "cs_zscore(add(signed_log1p(ts_corr($open,$amount,20)),ts_rank($open,40)))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "9fa8b69944d1b044",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "delta(ts_corr(ts_mean(delta($low,3),40),ts_mean(safe_div($high,$amount),20),3),5)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "b1a47668f8709925",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "intraday_or_overnight",
+      "formula": "ts_rank($open,2)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "88aba0a62a47b2c6",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "volatility",
+      "formula": "ts_rank(ts_corr(neg($volume),ts_std($high,20),2),10)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "eacbc6e13ffdf8b8",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_mean(abs(ts_corr($close,$amount,20)),20)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "984aeda8dce7d949",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_position",
+      "formula": "ts_rank(delta(delta(ts_max($close,40),2),20),3)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "f988cd0afef26fb6",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "delay(ts_mean(ts_corr(ts_mean($close,10),$high,2),40),5)",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "e06ab3c6bc50d581",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "safe_div(cs_zscore(ts_corr(ts_corr($open,$high,2),$amount,60)),ts_max(delta(safe_div($low,$close),10),10))",
+      "generation": 0,
+      "origin": "grammar"
+    },
+    {
+      "candidate_id": "6a93c4ceea813816",
+      "causal_contract": "TRADE_DATE_D_CLOSE_KNOWN_AT_NEXT_SESSION_OPEN",
+      "family": "price_volume_correlation",
+      "formula": "ts_corr(delta(delta($volume,5),5),$volume,3)",
+      "generation": 0,
+      "origin": "grammar"
+    }
+  ],
+  "catalog_content_hash": "6216ca0af144998d97032de715467ba61cec46cdb877af9bbb419ed582e0cb64",
+  "catalog_id": "r0-shsz-pv-factor-catalog-512-v1",
+  "engine_sha256": "ddd6cced5f41c5326fcd5ca4f1bb268ac3ee342669c2d0648c1a587787ef8e51",
+  "factor_runs": 0,
+  "fields": [
+    "open",
+    "high",
+    "low",
+    "close",
+    "volume",
+    "amount"
+  ],
+  "grammar_count": 464,
+  "holdout_opened": false,
+  "max_depth": 4,
+  "protocol_id": "r0-shsz-pv-single-factor-screen-v1-20260804",
+  "protocol_sha256": "6223a71a474ec0ac9e6f7860730ffd459be4594b132fec54e512009b2ca95055",
+  "schema_version": 1,
+  "seed": 20260804,
+  "seed_count": 48,
+  "status": "FROZEN_CATALOG__NOT_EVALUATED",
+  "validation_consumed": false
+}

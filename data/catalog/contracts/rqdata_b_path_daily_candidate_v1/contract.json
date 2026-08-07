@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "contract_id": "rqdata_b_path_daily_candidate_v1",
+  "status": "APPROVED_ENGINEERING_CONTRACT__CANDIDATE_ONLY",
+  "source": "Ricequant RQData",
+  "scope": {
+    "market": "CN_XSHG_XSHE_COMMON_STOCK_ONLY",
+    "base_dataset_id": "cn-a-share-r0-shsz-pv-panel",
+    "maximum_catch_up_trading_dates": 5,
+    "corporate_action_lookback_calendar_days": 45,
+    "industry": {
+      "source": "sws",
+      "level": 0,
+      "semantics": "RQDATA_LEGACY_SHENWAN_AS_OF_QUERY__NOT_SHENWAN_2021_VERSION_PROOF"
+    },
+    "core_indices": [
+      "000300.XSHG",
+      "000905.XSHG",
+      "000852.XSHG",
+      "000688.XSHG",
+      "399006.XSHE"
+    ],
+    "financial_pit": {
+      "execution": "QUEUED_NOT_EXECUTED",
+      "endpoint": "get_pit_financials_ex",
+      "fields": [
+        "revenue",
+        "net_profit"
+      ],
+      "lookback_quarters": 12,
+      "task_security_batch_size": 400
+    }
+  },
+  "limits": {
+    "maximum_business_api_calls": 200,
+    "maximum_measured_quota_increment_bytes": 67108864,
+    "minimum_quota_remaining_before_run_bytes": 75497472,
+    "maximum_returned_rows": 500000,
+    "maximum_candidate_bytes": 134217728,
+    "action_security_batch_size": 256,
+    "minimum_universe_rows": 4500,
+    "maximum_universe_rows": 6500,
+    "minimum_industry_coverage_ratio": 0.9
+  },
+  "safety": {
+    "plan_network_calls": 0,
+    "plan_writes": 0,
+    "run_fail_closed": true,
+    "atomic_candidate_seal": true,
+    "artifact_sha256_required": true,
+    "purpose_ceiling": "INSPECTION_ONLY",
+    "catalog_write": false,
+    "roadmap_write": false,
+    "source_registry_write": false,
+    "quality_promotion": false,
+    "formal_snapshot_write": false,
+    "research_use": false,
+    "factor_runs": 0,
+    "credential_value_capture": false,
+    "scheduled_task_creation": false
+  }
+}

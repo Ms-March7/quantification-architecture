@@ -1,0 +1,12 @@
+{
+  "schema_version": 2,
+  "contract_id": "r0_shsz_pv_publication_package_v2",
+  "status": "ENGINEERING_VERIFIED__DRY_RUN_ONLY",
+  "builder": "control/tools/build_r0_shsz_pv_publication_package.py",
+  "input_request_contract": "r0_shsz_pv_publication_package_request_v2",
+  "execution_contract": "formal_atomic_publish_execution_v2",
+  "requires_independent_exact_execution_authorization": true,
+  "published_at_policy": "WORKSPACE_ATOMIC_COMMIT_CLOCK",
+  "rights_status": "DECLARED__NOT_VERIFIED__NO_LEGAL_OPINION",
+  "formal_effect": "NONE"
+}

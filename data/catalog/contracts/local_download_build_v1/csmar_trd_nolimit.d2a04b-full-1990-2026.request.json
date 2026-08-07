@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "mode": "local_download_candidate",
+  "dataset_id": "csmar-trd-nolimit",
+  "run_id": "d2a04b-csmar-trd-nolimit-full-1990-2026-20260729-v1",
+  "source_id": "CSMAR_MANUAL_EXPORT",
+  "dataset_schema_version": "observed-export-20260729-trd-nolimit-3col-v1",
+  "authorized_local_research_download": true,
+  "source_access_note": "User authorized this exact full-history TRD_NoLimit export for local academic research use through the Tsinghua institutional CSMAR session. The actual ZIP descriptor and CSV header were reviewed as TradingDate, Symbol and Reason; observed dates include future-effective records through 2026-07-31, which are preserved without treating download time as availability. No redistribution, formal source admission, PIT closure, quality promotion or research-readiness assertion is made.",
+  "include_patterns": [
+    "无涨跌停限制股票文件005528869(仅供清华大学使用).zip"
+  ],
+  "zip_member_patterns": [
+    "TRD_NoLimit.csv"
+  ],
+  "table": {
+    "table_name": "trd_nolimit_d2a04b_full_candidate",
+    "expected_columns": [
+      "TradingDate",
+      "Symbol",
+      "Reason"
+    ],
+    "column_types": {
+      "TradingDate": "DATE",
+      "Symbol": "VARCHAR",
+      "Reason": "VARCHAR"
+    },
+    "date_column": "TradingDate",
+    "key_columns": [
+      "TradingDate",
+      "Symbol",
+      "Reason"
+    ],
+    "required_columns": [
+      "TradingDate",
+      "Symbol",
+      "Reason"
+    ],
+    "delimiter": ",",
+    "encoding": "utf-8-sig",
+    "allow_extra_columns": false,
+    "partition_mode": "year_month"
+  },
+  "limits": {
+    "max_packages": 1,
+    "max_csv_sources": 1,
+    "max_archive_members": 5,
+    "max_total_input_bytes": 1048576,
+    "max_total_unpacked_bytes": 2097152,
+    "max_compression_ratio": 20,
+    "max_rows": 20000
+  }
+}

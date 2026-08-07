@@ -1,0 +1,31 @@
+version: 0.1
+name: symbol-date
+description: Shared symbol and ISO date conventions for Quantification finance outputs.
+
+symbol_columns:
+  - symbol
+  - opponent
+  - benchmark_symbol
+
+date_columns:
+  - date
+  - event_date
+  - reaction_date
+  - reaction_date_used
+  - base_date
+  - start_date
+  - end_date
+  - trading_date
+
+allowed_symbol_patterns:
+  - name: six_digit_plain
+    pattern: '^[0-9]{6}$'
+  - name: exchange_suffix
+    pattern: '^[0-9]{6}\.(SH|SZ|BJ)$'
+
+date_pattern: '^[0-9]{4}-[0-9]{2}-[0-9]{2}$'
+
+notes:
+  - Plain six-digit symbols are accepted for ETF relative-dominance fixtures.
+  - Exchange-suffixed symbols are accepted for A-share event and flow fixtures.
+  - Downstream adapters may map between forms, but the mapping must be explicit.

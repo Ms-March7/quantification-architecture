@@ -1,0 +1,56 @@
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Python and JavaScript runtimes
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+node_modules/
+dist/
+build/
+
+# Data, databases, archives and documents
+*.csv
+*.tsv
+*.parquet
+*.feather
+*.arrow
+*.sqlite
+*.sqlite3
+*.db
+*.zip
+*.rar
+*.7z
+*.tar
+*.gz
+*.pdf
+*.docx
+*.xlsx
+*.xls
+*.ipynb
+
+# Runtime and research outputs
+data/market/
+data/published/
+reports/
+tmp/
+**/raw/
+**/curated/
+**/snapshots/
+**/quarantine/
+**/research_runs/
+**/engineering_runs/
+**/checkpoints/
+**/logs/
+**/.state/

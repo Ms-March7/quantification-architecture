@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "protocol_id": "r0-shsz-pv-single-factor-screen-v1-20260804",
+  "status": "PREREGISTERED__NOT_RUN",
+  "research_gate": "R0_SHSZ_PV",
+  "dataset": {
+    "dataset_id": "cn-a-share-r0-shsz-pv-panel",
+    "snapshot_id": "20050104-20260803-v1",
+    "content_hash": "26309d36b7c08096fff55df100f1d27df8412b106ea48f282ce0f7caad37084b",
+    "consumer": "multi-factor"
+  },
+  "factor_catalog": {
+    "catalog_id": "r0-shsz-pv-factor-catalog-512-v1",
+    "candidate_count": 512,
+    "seed": 20260804,
+    "max_depth": 4,
+    "fields": ["open", "high", "low", "close", "volume", "amount"],
+    "output_unit": "dimensionless",
+    "catalog_path": "configs/r0_shsz_pv_factor_catalog_512_v1.json"
+  },
+  "time_split": {
+    "discovery": ["2005-01-04", "2017-12-29"],
+    "purge_1": ["2018-01-02", "2018-01-31"],
+    "validation": ["2018-02-01", "2021-12-31"],
+    "purge_2": ["2022-01-04", "2022-01-31"],
+    "holdout": ["2022-02-01", "2026-08-03"],
+    "holdout_opened": false
+  },
+  "evaluation": {
+    "primary_forward_horizon_sessions": 5,
+    "diagnostic_horizons_sessions": [1, 20],
+    "minimum_assets_per_date": 200,
+    "minimum_evaluation_dates": 180,
+    "quantile_fraction": 0.2,
+    "cross_section_transform": "winsorize_1_99_then_rank",
+    "metrics": ["rank_ic", "icir", "positive_fold_ratio", "top_bottom_return", "turnover", "maximum_drawdown"],
+    "multiple_testing": "benjamini_yekutieli_fdr_0.10",
+    "walk_forward_folds": 4,
+    "round_trip_cost_bps": [15, 30, 50]
+  },
+  "hard_boundaries": {
+    "signal_lag_sessions_minimum": 1,
+    "execution_mask_is_signal": false,
+    "same_day_execution": false,
+    "latest_forward_adjusted_prices": false,
+    "corporate_action_features": false,
+    "fundamental_factors": false,
+    "industry_neutralization": false,
+    "etf_lookthrough": false,
+    "validation_consumed": false,
+    "factor_runs": 0
+  }
+}

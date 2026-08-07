@@ -1,0 +1,35 @@
+version: 0.1
+name: ranking
+description: Machine-readable ranking output from stock-relative-dominance.
+type: csv
+artifact: outputs/stock-relative-dominance/ranking.csv
+
+required_columns:
+  - return_rank
+  - drawdown_rank
+  - symbol
+  - return_score
+  - drawdown_score
+  - cumulative_return
+  - max_drawdown
+  - annualized_return
+  - annualized_volatility
+  - calmar_like
+
+required_non_empty:
+  - return_rank
+  - drawdown_rank
+  - symbol
+  - return_score
+  - drawdown_score
+
+numeric_columns:
+  - return_rank
+  - drawdown_rank
+  - return_score
+  - drawdown_score
+  - cumulative_return
+  - max_drawdown
+  - annualized_return
+  - annualized_volatility
+  - calmar_like

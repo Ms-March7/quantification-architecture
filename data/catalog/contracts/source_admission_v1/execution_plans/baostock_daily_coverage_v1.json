@@ -1,0 +1,277 @@
+{
+  "schema_version": 1,
+  "execution_plan_id": "baostock-daily-coverage-v4-20260727",
+  "work_package": "L1-D2A-01_SOURCE_ADMISSION_AND_PILOT_ADAPTERS",
+  "status": "COMPLETED__FIRST_BUSINESS_RESPONSE_FRAME_UNRESOLVED__NO_ACCEPTED_ROWS__NO_FORMAL_ADMISSION",
+  "execution_authorization_active": false,
+  "authorized_by": "USER_EXPLICIT_START_2026-07-27",
+  "purpose_ceiling": "INSPECTION_ONLY",
+  "formal_admission": false,
+  "bulk_backfill_authorized": false,
+  "quality_promotion_authorized": false,
+  "paid_source_authorized": false,
+  "user_credentials_or_keys_authorized": false,
+  "output_root": "tmp/source-admission-pilot/baostock-daily-coverage-v4-20260727",
+  "predecessor_evidence": {
+    "execution_plan_id": "baostock-daily-coverage-v3-20260727",
+    "execution_plan_sha256": "864da7f2997c69fd1875557fa0f2ddba108335f35a0cdc0e6e25f8b828cf9bfb",
+    "results_path": "tmp/source-admission-pilot/baostock-daily-coverage-v3-20260727/RESULTS.json",
+    "results_sha256": "58437bda0896ad50bc9a4b448c97dd0b914bec65858afd5166e0a1fde2dc45de",
+    "outcome": "LOGIN_FRAME_PASSED__COMPRESSED_RESPONSE_REJECTED_BECAUSE_PROVIDER_USED_SIGNED_DECIMAL_CRC32",
+    "v4_change": "Accept only signed-int32 or unsigned-uint32 decimal representations that normalize to the exact same CRC32; retain all prior framing, content and coverage gates."
+  },
+  "completion_evidence": {
+    "results_path": "tmp/source-admission-pilot/baostock-daily-coverage-v4-20260727/RESULTS.json",
+    "results_sha256": "da81d285169fb1e0d5a7a9b9c4fe231781a94bbbeedd8f78cc6819608b394686",
+    "inventory_sha256": "a21a4b7fc95d5517ceb0571e8304189846870e01d8eef8ac22cd3a3e708d2b25",
+    "business_probes_planned": 25,
+    "business_probe_results_accepted": 0,
+    "formal_targets_unchanged": true,
+    "outcome": "PAUSED__LOGIN_PASSED__FIRST_COMPRESSED_BUSINESS_RESPONSE_FRAME_REMAINED_UNRESOLVED"
+  },
+  "package": {
+    "name": "baostock",
+    "version": "0.9.3",
+    "client_version": "00.9.30",
+    "wheel_url": "https://files.pythonhosted.org/packages/d2/16/f28fef16a5d9af31def7435b73efd91ed66b40b9c249387d6c11cdf2ba35/baostock-0.9.3-py3-none-any.whl",
+    "wheel_sha256": "acbd19403285bc4e254cee8297cf0e2646ae2276e5af7e549deed3988ab02293",
+    "wheel_max_bytes": 65536,
+    "wheel_max_files": 256,
+    "wheel_unpacked_max_bytes": 1048576,
+    "local_wheel": "tmp/source-admission-pilot/baostock-preflight-package-20260727/baostock-0.9.3-py3-none-any.whl",
+    "runtime_import": "EXTRACT_VERIFIED_WHEEL_INTO_CURRENT_OUTPUT_ROOT",
+    "api_key_must_be_unset": true
+  },
+  "transport": {
+    "protocol": "TCP_PLAINTEXT_PROVIDER_PROTOCOL",
+    "host": "public-api.baostock.com",
+    "port": 10030,
+    "login_user": "anonymous",
+    "login_password_source": "PUBLIC_DEFAULT_EMBEDDED_IN_PROVIDER_PACKAGE",
+    "login_password_value": "123456",
+    "login_options": "0",
+    "connect_timeout_seconds": 15,
+    "read_timeout_seconds": 15,
+    "minimum_business_request_interval_seconds": 0.5,
+    "maximum_wall_clock_seconds": 180,
+    "automatic_business_retries": 0,
+    "maximum_sessions": 4,
+    "maximum_socket_messages": 33,
+    "default_on_wire_response_cap_bytes": 4194304,
+    "daily_cross_section_on_wire_response_cap_bytes": 8388608,
+    "per_response_decompressed_cap_bytes": 33554432,
+    "total_on_wire_cap_bytes": 33554432,
+    "total_decompressed_cap_bytes": 134217728,
+    "terminator_utf8": "<![CDATA[]]>\n",
+    "header_bytes": 21
+  },
+  "fixed_daily_fields": [
+    "date",
+    "code",
+    "open",
+    "high",
+    "low",
+    "close",
+    "preclose",
+    "volume",
+    "amount",
+    "adjustflag",
+    "turn",
+    "tradestatus",
+    "pctChg",
+    "peTTM",
+    "pbMRQ",
+    "psTTM",
+    "pcfNcfTTM",
+    "isST"
+  ],
+  "expected_response_message_types": {
+    "login": "01",
+    "logout": "03",
+    "stock_basic": "46",
+    "terminated": "68",
+    "suspended": "70",
+    "st": "72",
+    "star_st": "74",
+    "risk": "94",
+    "history": "96",
+    "daily_all_a": "99"
+  },
+  "row_caps": {
+    "daily_all_a": 20000,
+    "other_single_page": 2000,
+    "automatic_pagination": false,
+    "exactly_2000_rows_means": "TRUNCATED__NO_NEXT_PAGE_REQUEST"
+  },
+  "probes": {
+    "daily_cross_section": [
+      {
+        "probe_id": "daily_all_a_20260724",
+        "method": "query_daily_history_k_AStock",
+        "parameters": {
+          "date": "2026-07-24"
+        }
+      }
+    ],
+    "stock_basic": [
+      {"probe_id": "basic_sh_main", "method": "query_stock_basic", "parameters": {"code": "sh.600000", "code_name": ""}},
+      {"probe_id": "basic_sh_star", "method": "query_stock_basic", "parameters": {"code": "sh.688981", "code_name": ""}},
+      {"probe_id": "basic_sz_main", "method": "query_stock_basic", "parameters": {"code": "sz.000001", "code_name": ""}},
+      {"probe_id": "basic_sz_chinext", "method": "query_stock_basic", "parameters": {"code": "sz.300750", "code_name": ""}},
+      {"probe_id": "basic_bj_legacy_1", "method": "query_stock_basic", "parameters": {"code": "bj.835185", "code_name": ""}},
+      {"probe_id": "basic_bj_legacy_2", "method": "query_stock_basic", "parameters": {"code": "bj.833819", "code_name": ""}},
+      {"probe_id": "basic_sz_delisted", "method": "query_stock_basic", "parameters": {"code": "sz.000024", "code_name": ""}},
+      {"probe_id": "basic_bj_920_current", "method": "query_stock_basic", "parameters": {"code": "bj.920189", "code_name": ""}}
+    ],
+    "history": [
+      {
+        "probe_id": "history_sh_pre_exchange_boundary",
+        "method": "query_history_k_data_plus",
+        "parameters": {
+          "code": "sh.600601",
+          "start_date": "1989-12-01",
+          "end_date": "1989-12-29",
+          "frequency": "d",
+          "adjustflag": "3"
+        }
+      },
+      {
+        "probe_id": "history_sh_exchange_start",
+        "method": "query_history_k_data_plus",
+        "parameters": {
+          "code": "sh.600601",
+          "start_date": "1990-12-19",
+          "end_date": "1991-01-31",
+          "frequency": "d",
+          "adjustflag": "3"
+        }
+      },
+      {
+        "probe_id": "history_sz_early",
+        "method": "query_history_k_data_plus",
+        "parameters": {
+          "code": "sz.000001",
+          "start_date": "1991-04-01",
+          "end_date": "1991-04-30",
+          "frequency": "d",
+          "adjustflag": "3"
+        }
+      },
+      {
+        "probe_id": "history_sz_delisted",
+        "method": "query_history_k_data_plus",
+        "parameters": {
+          "code": "sz.000024",
+          "start_date": "2015-12-01",
+          "end_date": "2015-12-31",
+          "frequency": "d",
+          "adjustflag": "3"
+        }
+      },
+      {
+        "probe_id": "history_bj_opening_window",
+        "method": "query_history_k_data_plus",
+        "parameters": {
+          "code": "bj.835185",
+          "start_date": "2021-11-15",
+          "end_date": "2021-11-26",
+          "frequency": "d",
+          "adjustflag": "3"
+        }
+      },
+      {
+        "probe_id": "history_bj_recent_legacy_code",
+        "method": "query_history_k_data_plus",
+        "parameters": {
+          "code": "bj.835185",
+          "start_date": "2026-07-20",
+          "end_date": "2026-07-24",
+          "frequency": "d",
+          "adjustflag": "3"
+        }
+      },
+      {
+        "probe_id": "history_bj_recent_920_code",
+        "method": "query_history_k_data_plus",
+        "parameters": {
+          "code": "bj.920189",
+          "start_date": "2026-07-08",
+          "end_date": "2026-07-24",
+          "frequency": "d",
+          "adjustflag": "3"
+        }
+      },
+      {
+        "probe_id": "history_sh_same_day_freshness",
+        "method": "query_history_k_data_plus",
+        "parameters": {
+          "code": "sh.600000",
+          "start_date": "2026-07-27",
+          "end_date": "2026-07-27",
+          "frequency": "d",
+          "adjustflag": "3"
+        }
+      }
+    ],
+    "state_lists": [
+      {"probe_id": "terminated_20260724", "method": "query_terminated_stocks", "parameters": {"date": "2026-07-24"}},
+      {"probe_id": "suspended_20260724", "method": "query_suspended_stocks", "parameters": {"date": "2026-07-24"}},
+      {"probe_id": "st_20260724", "method": "query_st_stocks", "parameters": {"date": "2026-07-24"}},
+      {"probe_id": "star_st_20260724", "method": "query_starst_stocks", "parameters": {"date": "2026-07-24"}},
+      {"probe_id": "risk_20260724", "method": "query_stocks_in_risk", "parameters": {"date": "2026-07-24"}}
+    ],
+    "stability": {
+      "probe_id_prefix": "stability_sh600000_20260720_20260724",
+      "independent_sessions": 3,
+      "method": "query_history_k_data_plus",
+      "parameters": {
+        "code": "sh.600000",
+        "start_date": "2026-07-20",
+        "end_date": "2026-07-24",
+        "frequency": "d",
+        "adjustflag": "3"
+      }
+    }
+  },
+  "business_probe_count": 25,
+  "capture_policy": {
+    "retain_full_market_rows": false,
+    "retain_response_hashes_and_summaries": true,
+    "retain_at_most_sample_rows_per_probe": 3,
+    "record_retrieved_at": true,
+    "record_on_wire_bytes_and_sha256": true,
+    "record_decompressed_bytes_and_sha256": true,
+    "record_fields_row_count_date_bounds_and_code_prefixes": true,
+    "record_formal_root_fingerprints_before_and_after": true
+  },
+  "content_and_semantic_gates": {
+    "header_version_must_equal": "00.9.00",
+    "on_wire_length_rule": "raw_bytes == header_bytes + declared_payload_bytes + separator_plus_signed_or_unsigned_decimal_crc32_bytes + terminator_bytes",
+    "crc32_rule": "signed-int32 or unsigned-uint32 decimal footer must normalize to zlib.crc32(header_plus_declared_payload)",
+    "response_error_code_must_equal": "0",
+    "history_and_daily_fields_must_exactly_match_fixed_daily_fields": true,
+    "every_row_width_must_match_fields": true,
+    "history_adjustflag_must_equal": "3",
+    "history_rows_must_match_requested_code_and_date_window": true,
+    "daily_cross_section_rows_must_match_requested_date": true,
+    "stock_basic_rows_must_match_requested_code": true,
+    "business_keys_must_be_unique": true,
+    "strict_iso_dates_required": true,
+    "daily_required_identity_and_active_numeric_values_must_be_present": true,
+    "state_list_rows_require_well_formed_unique_code": true,
+    "truncated_response_fails_semantic_gate": true,
+    "daily_cross_section_minimum_rows_for_coverage_heuristic": 5000,
+    "daily_cross_section_required_code_prefixes": ["sh", "sz", "bj"],
+    "ohlc_and_nonnegative_checks_required": true,
+    "bse_coverage_pass_rule": "daily cross-section contains bj.* and at least one explicit bj.* history query succeeds with rows",
+    "bse_failure_rule": "no bj.* cross-section rows or explicit bj.* query returns unsupported/no rows for known listed window",
+    "rights_success_never_implied_by_transport_success": true,
+    "unit_rule": "volume_amount_turn_units remain UNVERIFIED unless a first-party dictionary is captured",
+    "state_completeness_rule": "returned state samples do not prove complete official census"
+  },
+  "legal_evidence_urls": [
+    "https://pypi.org/project/baostock/0.9.3/",
+    "https://www.baostock.com/",
+    "https://baostock.com/disclaimer"
+  ]
+}

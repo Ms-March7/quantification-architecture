@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "contract_id": "formal_atomic_publish_execution_v1",
+  "status": "PASS__ISOLATED_STATE_MACHINE__WORKSPACE_EXECUTOR_DEFAULT_DISABLED",
+  "formal_roots": [
+    "data/market/snapshots",
+    "data/published"
+  ],
+  "candidate_roots": [
+    "tmp",
+    "data/market/quarantine"
+  ],
+  "catalog_path": "data/catalog/datasets.json",
+  "research_input_contract_policy": "REQUIRED_NON_EMPTY_DETERMINISTIC_JSON_OBJECT_COPIED_EXACTLY_TO_MANIFEST",
+  "states": [
+    "EVIDENCE_VERIFIED",
+    "INPUT_INVENTORY_SEALED",
+    "PRIVATE_STAGING_SEALED",
+    "CATALOG_LOCK_ACQUIRED",
+    "PAYLOAD_FINALIZED_INVISIBLE",
+    "CATALOG_ATOMICALLY_VISIBLE",
+    "QDATA_RESEARCH_RESOLVED",
+    "AUTHORIZATION_CONSUMED",
+    "PUBLISHED"
+  ],
+  "success_order": [
+    "EVIDENCE_VERIFIED",
+    "INPUT_INVENTORY_SEALED",
+    "PRIVATE_STAGING_SEALED",
+    "CATALOG_LOCK_ACQUIRED",
+    "PAYLOAD_FINALIZED_INVISIBLE",
+    "CATALOG_ATOMICALLY_VISIBLE",
+    "QDATA_RESEARCH_RESOLVED",
+    "AUTHORIZATION_CONSUMED",
+    "PUBLISHED"
+  ],
+  "failure_policy": {
+    "before_catalog_visibility": "FAIL_CLOSED_WITHOUT_CATALOG_MUTATION",
+    "after_catalog_visibility_before_qdata": "COMPARE_AND_SWAP_CATALOG_ROLLBACK_OR_FAIL_CLOSED",
+    "after_qdata_before_authorization": "RECOVER_AND_REVALIDATE_EXACT_IDENTITY_OR_COMPARE_AND_SWAP_ROLLBACK",
+    "authorization": "SINGLE_USE_CONSUMED_ONLY_AFTER_QDATA_SUCCESS",
+    "orphan_payload": "INVISIBLE_UNTIL_EXPLICIT_RECOVERY_OR_QUARANTINE",
+    "cleanup_after_visibility": "PUBLISHED_CLEANUP_PENDING"
+  },
+  "current_execution_surface": "SENTINEL_BOUND_TMP_COPY_ONLY__DEFAULT_DISABLED",
+  "isolated_executor": "control/tools/execute_formal_atomic_publish_isolated.py",
+  "isolated_workspace_root": "tmp/formal-publisher-isolated-workspaces/<workspace_id>",
+  "real_workspace_execution_surface": "control/tools/execute_formal_atomic_publish_workspace.py__EXACT_ROOT_AND_BASELINE__DEFAULT_DISABLED",
+  "workspace_execution_contract": "formal_atomic_publish_workspace_v1",
+  "requires_future_engine_integration": false,
+  "real_publication_performed": false
+}

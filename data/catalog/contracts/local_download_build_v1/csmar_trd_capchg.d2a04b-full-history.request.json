@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "mode": "local_download_candidate",
+  "dataset_id": "csmar-trd-capchg",
+  "run_id": "d2a04b-csmar-trd-capchg-full-history-20260729-v1",
+  "source_id": "CSMAR_MANUAL_EXPORT",
+  "dataset_schema_version": "csmar-trd-capchg-observed-21col-20260729-candidate-v1",
+  "authorized_local_research_download": true,
+  "source_access_note": "User explicitly authorized and manually completed this CSMAR export through the institution-provided academic research access on 2026-07-29. The exact ZIP package, TRD_Capchg descriptor, and order-sensitive 21-column CSV header were inspected before execution. This request authorizes only an isolated INSPECTION_ONLY/NOT_ADMITTED local candidate; it does not assert redistribution rights, formal source admission, semantic closure, quality promotion, PIT closure, or research readiness.",
+  "include_patterns": [
+    "股本变动文件005510769(仅供清华大学使用).zip"
+  ],
+  "zip_member_patterns": [
+    "TRD_Capchg.csv"
+  ],
+  "table": {
+    "table_name": "trd_capchg_candidate",
+    "expected_columns": [
+      "Stkcd",
+      "Shrchgdt",
+      "Shrtyp",
+      "Nshrttl",
+      "Nshrstt",
+      "Nshrlpd",
+      "Nshrlpf",
+      "Nshrlpn",
+      "Nshremp",
+      "Nshrmf",
+      "Nshrrot",
+      "Nshrprf",
+      "Nshra",
+      "Nshrb",
+      "Nshrh",
+      "Nshrunl",
+      "Nshrsms",
+      "Nshrglea",
+      "Nshrsina",
+      "Nshrlpo",
+      "Nshroft"
+    ],
+    "column_types": {
+      "Stkcd": "VARCHAR",
+      "Shrchgdt": "DATE",
+      "Shrtyp": "VARCHAR",
+      "Nshrttl": "DECIMAL(20,2)",
+      "Nshrstt": "DECIMAL(20,2)",
+      "Nshrlpd": "DECIMAL(20,2)",
+      "Nshrlpf": "DECIMAL(20,2)",
+      "Nshrlpn": "DECIMAL(20,2)",
+      "Nshremp": "DECIMAL(20,2)",
+      "Nshrmf": "DECIMAL(20,2)",
+      "Nshrrot": "DECIMAL(20,2)",
+      "Nshrprf": "DECIMAL(20,2)",
+      "Nshra": "DECIMAL(20,2)",
+      "Nshrb": "DECIMAL(20,2)",
+      "Nshrh": "DECIMAL(20,2)",
+      "Nshrunl": "DECIMAL(20,2)",
+      "Nshrsms": "DECIMAL(20,2)",
+      "Nshrglea": "DECIMAL(20,2)",
+      "Nshrsina": "DECIMAL(20,2)",
+      "Nshrlpo": "DECIMAL(20,2)",
+      "Nshroft": "DECIMAL(20,2)"
+    },
+    "date_column": "Shrchgdt",
+    "key_columns": [
+      "Stkcd",
+      "Shrchgdt",
+      "Shrtyp"
+    ],
+    "required_columns": [
+      "Stkcd",
+      "Shrchgdt",
+      "Shrtyp"
+    ],
+    "delimiter": ",",
+    "encoding": "utf-8-sig",
+    "allow_extra_columns": false,
+    "partition_mode": "year_month"
+  },
+  "limits": {
+    "max_packages": 1,
+    "max_csv_sources": 1,
+    "max_archive_members": 10000,
+    "max_total_input_bytes": 10737418240,
+    "max_total_unpacked_bytes": 21474836480,
+    "max_compression_ratio": 1000,
+    "max_rows": 100000000
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "schema_version": 2,
+  "contract_id": "formal_atomic_publish_execution_v2",
+  "status": "IMPLEMENTED__DRY_RUN_AND_ISOLATED_TEST_ONLY",
+  "published_at_policy": "WORKSPACE_ATOMIC_COMMIT_CLOCK",
+  "request_supplied_published_at": false,
+  "available_at_clock_guard_required_before_authorization_reservation": true,
+  "formal_publication_effect": "NONE_UNLESS_EXPLICIT_WORKSPACE_EXECUTION"
+}

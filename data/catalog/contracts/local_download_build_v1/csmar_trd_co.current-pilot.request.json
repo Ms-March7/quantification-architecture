@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "mode": "local_download_candidate",
+  "dataset_id": "csmar-trd-co-pilot",
+  "run_id": "pilot-current-export-20260728-v2",
+  "source_id": "CSMAR_MANUAL_EXPORT",
+  "dataset_schema_version": "current-export-20260728-pilot-v1",
+  "authorized_local_research_download": true,
+  "source_access_note": "User confirms company_file_20260728_pilot.zip was manually downloaded under approved local academic research access; no redistribution or formal admission is asserted.",
+  "include_patterns": [
+    "company_file_20260728_pilot.zip"
+  ],
+  "zip_member_patterns": [
+    "TRD_Co.csv"
+  ],
+  "table": {
+    "table_name": "trd_co_current_pilot",
+    "expected_columns": [
+      "Stkcd",
+      "Stknme",
+      "Listdt"
+    ],
+    "column_types": {
+      "Stkcd": "VARCHAR",
+      "Stknme": "VARCHAR",
+      "Listdt": "VARCHAR"
+    },
+    "date_column": null,
+    "key_columns": [
+      "Stkcd"
+    ],
+    "required_columns": [
+      "Stkcd"
+    ],
+    "delimiter": ",",
+    "encoding": "utf-8-sig",
+    "allow_extra_columns": false,
+    "partition_mode": "single"
+  },
+  "limits": {
+    "max_packages": 1,
+    "max_csv_sources": 1,
+    "max_archive_members": 10,
+    "max_total_input_bytes": 104857600,
+    "max_total_unpacked_bytes": 104857600,
+    "max_compression_ratio": 1000,
+    "max_rows": 100000
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "source_normalization_adapter_v1/request.schema.json",
+  "title": "Source normalization adapter v1 request",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "contract_id",
+    "run_id",
+    "seal_run_id",
+    "sealed_relative_path",
+    "sealed_sha256",
+    "source_id",
+    "dataset_id",
+    "trade_date",
+    "timezone",
+    "available_at",
+    "field_map",
+    "unit_map",
+    "security_id_map",
+    "expected_permanent_security_ids"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "contract_id": {"const": "source_normalization_adapter_v1"},
+    "run_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,79}$"},
+    "seal_run_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,79}$"},
+    "sealed_relative_path": {"type": "string", "pattern": "^sealed/[A-Za-z0-9._-]+$"},
+    "sealed_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "source_id": {"type": "string", "pattern": "^[A-Z][A-Z0-9_]{2,63}$"},
+    "dataset_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{2,127}$"},
+    "trade_date": {"type": "string", "format": "date"},
+    "timezone": {"const": "Asia/Shanghai"},
+    "available_at": {"type": "string", "format": "date-time"},
+    "field_map": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_security_id", "trade_date", "open", "high", "low", "close", "previous_close", "volume", "amount"],
+      "properties": {
+        "source_security_id": {"type": "string", "minLength": 1},
+        "trade_date": {"type": "string", "minLength": 1},
+        "open": {"type": "string", "minLength": 1},
+        "high": {"type": "string", "minLength": 1},
+        "low": {"type": "string", "minLength": 1},
+        "close": {"type": "string", "minLength": 1},
+        "previous_close": {"type": "string", "minLength": 1},
+        "volume": {"type": "string", "minLength": 1},
+        "amount": {"type": "string", "minLength": 1}
+      }
+    },
+    "unit_map": {"type": "object"},
+    "security_id_map": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {"type": "string", "pattern": "^[A-Z]{2}\\.[A-Z0-9]{4}\\.[A-Z0-9._-]{1,32}$"}
+    },
+    "expected_permanent_security_ids": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"type": "string", "pattern": "^[A-Z]{2}\\.[A-Z0-9]{4}\\.[A-Z0-9._-]{1,32}$"}
+    }
+  }
+}

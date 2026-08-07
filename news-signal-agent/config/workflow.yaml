@@ -1,0 +1,72 @@
+workflow:
+  name: "default_news_signal_workflow"
+  mode: "auditable"
+  nodes:
+    - collect
+    - normalize
+    - dedup
+    - update_event_store
+    - generate_event_card
+    - entity_link
+    - rule_classification
+    - llm_classification
+    - classification_merge
+    - feedback_override
+    - score
+    - market_validate
+    - backtest_validate
+    - rank
+    - memory_store
+    - notify
+
+node_settings:
+  collect:
+    enabled: true
+    timeout_seconds: 30
+
+  rule_classification:
+    enabled: true
+    fallback_to_rules: true
+
+  llm_classification:
+    enabled: true
+    cache: true
+    fallback_to_rules: true
+
+  classification_merge:
+    enabled: true
+    prefer_llm_when_available: true
+
+  generate_event_card:
+    enabled: true
+    use_llm: true
+    fallback_to_template: true
+
+  feedback_override:
+    enabled: true
+    apply_active_overrides: true
+
+  market_validate:
+    enabled: true
+    use_realtime_quote: true
+
+  backtest_validate:
+    enabled: true
+    windows: [1, 3, 5, 10, 20]
+
+  memory_store:
+    enabled: true
+    persist_high_impact_events: true
+
+  notify:
+    enabled: false
+    dry_run: true
+
+rerun:
+  allow_partial_rerun: true
+  persist_intermediate_outputs: true
+
+scheduler:
+  enabled: false
+  interval_minutes: 15
+  run_on_startup: false

@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "qdata-revision-event-ledger-event-v1",
+  "title": "Inspection-only revision event",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "event_id",
+    "dataset_id",
+    "source_id",
+    "business_key",
+    "vintage",
+    "revision_id",
+    "revision_no",
+    "event_type",
+    "available_at",
+    "observed_at",
+    "supersedes_revision_id",
+    "withdraws_revision_id",
+    "payload"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "event_id": {"$ref": "#/$defs/component"},
+    "dataset_id": {"$ref": "#/$defs/component"},
+    "source_id": {"$ref": "#/$defs/component"},
+    "business_key": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": ["string", "number", "integer", "boolean"]
+      }
+    },
+    "vintage": {"$ref": "#/$defs/component"},
+    "revision_id": {"$ref": "#/$defs/component"},
+    "revision_no": {"type": "integer", "minimum": 1},
+    "event_type": {"enum": ["UPSERT", "WITHDRAWAL"]},
+    "available_at": {"type": "string", "format": "date-time"},
+    "observed_at": {"type": "string", "format": "date-time"},
+    "supersedes_revision_id": {
+      "oneOf": [{"$ref": "#/$defs/component"}, {"type": "null"}]
+    },
+    "withdraws_revision_id": {
+      "oneOf": [{"$ref": "#/$defs/component"}, {"type": "null"}]
+    },
+    "payload": {"type": ["object", "null"]}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"event_type": {"const": "UPSERT"}}},
+      "then": {
+        "properties": {
+          "payload": {"type": "object", "minProperties": 1},
+          "withdraws_revision_id": {"type": "null"}
+        }
+      }
+    },
+    {
+      "if": {"properties": {"event_type": {"const": "WITHDRAWAL"}}},
+      "then": {
+        "properties": {
+          "payload": {"type": "null"},
+          "supersedes_revision_id": {"type": "null"},
+          "withdraws_revision_id": {"$ref": "#/$defs/component"}
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "component": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._=:@+\\-]{0,191}$"
+    }
+  }
+}

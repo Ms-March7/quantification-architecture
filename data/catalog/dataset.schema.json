@@ -1,0 +1,227 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.quantification/schemas/dataset-catalog-v1.json",
+  "title": "Quantification workspace dataset catalog",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "updated_at",
+    "workspace_root",
+    "catalog_mode",
+    "physical_migration",
+    "authority_precedence",
+    "owners",
+    "stores",
+    "datasets",
+    "retired_datasets",
+    "publication_contracts"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "updated_at": {"type": "string", "format": "date-time"},
+    "workspace_root": {"type": "string"},
+    "catalog_mode": {"const": "federated_logical_catalog"},
+    "physical_migration": {"type": "boolean"},
+    "authority_precedence": {
+      "type": "array",
+      "items": {"type": "string"},
+      "minItems": 1
+    },
+    "owners": {
+      "type": "array",
+      "items": {"type": "string"},
+      "uniqueItems": true
+    },
+    "stores": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/store"}
+    },
+    "datasets": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/dataset"}
+    },
+    "retired_datasets": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/retiredDataset"}
+    },
+    "publication_contracts": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/publicationContract"}
+    }
+  },
+  "$defs": {
+    "path": {"type": "string", "pattern": "^[A-Za-z]:/"},
+    "lifecycle": {
+      "enum": ["active", "frozen", "review", "historical", "failed", "smoke", "unmanaged", "planned"]
+    },
+    "mutability": {
+      "enum": ["immutable", "append_only", "mutable", "mixed"]
+    },
+    "purpose": {
+      "enum": ["DO_NOT_USE", "ENGINEERING_ONLY", "SMOKE_ONLY", "RESEARCH_ONLY", "SHADOW_ONLY", "LIVE_READY"]
+    },
+    "license": {
+      "enum": ["VERIFIED", "DECLARED", "UNVERIFIED", "MIXED", "NOT_APPLICABLE"]
+    },
+    "quality": {
+      "enum": ["OK", "REVIEW", "PARTIAL", "MISSING", "CONFLICT", "FAILED", "UNMANAGED"]
+    },
+    "store": {
+      "type": "object",
+      "required": [
+        "store_id",
+        "owner_project",
+        "physical_root",
+        "kind",
+        "lifecycle",
+        "mutability",
+        "purpose_ceiling",
+        "authority_paths"
+      ],
+      "properties": {
+        "store_id": {"type": "string", "minLength": 1},
+        "owner_project": {"type": "string", "minLength": 1},
+        "physical_root": {"$ref": "#/$defs/path"},
+        "kind": {
+          "enum": [
+            "shared_run_store",
+            "immutable_snapshot_store",
+            "published_feature_store",
+            "immutable_research_evidence_store",
+            "application_state_store",
+            "experimental_cache_store",
+            "historical_output_store",
+            "temporary_run_store"
+          ]
+        },
+        "lifecycle": {"$ref": "#/$defs/lifecycle"},
+        "mutability": {"$ref": "#/$defs/mutability"},
+        "purpose_ceiling": {"$ref": "#/$defs/purpose"},
+        "authority_paths": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/path"},
+          "minItems": 1
+        },
+        "notes": {"type": "string"}
+      },
+      "allOf": [
+        {
+          "if": {
+            "required": ["hash_algorithm"],
+            "properties": {
+              "hash_algorithm": {"const": "sha256-snapshot-contract-v1"}
+            }
+          },
+          "then": {
+            "required": ["content_hash", "hash_algorithm"],
+            "properties": {
+              "content_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+              "mutability": {"const": "immutable"},
+              "authority_paths": {
+                "type": "array",
+                "items": {"$ref": "#/$defs/path"},
+                "minItems": 5,
+                "maxItems": 5,
+                "uniqueItems": true
+              }
+            }
+          }
+        }
+      ]
+    },
+    "dataset": {
+      "type": "object",
+      "required": [
+        "dataset_id",
+        "snapshot_id",
+        "store_id",
+        "owner_project",
+        "physical_path",
+        "lifecycle",
+        "mutability",
+        "purpose_ceiling",
+        "license_status",
+        "quality_status",
+        "authority_paths",
+        "consumers"
+      ],
+      "properties": {
+        "dataset_id": {"type": "string", "minLength": 1},
+        "snapshot_id": {"type": "string", "minLength": 1},
+        "store_id": {"type": "string", "minLength": 1},
+        "owner_project": {"type": "string", "minLength": 1},
+        "physical_path": {"$ref": "#/$defs/path"},
+        "member_paths": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/path"},
+          "uniqueItems": true
+        },
+        "lifecycle": {"$ref": "#/$defs/lifecycle"},
+        "mutability": {"$ref": "#/$defs/mutability"},
+        "purpose_ceiling": {"$ref": "#/$defs/purpose"},
+        "license_status": {"$ref": "#/$defs/license"},
+        "quality_status": {"$ref": "#/$defs/quality"},
+        "authority_paths": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/path"},
+          "minItems": 1
+        },
+        "content_hash": {"type": "string"},
+        "hash_algorithm": {"type": "string"},
+        "consumers": {
+          "type": "array",
+          "items": {"type": "string"},
+          "uniqueItems": true
+        },
+        "known_limits": {"type": "array", "items": {"type": "string"}},
+        "notes": {"type": "string"}
+      }
+    },
+    "retiredDataset": {
+      "type": "object",
+      "required": [
+        "dataset_id",
+        "snapshot_id",
+        "owner_project",
+        "former_physical_path",
+        "retired_at",
+        "status",
+        "reason",
+        "deleted_files",
+        "deleted_bytes",
+        "retained_authority_paths",
+        "cleanup_receipt"
+      ],
+      "properties": {
+        "dataset_id": {"type": "string", "minLength": 1},
+        "snapshot_id": {"type": "string", "minLength": 1},
+        "owner_project": {"type": "string", "minLength": 1},
+        "former_physical_path": {"$ref": "#/$defs/path"},
+        "retired_at": {"type": "string", "format": "date-time"},
+        "status": {"const": "PAYLOAD_DELETED_METADATA_RETAINED"},
+        "reason": {"type": "string", "minLength": 1},
+        "content_hash": {"type": "string"},
+        "hash_algorithm": {"type": "string"},
+        "deleted_files": {"type": "integer", "minimum": 0},
+        "deleted_bytes": {"type": "integer", "minimum": 0},
+        "retained_authority_paths": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/path"},
+          "minItems": 1
+        },
+        "cleanup_receipt": {"$ref": "#/$defs/path"}
+      }
+    },
+    "publicationContract": {
+      "type": "object",
+      "required": ["producer", "consumer", "artifact", "status", "requirements"],
+      "properties": {
+        "producer": {"type": "string"},
+        "consumer": {"type": "string"},
+        "artifact": {"type": "string"},
+        "status": {"enum": ["blocked", "planned", "active"]},
+        "requirements": {"type": "array", "items": {"type": "string"}}
+      }
+    }
+  }
+}

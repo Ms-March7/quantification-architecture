@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "run_family_id": "r0-shsz-pv-c-v1.1-discovery-20260805",
+  "status": "APPROVED_FROZEN_EXECUTION_CONFIG__DISCOVERY_ONLY",
+  "supersedes_for_execution_without_overwrite": "r0-shsz-pv-single-factor-screen-v1-20260804",
+  "dataset": {
+    "dataset_id": "cn-a-share-r0-shsz-pv-panel",
+    "snapshot_id": "20050104-20260803-v1",
+    "content_hash": "26309d36b7c08096fff55df100f1d27df8412b106ea48f282ce0f7caad37084b",
+    "consumer": "multi-factor"
+  },
+  "factor_sources": {
+    "calibration": {
+      "catalog_id": "r0-shsz-pv-factor-catalog-512-v1",
+      "ordered_prefix_count": 96
+    },
+    "primary_discovery": {
+      "catalog_id": "r0-shsz-pv-factor-catalog-512-v1",
+      "candidate_count": 512,
+      "catalog_content_hash": "6216ca0af144998d97032de715467ba61cec46cdb877af9bbb419ed582e0cb64"
+    },
+    "additional_registered_definitions": {
+      "maximum_count": 364,
+      "sources": ["joinquant_alpha101_alpha191", "joinquant_technical_analysis"],
+      "gate": "LOCAL_PARSER_OR_REIMPLEMENTATION_AND_DEPENDENCY_TEST_REQUIRED",
+      "joinquant_data_api_allowed": false
+    }
+  },
+  "discovery_window": {
+    "load_start": "2005-01-04",
+    "decision_start": "2005-07-01",
+    "decision_end": "2021-12-31",
+    "hard_data_cutoff": "2022-01-31",
+    "protocol_holdout": ["2022-02-01", "2026-08-03"],
+    "holdout_opened": false,
+    "old_protocol_validation_claimed": false,
+    "old_protocol_status": "RETAINED_UNRUN__SUPERSEDED_FOR_EXECUTION"
+  },
+  "sample_schemes": {
+    "rolling_train_years": [3, 5, 8],
+    "rolling_test_years": 1,
+    "expanding_window": true,
+    "purge_sessions": 20,
+    "embargo_sessions": 5,
+    "governance_validation_consumed": false
+  },
+  "universe": {
+    "market_scope": "XSHG_XSHE_ORDINARY_A",
+    "dynamic_historical_universe": true,
+    "minimum_observed_trading_sessions": 120,
+    "minimum_assets_per_date": 200,
+    "missing_values": "NO_FILL_NO_BIDIRECTIONAL_INTERPOLATION"
+  },
+  "labels": {
+    "primary_horizon_sessions": 10,
+    "diagnostic_horizons_sessions": [5, 20],
+    "implementation": "ACTION_AWARE_TOTAL_RETURN_INDEX_OPEN_T1_TO_OPEN_T_H_PLUS_1",
+    "future_execution_masks_used": false,
+    "temporary_missing_exit": "LATEST_TOTAL_RETURN_CLOSE_MARK"
+  },
+  "factor_safety": {
+    "action_invariant_tier_survivor_eligible": true,
+    "raw_price_cross_session_tier": "DIAGNOSTIC_ONLY",
+    "share_volume_split_sensitive_tier": "DIAGNOSTIC_ONLY",
+    "corporate_action_fields_as_signals": false
+  },
+  "preprocessing": {
+    "cross_section": "WINSORIZE_1_99_THEN_TIE_AWARE_RANK",
+    "industry_neutralization": false,
+    "unknown_to_zero": false
+  },
+  "execution_and_cost": {
+    "signal_time": "TRADE_DATE_CLOSE",
+    "earliest_execution": "NEXT_OBSERVED_TRADING_SESSION_OPEN",
+    "t_plus_one": true,
+    "one_price_upper_limit_buy": "BLOCK",
+    "one_price_lower_limit_sell": "BLOCK",
+    "opened_limit_board": "ALLOW_WITH_EXTRA_SLIPPAGE_STRESS",
+    "round_trip_cost_bps": [15, 30, 50]
+  },
+  "statistics": {
+    "quantile_fraction": 0.2,
+    "metrics": [
+      "rank_ic",
+      "icir",
+      "positive_year_ratio",
+      "rolling_window_stability",
+      "top_excess",
+      "top_bottom_spread",
+      "turnover",
+      "cost_adjusted_top_excess"
+    ],
+    "permutations": 999,
+    "permutation_minimum_block_sessions": 5,
+    "multiple_testing": "BENJAMINI_YEKUTIELI_FDR_0.10"
+  },
+  "accelerator": {
+    "backend": "gpu",
+    "device": "NVIDIA GeForce RTX 3060 Laptop GPU",
+    "gpu_column_chunk": 128,
+    "fail_closed": true,
+    "cpu_gpu_equivalence_required": true
+  },
+  "hard_boundaries": {
+    "validation_consumed": false,
+    "holdout_opened": false,
+    "automatic_trading": false,
+    "data_published_write": false,
+    "canonical_r0_r1_r2_effect": "NONE",
+    "joinquant_data_api": false,
+    "ricequant_factor_value_bulk_download": false
+  }
+}

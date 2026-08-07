@@ -1,0 +1,170 @@
+{
+  "schema_version": 1,
+  "contract_id": "r0_shsz_pv_v2",
+  "gate_id": "R0_SHSZ_PV",
+  "status": "ACTIVE__BUILD_AND_PUBLICATION_PENDING__FAIL_CLOSED",
+  "supersedes_for_this_narrow_gate": "r0_shsz_pv_v1",
+  "independence": {
+    "canonical_gate": "R0_PV",
+    "canonical_gate_modified": false,
+    "canonical_gate_satisfied_by_this_contract": false,
+    "counts_toward_core20": false
+  },
+  "scope": {
+    "venues": [
+      "XSHG",
+      "XSHE"
+    ],
+    "boards": [
+      "SSE_MAIN",
+      "SZSE_MAIN",
+      "CHINEXT",
+      "STAR"
+    ],
+    "instrument_scope": "ORDINARY_A_SHARES_ONLY",
+    "coverage_start_date": "2005-01-04",
+    "coverage_end_date": "2026-08-03",
+    "latest_complete_trade_date": "2026-08-03",
+    "bjse_in_scope": false,
+    "b_shares_in_scope": false,
+    "known_unresolved_a_share_episode_exclusions": [
+      "600849.XSHG"
+    ],
+    "unknown_policy": "EXCLUDE_FAIL_CLOSED"
+  },
+  "input_segments": {
+    "historical_base": {
+      "start_date": "2005-01-04",
+      "end_date": "2024-12-31",
+      "source": "HASH_PINNED_LOCAL_CSMAR_CANDIDATE"
+    },
+    "local_tail": {
+      "start_date": "2025-01-02",
+      "end_date": "2026-07-28",
+      "source": "HASH_PINNED_LOCAL_CSMAR_CANDIDATE"
+    },
+    "ricequant_delta": {
+      "trade_dates": [
+        "2026-07-29",
+        "2026-07-30",
+        "2026-07-31",
+        "2026-08-03"
+      ],
+      "source": "RQDATA_UNADJUSTED_DAILY"
+    }
+  },
+  "research_semantics": {
+    "timezone": "Asia/Shanghai",
+    "decision_time": "TRADE_DATE_CLOSE",
+    "bar_available_at": "NEXT_OBSERVED_TRADING_SESSION_OPEN",
+    "earliest_execution_time": "NEXT_OBSERVED_TRADING_SESSION_OPEN",
+    "signal_lag_sessions_minimum": 1,
+    "raw_price_convention": "UNADJUSTED",
+    "return_convention": "ONE_PERIOD_REALIZED_TOTAL_RETURN_AVAILABLE_AFTER_PERIOD_CLOSE",
+    "adjusted_price_levels_allowed": false,
+    "latest_forward_adjusted_history_allowed": false,
+    "corporate_action_features_allowed": false,
+    "missing_value_policy": "NULL_NEVER_ZERO_FILL",
+    "execution_mask_role": "SIMULATION_ONLY__NEVER_SIGNAL_RANK_INPUT",
+    "survivorship_policy": "DYNAMIC_LISTING_EPISODES__NO_CURRENT_ACTIVE_UNIVERSE_BACKFILL"
+  },
+  "research_input_contract": {
+    "schema_version": 1,
+    "research_tier": "R0_SHSZ_PV",
+    "gate_id": "R0_SHSZ_PV",
+    "contract_id": "r0_shsz_pv_v2",
+    "dataset_id": "cn-a-share-r0-shsz-pv-panel",
+    "snapshot_id": "20050104-20260803-v1",
+    "market_scope": "XSHG_XSHE_ORDINARY_A",
+    "timezone": "Asia/Shanghai",
+    "coverage_start_date": "2005-01-04",
+    "coverage_end_date": "2026-08-03",
+    "decision_time": "TRADE_DATE_CLOSE",
+    "available_at_semantics": "NEXT_OBSERVED_TRADING_SESSION_OPEN",
+    "earliest_execution_time": "NEXT_OBSERVED_TRADING_SESSION_OPEN",
+    "signal_lag_sessions_minimum": 1,
+    "raw_price_convention": "UNADJUSTED",
+    "return_convention": "ONE_PERIOD_REALIZED_TOTAL_RETURN",
+    "adjusted_price_levels_allowed": false,
+    "latest_forward_adjusted_history_allowed": false,
+    "corporate_action_features_allowed": false,
+    "execution_mask_role": "SIMULATION_ONLY__NEVER_SIGNAL_RANK_INPUT",
+    "survivorship_policy": "DYNAMIC_LISTING_EPISODES__NO_CURRENT_ACTIVE_UNIVERSE_BACKFILL",
+    "missing_value_policy": "NULL_NEVER_ZERO_FILL",
+    "payload_schema": "r0-shsz-pv-panel-v2",
+    "primary_key": [
+      "order_book_id",
+      "trade_date"
+    ],
+    "payload_format": "PARQUET",
+    "payload_discovery": "PARTITION_MANIFEST_CURATED_ENTRIES"
+  },
+  "normalized_panel_required_fields": [
+    "order_book_id",
+    "exchange_mic",
+    "local_code",
+    "trade_date",
+    "previous_close",
+    "open",
+    "high",
+    "low",
+    "close",
+    "volume_shares",
+    "turnover_cny",
+    "realized_total_return",
+    "trading_status_code",
+    "upper_limit_price",
+    "lower_limit_price",
+    "available_at",
+    "listed_episode_eligible",
+    "had_trade",
+    "open_execution_eligible",
+    "source_id",
+    "source_snapshot_id"
+  ],
+  "quality_gate": {
+    "primary_key": [
+      "order_book_id",
+      "trade_date"
+    ],
+    "duplicate_primary_keys_maximum": 0,
+    "invalid_ohlc_rows_maximum": 0,
+    "nonpositive_price_rows_maximum": 0,
+    "negative_volume_or_turnover_rows_maximum": 0,
+    "missing_total_return_rows_maximum": 0,
+    "missing_identity_rows_maximum": 0,
+    "out_of_scope_venue_rows_maximum": 0,
+    "future_available_at_rows_maximum": 0,
+    "cross_source_overlap_conflicts": "REPORT_AND_FAIL_CLOSED_ABOVE_DOCUMENTED_TOLERANCE",
+    "full_payload_hash_verification": true
+  },
+  "formal_target": {
+    "dataset_id": "cn-a-share-r0-shsz-pv-panel",
+    "snapshot_id": "20050104-20260803-v1",
+    "store_id": "workspace-market-snapshots",
+    "purpose_ceiling": "RESEARCH_ONLY",
+    "license_status_allowed": [
+      "DECLARED",
+      "VERIFIED"
+    ],
+    "quality_status_required": "OK",
+    "mutability_required": "immutable",
+    "hash_algorithm_required": "sha256-snapshot-contract-v1",
+    "qdata_intent_required": "research"
+  },
+  "gate_open_requirements": {
+    "candidate_quality_gate": "PASS",
+    "source_rights_receipt_bound": true,
+    "five_authority_documents_bound": true,
+    "atomic_publication_receipt": "PASS",
+    "qdata_research_resolution": "PASS",
+    "panel_adapter_smoke": "PASS",
+    "pit_and_execution_leakage_tests": "PASS",
+    "factor_execution_before_gate_open": false
+  },
+  "current_state": {
+    "research_gate_open": false,
+    "factor_execution_authorized": false,
+    "reason": "COMPOSITE_PANEL_NOT_YET_PUBLISHED_AND_QDATA_RESEARCH_POSTCONDITION_NOT_YET_PROVED"
+  }
+}

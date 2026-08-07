@@ -1,0 +1,38 @@
+version: 0.1
+name: capital-flow
+description: Canonical normalized capital-flow CSV contract.
+type: csv
+artifact: outputs/capital-flow/data/normalized_capital_flow.csv
+
+required_columns:
+  - date
+  - symbol
+  - name
+  - source
+  - source_url
+  - fetch_time
+  - data_frequency
+  - flow_type
+  - net_flow
+  - net_flow_ratio
+  - turnover
+  - amount
+  - close
+  - pct_change
+  - industry
+  - theme
+  - missing_flags
+
+required_non_empty:
+  - date
+  - symbol
+  - source
+  - fetch_time
+  - data_frequency
+  - flow_type
+
+date_columns:
+  - date
+
+quality_columns:
+  - missing_flags

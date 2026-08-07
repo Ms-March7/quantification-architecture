@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "mode": "local_download_candidate",
+  "dataset_id": "resset-comnmhis-candidate",
+  "run_id": "intake-20260802-04pkg-v1",
+  "source_id": "RESSET_Tsinghua_manual_export",
+  "dataset_schema_version": "observed-export-20260802-v1",
+  "authorized_local_research_download": true,
+  "source_access_note": "User confirmed this RESSET table was exported through the Tsinghua institutional subscription for local student research. This request preserves the exact package and validates only its observed structure; it makes no formal source-admission, permanent-identity completeness, redistribution, or research-readiness claim.",
+  "include_patterns": [
+    "RESSET 股票_公司名称变更历史.zip"
+  ],
+  "zip_member_patterns": [
+    "RESSET_COMNMHIS_1.csv"
+  ],
+  "table": {
+    "table_name": "resset_comnmhis_candidate",
+    "expected_columns": [
+      "UpDt",
+      "nobs",
+      "CompanyCode",
+      "ComCd",
+      "LComNm",
+      "A_StkCd",
+      "B_StkCd",
+      "H_StkCd",
+      "LstFlg",
+      "InfoPubDt",
+      "InfoSource",
+      "SMDeciPubDt",
+      "IfVotedDown",
+      "ChgDt",
+      "ChiNm",
+      "ChiNmAbbr",
+      "EngNm",
+      "EngNmAbbr"
+    ],
+    "column_types": {
+      "UpDt": "DATE",
+      "nobs": "BIGINT",
+      "CompanyCode": "VARCHAR",
+      "ComCd": "VARCHAR",
+      "LComNm": "VARCHAR",
+      "A_StkCd": "VARCHAR",
+      "B_StkCd": "VARCHAR",
+      "H_StkCd": "VARCHAR",
+      "LstFlg": "VARCHAR",
+      "InfoPubDt": "DATE",
+      "InfoSource": "VARCHAR",
+      "SMDeciPubDt": "DATE",
+      "IfVotedDown": "VARCHAR",
+      "ChgDt": "DATE",
+      "ChiNm": "VARCHAR",
+      "ChiNmAbbr": "VARCHAR",
+      "EngNm": "VARCHAR",
+      "EngNmAbbr": "VARCHAR"
+    },
+    "date_column": "InfoPubDt",
+    "key_columns": [
+      "CompanyCode",
+      "InfoPubDt",
+      "ChiNm",
+      "ChiNmAbbr"
+    ],
+    "required_columns": [
+      "CompanyCode",
+      "InfoPubDt",
+      "ChiNm",
+      "ChiNmAbbr"
+    ],
+    "delimiter": ",",
+    "encoding": "utf-8",
+    "allow_extra_columns": false,
+    "partition_mode": "year_month"
+  },
+  "limits": {
+    "max_packages": 1,
+    "max_csv_sources": 1,
+    "max_archive_members": 10,
+    "max_total_input_bytes": 2097152,
+    "max_total_unpacked_bytes": 10485760,
+    "max_compression_ratio": 100,
+    "max_rows": 20000
+  }
+}

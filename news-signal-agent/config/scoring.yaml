@@ -1,0 +1,85 @@
+weights:
+  relevance: 0.25
+  source_credibility: 0.15
+  impact: 0.20
+  freshness: 0.10
+  corroboration: 0.10
+  market_validation: 0.15
+  direction_confidence: 0.05
+
+llm:
+  budget:
+    max_calls_per_run: 8
+  event_card:
+    enabled: "auto"
+    provider: "codex_cli"
+    command: "codex"
+    sandbox: "read-only"
+    model: ""
+    prompt_version: "event_card_v0.6"
+    cache: "on"
+    timeout_seconds: 45
+    max_calls_per_run: 3
+    reasoning_effort: "low"
+  classify:
+    enabled: "auto"
+    provider: "codex_cli"
+    command: "codex"
+    sandbox: "read-only"
+    model: ""
+    prompt_version: "classify_v0.6"
+    cache: "on"
+    timeout_seconds: 45
+    max_calls_per_run: 8
+    reasoning_effort: "low"
+
+backtest:
+  enabled: true
+  timeout_seconds: 8
+  benchmark_symbol: "512050"
+  windows: [1, 3, 5, 10, 20]
+
+storage_retention:
+  raw_message_days: 14
+  rank_history_days: 180
+  notification_log_days: 60
+  workflow_artifact_days: 7
+  llm_cache_days: 30
+  max_event_cards: 5000
+
+source_scores:
+  official: 100
+  exchange: 100
+  regulator: 100
+  mainstream_media: 80
+  data_vendor: 75
+  normal_media: 60
+  research_report: 55
+  social_media: 35
+  rumor: 25
+
+relevance_scores:
+  direct_symbol: 100
+  etf_constituent: 80
+  theme_or_industry: 60
+  macro_or_overseas: 30
+
+thresholds:
+  top_list_min_abs_score: 40
+  notify_abs_score: 80
+  high_uncertainty_penalty: 25
+  retain_min_abs_score: 60
+
+horizons:
+  short:
+    label: "1-3 trading days"
+    freshness_half_life_hours: 12
+    retain_days: 3
+  mid:
+    label: "1-8 weeks"
+    freshness_half_life_hours: 168
+    retain_days: 21
+  long:
+    label: "3 months+"
+    freshness_half_life_hours: 720
+    retain_days: 90

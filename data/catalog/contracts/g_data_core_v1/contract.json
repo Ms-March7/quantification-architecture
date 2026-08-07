@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "contract_id": "g-data-core-d3a-v1",
+  "contract_version": "1.0.0",
+  "updated_at": "2026-07-20",
+  "status": "D3A_COMPLETE_CONTRACT_ONLY__NO_DATA_INGESTED",
+  "completed_at": "2026-07-20",
+  "next_work_package": "L1-D12A",
+  "scope": "20项G-DATA-CORE的字段、来源、许可、PIT、修订、schema与质量阻断合同；不表示数据已下载或获准批量保存。",
+  "planned_catalog": "${QUANTIFICATION_ROOT}/data/catalog/planned_datasets.json",
+  "source_registry": "sources.json",
+  "dataset_contract_files": [
+    "core_01_08_market_reference.json",
+    "core_09_12_index_industry.json",
+    "core_13_20_fundamental_risk.json"
+  ],
+  "validation": {
+    "result": "PASS_WITH_INGESTION_BLOCKERS_PRESERVED",
+    "validated_at": "2026-07-20",
+    "sources": 27,
+    "datasets": 20,
+    "tables": 45,
+    "local_field_definitions": 565,
+    "field_definitions_including_inherited_sets": 588,
+    "blocked_source_bindings": 19,
+    "catalog_validation": "PASS",
+    "qdata_doctor": "PASS_WITH_13_EXPECTED_NON_OK_ASSET_WARNINGS"
+  },
+  "global_rules": {
+    "timezone": "Asia/Shanghai",
+    "date_type": "date32",
+    "timestamp_type": "timestamp[us,Asia/Shanghai]",
+    "price_unit": "CNY_per_share",
+    "volume_unit": "share",
+    "amount_unit": "CNY",
+    "rate_unit": "decimal_fraction",
+    "unknown_value": "NULL_WITH_QUALITY_FLAG",
+    "zero_is_not_missing": true,
+    "raw_is_append_only": true,
+    "snapshot_is_immutable": true,
+    "research_requires_explicit_snapshot_id": true,
+    "latest_forbidden_for_research": true,
+    "available_at_rule": "研究系统最早合法可观察时间；不得用report_period、effective_date或ingested_at倒填。",
+    "revision_rule": "来源更正或重述写新revision_id和新snapshot，不覆盖旧事实。",
+    "license_rule": "公开可见不等于获准自动批量抓取、长期保存或再分发；精确端点和条款未登记时阻断采集晋级。",
+    "calibration_rule": "各来源raw分别保存；冲突保留原值并标记CONFLICT，禁止静默覆盖或取平均。",
+    "derived_rule": "派生表必须记录公式、代码版本、全部输入snapshot和knowledge_cutoff_at。"
+  },
+  "global_source_bindings": [
+    {
+      "binding_id": "GLOBAL_LINEAGE",
+      "primary_source_ids": ["INTERNAL_PROVENANCE"],
+      "calibration_source_ids": [],
+      "license_gate": "INTERNAL_METADATA",
+      "ingestion_status": "READY_FOR_D12A"
+    },
+    {
+      "binding_id": "GLOBAL_SECURITY_IDENTITY",
+      "primary_source_ids": ["INTERNAL_CORE01"],
+      "calibration_source_ids": [],
+      "license_gate": "INHERITS_CORE01_GATE",
+      "ingestion_status": "BLOCKED_BY_CORE01"
+    },
+    {
+      "binding_id": "GLOBAL_INDEX_IDENTITY",
+      "primary_source_ids": ["INTERNAL_CORE09"],
+      "calibration_source_ids": [],
+      "license_gate": "INHERITS_CORE09_GATE",
+      "ingestion_status": "BLOCKED_BY_CORE09"
+    },
+    {
+      "binding_id": "GLOBAL_DERIVED",
+      "primary_source_ids": ["INTERNAL_UPSTREAM"],
+      "calibration_source_ids": [],
+      "license_gate": "INHERITS_ALL_INPUT_GATES",
+      "ingestion_status": "BLOCKED_BY_UPSTREAM"
+    }
+  ],
+  "field_sets": {
+    "record_lineage": [
+      {"name": "source_id", "dtype": "string", "nullable": false, "unit": null, "description": "真正底层事实来源身份；适配器不是事实发布者。", "source_binding": "GLOBAL_LINEAGE", "pit_role": "lineage"},
+      {"name": "source_record_id", "dtype": "string", "nullable": true, "unit": null, "description": "来源记录、公告、文件或响应身份。", "source_binding": "GLOBAL_LINEAGE", "pit_role": "lineage"},
+      {"name": "source_url", "dtype": "string", "nullable": false, "unit": null, "description": "原始来源或官方说明URL。", "source_binding": "GLOBAL_LINEAGE", "pit_role": "lineage"},
+      {"name": "published_at", "dtype": "timestamp[us,Asia/Shanghai]", "nullable": true, "unit": null, "description": "来源首次公开时间；来源确实不提供时必须标记原因。", "source_binding": "GLOBAL_LINEAGE", "pit_role": "published_at"},
+      {"name": "available_at", "dtype": "timestamp[us,Asia/Shanghai]", "nullable": false, "unit": null, "description": "本研究系统最早合法可观察时间。", "source_binding": "GLOBAL_LINEAGE", "pit_role": "decision_cutoff"},
+      {"name": "ingested_at", "dtype": "timestamp[us,Asia/Shanghai]", "nullable": false, "unit": null, "description": "本地实际取得原始证据时间。", "source_binding": "GLOBAL_LINEAGE", "pit_role": "ingestion"},
+      {"name": "revision_id", "dtype": "string", "nullable": false, "unit": null, "description": "来源版本或本地确定性修订身份。", "source_binding": "GLOBAL_LINEAGE", "pit_role": "revision"},
+      {"name": "raw_content_hash", "dtype": "string", "nullable": false, "unit": null, "description": "原始响应或文件内容哈希。", "source_binding": "GLOBAL_LINEAGE", "pit_role": "lineage"},
+      {"name": "quality_flags", "dtype": "list<string>", "nullable": false, "unit": null, "description": "MISSING、CONFLICT、OUTLIER等字段或记录质量标记。", "source_binding": "GLOBAL_LINEAGE", "pit_role": "quality"},
+      {"name": "license_status", "dtype": "string", "nullable": false, "unit": null, "description": "该记录实际来源的许可状态。", "source_binding": "GLOBAL_LINEAGE", "pit_role": "license"},
+      {"name": "snapshot_id", "dtype": "string", "nullable": false, "unit": null, "description": "不可变快照身份。", "source_binding": "GLOBAL_LINEAGE", "pit_role": "snapshot"}
+    ],
+    "security_key": [
+      {"name": "security_id", "dtype": "string", "nullable": false, "unit": null, "description": "由CORE-01维护、跨代码变化稳定的永久证券身份。", "source_binding": "GLOBAL_SECURITY_IDENTITY", "pit_role": "identity"},
+      {"name": "exchange_id", "dtype": "string", "nullable": false, "unit": null, "description": "SSE、SZSE或BSE等交易所身份。", "source_binding": "GLOBAL_SECURITY_IDENTITY", "pit_role": "identity"}
+    ],
+    "index_key": [
+      {"name": "index_id", "dtype": "string", "nullable": false, "unit": null, "description": "由CORE-09维护的稳定指数身份。", "source_binding": "GLOBAL_INDEX_IDENTITY", "pit_role": "identity"},
+      {"name": "provider_id", "dtype": "string", "nullable": false, "unit": null, "description": "指数提供商身份。", "source_binding": "GLOBAL_INDEX_IDENTITY", "pit_role": "identity"},
+      {"name": "index_code", "dtype": "string", "nullable": false, "unit": null, "description": "提供商内指数代码。", "source_binding": "GLOBAL_INDEX_IDENTITY", "pit_role": "identity"},
+      {"name": "return_variant", "dtype": "string", "nullable": false, "unit": null, "description": "PRICE、TOTAL_RETURN或NET_TOTAL_RETURN。", "source_binding": "GLOBAL_INDEX_IDENTITY", "pit_role": "identity"},
+      {"name": "currency", "dtype": "string", "nullable": false, "unit": null, "description": "指数计价货币。", "source_binding": "GLOBAL_INDEX_IDENTITY", "pit_role": "identity"},
+      {"name": "methodology_version", "dtype": "string", "nullable": false, "unit": null, "description": "指数方法版本。", "source_binding": "GLOBAL_INDEX_IDENTITY", "pit_role": "methodology"}
+    ],
+    "derived_lineage": [
+      {"name": "formula_version", "dtype": "string", "nullable": false, "unit": null, "description": "确定性公式或模型定义版本。", "source_binding": "GLOBAL_DERIVED", "pit_role": "lineage"},
+      {"name": "code_version", "dtype": "string", "nullable": false, "unit": null, "description": "生成代码版本或提交哈希。", "source_binding": "GLOBAL_DERIVED", "pit_role": "lineage"},
+      {"name": "input_snapshot_ids", "dtype": "list<string>", "nullable": false, "unit": null, "description": "全部上游精确数据快照身份。", "source_binding": "GLOBAL_DERIVED", "pit_role": "lineage"},
+      {"name": "knowledge_cutoff_at", "dtype": "timestamp[us,Asia/Shanghai]", "nullable": false, "unit": null, "description": "派生计算允许使用信息的最晚可见时间。", "source_binding": "GLOBAL_DERIVED", "pit_role": "decision_cutoff"}
+    ]
+  },
+  "required_quality_blockers": [
+    "UNKNOWN_SECURITY_IDENTITY",
+    "DUPLICATE_PRIMARY_KEY_UNRESOLVED",
+    "UNKNOWN_UNIT_OR_SCALE",
+    "MISSING_AVAILABLE_AT",
+    "UNCLEAR_LICENSE",
+    "CRITICAL_COVERAGE_GAP",
+    "SOURCE_SCHEMA_CHANGED",
+    "CRITICAL_SOURCE_CONFLICT"
+  ]
+}

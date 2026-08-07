@@ -1,0 +1,161 @@
+{
+  "schema_version": 1,
+  "plan_id": "L1-D2A-03_OFFICIAL_DISCLOSURE_PIT_AND_MINIMUM_CORE_CANDIDATE_SLICE",
+  "created_at": "2026-07-28T14:37:58+08:00",
+  "authorization": "USER_APPROVED_STANDARD_PROCESS__TMP_AND_REPORTS_ONLY",
+  "purpose_ceiling": "INSPECTION_ONLY",
+  "formal_admission": false,
+  "inputs": {
+    "reuse_only_by_explicit_path_and_sha256": [
+      "${QUANTIFICATION_ROOT}/tmp/source-admission-pilot/d2a01-20260727-v3",
+      "${QUANTIFICATION_ROOT}/tmp/local-dataset-build/csmar-trd-dalyr-pilot/d2a02-2020-2024-20260728-v1"
+    ],
+    "automatic_tmp_scanning": false
+  },
+  "network_plan": {
+    "official_business_request_limit_total": 18,
+    "rows_per_request_limit": 100,
+    "total_response_bytes_limit": 52428800,
+    "request_mode": "SERIAL_LOW_FREQUENCY",
+    "sources": {
+      "SZSE_OFFICIAL": {
+        "method": "POST",
+        "url": "https://www.szse.cn/api/disc/announcement/annList",
+        "request_limit": 4,
+        "body_encoding": "UTF8_JSON",
+        "pit_field": "publishTime",
+        "pit_precision_candidate": "SECOND",
+        "status": "RUNNABLE_VERIFIED"
+      },
+      "SSE_OFFICIAL": {
+        "method": "GET",
+        "url": "https://query.sse.com.cn/security/stock/queryCompanyBulletin.do",
+        "request_limit": 4,
+        "pit_field": "SSEDATE",
+        "forbidden_pit_field": "ADDDATE",
+        "pit_precision_candidate": "DATE_ONLY",
+        "status": "RUNNABLE_VERIFIED"
+      },
+      "BSE_OFFICIAL": {
+        "method": "GET",
+        "discovery_url": "https://www.bse.cn/disclosure/announcement.html",
+        "request_limit": 1,
+        "endpoint_must_be_observed_from_official_page_before_request": true,
+        "status": "DISCOVERED_NOT_EXECUTABLE",
+        "stop_reason": "BSE_REQUEST_SERIALIZATION_AND_RUNTIME_DEFAULTS_UNVERIFIED",
+        "business_request_authorized": false
+      },
+      "CNINFO_OFFICIAL": {
+        "method": "POST",
+        "url": "https://www.cninfo.com.cn/new/hisAnnouncement/query",
+        "referer": "https://www.cninfo.com.cn/new/commonUrl/pageOfSearch",
+        "request_limit": 6,
+        "use": "CROSS_SOURCE_CALIBRATION_AND_GAP_DISCOVERY_ONLY",
+        "status": "RUNNABLE_VERIFIED_CROSSCHECK_ONLY",
+        "required_raw_fields": [
+          "announcementId",
+          "announcementTitle",
+          "announcementTime",
+          "adjunctUrl",
+          "secCode"
+        ]
+      }
+    },
+    "pdf_policy": {
+      "only_when_required_for_direct_original_revision_evidence": true,
+      "count_limit": 12,
+      "total_bytes_limit": 104857600,
+      "use_only_document_url_returned_by_official_metadata": true
+    },
+    "csmar": {
+      "access": "EXISTING_USER_AUTHORIZED_INSTITUTIONAL_BROWSER_SESSION",
+      "automated_login": false,
+      "persist_credentials_cookie_or_token": false,
+      "financial_fact_packages": 1,
+      "issuer_limit": 3,
+      "report_periods_per_issuer_limit": 2,
+      "table_and_fields": "SELECT_ONLY_AFTER_VISIBLE_PORTAL_METADATA_IS_VERIFIED"
+    }
+  },
+  "candidate_slice": {
+    "plan_ids": [
+      "CORE-01",
+      "CORE-02",
+      "CORE-03",
+      "CORE-04",
+      "CORE-05",
+      "CORE-06"
+    ],
+    "security_count_min": 12,
+    "security_count_max": 18,
+    "required_exchanges": [
+      "SSE",
+      "SZSE",
+      "BSE"
+    ],
+    "required_event_classes": [
+      "STABLE_LISTING",
+      "IPO_OR_NO_CONVENTIONAL_PRICE_LIMIT",
+      "ST_OR_RISK_WARNING",
+      "SUSPENSION_OR_NO_TRADE",
+      "DELISTING_OR_CORPORATE_ACTION_BOUNDARY"
+    ],
+    "event_window_trading_days_before": 20,
+    "event_window_trading_days_after": 20,
+    "output_root": "${QUANTIFICATION_ROOT}/tmp/d2a03-official-pit-core-slice"
+  },
+  "pit_rules": {
+    "preserve_raw_publication_time": true,
+    "szse_publish_time_timezone": "Asia/Shanghai",
+    "sse_adddate_is_publication_time": false,
+    "date_only_available_at": "NEXT_TRADING_SESSION_OPEN_USING_PINNED_CORE02_CALENDAR",
+    "forbidden_substitutes_for_first_publication": [
+      "REPORT_PERIOD",
+      "CORRECTION_DATE",
+      "DOWNLOAD_DATE",
+      "INGESTED_AT"
+    ],
+    "source_record_id_is_revision_id": false,
+    "associate_announcement_is_supersedes": false,
+    "financial_fact_unique_mapping_key": [
+      "issuer_id",
+      "report_period",
+      "statement_type",
+      "consolidation_scope",
+      "original_or_revision",
+      "document_id",
+      "document_sha256",
+      "published_at",
+      "available_at"
+    ],
+    "unresolved_mapping_action": "QUARANTINE"
+  },
+  "guards": {
+    "maximum_batch_footprint_gib": 20.0,
+    "minimum_free_fraction": 0.25,
+    "catalog_path": "${QUANTIFICATION_ROOT}/data/catalog/datasets.json",
+    "catalog_sha256_expected": "debdbea74d3597dab66efc850517d3ab8ed6062a58229a61303556351883be00"
+  },
+  "forbidden": [
+    "PAID_SOURCE_OR_NEW_SUBSCRIPTION",
+    "AUTOMATED_LOGIN_OR_PERSISTED_CREDENTIAL_COOKIE_TOKEN",
+    "FULL_HISTORY_OR_FULL_DATABASE_BACKFILL",
+    "CONCURRENT_CRAWLING_OR_SCHEDULER",
+    "FORMAL_CATALOG_REGISTRATION",
+    "FORMAL_QUALITY_PROMOTION_OR_WAIVER",
+    "FACTOR_IC_BACKTEST_OR_EFFICACY_CLAIM",
+    "NEWS_OR_HIGH_FREQUENCY_BRANCH",
+    "AUTOMATIC_DELETION"
+  ],
+  "stop_conditions": [
+    "LICENSE_RETENTION_OR_INTERNAL_RESEARCH_SCOPE_UNCLEAR",
+    "CAPTCHA_HTTP429_OR_AUTHENTICATION_LOSS",
+    "TIMESTAMP_TIMEZONE_OR_PRECISION_CANNOT_BE_CONSERVATIVELY_RESOLVED",
+    "FINANCIAL_FACT_CANNOT_BE_UNIQUELY_MAPPED_TO_DISCLOSURE_VERSION",
+    "REVISION_CHAIN_HAS_NO_DIRECT_EVIDENCE",
+    "SECURITY_EXCHANGE_DATE_OR_UNIT_MAPPING_AMBIGUOUS",
+    "PRIMARY_KEY_OHLC_OR_OFFICIAL_RULE_CRITICAL_CONFLICT",
+    "REQUEST_RESPONSE_PDF_OR_DISK_GUARD_EXCEEDED",
+    "FORMAL_CATALOG_HASH_CHANGED"
+  ]
+}

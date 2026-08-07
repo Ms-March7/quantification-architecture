@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "plan_id": "d2a04-core01-to-core06-candidate-closure-v1",
+  "work_package": "L1-D2A-04_CORE01_TO_CORE06_CANDIDATE_CLOSURE_AND_SELECTED_SOURCE_PILOT",
+  "created_at": "2026-07-28T19:40:00+08:00",
+  "authorization": {
+    "user_start_evidence": "User requested database construction and asked to begin multifactor work on 2026-07-28.",
+    "execution_authorization_active": true,
+    "purpose_ceiling": "INSPECTION_ONLY",
+    "formal_catalog_write": false,
+    "formal_quality_promotion_or_waiver": false,
+    "factor_efficacy_research": false,
+    "full_history_or_full_database_backfill": false,
+    "paid_source_or_new_subscription": false,
+    "credential_cookie_token_storage": false,
+    "unattended_scheduler": false,
+    "automatic_cleanup": false
+  },
+  "phase_a": {
+    "name": "LOCAL_EVIDENCE_CLOSURE",
+    "network_requests_authorized": false,
+    "inputs": [
+      {
+        "role": "CSMAR_DAILY_2020_2024_CANDIDATE",
+        "root": "${QUANTIFICATION_ROOT}/tmp/local-dataset-build/csmar-trd-dalyr-pilot/d2a02-2020-2024-20260728-v1",
+        "manifest_sha256": "1130a5bf284b52c3d0eccf683ee9a4a8126a91aab612bcdbb85f3433dc59302b",
+        "content_hash": "319eaff543125fb41a5b5bc2790591df92909233da37cd685244ae923b1bd266",
+        "expected_rows": 5852287,
+        "expected_distinct_source_codes": 5659
+      },
+      {
+        "role": "CSMAR_CURRENT_COMPANY_CANDIDATE",
+        "root": "${QUANTIFICATION_ROOT}/tmp/local-dataset-build/csmar-trd-co-pilot/pilot-current-export-20260728-v2",
+        "manifest_sha256": "0a8035687ef6a9928fdc7dca4004411d45b9c926e2e62996001f70659e53bb1c",
+        "content_hash": "2bb196be1fb880b6dc17a8a25c3fd945c4e0f494b61648f14255f84e1f16f152",
+        "expected_rows": 6013
+      },
+      {
+        "role": "D2A03_OFFICIAL_PIT_CANDIDATE",
+        "root": "${QUANTIFICATION_ROOT}/tmp/d2a03-official-pit-core-slice/d2a03-official-pit-20260728-v2",
+        "tree_sha256": "8dde177a6f2d885e693782f1bfbf055f671b0675aaea5952e7a3fdd62f5d6e4e"
+      }
+    ],
+    "formal_catalog_guard": {
+      "path": "${QUANTIFICATION_ROOT}/data/catalog/datasets.json",
+      "expected_sha256": "debdbea74d3597dab66efc850517d3ab8ed6062a58229a61303556351883be00",
+      "must_remain_unchanged": true
+    },
+    "storage_guard": {
+      "drive": "G:",
+      "max_new_footprint_gib": 20,
+      "minimum_free_fraction": 0.25,
+      "free_gib_at_plan_freeze": 383.13,
+      "automatic_cleanup": false
+    },
+    "tasks": [
+      {
+        "task_id": "D2A04-A1",
+        "dataset": "CORE-01",
+        "action": "Build provisional exchange-qualified source-code episodes and current-listing observations; preserve the distinction between a provisional code episode and a permanent security identity."
+      },
+      {
+        "task_id": "D2A04-A2",
+        "dataset": "CORE-02",
+        "action": "Build observed-trade-date diagnostics only; do not promote observed dates to an official exchange calendar or session history."
+      },
+      {
+        "task_id": "D2A04-A3",
+        "dataset": "CORE-03",
+        "action": "Normalize the five-year unadjusted daily source observations, bind them to provisional code episodes, preserve source fields and NULLs, and produce coverage and conflict reports."
+      },
+      {
+        "task_id": "D2A04-A4",
+        "dataset": "CORE-04",
+        "action": "Inventory existing corporate-action clues and prove that Capchgdt or disclosure metadata alone cannot substitute for event terms and a revision chain."
+      },
+      {
+        "task_id": "D2A04-A5",
+        "dataset": "CORE-05",
+        "action": "Produce no adjusted-price projection until qualified CORE-03 and CORE-04 inputs exist."
+      },
+      {
+        "task_id": "D2A04-A6",
+        "dataset": "CORE-06",
+        "action": "Preserve Trdsta and limit fields as source observations; do not infer complete ST, suspension, eligibility, or historical rule states without admitted code tables and rule versions."
+      }
+    ]
+  },
+  "completion_gate": {
+    "required": [
+      "CORE01 permanent identity and code-history candidate evidence is complete for the selected scope.",
+      "CORE02 official calendar and session-history candidate evidence is complete for the selected scope.",
+      "CORE03 fields, units, NULL and sentinel semantics, permanent identity mapping, and multi-source calibration have no critical unresolved conflict.",
+      "CORE04 event terms, dates, ratios, publication time, lifecycle and revision-chain candidate evidence is complete for the selected scope.",
+      "CORE06 status code tables and historical rule versions are complete for the selected scope.",
+      "CORE05 is reproducible only from qualified pinned CORE03 and CORE04 inputs.",
+      "Rights and local-retention scope are recorded.",
+      "Formal catalog hash remains unchanged during candidate closure.",
+      "Candidate paths remain rejected by qdata research intent.",
+      "A machine-readable work-package receipt, coverage report, gap matrix, footprint report and verification result exist."
+    ],
+    "on_pass": "PAUSE_AND_REQUEST_SEPARATE_D2B_START",
+    "on_conflict": "PAUSE_AND_REPORT",
+    "does_not_authorize": [
+      "FORMAL_DATASET_ADMISSION",
+      "FORMAL_QUALITY_PROMOTION_OR_WAIVER",
+      "FORMAL_FACTOR_RESEARCH",
+      "FULL_HISTORY_OR_FULL_DATABASE_BACKFILL"
+    ]
+  }
+}

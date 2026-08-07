@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "contract_id": "ricequant-r1-financial-pit-probe-v1",
+  "authorized_on": "2026-08-04",
+  "status": "COMPLETED__PARTIAL_FINANCIAL_CAPABILITY__FORMAL_EFFECT_NONE",
+  "purpose_ceiling": "INSPECTION_ONLY",
+  "formal_admission": false,
+  "formal_catalog_write": false,
+  "quality_promotion": false,
+  "research_use": false,
+  "factor_efficacy_use": false,
+  "backtest_use": false,
+  "bulk_download": false,
+  "automated_trading": false,
+  "security": {
+    "authentication_source": "EXISTING_RQDATA_RUNTIME_CONFIGURATION_ONLY",
+    "credential_value_capture": false,
+    "credential_value_persistence": false,
+    "account_identity_capture": false,
+    "api_payload_persistence": false
+  },
+  "request_budget": {
+    "maximum_total_business_api_calls": 12,
+    "fresh_process_quota_calls": 2,
+    "financial_capability_calls": 10,
+    "maximum_order_book_ids_per_call": 2,
+    "maximum_quarters_per_call": 1,
+    "maximum_fields_per_financial_call": 4,
+    "summary_only": true,
+    "payload_persistence": false
+  },
+  "bounded_samples": {
+    "core13": {
+      "order_book_ids": ["000048.XSHE", "000001.XSHE"],
+      "quarter": "2018q2",
+      "fields": ["revenue", "net_profit"],
+      "as_of_dates": ["2018-08-15", "2018-09-01", "2018-11-01", "2019-06-16"],
+      "statements": "all"
+    },
+    "core15_express": {
+      "order_book_ids": ["000004.XSHE"],
+      "as_of_dates": ["2018-04-13", "2018-04-15"],
+      "fields": ["total_profit"],
+      "interval": "1q"
+    },
+    "core15_forecast": {
+      "order_book_ids": ["000001.XSHE"],
+      "as_of_dates": ["2016-01-20", "2016-01-22"],
+      "fields": ["forecast_type", "forecast_description", "forecast_np_floor", "forecast_np_ceiling"]
+    },
+    "core16": {
+      "order_book_ids": ["000001.XSHE", "600519.XSHG"],
+      "quarter": "2018q4",
+      "as_of_dates": ["2018-12-31", "2019-12-31"],
+      "type": "financial_statements"
+    }
+  },
+  "allowed_api_calls": [
+    "user.get_quota",
+    "get_pit_financials_ex",
+    "current_performance",
+    "performance_forecast",
+    "get_audit_opinion"
+  ],
+  "formal_limits": [
+    "client_entrypoint_presence_does_not_prove_entitlement",
+    "bounded_as_of_behavior_does_not_prove_complete_revision_chain",
+    "info_date_is_not_assumed_to_be_intraday_available_at",
+    "rice_create_tm_is_not_assumed_to_be_legal_publication_time",
+    "source_retention_derivation_and_snapshot_rights_are_not_inferred",
+    "core14_remains_derived_from_formally_admitted_core13",
+    "core18_has_no_probed_source_endpoint"
+  ],
+  "prohibited_actions": [
+    "print_read_or_persist_credentials",
+    "persist_api_payload",
+    "bulk_history_request",
+    "write_datasets_json",
+    "modify_roadmap_or_current_source_registry",
+    "publish_formal_snapshot",
+    "promote_quality",
+    "run_factor_or_backtest",
+    "open_validation_or_holdout",
+    "connect_broker_or_trade"
+  ]
+}

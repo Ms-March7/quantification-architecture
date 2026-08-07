@@ -1,0 +1,33 @@
+{
+  "schema_version": "capital-flow-research-config-v1",
+  "run_id": "20260719-g1-research-v22",
+  "as_of": "2026-07-19T23:59:59+08:00",
+  "pilot_end_date": "2026-07-14",
+  "pilot_trading_days": 20,
+  "backtest_start_date": "2010-03-31",
+  "backtest_folds": 6,
+  "backtest_gap_days": 5,
+  "backtest_test_days": 252,
+  "one_way_cost_bps": 10,
+  "nav_workers": 8,
+  "retry_attempts": 5,
+  "data_root": "${QUANTIFICATION_ROOT}/data/capital-flow-attribution",
+  "report_root": "${QUANTIFICATION_ROOT}/reports/capital-flow-attribution",
+  "qlib_store": "${QUANTIFICATION_ROOT}/多因子/data/market/snapshots/2026-07-14/qlib_bin",
+  "raw_fallback_roots": [
+    "${QUANTIFICATION_ROOT}/data/capital-flow-attribution/research/20260719-g1-research-v21/raw",
+    "${QUANTIFICATION_ROOT}/data/capital-flow-attribution/research/20260719-g1-research-v20/raw",
+    "${QUANTIFICATION_ROOT}/data/capital-flow-attribution/research/20260719-g1-research-v19/raw",
+    "${QUANTIFICATION_ROOT}/data/capital-flow-attribution/research/20260719-g1-research-v18/raw",
+    "${QUANTIFICATION_ROOT}/data/capital-flow-attribution/research/20260719-g1-research-v17/raw",
+    "${QUANTIFICATION_ROOT}/data/capital-flow-attribution/research/20260719-g1-research-v16/raw",
+    "${QUANTIFICATION_ROOT}/data/capital-flow-attribution/research/20260719-g1-research-v15/raw",
+    "${QUANTIFICATION_ROOT}/data/capital-flow-attribution/research/20260719-g1-research-v14/raw",
+    "${QUANTIFICATION_ROOT}/data/capital-flow-attribution/research/20260719-g1-research-v13/raw",
+    "${QUANTIFICATION_ROOT}/data/capital-flow-attribution/research/20260719-g1-research-v12/raw"
+  ],
+  "storage_hard_cap_bytes": 10737418240,
+  "minimum_free_bytes": 128849018880,
+  "request_timeout_seconds": 30,
+  "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/134.0 Safari/537.36"
+}

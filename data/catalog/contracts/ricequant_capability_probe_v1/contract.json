@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "contract_id": "ricequant-capability-probe-v1",
+  "source_id": "RQDATA",
+  "status": "LIVE_MINIMAL_PROBE_PARTIAL__PRICE_CALENDAR_PASS__FUND_ETF_DENIED__FORMAL_EFFECT_NONE",
+  "purpose_ceiling": "INSPECTION_ONLY",
+  "formal_admission": false,
+  "formal_catalog_write": false,
+  "quality_promotion": false,
+  "research_use": false,
+  "backtest_use": false,
+  "bulk_download": false,
+  "automated_trading": false,
+  "source_suitability": "PRIORITY_CORE_PV_PROBE_AND_GAP_FILL_CANDIDATE",
+  "current_evidence_receipt": "reports/data-governance/ricequant-live-capability-probe-20260803-v1/RESULT.json",
+  "security": {
+    "license_configured_interactively_by_user": true,
+    "license_value_in_cli_args": false,
+    "license_value_in_environment_dump": false,
+    "license_value_in_workspace": false,
+    "license_value_in_logs_or_reports": false,
+    "account_identity_capture": false,
+    "secret_persistence_by_probe": false
+  },
+  "offline_probe": {
+    "network_requests": 0,
+    "checks": [
+      "python_version",
+      "rqsdk_command_presence",
+      "module_presence",
+      "installed_distribution_versions"
+    ],
+    "output_root": "tmp/ricequant-capability-probe"
+  },
+  "live_probe_observations": {
+    "observed_on": "2026-08-03",
+    "evidence_origin": "USER_MEDIATED_LOCAL_TERMINAL_OUTPUT__SANITIZED_FACTS_ONLY",
+    "license_value_captured": false,
+    "passed": [
+      "rqdata_initialization",
+      "trading_calendar_two_security_window",
+      "stock_and_etf_daily_price_small_sample"
+    ],
+    "permission_denied": [
+      "fund.all_instruments_via_fund.get_holdings",
+      "etf.get_components"
+    ],
+    "promotion_decision": "EVIDENCE_UPGRADE_ONLY__KEEP_INSPECTION_ONLY__NO_FORMAL_ADMISSION"
+  },
+  "future_live_probe_limits": {
+    "requires_separate_user_start": true,
+    "maximum_order_book_ids": 2,
+    "maximum_trading_dates": 5,
+    "allowed_order_book_ids": [
+      "603986.XSHG",
+      "159995.XSHE"
+    ],
+    "allowed_checks": [
+      "license_type_expiry_and_quota_without_license_value",
+      "rqdata_price_schema_and_small_sample",
+      "trading_calendar_schema_and_small_sample",
+      "instrument_identity_and_historical_status",
+      "fund_disclosed_holdings_release_date_semantics",
+      "index_or_etf_historical_component_capability",
+      "financial_point_in_time_and_revision_metadata",
+      "rqfactor_module_entitlement",
+      "rqoptimizer_module_entitlement",
+      "rqalpha_plus_module_entitlement"
+    ],
+    "prohibited_actions": [
+      "download_rqalpha_bundle",
+      "bulk_history_request",
+      "write_datasets_json",
+      "publish_snapshot",
+      "run_factor_ic_or_backtest",
+      "connect_broker_or_trade"
+    ]
+  },
+  "promotion_gates": [
+    "entitlement_and_expiry_verified",
+    "coverage_and_history_verified_per_data_family",
+    "historical_security_identity_and_dynamic_universe_verified",
+    "trading_calendar_corporate_action_and_adjustment_semantics_verified",
+    "financial_available_at_and_revision_chain_verified",
+    "etf_disclosed_holdings_and_daily_basket_boundary_verified",
+    "local_retention_internal_derivation_and_research_rights_verified",
+    "rate_limit_stability_and_reproducibility_verified",
+    "immutable_export_and_hash_binding_feasible",
+    "independent_source_calibration_plan_defined"
+  ],
+  "promotion_outcomes": {
+    "strong_full_evidence": "PROPOSE_PRIMARY_STRUCTURED_RESEARCH_SOURCE",
+    "strong_partial_evidence": "PROPOSE_PRIORITY_CALIBRATION_OR_GAP_FILL_SOURCE",
+    "api_only_without_pit_or_rights": "KEEP_INSPECTION_ONLY",
+    "unstable_or_insufficient": "KEEP_HISTORICAL_ALTERNATIVE_CANDIDATE"
+  }
+}

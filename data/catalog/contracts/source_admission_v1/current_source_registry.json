@@ -1,0 +1,1360 @@
+{
+  "schema_version": 1,
+  "registry_id": "current-source-registry-20260805-v23",
+  "updated_at": "2026-08-05",
+  "status": "BOUNDED_SOURCE_CLOSURE_ACTIVE__RQDATA_R0_GAP_FILL_MATRIX_REGISTERED__SHSZ_ST_SUSPENSION_LONG_SPAN_ENDPOINT_PASS__XSHG_XSHE_PRICE_AVAILABLE__BJSE_DAILY_DENIED__JOINQUANT_COMPANY_ACTION_FULL_EXPORT_383613_RAW_ROWS_HASH_VERIFIED__MULTISOURCE_V2_LEDGER_1787017_ROWS__DATE_ONLY_PIT_CANDIDATE_713851_ROWS__FORMAL_AVAILABLE_AT_0_OF_1787017__JOINQUANT_EXTERNAL_SDK_QUOTA_UNVERIFIED__CENTRAL_CANDIDATE_INDEX_26_ROOTS_92_EVIDENCE_67_MANIFESTS__UNIFIED_CANDIDATE_MAINTENANCE_WEEKDAYS_1920_PASS__EXACT_DUPLICATE_C_DRIVE_CLEANUP_RECOVERABLE__FORMAL_EFFECT_NONE__STAGE_A_PRE_ADMISSION_0_OF_4__MECHANICAL_FULL_CLOSURE_0_OF_43__RESSET_11_DATA_PACKAGES_SEALED__11_CANDIDATE_TABLES_MATERIALIZED__28_ROWS_REPAIRED__01_AMBIGUOUS_ROW_QUARANTINED__RESEARCH_PRICE_ACTION_PROJECTION_PASS_DISCOVERY_ONLY__FORMAL_EVENT_PIT_OPEN__01_HF_GUIDE_ARCHIVED__DOWNLOADS_CLEANUP_RECOVERABLE__CORE02_Q1_FAIL_Q2_FAIL_Q3_UNKNOWN_Q4_PASS__LOCAL_MAINTENANCE_STANDARDIZATION_INSPECTION_ONLY__CSMAR_API_ENTITLEMENT_DENIED__PUBLIC_OFFICIAL_API_INSPECTION_LIVE_3_OF_4__FORMAL_ADMISSIONS_0__D2B_BLOCKED__NOT_ADMITTED",
+  "purpose": "Current additive status overlay across D2A-01 through the auditor-contract-v3 report sealed as the fourth 2026-07-31 Stage-A packaging artifact, exact-asset CSMAR rights attestation, two-stage selected CORE admission architecture, official identity/calendar/rules evidence, the 2026-08-02 RESSET identity/status and DIST candidate arrivals, the 2026-08-04 RESSET six-package company-action plus one-document sealed intake and recoverable Downloads cleanup, the 2026-08-05 deterministic RESSET/CSMAR/CNINFO/RQData company-action v1 ledger and Discovery-only causal total-return projection, the 2026-08-05 full JoinQuant online STK_XR_XD/STK_CAPITAL_CHANGE export with 383,613 raw rows and the 1,787,017-row five-family v2 source-observation ledger, its date-only daily-PIT candidate and still-open formal version-chain gate, the exact-duplicate C-drive cleanup receipt, the 26-root central candidate evidence index and the unified weekday 19:20 candidate maintenance scheduler, the Ricequant quota recheck, vendor dictionary/use-rights evidence, inspection-only local maintenance layers and bounded local inspection worker, API entitlement probes, the 2026-08-03 Ricequant isolated runtime plus completed bounded schema, coverage, PIT-behavior and price-volume probes, the 2026-08-04 RQData R0 gap-fillability assessment and long-span ST/suspension endpoint probe, official no-key inspection adapters and read-only Tsinghua vendor entitlement preflight",
+  "authority_boundary": {
+    "execution_authorization_active": true,
+    "resume_requires_user_start": false,
+    "authorized_scope": "BOUNDED_D2A04B_SOURCE_CLOSURE__PRE_ADMISSION_EVIDENCE_AUDIT__READ_ONLY_SOURCE_AND_MINIMAL_NO_KEY_API_PREFLIGHT__INSPECTION_ONLY_LOCAL_INCREMENT_ENGINE__RQDATA_ISOLATED_RUNTIME__RQDATA_BOUNDED_R0_LIVE_PROBE__RQDATA_BOUNDED_R0_COVERAGE_PIT_VOLUME_PROBE__CORPORATE_ACTION_MULTISOURCE_RESEARCH_CLOSURE__JOINQUANT_ONLINE_COMPANY_ACTION_FULL_EXPORT_AND_V2_CANDIDATE_BUILD__CENTRAL_CANDIDATE_INDEX_AND_UNIFIED_CANDIDATE_DAILY_MAINTENANCE",
+    "purpose_ceiling": "INSPECTION_ONLY",
+    "pre_admission_audit_authorized": true,
+    "formal_admission_run_authorized": false,
+    "formal_snapshot_publish_authorized": false,
+    "formal_admission": false,
+    "formal_catalog_write": false,
+    "quality_promotion": false,
+    "research_use": false,
+    "bulk_backfill_authorized": false,
+    "paid_source_authorized": false,
+    "credential_or_secret_storage_authorized": false,
+    "rqdata_runtime_scaffold_authorized": true,
+    "rqdata_live_api_probe_authorized": true,
+    "rqdata_bulk_download_authorized": false,
+    "rqdata_factor_or_backtest_execution_authorized": false
+  },
+  "precedence": {
+    "historical_runner_contract": "data/catalog/contracts/source_admission_v1/source_matrix.json",
+    "current_status_overlay": "data/catalog/contracts/source_admission_v1/current_source_registry.json",
+    "csmar_intake_detail": "data/catalog/contracts/local_download_build_v1/csmar.intake-manifest.json",
+    "csmar_33pkg_local_closure": "reports/data-governance/csmar-33pkg-local-closure-20260729/CLOSURE_AUDIT.json",
+    "csmar_supplemental_arrival_intake": "reports/data-governance/csmar-arrival-intake-20260730-v1/VERIFICATION.json",
+    "csmar_supplemental_evidence": "reports/data-governance/csmar-intake-supplemental-evidence-20260730-v1/VERIFICATION.json",
+    "csmar_index_daily_intake_20260730": "data/market/quarantine/csmar-manual-export/intake-20260730-18src-12blob-idx-idxtrd-v1/INTAKE_MANIFEST.json",
+    "csmar_downloads_cleanup_20260730": "reports/data-governance/csmar-downloads-cleanup-20260730-v1/CLEANUP_RECEIPT.json",
+    "csmar_user_attested_rights_20260730": "reports/data-governance/csmar-user-attested-rights-receipt-20260730-v1/RIGHTS_RECEIPT.json",
+    "selected_core_local_evidence": "reports/data-governance/core01-02-03-06-local-evidence-closure-20260730-v1/GATE_EVIDENCE.json",
+    "selected_core_legacy_post_admission_audit": "reports/data-governance/d2b-selected-core-formal-admission-gate-20260730-v1/GATE_DECISION.json",
+    "selected_core_formal_gate_legacy_compatibility": "reports/data-governance/d2b-selected-core-formal-admission-gate-20260730-v1/GATE_DECISION.json",
+    "selected_core_two_stage_admission_architecture": "reports/data-governance/selected-core-two-stage-admission-architecture-audit-20260730-v1/VERIFICATION.json",
+    "stage_a_closure_control_v2": "reports/data-governance/stage-a-closure-control-20260730-v2/VERIFICATION.json",
+    "stage_a_core01_official_identity": "reports/data-governance/stage-a-core01-official-identity-closure-20260730-v1/VERIFICATION.json",
+    "stage_a_core02_calendar_session": "reports/data-governance/stage-a-core02-calendar-session-closure-20260730-v1/VERIFICATION.json",
+    "stage_a_core02_iso_mic": "reports/data-governance/stage-a-core02-iso-mic-evidence-20260730-v1/VERIFICATION.json",
+    "stage_a_core03_core06_rules": "reports/data-governance/stage-a-core03-core06-official-rules-closure-20260730-v1/VERIFICATION.json",
+    "stage_a_evidence_consolidation_v4": "reports/data-governance/stage-a-evidence-consolidation-20260731-v4/VERIFICATION.json",
+    "stage_a_evidence_consolidation_v4_alias_receipt": "reports/data-governance/stage-a-evidence-consolidation-20260731-v4-alias-receipt-v1/ALIAS_RECEIPT.json",
+    "stage_a_authority_sync_post_verification": "reports/data-governance/stage-a-authority-sync-post-verification-20260731-v1/POST_SYNC_VERIFICATION.json",
+    "trd_dalyr_null_zero_semantics_audit_v2": "reports/data-governance/trd-dalyr-null-zero-semantics-audit-20260730-v2/VERIFICATION.json",
+    "core02_official_calendar_session_closure": "reports/data-governance/core02-official-calendar-session-closure-20260730-v1/CORE02_GATE_RECEIPT.json",
+    "local_daily_update_engine": "reports/data-governance/local-daily-update-engine-20260730-v1/VERIFICATION.json",
+    "local_daily_orchestration_state": "reports/data-governance/local-daily-orchestration-state-layer-20260730-v1/VERIFICATION.json",
+    "local_daily_inspection_worker": "reports/data-governance/local-daily-inspection-worker-20260731-v1/VERIFICATION.json",
+    "schema_evolution_classifier": "reports/data-governance/schema-evolution-classifier-20260730-v1/VERIFICATION.json",
+    "revision_event_ledger": "reports/data-governance/revision-event-ledger-inspection-20260730-v1/VERIFICATION.json",
+    "nightly_standardization_and_blockers": "reports/data-governance/nightly-standardization-and-blockers-20260730-v1/VERIFICATION.json",
+    "csmar_python_api_entitlement_probe": "reports/data-governance/csmar-python-api-entitlement-probe-20260730-v1/VERIFICATION.json",
+    "official_source_inventory": "reports/data-governance/official-automatable-source-inventory-20260730-v1/SOURCE_MATRIX.json",
+    "public_official_api_preflight": "reports/data-governance/public-official-api-preflight-20260730-v1/PREFLIGHT_RESULTS.json",
+    "ricequant_capability_probe_contract": "data/catalog/contracts/ricequant_capability_probe_v1/contract.json",
+    "ricequant_offline_runtime_probe": "tmp/ricequant-capability-probe/offline-install-20260803-v1/environment.json",
+    "ricequant_live_capability_receipt": "reports/data-governance/ricequant-live-capability-probe-20260803-v1/RESULT.json",
+    "ricequant_r0_closure_probe_contract": "data/catalog/contracts/ricequant_r0_closure_probe_v1/contract.json",
+    "ricequant_r0_closure_probe_latest_attempt": "tmp/ricequant-capability-probe/live-r0-closure-20260803-v1/result.json",
+    "ricequant_r0_live_closure_receipt": "reports/data-governance/ricequant-r0-live-closure-probe-20260803-v1/RESULT.json",
+    "ricequant_r0_coverage_probe_contract": "data/catalog/contracts/ricequant_r0_coverage_probe_v1/contract.json",
+    "ricequant_r0_coverage_probe_result": "tmp/ricequant-capability-probe/live-r0-coverage-pit-volume-20260803-v1/result.json",
+    "ricequant_r0_coverage_receipt": "reports/data-governance/ricequant-r0-coverage-probe-20260803-v1/RESULT.json",
+    "ricequant_r0_gap_fill_assessment": "reports/data-governance/ricequant-r0-gap-fill-assessment-20260804-v1/RESULT.json",
+    "public_official_api_inspection_adapters": "reports/data-governance/public-official-api-inspection-adapters-20260730-v1/VERIFICATION.json",
+    "tsinghua_vendor_automation_preflight": "reports/data-governance/tsinghua-vendor-automation-preflight-20260731-v1/VERIFICATION.json",
+    "resset_manual_export_intake_20260802": "data/market/quarantine/resset-manual-export/intake-20260802-04pkg-v1/INTAKE_MANIFEST.json",
+    "resset_company_actions_dist_intake_20260802": "data/market/quarantine/resset-manual-export/intake-20260802-company-actions-v1/INTAKE_MANIFEST.json",
+    "resset_company_actions_intake_20260804": "data/market/quarantine/resset-manual-export/intake-20260804-06pkg-company-actions-01doc-v1/INTAKE_MANIFEST.json",
+    "resset_company_actions_schema_crosswalk": "reports/data-governance/resset-company-actions-schema-crosswalk-20260802-v1/README.md",
+    "company_action_multisource_research_closure_20260805": "reports/data-governance/corporate-action-research-closure-20260805-v1/VERIFICATION.json",
+    "company_action_total_return_projection_verification_20260805": "reports/data-governance/corporate-action-research-closure-20260805-v1/PROJECTION_VERIFICATION.json",
+    "rqdata_joinquant_company_action_fill_probe_20260805": "reports/data-governance/rqdata-joinquant-company-action-fill-probe-20260805-v1/RESULT.json",
+    "joinquant_company_action_full_intake_20260805": "data/market/quarantine/joinquant-company-actions/intake-20260805-full-shsz-v1/raw/extracted/jq_company_actions_full_20260805/MANIFEST.json",
+    "company_action_multisource_v2_verification_20260805": "reports/data-governance/corporate-action-multisource-fill-20260805-v2/VERIFICATION.json",
+    "joinquant_company_action_download_cleanup_20260805": "reports/data-governance/joinquant-download-duplicate-cleanup-20260805-v1/CLEANUP_RECEIPT.json",
+    "candidate_asset_central_index_20260805": "data/catalog/candidate_assets.json",
+    "candidate_daily_maintenance_closure_20260805": "reports/data-governance/candidate-daily-maintenance-closure-20260805-v1/RESULT.json",
+    "resset_downloads_consolidation_cleanup_20260804": "reports/data-governance/resset-downloads-consolidation-cleanup-20260804-v1/CLEANUP_RECEIPT.json",
+    "resset_source_gap_matrix_20260804": "reports/data-governance/resset-downloads-consolidation-cleanup-20260804-v1/SOURCE_GAP_MATRIX.md",
+    "resset_r0_core01_core06_arrival_v2": "reports/data-governance/resset-r0-core01-core06-arrival-intake-20260802-v2/VERIFICATION.json",
+    "resset_vendor_dictionary_and_rights_20260802": "reports/data-governance/resset-vendor-dictionary-evidence-20260802-v1/README.md",
+    "formal_catalog": "data/catalog/datasets.json",
+    "rule": "This registry summarizes current candidate evidence. It does not edit historical runner authorization and cannot create a formal dataset identity."
+  },
+  "work_packages": [
+    {
+      "work_package": "L1-D2A-01_SOURCE_ADMISSION_AND_PILOT_ADAPTERS",
+      "status": "PAUSED__BLOCKING_CONFLICTS_REPORTED__NO_FORMAL_ADMISSION",
+      "evidence": "reports/data-governance/d2a-01-source-admission-pilot-20260727/README.md"
+    },
+    {
+      "work_package": "L1-D2A-01B_CSMAR_LOCAL_RESEARCH_BOOTSTRAP",
+      "status": "DONE__LOCAL_CANDIDATE_PIPELINE_ONLY__FORMAL_ADMISSION_0",
+      "evidence": "reports/data-governance/csmar-local-research-bootstrap-20260728/README.md"
+    },
+    {
+      "work_package": "L1-D2A-02_CSMAR_PRIORITY_TABLE_CENSUS_AND_MULTIPACK_PILOT",
+      "status": "PARTIAL__DAILY_MULTIPACK_PASS__FINANCIAL_PIT_PERMISSION_BLOCKED",
+      "evidence": "reports/data-governance/d2a-02-csmar-priority-table-pilot-20260728/PILOT_MEASUREMENTS.json"
+    },
+    {
+      "work_package": "L1-D2A-03_OFFICIAL_DISCLOSURE_PIT_AND_MINIMUM_CORE_CANDIDATE_SLICE",
+      "status": "PAUSED__PARTIAL__BSE_BUSINESS_AND_CSMAR_FINANCIAL_PIT_BLOCKED__CORE03_SOURCE_SLICE_ONLY__FORMAL_ADMISSIONS_0",
+      "evidence": "reports/data-governance/d2a-03-official-pit-min-core-slice-20260728/WORK_PACKAGE.json"
+    },
+    {
+      "work_package": "L1-D2A-04_CORE01_TO_CORE06_CANDIDATE_CLOSURE_AND_SELECTED_SOURCE_PILOT",
+      "status": "COMPLETED__PHASE_A_LOCAL_ENGINEERING__D2A_04_COMPLETION_GATE_NOT_MET__PAUSED",
+      "execution_plan": "data/catalog/contracts/source_admission_v1/execution_plans/d2a04_core01_to_core06_candidate_closure_v1.json",
+      "evidence": "reports/data-governance/d2a-04-core01-to-core06-candidate-20260728/WORK_PACKAGE.json",
+      "candidate_root": "tmp/d2a04-core01-to-core06-candidate/d2a04-phase-a-20260728-v1",
+      "candidate_bytes": 568246,
+      "candidate_content_hash": "f228a3a8b55aec100291b21e32e6fa2b6aacf1c58866d89dc884c096a52ab1f3",
+      "referenced_daily_rows": 5852287,
+      "referenced_daily_partitions": 60,
+      "core05_output_rows": 0,
+      "purpose_ceiling": "INSPECTION_ONLY",
+      "network_requests_authorized_in_phase_a": false,
+      "factor_efficacy_research_authorized": false
+    },
+    {
+      "work_package": "L1-D2A-04B_OFFICIAL_IDENTITY_CALENDAR_ACTION_STATUS_SOURCE_CLOSURE",
+      "status": "ACTIVE_AUTHORIZED_BOUNDED_SOURCE_CLOSURE__HISTORICAL_33PKG_INTAKE_SEALED__D2A04C_LOCAL_CLOSURE_COMPLETE__STAGE_A_PRE_ADMISSION_0_OF_4__CORE02_Q1_Q2_FAIL__NO_PAID_NO_NEW_KEY_NO_BULK_BACKFILL__INSPECTION_ONLY",
+      "execution_plan": "data/catalog/contracts/source_admission_v1/execution_plans/d2a04b_official_identity_calendar_action_status_source_closure_v1.json",
+      "execution_plan_sha256": "96d176dba9a06bcbbaab9f72cad29600bdb3abe486c7747677b40a4a645591c6",
+      "superseded_for_local_candidate_counts_by": "L1-D2A-04C_33PKG_LOCAL_SCHEMA_PIT_AND_TEXT_CLOSURE",
+      "history": [
+        {
+          "status": "PAUSED__CSMAR_FULL_TABLE_PERMISSION_BLOCKED__NO_NEW_DATA__FORMAL_ADMISSIONS_0",
+          "evidence": "reports/data-governance/d2a-04b-source-closure-20260728/d2a04b-portal-preflight-20260728-v1/WORK_PACKAGE.json",
+          "reason": "The earlier portal session showed TRD_Dalyr as unavailable with a purchase action; that cycle stopped with zero requests, downloads, packages and business bytes."
+        }
+      ],
+      "current_cycle": {
+        "user_restart": "USER_RESTARTED_AND_AUTHORIZED_BOUNDED_D2A04B_DATABASE_COLLECTION",
+        "csmar": {
+          "access": "TSINGHUA_INSTITUTIONAL_SESSION",
+          "entitlement_observation": "PORTAL_SHOWS_PURCHASED",
+          "status": "D2A04C_LOCAL_CLOSURE_COMPLETE__MANUAL_EXPORT_CANDIDATES_PRESERVED__PYTHON_API_AUTH_PASS_ENTITLEMENT_DENIED__FORMAL_ADMISSIONS_0",
+          "portal_incident": {
+            "observed_on": "2026-07-29",
+            "proxy_error_code": 27,
+            "displayed_unblock_at": "2026-07-30T00:00:00+08:00",
+            "action": "STOP_CSMAR_RESOURCE_ROUTE_REQUESTS__NO_RETRY__NO_ACCOUNT_SWITCH__NO_BYPASS__OTHER_LIBRARY_DATABASES_NOT_IMPLIED_BLOCKED",
+            "evidence": "reports/data-governance/d2a-04b-csmar-structured-candidates-20260729/PORTAL_PAUSE.md"
+          },
+          "structured_candidate_summary": {
+            "daily_read_only_union_rows": 18691664,
+            "daily_distinct_securities": 5990,
+            "daily_distinct_trading_dates": 8741,
+            "daily_coverage": "1990-12-19 through 2026-07-28",
+            "daily_source_candidate_partitions": 464,
+            "daily_source_candidate_bytes": 2629656346,
+            "daily_overlap_field_mismatches": 0,
+            "reference_tables": [
+              "TRD_Co",
+              "TRD_Cale"
+            ],
+            "action_constraint_tables": [
+              "TRD_Cptl",
+              "TRD_Capchg",
+              "TRD_NoLimit",
+              "TRD_AdjustFactor"
+            ],
+            "financial_table_zips_received": [
+              "FS_Combas",
+              "FS_Comins",
+              "FS_Comscfd",
+              "FS_Bcombas",
+              "FS_Bcomins",
+              "FS_Bcomscfd",
+              "FS_Bcomscfi",
+              "FS_Scombas",
+              "FS_Scomins",
+              "FS_Scomscfd",
+              "FS_Scomscfi",
+              "FS_Icombas",
+              "FS_Icomins",
+              "FS_Icomscfd",
+              "FS_Icomscfi",
+              "FIN_AuditStats",
+              "FIN_Audit",
+              "FIN_AuditDetail"
+            ],
+            "financial_table_zip_count": 18,
+            "financial_candidate_build_status": "HISTORICAL_04B_PAUSE__SIXTEEN_TABLES_COMPLETE__TWO_AUDIT_TEXT_TABLES_RAW_ONLY_AT_PAUSE__INSPECTION_ONLY__PIT_OPEN",
+            "local_csmar_zip_count": 33,
+            "local_csmar_zip_bytes": 2038345395,
+            "transactional_intake": {
+              "run_id": "intake-20260729-33pkg-v1",
+              "canonical_root": "data/market/quarantine/csmar-manual-export/intake-20260729-33pkg-v1",
+              "package_count": 33,
+              "package_bytes": 2038345395,
+              "source_deleted_count": 33,
+              "intake_manifest_sha256": "c156608a8d1087b2cd58baf39ccbe04c5278fa9e33b7800234f90eea4f17e8c2",
+              "source_deletion_receipt_sha256": "a9159aa3d332caed947a7b1ab73d9059661d272feedf43e75d83c17fc6e927c9"
+            },
+            "additional_candidate_batch": {
+              "candidate_count": 13,
+              "row_count": 80109,
+              "partition_count": 1303,
+              "candidate_bytes": 33113057,
+              "mechanical_pass_count": 13,
+              "purpose_ceiling": "INSPECTION_ONLY",
+              "admission_decision": "NOT_ADMITTED"
+            },
+            "raw_only_quarantine_at_04b_pause": {
+              "table_count": 2,
+              "tables": [
+                "FIN_Audit",
+                "FIN_AuditDetail"
+              ],
+              "reason": "DEDICATED_ZERO_DROP_QUOTED_TEXT_PARSER_REQUIRED"
+            },
+            "evidence": "reports/data-governance/csmar-33pkg-transactional-intake-20260729/MEASUREMENTS.json"
+          },
+          "supplemental_intake_20260730": {
+            "run_id": "intake-20260730-08pkg-03manual-v1",
+            "canonical_root": "data/market/quarantine/csmar-manual-export/intake-20260730-08pkg-03manual-v1",
+            "source_file_count": 17,
+            "source_file_bytes": 196558974,
+            "source_retained_count": 17,
+            "source_retained_count_semantics": "AT_INTAKE_SEAL_TIME__SUPERSEDED_BY_POST_INTAKE_RECYCLE_BIN_CLEANUP_RECEIPT",
+            "source_deleted_count": 0,
+            "unique_blob_count": 10,
+            "unique_blob_bytes": 149771704,
+            "unique_package_zip_count": 7,
+            "unique_document_pdf_count": 3,
+            "zip_member_count": 31,
+            "candidate_binding_count": 7,
+            "historical_33pkg_candidate_touched": "14/20",
+            "projected_candidate_touched": "16/20",
+            "formal_core_completed": "0/20",
+            "stage_a_ready": "0/4",
+            "purpose_ceiling": "INSPECTION_ONLY",
+            "admission_decision": "NOT_ADMITTED",
+            "intake_manifest_sha256": "9d4785ffd243cecb4c122f63984168db143ab8385f1e7c6169bd91a7faddb149",
+            "source_retention_receipt_sha256": "83ddd647e0789672976a19aa0c6ee17969b887a9de222c5a44039a6e37ce31a5",
+            "evidence_map_sha256": "9467dd7ee7b32adf9a32c102ba102923faf1cf5b5db0ba95ac2fd1a3e0489ba8",
+            "verification": "reports/data-governance/csmar-intake-supplemental-evidence-20260730-v1/VERIFICATION.json"
+          },
+          "index_daily_intake_20260730": {
+            "run_id": "intake-20260730-18src-12blob-idx-idxtrd-v1",
+            "canonical_root": "data/market/quarantine/csmar-manual-export/intake-20260730-18src-12blob-idx-idxtrd-v1",
+            "source_alias_count": 18,
+            "source_bytes": 435572489,
+            "unique_zip_count": 12,
+            "unique_zip_bytes": 397397885,
+            "intake_manifest_sha256": "10439a5e5857fd9cf5c00c36aa2cd3d5fcfaac52bd11a67efff4e31f451eff23",
+            "source_retention_receipt_sha256": "36b8fc683cef53a460883813f4f21b3265db4c06833892dc550b53945299051c",
+            "purpose_ceiling": "INSPECTION_ONLY",
+            "admission_decision": "NOT_ADMITTED",
+            "research_ready": false
+          },
+          "post_intake_cleanup_20260730": {
+            "source_count": 35,
+            "source_bytes": 632131463,
+            "unique_destination_object_count": 22,
+            "unique_destination_zip_count": 19,
+            "unique_destination_pdf_count": 3,
+            "action": "SEND_TO_RECYCLE_BIN",
+            "recycle_bin_emptied": false,
+            "receipt": "reports/data-governance/csmar-downloads-cleanup-20260730-v1/CLEANUP_RECEIPT.json",
+            "receipt_sha256": "91e97ee9d188b4e5c52030009cb82191b672032404d6e7e698ed300700a3f731"
+          },
+          "rights_receipt_20260730": {
+            "manifest_count": 3,
+            "source_alias_count": 68,
+            "canonical_blob_count": 55,
+            "canonical_bytes": 2585514984,
+            "allowed": [
+              "LOCAL_LONG_TERM_RETENTION_ON_THIS_MACHINE",
+              "CAMPUS_INTERNAL_NONCOMMERCIAL_ACADEMIC_RESEARCH",
+              "INTERNAL_DERIVED_FACTORS_AND_STATISTICS"
+            ],
+            "prohibited": [
+              "RAW_EXTERNAL_REDISTRIBUTION",
+              "COMMERCIAL_USE"
+            ],
+            "not_covered": [
+              "API_OR_AUTOMATED_BULK_COLLECTION",
+              "POST_AFFILIATION_DISPOSITION",
+              "OFFICIAL_SOURCE_RIGHTS",
+              "INDEPENDENT_CONTRACT_VERIFICATION"
+            ],
+            "rights_receipt_sha256": "1d07b07304fe767ce7edda2d2563d816c73e52fe7b1c21ef30bccb1db9498661",
+            "report_manifest_sha256": "fcb22330aeec0731ee29562bfceb32312a37c1ab365b24d9c00bef20c3bdcded",
+            "formal_admission": false,
+            "research_usable": false
+          },
+          "purpose_ceiling": "INSPECTION_ONLY",
+          "formal_admission": false,
+          "research_ready": false
+        },
+        "sse": {
+          "status": "PARTIAL_CANDIDATE_EVIDENCE__INSPECTION_ONLY__NOT_ADMITTED",
+          "request_attempts": 21,
+          "successful_requests": 21,
+          "raw_files": 21,
+          "raw_bytes": 1165667,
+          "package_footprint_bytes": 1582647,
+          "evidence": "tmp/d2a04b-source-closure/d2a04b-official-track-a-20260728-v1/SSE/VERIFICATION.json"
+        },
+        "szse": {
+          "status": "PARTIAL_CANDIDATE_EVIDENCE__STOPPED_AFTER_REQUEST_24_HTTP_404__INSPECTION_ONLY__NOT_ADMITTED",
+          "request_attempts": 24,
+          "successful_requests": 23,
+          "raw_files": 23,
+          "raw_bytes": 1004095,
+          "hard_stop": "REQUEST_24_HTTP_404",
+          "evidence": "tmp/d2a04b-source-closure/d2a04b-official-track-a-20260728-v1/SZSE/REQUEST_RECEIPTS.json"
+        },
+        "bse": {
+          "status": "PAUSED__HTTP_403_WAF_HARD_STOP__NO_BUSINESS_DATA__INSPECTION_ONLY",
+          "preflight_attempts": 2,
+          "business_requests_completed": 0,
+          "business_data_bytes": 0,
+          "candidate_rows": 0,
+          "hard_stop": "HTTP_403_FROM_BSE_OFFICIAL_WAF",
+          "evidence": "tmp/d2a04b-source-closure/d2a04b-official-track-a-20260728-v1/BSE/WORK_PACKAGE.json"
+        },
+        "official_successful_raw_files": 44,
+        "official_successful_raw_bytes": 2169762,
+        "formal_catalog_sha256": "debdbea74d3597dab66efc850517d3ab8ed6062a58229a61303556351883be00",
+        "formal_catalog_unchanged": true,
+        "completion_gate_passed": false
+      },
+      "user_start_evidence": "User explicitly restarted bounded collection on 2026-07-28, authorized exactly 33 CSMAR packages plus verified C/F source deletion on 2026-07-29, and on 2026-07-30 authorized bounded formal-admission auditing, source closure and API/source discovery without paid sources, new keys or bulk backfill.",
+      "scope_summary": "Bounded official identity, calendar, corporate-action, status, rights and financial-PIT closure is active under the 2026-07-30 user authorization. The 33-package low-frequency CSMAR intake remains sealed and immutable. The legacy combined audit is post-admission-only; the non-circular Stage A remains 0/4 ready and CORE-02 Q1/Q2 remain failed. Paid sources, new keys, bulk backfill, formal catalog writes, quality promotion and research remain outside scope.",
+      "purpose_ceiling": "INSPECTION_ONLY",
+      "formal_catalog_write": false,
+      "quality_promotion": false,
+      "factor_efficacy_research_authorized": false,
+      "full_database_backfill_authorized": false,
+      "paid_source_authorized": false,
+      "credential_or_secret_storage_authorized": false,
+      "after_run_action": "CONTINUE_BOUNDED_SOURCE_CLOSURE__FAIL_CLOSED_AT_EACH_GATE__REPORT_BEFORE_ANY_SCOPE_EXPANSION"
+    },
+    {
+      "work_package": "L1-D2A-04C_33PKG_LOCAL_SCHEMA_PIT_AND_TEXT_CLOSURE",
+      "status": "COMPLETED__33PKG_INVENTORY__AUDIT_TEXT_ZERO_DROP_PROVENANCE_BOUND_V2__PIT_GAP_AUDIT_COMPLETE__PIT_NOT_CLOSED__CORE_TOUCHED_14_OF_20__FORMAL_CORE_0_OF_20__INSPECTION_ONLY",
+      "authorization_basis": "User approved the first stage for the already sealed 33-package intake: local parsers, candidates, evidence, acceptance files and control synchronization only.",
+      "scope": {
+        "sealed_package_count": 33,
+        "logical_table_count": 25,
+        "unique_observed_field_count": 559,
+        "unique_observed_field_count_semantics": "CASE_SENSITIVE_RAW_FIELD_NAME_DISTINCT_COUNT",
+        "unique_observed_field_name_count_case_sensitive": 559,
+        "unique_observed_field_name_count_casefold": 474,
+        "table_field_occurrence_count": 1197,
+        "candidate_run_count": 32,
+        "overlap_calibration_package_count": 1,
+        "financial_audit_candidate_table_count": 18,
+        "financial_audit_candidate_rows": 2296290,
+        "financial_audit_authoritative_candidate_bytes": 803059261,
+        "core_touched": "14/20",
+        "formal_core_closed": "0/20"
+      },
+      "audit_text_v2": [
+        {
+          "table": "FIN_Audit",
+          "rows": 80301,
+          "repaired_rows": 238,
+          "semantic_review_rows": 1,
+          "candidate_root": "tmp/local-dataset-build/csmar-fin-audit/csmar-33pkg-fin-audit-text-closure-20260729-v2-parquet-v1",
+          "content_hash": "b9186d3448dcfa2a98ff540b8cdcbec03540418f7eeecc831f9d705ce23f0c4d",
+          "provenance_zip_sha256": "a407150ae8964e581effe42963b8e187cd22ef7311fa7553a18c4bf2c69c2fb7"
+        },
+        {
+          "table": "FIN_AuditDetail",
+          "rows": 82264,
+          "repaired_rows": 103,
+          "semantic_review_rows": 0,
+          "candidate_root": "tmp/local-dataset-build/csmar-fin-auditdetail/csmar-33pkg-fin-auditdetail-text-closure-20260729-v2-parquet-v1",
+          "content_hash": "be55d9243093006dc2f18ee827d35361eac6cc0f9e6ce1e19c210c0fd933d4eb",
+          "provenance_zip_sha256": "09cc71a9adf565c4cc58286a51906f9472c414877ddc26ab11f84735871efe7e"
+        }
+      ],
+      "three_table_reconciliation": {
+        "FIN_AuditStats_rows": 41178,
+        "FIN_Audit_rows": 80301,
+        "FIN_AuditDetail_rows": 82264,
+        "stats_without_detail_keys": 0,
+        "detail_without_stats_keys": 0,
+        "auditno_detail_count_mismatch_keys": 0,
+        "stats_without_audit_keys": 1,
+        "stats_without_audit_example": "302132/2024-12-31"
+      },
+      "remaining_pit_gap": "Initial available_at, prior values and complete revision chains remain missing; report periods and correction dates are not substitutes.",
+      "evidence": "reports/data-governance/csmar-33pkg-local-closure-20260729/CLOSURE_AUDIT.json",
+      "verification": "reports/data-governance/csmar-33pkg-local-closure-20260729/VERIFICATION.json",
+      "formal_catalog_sha256": "debdbea74d3597dab66efc850517d3ab8ed6062a58229a61303556351883be00",
+      "formal_catalog_unchanged": true,
+      "purpose_ceiling": "INSPECTION_ONLY",
+      "formal_admission": false,
+      "formal_catalog_write": false,
+      "quality_promotion": false,
+      "factor_efficacy_research_authorized": false,
+      "network_or_new_download_authorized": false,
+      "sealed_intake_mutation_authorized": false,
+      "deletion_authorized": false
+    },
+    {
+      "work_package": "L1-D2B_SELECTED_CORE_FORMAL_ADMISSION_GATE__CORE01_CORE02_CORE03_CORE06",
+      "classification": "LEGACY_COMBINED_POST_ADMISSION_AUDIT",
+      "status": "COMPLETED__RECLASSIFIED_POST_ADMISSION_AUDIT__HISTORICAL_0_OF_4__BLOCK_GATES_PASS_1_FAIL_12_UNKNOWN_3__FORMAL_STATE_UNCHANGED",
+      "architecture_note": "formal_closure, formal_catalog_identity and qdata_research_resolution are post-publish checks and cannot be pre-admission prerequisites.",
+      "authorization_basis": "User explicitly authorized bounded formal-admission auditing on 2026-07-30; no real snapshot publication occurred.",
+      "scope": [
+        "CORE-01",
+        "CORE-02",
+        "CORE-03",
+        "CORE-06"
+      ],
+      "local_evidence": "reports/data-governance/core01-02-03-06-local-evidence-closure-20260730-v1/GATE_EVIDENCE.json",
+      "formal_gate": "reports/data-governance/d2b-selected-core-formal-admission-gate-20260730-v1/GATE_DECISION.json",
+      "admitted_count": 0,
+      "target_count": 4,
+      "blocking_gate_counts": {
+        "PASS": 1,
+        "FAIL": 12,
+        "UNKNOWN": 3
+      },
+      "formal_catalog_write": false,
+      "quality_promotion": false,
+      "snapshot_publish": false
+    },
+    {
+      "work_package": "L1-D2A-04B_SELECTED_CORE_TWO_STAGE_ADMISSION_ARCHITECTURE_AUDIT",
+      "classification": "CURRENT_NON_CIRCULAR_PRE_ADMISSION_AND_POST_PUBLISH_MODEL",
+      "status": "STAGE_A_BLOCKED__0_OF_4_READY__STAGE_B_BLOCKED_PHASE_A_NOT_READY__NO_FORMAL_MUTATION",
+      "scope": [
+        "CORE-01",
+        "CORE-02",
+        "CORE-03",
+        "CORE-06"
+      ],
+      "stage_a_blocker_counts": {
+        "CORE-01": 11,
+        "CORE-02": 9,
+        "CORE-03": 12,
+        "CORE-06": 11
+      },
+      "stage_b_requires": [
+        "ALL_FOUR_STAGE_A_PASS",
+        "SEPARATE_USER_AUTHORIZATION_HASH_BOUND_TO_EXACT_STAGE_A_BUNDLE",
+        "REAL_DATA_CAPABLE_ATOMIC_PUBLISHER",
+        "EXACT_POST_PUBLISH_CATALOG_IDENTITY_AND_QDATA_RESEARCH_RESOLUTION"
+      ],
+      "evidence": "reports/data-governance/selected-core-two-stage-admission-architecture-audit-20260730-v1/VERIFICATION.json",
+      "formal_admission": false,
+      "formal_catalog_write": false,
+      "quality_promotion": false,
+      "snapshot_publish": false
+    },
+    {
+      "work_package": "L1-D2A-04B_CORE02_OFFICIAL_CALENDAR_SESSION_CLOSURE",
+      "status": "INSPECTION_ONLY__8454_VENUE_DATES__28_NOTICE_LINEAGE__12_SESSION_ROWS__FINAL_Q1_FAIL_Q2_FAIL_Q3_UNKNOWN_Q4_PASS__FORMAL_ADMISSION_0__D2B_BLOCKED__NOT_ADMITTED",
+      "coverage": "SSE and SZSE 2015-01-01 through 2026-07-28",
+      "remaining_blockers": [
+        "BSE_OFFICIAL_DAILY_CALENDAR",
+        "ALL_VENUE_HISTORICAL_SESSION_VERSION_CHAIN",
+        "COMPLETE_THREE_VENUE_TEMPORARY_OR_EMERGENCY_CLOSURE_ARCHIVE",
+        "INTRADAY_PUBLICATION_PRECISION",
+        "AUTOMATED_BULK_LOCAL_RETENTION_AND_REDISTRIBUTION_RIGHTS"
+      ],
+      "closed_subchecks": [
+        "ISO_10383_XSHG_XSHE_BJSE_ACTIVE_MIC_MAPPING"
+      ],
+      "evidence": "reports/data-governance/core02-official-calendar-session-closure-20260730-v1/CORE02_GATE_RECEIPT.json",
+      "formal_admission": false,
+      "formal_catalog_write": false,
+      "quality_promotion": false,
+      "research_usable": false
+    },
+    {
+      "work_package": "L1_DAILY_UPDATE_LOCAL_ENGINEERING_SMOKE_20260730",
+      "status": "PASS_INSPECTION_ONLY_LOCAL_INCREMENT_ENGINE__TESTS_14_OF_14__BOUNDED_INSPECTION_WORKER_TESTS_34_OF_34__NO_PRODUCTION_UPDATER__NO_SCHEDULER",
+      "evidence": "reports/data-governance/local-daily-update-engine-20260730-v1/VERIFICATION.json",
+      "legacy_smoke_evidence": "reports/data-governance/daily-update-local-smoke-20260730-v1/VERIFICATION.json",
+      "inspection_worker_status": "PASS_34_OF_34__IDENTITY_DATE_REQUEST_AND_RESULT_HASH_BOUND__FAILURE_CLEARS_CLAIM__INSPECTION_ONLY",
+      "inspection_worker_evidence": "reports/data-governance/local-daily-inspection-worker-20260731-v1/VERIFICATION.json",
+      "formal_admission": false,
+      "formal_catalog_write": false,
+      "quality_promotion": false,
+      "scheduler_created": false
+    },
+    {
+      "work_package": "L1_OFFICIAL_AND_LIBRARY_SOURCE_COVERAGE_20260730",
+      "status": "COMPLETED__35_OF_35_PLANNED_IDENTITIES_MAPPED__FORMAL_ADMISSION_READY_0",
+      "official_inventory": "reports/data-governance/official-automatable-source-inventory-20260730-v1/SOURCE_MATRIX.json",
+      "library_vendor_coverage": "reports/data-governance/library-structured-vendor-coverage-20260730-v1/COVERAGE_MATRIX.json",
+      "formal_admission": false
+    },
+    {
+      "work_package": "L1_PUBLIC_OFFICIAL_API_PREFLIGHT_20260730",
+      "status": "PREFLIGHT_ONLY__4_OF_7_LIVE_STRUCTURE_PASS__FORMAL_ADMISSIONS_0",
+      "evidence": "reports/data-governance/public-official-api-preflight-20260730-v1/PREFLIGHT_RESULTS.json",
+      "formal_admission": false
+    },
+    {
+      "work_package": "L1-D2A-04B_PUBLIC_OFFICIAL_NO_KEY_API_INSPECTION_ADAPTERS",
+      "status": "FIXTURE_4_OF_4_PASS__LIVE_3_OF_4_STRUCTURE_PASS__ECB_TLS_FAIL_CLOSED_QUARANTINED__INSPECTION_ONLY_NOT_ADMITTED",
+      "evidence": "reports/data-governance/public-official-api-inspection-adapters-20260730-v1/VERIFICATION.json",
+      "formal_admission": false,
+      "formal_catalog_write": false,
+      "quality_promotion": false,
+      "scheduler_created": false
+    },
+    {
+      "work_package": "L1-D2A-04B_RESSET_04PKG_CANDIDATE_ARRIVAL_20260802",
+      "status": "COMPLETED__04PKG_SEALED__04_CANDIDATES_AVAILABLE__FORMAL_EFFECT_NONE__INSPECTION_ONLY_NOT_ADMITTED",
+      "intake_manifest": "data/market/quarantine/resset-manual-export/intake-20260802-04pkg-v1/INTAKE_MANIFEST.json",
+      "evidence": "reports/data-governance/resset-r0-core01-core06-arrival-intake-20260802-v2/VERIFICATION.json",
+      "vendor_dictionary_and_rights_evidence": "reports/data-governance/resset-vendor-dictionary-evidence-20260802-v1/README.md",
+      "affected_plan_ids": [
+        "CORE-01",
+        "CORE-03",
+        "CORE-06"
+      ],
+      "no_closure_for": [
+        "CORE-02",
+        "CORE-04",
+        "CORE-05"
+      ],
+      "formal_effect": "NONE",
+      "formal_admission": false,
+      "formal_catalog_write": false,
+      "quality_promotion": false,
+      "snapshot_write": false,
+      "research_use": false
+    },
+    {
+      "work_package": "L1-D2A-04B_RESSET_DOWNLOADS_CONSOLIDATION_AND_RECOVERABLE_CLEANUP_20260804",
+      "status": "COMPLETED__11_DATA_PACKAGES_SEALED__11_CANDIDATE_TABLES_MATERIALIZED__COMPANY_ACTION_MULTISOURCE_LEDGER_1073145_ROWS__28_ROWS_REPAIRED__01_AMBIGUOUS_ROW_QUARANTINED__RESEARCH_PRICE_ACTION_PROJECTION_PASS_DISCOVERY_ONLY__FORMAL_EVENT_PIT_OPEN__01_HF_GUIDE_ARCHIVED__12_DOWNLOADS_ORIGINALS_RECYCLED_RECOVERABLE__FORMAL_EFFECT_NONE",
+      "new_intake_manifest": "data/market/quarantine/resset-manual-export/intake-20260804-06pkg-company-actions-01doc-v1/INTAKE_MANIFEST.json",
+      "schema_crosswalk": "reports/data-governance/resset-company-actions-schema-crosswalk-20260802-v1/README.md",
+      "cleanup_receipt": "reports/data-governance/resset-downloads-consolidation-cleanup-20260804-v1/CLEANUP_RECEIPT.json",
+      "source_gap_matrix": "reports/data-governance/resset-downloads-consolidation-cleanup-20260804-v1/SOURCE_GAP_MATRIX.md",
+      "affected_plan_ids": [
+        "CORE-04",
+        "CORE-05",
+        "CORE-07",
+        "CORE-17"
+      ],
+      "formal_effect": "NONE",
+      "formal_admission": false,
+      "formal_catalog_write": false,
+      "quality_promotion": false,
+      "snapshot_write": false,
+      "research_use": false,
+      "cleanup_method": "WINDOWS_RECYCLE_BIN_NOT_EMPTIED"
+    },
+    {
+      "work_package": "L1-D2A-04B_JOINQUANT_COMPANY_ACTION_FULL_EXPORT_AND_MULTISOURCE_V2_20260805",
+      "status": "COMPLETED__383613_RAW_ROWS_HASH_VERIFIED__713872_STAGE_OBSERVATIONS__1787017_UNIFIED_ROWS__713851_DATE_ONLY_PIT_CANDIDATES__FORMAL_AVAILABLE_AT_0_OF_1787017__INSPECTION_ONLY_NOT_ADMITTED__FORMAL_EFFECT_NONE",
+      "intake_manifest": "data/market/quarantine/joinquant-company-actions/intake-20260805-full-shsz-v1/raw/extracted/jq_company_actions_full_20260805/MANIFEST.json",
+      "candidate_root": "data/market/quarantine/cn-a-share-corporate-actions-multisource/candidate-20260805-v2",
+      "evidence": "reports/data-governance/corporate-action-multisource-fill-20260805-v2/VERIFICATION.json",
+      "affected_plan_ids": [
+        "CORE-04",
+        "CORE-05"
+      ],
+      "remaining_blockers": [
+        "FORMAL_FIRST_AVAILABLE_TIMESTAMP",
+        "COMPLETE_CORRECTION_WITHDRAWAL_AND_SUPERSEDES_CHAIN",
+        "PERMANENT_SECURITY_IDENTITY_FOR_ALL_ROWS",
+        "SOURCE_UNIT_AND_NUMERIC_CONFLICT_ADJUDICATION",
+        "FORMAL_SAVE_AND_DERIVATION_RIGHTS"
+      ],
+      "formal_effect": "NONE",
+      "formal_admission": false,
+      "formal_catalog_write": false,
+      "quality_promotion": false,
+      "snapshot_write": false,
+      "research_use": false
+    }
+  ],
+  "sources": [
+    {
+      "source_id": "RESSET_MANUAL_EXPORT",
+      "role": "CANDIDATE_SECONDARY_IDENTITY_ACTION_AND_TRADABILITY_SOURCE",
+      "current_decision": "ELEVEN_DATA_PACKAGES_SEALED__ELEVEN_TABLES_MATERIALIZED__COMPANY_ACTION_MULTISOURCE_LEDGER_BUILT__RESEARCH_PRICE_ACTION_PROJECTION_PASS_DISCOVERY_ONLY__FORMAL_EVENT_PIT_OPEN__ONE_HF_GUIDE_ARCHIVED__INSPECTION_ONLY__NOT_ADMITTED",
+      "sealed_intake": {
+        "run_id": "intake-20260802-04pkg-v1",
+        "manifest": "data/market/quarantine/resset-manual-export/intake-20260802-04pkg-v1/INTAKE_MANIFEST.json",
+        "manifest_sha256": "d7a8bdacbe8ed8d4876179a0e0c0be293b2a15a0fab39daf8ccb2ffea7d0c969",
+        "source_package_count": 4,
+        "source_total_bytes": 4524042
+      },
+      "additional_sealed_intakes": [
+        {
+          "run_id": "intake-20260802-company-actions-v1",
+          "manifest": "data/market/quarantine/resset-manual-export/intake-20260802-company-actions-v1/INTAKE_MANIFEST.json",
+          "manifest_sha256": "d9776a661fc1b936594e3b08acbfc019dc477c912d49d3e59c0cc25332536ace",
+          "source_package_count": 1,
+          "role": "DIST_COMPANY_ACTION_CANDIDATE"
+        },
+        {
+          "run_id": "intake-20260804-06pkg-company-actions-01doc-v1",
+          "manifest": "data/market/quarantine/resset-manual-export/intake-20260804-06pkg-company-actions-01doc-v1/INTAKE_MANIFEST.json",
+          "manifest_sha256": "0c6d86fcac9f36e48a1c35e6cf6eb020d6e71464c26ae6e99f5e753c53b5bac8",
+          "source_package_count": 6,
+          "documentation_archive_count": 1,
+          "source_total_bytes": 18650560,
+          "role": "COMPANY_ACTION_RAW_CANDIDATES_AND_HF_DOCUMENTATION"
+        }
+      ],
+      "candidate_tables": [
+        {
+          "table": "COMNMHIS",
+          "row_count": 9778,
+          "manifest": "tmp/local-dataset-build/resset-comnmhis-candidate/intake-20260802-04pkg-v1/manifest.json",
+          "manifest_sha256": "0e8ca873e3e9f5c367bf659fbed45ada62e9829b3c6e2a7b489942034441882f",
+          "content_hash": "1bbd6040f187b3fb2f1804e40fab8906ac74e27a312e26ece05aab4c5218bf26"
+        },
+        {
+          "table": "DELINFO",
+          "row_count": 8936,
+          "manifest": "tmp/local-dataset-build/resset-delinfo-candidate/intake-20260802-04pkg-v1/manifest.json",
+          "manifest_sha256": "128f0592826ba14fab9b3ab7cb742cebbf37e7e35cc2b8e46b540bdc173a0d76",
+          "content_hash": "f9f2e160b048e6b8fb69452ec69726840d082647a56a089dc7afd5ed654d2bdd"
+        },
+        {
+          "table": "STKSPCTRMT",
+          "row_count": 4105,
+          "manifest": "tmp/local-dataset-build/resset-stkspctrmt/manual-export-20260802-zero-loss-v1/manifest.json",
+          "manifest_sha256": "dbbf8e2a3095c86ab1865c7fbe742bc789e88452fa3b607cb4c5622d1ac5b63e",
+          "content_hash": "8c5833369e1eab78171425747a107ede7f2edb466c4ba9cc00a767aa40d537d5"
+        },
+        {
+          "table": "SUSPNSNRESMPTN",
+          "row_count": 81535,
+          "manifest": "tmp/local-dataset-build/resset-suspnsnresmptn/intake-20260802-04pkg-v1-zero-loss-v1/manifest.json",
+          "manifest_sha256": "14a79f6f5a4a7542b76b0a6e18e81d86206d27f80c4f2a862b9dd41e4ecc3703",
+          "content_hash": "8f11c34e317dc124ccfd4a0a12b12e3fd9bca5a5950b7ab1b0f760614251105a"
+        },
+        {
+          "table": "DIST",
+          "row_count": 57287,
+          "manifest": "tmp/local-dataset-build/resset-dist/intake-20260802-company-actions-v1-zero-loss-v1/manifest.json",
+          "manifest_sha256": "4c816060fa69e614442c8337d772ad686aa12a93badff856d4fe33a1038fea25",
+          "content_hash": "a07fa090a033c18c45fe79e87e34413215ff01f8ef8dd1122a0e287e8c047f78"
+        }
+      ],
+      "company_action_candidate_tables": [
+        {
+          "table": "SISSUA_EXT",
+          "row_count": 30426,
+          "status": "CANDIDATE_MATERIALIZED__30426_ROWS__6_DETERMINISTIC_REPAIRS"
+        },
+        {
+          "table": "APLA",
+          "row_count": 1685,
+          "status": "CANDIDATE_MATERIALIZED__1684_ROWS__2_DETERMINISTIC_REPAIRS__1_AMBIGUOUS_ROW_QUARANTINED"
+        },
+        {
+          "table": "COMPDIVIDENDPROG_EXT",
+          "row_count": 290473,
+          "status": "CANDIDATE_MATERIALIZED__290473_ROWS__10_DETERMINISTIC_REPAIRS"
+        },
+        {
+          "table": "DIVIDEND_EXT",
+          "row_count": 156753,
+          "status": "CANDIDATE_MATERIALIZED__156753_ROWS__10_DETERMINISTIC_REPAIRS"
+        },
+        {
+          "table": "DIVIDENDOBJECT",
+          "row_count": 77023,
+          "status": "CANDIDATE_MATERIALIZED__77023_ROWS__NO_REPAIRS"
+        },
+        {
+          "table": "DISTDIVSHR",
+          "row_count": 1330,
+          "status": "CANDIDATE_MATERIALIZED__1330_ROWS__NO_REPAIRS"
+        }
+      ],
+      "company_action_schema_evidence": {
+        "path": "reports/data-governance/resset-company-actions-schema-crosswalk-20260802-v1/README.md",
+        "sha256": "a46cdc3336e1afe1c8be4774126e067a1d9620eef7348bc60a0531640e89c562",
+        "seven_table_total_rows": 614977,
+        "row_width_anomalies": 29,
+        "deterministically_repairable_rows": 28,
+        "ambiguous_rows_to_quarantine": 1
+      },
+      "company_action_multisource_candidate": {
+        "candidate_root": "data/market/quarantine/cn-a-share-corporate-actions-multisource/candidate-20260805-v1",
+        "verification": "reports/data-governance/corporate-action-research-closure-20260805-v1/VERIFICATION.json",
+        "projection_verification": "reports/data-governance/corporate-action-research-closure-20260805-v1/PROJECTION_VERIFICATION.json",
+        "unified_observation_rows": 1073145,
+        "resset_source_rows": 614977,
+        "resset_emitted_rows": 614976,
+        "deterministically_repaired_rows": 28,
+        "ambiguous_rows_quarantined": 1,
+        "research_price_action_handling": "PASS__DISCOVERY_ONLY__CAUSAL_TOTAL_RETURN_SIGNAL_VIEW",
+        "formal_event_pit_gate": "OPEN__INITIAL_AVAILABLE_AT_REVISION_SUPERSEDES_CONFLICT_ADJUDICATION_AND_SUPPLIER_RIGHTS",
+        "purpose_ceiling": "INSPECTION_ONLY",
+        "admission_decision": "NOT_ADMITTED",
+        "formal_effect": "NONE"
+      },
+      "downloads_cleanup_receipt": "reports/data-governance/resset-downloads-consolidation-cleanup-20260804-v1/CLEANUP_RECEIPT.json",
+      "documentation_archives": [
+        {
+          "archive": "RESSET_High_Frequency_Data_Users'_Guide_CN.rar",
+          "sha256": "de36c56ffba6a76a05dab6bcf1336ddd3db6abfd29a0eabec9f7a894a8a606da",
+          "status": "DOCUMENTATION_ONLY__NOT_A_DATASET"
+        }
+      ],
+      "vendor_dictionary_and_rights_evidence": {
+        "path": "reports/data-governance/resset-vendor-dictionary-evidence-20260802-v1/README.md",
+        "sha256": "9da09726ce1fca08767f3aa5f71a0b0ad2fc99c4e7f22bfe08a1eecc34fa20d9",
+        "rights_ceiling": "NARROW_SINGLE_USER_LOCAL_NON_COMMERCIAL_ACADEMIC_RESEARCH__NO_RAW_OR_ROW_LEVEL_REDISTRIBUTION",
+        "formal_effect": "NONE"
+      },
+      "affected_plan_ids": [
+        "CORE-01",
+        "CORE-03",
+        "CORE-04",
+        "CORE-05",
+        "CORE-06",
+        "CORE-07",
+        "CORE-17"
+      ],
+      "no_closure_for": [
+        "CORE-02",
+        "CORE-04",
+        "CORE-05",
+        "CORE-07",
+        "CORE-17"
+      ],
+      "official_crosscheck_status": "OPEN",
+      "purpose_ceiling": "INSPECTION_ONLY",
+      "admission_decision": "NOT_ADMITTED",
+      "formal_effect": "NONE",
+      "formal_admission": false,
+      "formal_catalog_write": false,
+      "quality_promotion": false,
+      "snapshot_write": false,
+      "research_use": false,
+      "gate_transition": false
+    },
+    {
+      "source_id": "CSMAR_MANUAL_EXPORT",
+      "role": "CANDIDATE_PRIMARY_STRUCTURED_SOURCE",
+      "current_decision": "D2A04C_33PKG_LOCAL_CLOSURE_COMPLETE__32_CANDIDATES_PLUS_1_OVERLAP_CALIBRATION__18_FINANCIAL_AUDIT_CANDIDATES__AUDIT_TEXT_V2_PROVENANCE_BOUND__PIT_OPEN__INSPECTION_ONLY__NOT_ADMITTED",
+      "candidate_run_count": 32,
+      "listed_anchor_run_count": 3,
+      "current_candidate_summary": {
+        "daily_segment_runs": 8,
+        "daily_read_only_union_rows": 18691664,
+        "daily_distinct_securities": 5990,
+        "daily_coverage": "1990-12-19 through 2026-07-28",
+        "daily_physical_candidate_bytes": 2629656346,
+        "reference_runs": 2,
+        "reference_tables": [
+          "TRD_Co",
+          "TRD_Cale"
+        ],
+        "action_constraint_runs": 4,
+        "action_constraint_tables": [
+          "TRD_Cptl",
+          "TRD_Capchg",
+          "TRD_NoLimit",
+          "TRD_AdjustFactor"
+        ],
+        "financial_fact_runs": 18,
+        "anchor_financial_fact_tables": [
+          {
+            "table": "FS_Combas",
+            "rows": 691546,
+            "candidate_bytes": 300091672,
+            "content_hash": "2a3164b012f3aa07075ae431c85d27512eb489eb56bd3405596e1c9672649e4b"
+          },
+          {
+            "table": "FS_Comins",
+            "rows": 693242,
+            "candidate_bytes": 190141476,
+            "content_hash": "4c4ba364849c24c7e9602c744a774720ca3748920c7fd684b4de4d3f7974f50a"
+          },
+          {
+            "table": "FS_Comscfd",
+            "rows": 668828,
+            "candidate_bytes": 194642486,
+            "content_hash": "76cb1aabc8a0eba2f290b7f3189a5c238f561f9bb6bc3e5f3218ccfa7321482b"
+          }
+        ],
+        "additional_financial_audit_candidate_batch": {
+          "candidate_count": 13,
+          "dataset_ids": [
+            "csmar-fin-auditstats",
+            "csmar-fs-bcombas",
+            "csmar-fs-bcomins",
+            "csmar-fs-bcomscfd",
+            "csmar-fs-bcomscfi",
+            "csmar-fs-icombas",
+            "csmar-fs-icomins",
+            "csmar-fs-icomscfd",
+            "csmar-fs-icomscfi",
+            "csmar-fs-scombas",
+            "csmar-fs-scomins",
+            "csmar-fs-scomscfd",
+            "csmar-fs-scomscfi"
+          ],
+          "rows": 80109,
+          "partitions": 1303,
+          "candidate_bytes": 33113057,
+          "mechanical_status": "PASS",
+          "quality_status": "REVIEW",
+          "admission_decision": "NOT_ADMITTED",
+          "evidence": "reports/data-governance/csmar-33pkg-transactional-intake-20260729/VERIFICATION.json"
+        },
+        "resolved_audit_text_tables": [
+          {
+            "table": "FIN_Audit",
+            "rows": 80301,
+            "repaired_rows": 238,
+            "semantic_review_rows": 1,
+            "candidate_root": "tmp/local-dataset-build/csmar-fin-audit/csmar-33pkg-fin-audit-text-closure-20260729-v2-parquet-v1",
+            "content_hash": "b9186d3448dcfa2a98ff540b8cdcbec03540418f7eeecc831f9d705ce23f0c4d",
+            "provenance_zip_sha256": "a407150ae8964e581effe42963b8e187cd22ef7311fa7553a18c4bf2c69c2fb7"
+          },
+          {
+            "table": "FIN_AuditDetail",
+            "rows": 82264,
+            "repaired_rows": 103,
+            "semantic_review_rows": 0,
+            "candidate_root": "tmp/local-dataset-build/csmar-fin-auditdetail/csmar-33pkg-fin-auditdetail-text-closure-20260729-v2-parquet-v1",
+            "content_hash": "be55d9243093006dc2f18ee827d35361eac6cc0f9e6ce1e19c210c0fd933d4eb",
+            "provenance_zip_sha256": "09cc71a9adf565c4cc58286a51906f9472c414877ddc26ab11f84735871efe7e"
+          }
+        ],
+        "raw_only_overlap_calibration_package": {
+          "table": "TRD_Dalyr",
+          "rows": 6365061,
+          "role": "OVERLAP_CONSISTENCY_CALIBRATION_ONLY__NOT_MERGED_TO_AVOID_DUPLICATION",
+          "overlap_field_mismatches": 0
+        },
+        "financial_fact_total_rows": 2296290,
+        "financial_fact_total_candidate_bytes": 803059261,
+        "financial_pit_status": "CURRENT_WIDE_TABLES_ONLY__INITIAL_AVAILABLE_AT_AND_REVISION_CHAIN_MISSING",
+        "evidence": "reports/data-governance/csmar-33pkg-local-closure-20260729/CLOSURE_AUDIT.json",
+        "transactional_intake_evidence": "reports/data-governance/csmar-33pkg-transactional-intake-20260729/MEASUREMENTS.json",
+        "hash_binding_evidence": "reports/data-governance/csmar-33pkg-local-closure-20260729/HASH_BINDINGS.json",
+        "supplemental_20260730": {
+          "candidate_binding_count": 7,
+          "logical_tables": [
+            "FS_Comscfi",
+            "BDT_CO",
+            "BDT_Trdchg",
+            "IDX_Idxinfo",
+            "IDX_Chgsmp"
+          ],
+          "historical_33pkg_candidate_touched": "14/20",
+          "projected_candidate_touched": "16/20",
+          "formal_core_completed": "0/20",
+          "stage_a_ready": "0/4",
+          "evidence": "reports/data-governance/csmar-intake-supplemental-evidence-20260730-v1/EVIDENCE_MAP.json"
+        },
+        "index_daily_intake_20260730": {
+          "source_alias_count": 18,
+          "source_bytes": 435572489,
+          "unique_zip_count": 12,
+          "unique_zip_bytes": 397397885,
+          "intake_manifest_sha256": "10439a5e5857fd9cf5c00c36aa2cd3d5fcfaac52bd11a67efff4e31f451eff23",
+          "purpose_ceiling": "INSPECTION_ONLY",
+          "admission_decision": "NOT_ADMITTED",
+          "evidence": "data/market/quarantine/csmar-manual-export/intake-20260730-18src-12blob-idx-idxtrd-v1/INTAKE_MANIFEST.json"
+        }
+      },
+      "candidate_runs": [
+        {
+          "table": "TRD_Co",
+          "coverage": "current export observed on 2026-07-28",
+          "source_package": "tmp/csmar_pilot/company_file_20260728_pilot.zip",
+          "candidate_root": "tmp/local-dataset-build/csmar-trd-co-pilot/pilot-current-export-20260728-v2",
+          "row_count": 6013,
+          "source_field_count": 3,
+          "partition_count": 1,
+          "candidate_bytes": 360677,
+          "content_hash": "2bb196be1fb880b6dc17a8a25c3fd945c4e0f494b61648f14255f84e1f16f152"
+        },
+        {
+          "table": "TRD_Dalyr",
+          "coverage": "2025-01-02 through 2025-01-27",
+          "source_package": "tmp/csmar_pilot/daily_2025_01_all_fields_pilot.zip",
+          "candidate_root": "tmp/local-dataset-build/csmar-trd-dalyr-pilot/pilot-current-export-20260728-v2",
+          "row_count": 98229,
+          "source_field_count": 24,
+          "partition_count": 1,
+          "candidate_bytes": 12367911,
+          "content_hash": "65d66b1199cffba5630684417ba5da51ddccb7fe2d73fe771e0155a61499a7fe"
+        },
+        {
+          "table": "TRD_Dalyr",
+          "coverage": "2020-01-02 through 2024-12-31",
+          "source_package": "tmp/csmar_pilot/daily_2020_2024_all_fields_pilot.zip",
+          "candidate_root": "tmp/local-dataset-build/csmar-trd-dalyr-pilot/d2a02-2020-2024-20260728-v1",
+          "row_count": 5852287,
+          "distinct_security_count": 5659,
+          "source_field_count": 24,
+          "partition_count": 60,
+          "candidate_bytes": 693892239,
+          "content_hash": "319eaff543125fb41a5b5bc2790591df92909233da37cd685244ae923b1bd266"
+        }
+      ],
+      "rights_status": "EXACT_ASSET_USER_ATTESTATION_PASS__LOCAL_LONG_TERM_RETENTION__CAMPUS_INTERNAL_NONCOMMERCIAL_RESEARCH__INTERNAL_DERIVED_FACTORS_AND_STATISTICS__RAW_EXTERNAL_REDISTRIBUTION_AND_COMMERCIAL_USE_PROHIBITED__API_AUTOMATED_BULK_POST_AFFILIATION_OFFICIAL_SOURCE_RIGHTS_AND_INDEPENDENT_CONTRACT_VERIFICATION_NOT_COVERED",
+      "pit_status": "DAILY_TRADE_DATE_AVAILABLE__FINANCIAL_INITIAL_AVAILABLE_AT_BLOCKED",
+      "field_semantics_status": "MECHANICAL_SCHEMA_PASS__VENDOR_TRD_STATUS_VOLUME_AND_LIMIT_FIELDS_PARTIALLY_DOCUMENTED__OFFICIAL_HISTORICAL_RULE_PIT_RIGHTS_AND_SENTINEL_REVIEW_OPEN",
+      "blockers": [
+        "Permanent security identity and A/B/BSE namespace mapping are not closed.",
+        "Institution-specific local retention and internal sharing terms are not independently verified.",
+        "Vendor TRD units, enum and calculation are documented, but official historical limit rules, effective intervals, tick/rounding, IPO/relisting exceptions, NULL and sentinel semantics remain unresolved.",
+        "Financial facts have no verified initial available_at and revision chain.",
+        "No full-history or full-database backfill is authorized."
+      ]
+    },
+    {
+      "source_id": "SSE_OFFICIAL",
+      "role": "OFFICIAL_REFERENCE_CALENDAR_AND_DISCLOSURE_CANDIDATE",
+      "current_decision": "D2A04B_PARTIAL_RAW_EVIDENCE__21_OF_21_REQUESTS__INSPECTION_ONLY__NOT_ADMITTED",
+      "d2a03_normalized_pit_candidates": 7,
+      "d2a04b": {
+        "request_attempts": 21,
+        "successful_requests": 21,
+        "raw_files": 21,
+        "raw_bytes": 1165667,
+        "package_footprint_bytes": 1582647,
+        "evidence": "tmp/d2a04b-source-closure/d2a04b-official-track-a-20260728-v1/SSE/VERIFICATION.json",
+        "completion_gate_passed": false
+      },
+      "pit_status": "PARTIAL__SSEDATE_DATE_LEVEL_ONLY__AVAILABLE_AT_NOT_CREATED",
+      "blockers": [
+        "Complete historical security identity and session calendar are not established.",
+        "ADDDATE is not accepted as public publication time.",
+        "Specific market-data retention and internal-use rights are not admitted."
+      ]
+    },
+    {
+      "source_id": "SZSE_OFFICIAL",
+      "role": "OFFICIAL_REFERENCE_CALENDAR_AND_DISCLOSURE_CANDIDATE",
+      "current_decision": "D2A04B_PARTIAL_RAW_EVIDENCE__23_OF_24_REQUESTS__STOPPED_ON_HTTP_404__INSPECTION_ONLY__NOT_ADMITTED",
+      "d2a03_normalized_pit_candidates": 2,
+      "d2a04b": {
+        "request_attempts": 24,
+        "successful_requests": 23,
+        "raw_files": 23,
+        "raw_bytes": 1004095,
+        "hard_stop": "REQUEST_24_HTTP_404",
+        "evidence": "tmp/d2a04b-source-closure/d2a04b-official-track-a-20260728-v1/SZSE/REQUEST_RECEIPTS.json",
+        "completion_gate_passed": false
+      },
+      "pit_status": "PARTIAL__PUBLISHTIME_RAW_SECONDS_PRESERVED__AVAILABLE_AT_NOT_CREATED",
+      "blockers": [
+        "Complete historical security identity and session calendar are not established.",
+        "Publication metadata sample does not prove a complete revision chain.",
+        "Specific market-data retention and internal-use rights are not admitted."
+      ]
+    },
+    {
+      "source_id": "CNINFO_OFFICIAL",
+      "role": "OFFICIAL_DISCLOSURE_CALIBRATION_CANDIDATE",
+      "current_decision": "PARTIAL_METADATA_CANDIDATE__INSPECTION_ONLY__NOT_ADMITTED",
+      "d2a01_unique_metadata_rows": 10,
+      "d2a03_calibration_candidates": 5,
+      "pit_status": "PARTIAL__RAW_PUBLICATION_VALUE_PRESERVED__PRECISION_REVISION_AND_EFFECTIVE_TIME_OPEN",
+      "blockers": [
+        "Date-like midnight values cannot be treated as proven second-precision publication times.",
+        "associateAnnouncement is insufficient as a general revision chain.",
+        "No PDF body or complete corporate-action terms are admitted.",
+        "Bulk retention and internal sharing rights remain open."
+      ]
+    },
+    {
+      "source_id": "BSE_OFFICIAL",
+      "role": "OFFICIAL_DISCOVERY_ONLY",
+      "current_decision": "D2A04B_HTTP_403_WAF_HARD_STOP__BUSINESS_DATA_0__INSPECTION_ONLY__NOT_ADMITTED",
+      "d2a04b": {
+        "preflight_attempts": 2,
+        "business_requests_completed": 0,
+        "business_data_bytes": 0,
+        "candidate_rows": 0,
+        "evidence": "tmp/d2a04b-source-closure/d2a04b-official-track-a-20260728-v1/BSE/WORK_PACKAGE.json",
+        "completion_gate_passed": false
+      },
+      "pit_status": "NOT_TESTED",
+      "blockers": [
+        "BSE official WAF returned HTTP 403 during the legal-disclaimer preflight; no further requests were made.",
+        "Business-request serialization and runtime defaults are unverified.",
+        "Historical security-master schema, session history and rights are not closed."
+      ]
+    },
+    {
+      "source_id": "SSE_SZSE_BSE_OFFICIAL_MARKET_DATA",
+      "role": "OFFICIAL_DAILY_MARKET_DATA_CANDIDATE",
+      "current_decision": "BLOCKED_BEFORE_BUSINESS_DATA_FETCH",
+      "pit_status": "NOT_TESTED",
+      "blockers": [
+        "No exact historical daily product, field dictionary, local-retention right and internal-research licence have been admitted."
+      ]
+    },
+    {
+      "source_id": "BAOSTOCK_0_9_3_INSPECTION",
+      "role": "OPEN_SOURCE_SECONDARY_DAILY_CANDIDATE",
+      "current_decision": "BLOCKED_AFTER_LOGIN__FIRST_COMPRESSED_BUSINESS_RESPONSE_FRAME_UNRESOLVED__ACCEPTED_ROWS_0",
+      "pit_status": "NOT_TESTED",
+      "blockers": [
+        "The first compressed all-A response did not satisfy the reviewed frame and footer contract.",
+        "Actual market, delisted-history, unit, rights and PIT coverage are unverified."
+      ]
+    },
+    {
+      "source_id": "TENCENT_SECONDARY_INSPECTION",
+      "role": "SECONDARY_DAILY_CALIBRATION_CANDIDATE",
+      "current_decision": "BLOCKED_BEFORE_NEW_FETCH",
+      "pit_status": "PARTIAL__TRADE_DATE_ONLY",
+      "blockers": [
+        "Observed 11 raw fields conflict with a six-field local adapter projection.",
+        "Units, reuse rights and date-bound semantics remain unresolved."
+      ]
+    },
+    {
+      "source_id": "AKSHARE_ADAPTER",
+      "role": "OPEN_SOURCE_ADAPTER_ONLY",
+      "current_decision": "CODE_AVAILABLE__UNDERLYING_SOURCE_ADMISSION_REQUIRED_PER_DATA_FAMILY",
+      "formal_admission": false
+    },
+    {
+      "source_id": "TUSHARE_PRO",
+      "role": "ALTERNATIVE_CANDIDATE",
+      "current_decision": "NOT_EXECUTED__NO_TOKEN_OR_PAID_TIER_AUTHORIZED",
+      "formal_admission": false
+    },
+    {
+      "source_id": "RQDATA",
+      "role": "PRIORITY_R0_STRUCTURED_SOURCE_CANDIDATE",
+      "current_decision": "BOUNDED_SCHEMA_COVERAGE_AND_PIT_BEHAVIOR_PASS__NARROW_SHSZ_R0_FORMAL_BASE_SEPARATELY_PUBLISHED__CORE11_LEVEL1_INDUSTRY_AND_CORE09_12_19_REFERENCE_CANDIDATES_COMMITTED_INSPECTION_ONLY__BJSE_DAILY_FUND_ETF_COMPONENTS_AND_RISK_EXPOSURE_DENIED__R1_RIGHTS_AVAILABLE_AT_AND_REVISION_CHAIN_BLOCKED__NO_CANONICAL_FORMAL_ADMISSION",
+      "capability_contract": "data/catalog/contracts/ricequant_capability_probe_v1/contract.json",
+      "runtime_lock": "control/runtime/ricequant-rqsdk/runtime-lock.json",
+      "offline_probe_evidence": "tmp/ricequant-capability-probe/offline-install-20260803-v1/environment.json",
+      "live_probe_evidence": "reports/data-governance/ricequant-live-capability-probe-20260803-v1/RESULT.json",
+      "r0_closure_probe_contract": "data/catalog/contracts/ricequant_r0_closure_probe_v1/contract.json",
+      "r0_closure_probe_latest_attempt": "tmp/ricequant-capability-probe/live-r0-closure-20260803-v1/result.json",
+      "r0_live_closure_receipt": "reports/data-governance/ricequant-r0-live-closure-probe-20260803-v1/RESULT.json",
+      "r0_coverage_probe_contract": "data/catalog/contracts/ricequant_r0_coverage_probe_v1/contract.json",
+      "r0_coverage_probe_result": "tmp/ricequant-capability-probe/live-r0-coverage-pit-volume-20260803-v1/result.json",
+      "r0_coverage_receipt": "reports/data-governance/ricequant-r0-coverage-probe-20260803-v1/RESULT.json",
+      "r0_gap_fill_assessment_receipt": "reports/data-governance/ricequant-r0-gap-fill-assessment-20260804-v1/RESULT.json",
+      "r1_market_reference_probe_contract": "data/catalog/contracts/ricequant_r1_market_reference_probe_v1/contract.json",
+      "r1_market_reference_probe_receipt": "reports/data-governance/ricequant-r1-market-reference-probe-20260804-v1/RECEIPT.json",
+      "core11_industry_history_candidate_contract": "data/catalog/contracts/ricequant_core11_industry_history_candidate_v1/contract.json",
+      "core11_industry_history_candidate": "data/market/quarantine/cn-industry-classification-pit/ricequant-citics2019-level1-history-20260805-v1/manifest.json",
+      "core11_industry_history_candidate_receipt": "reports/data-governance/ricequant-core11-industry-history-candidate-20260805-v1/RESULT.json",
+      "r1_index_market_candidate_contract": "data/catalog/contracts/ricequant_r1_index_market_candidate_v1/contract.json",
+      "r1_index_market_candidate": "data/market/quarantine/r1-market-reference/ricequant-index-market-20050104-20220131-20260805-v1/manifest.json",
+      "r1_index_market_candidate_receipt": "reports/data-governance/ricequant-r1-index-market-candidate-20260805-v1/RESULT.json",
+      "r0_gap_fill_summary": {
+        "CORE-01": "PARTIALLY_FILLABLE__HISTORICAL_PIT_IDENTITY_CHAIN_OPEN",
+        "CORE-02": "NARROW_SHSZ_DAILY_FILLABLE__CANONICAL_SESSION_RULE_HISTORY_PARTIAL",
+        "CORE-03": "SHSZ_INCREMENTALLY_FILLABLE__BJSE_DAILY_PERMISSION_DENIED",
+        "CORE-04": "SUBSTANTIALLY_FILLABLE__REVISION_AVAILABLE_AT_RIGHTS_OPEN",
+        "CORE-05": "DERIVABLE_AFTER_FORMAL_CORE03_CORE04_PINNING",
+        "CORE-06": "HIGHEST_PRIORITY_INCREMENTALLY_FILLABLE__ST_SUSPENSION_LONG_SPAN_ENDPOINT_PASS"
+      },
+      "r1_reference_candidate_summary": {
+        "CORE-07": "BOUNDED_ENDPOINT_ALLOWED__FULL_HISTORY_NOT_BUILT",
+        "CORE-08": "BOUNDED_TURNOVER_ENDPOINT_ALLOWED__VALUATION_AND_FULL_HISTORY_NOT_BUILT",
+        "CORE-09": "LATEST_INDEX_MASTER_CANDIDATE_COMMITTED__HISTORICAL_PIT_UNPROVEN",
+        "CORE-10": "BOUNDED_COMPONENTS_AND_WEIGHTS_ALLOWED__FULL_HISTORY_NOT_BUILT",
+        "CORE-11": "CITICS_2019_LEVEL1_HISTORY_CANDIDATE_COMMITTED__AVAILABLE_AT_AND_REVISION_CHAIN_UNPROVEN__SWS_PRIMARY_MISSING",
+        "CORE-12": "EIGHT_BENCHMARK_DAILY_SERIES_CANDIDATE_COMMITTED__FULL_INDEX_COVERAGE_NOT_BUILT",
+        "CORE-19": "CHINABOND_GOVERNMENT_YIELD_CURVE_CANDIDATE_COMMITTED__RESEARCH_CASH_RULE_NOT_FROZEN",
+        "CORE-20": "VENDOR_FACTOR_EXPOSURE_PERMISSION_DENIED__DERIVATION_PENDING"
+      },
+      "canonical_r0_formal_core_passed": 0,
+      "canonical_r0_formal_core_total": 6,
+      "promotion_eligible": true,
+      "promotion_requires_live_evidence": true,
+      "purpose_ceiling": "INSPECTION_ONLY",
+      "formal_admission": false
+    },
+    {
+      "source_id": "JOINQUANT_ONLINE_JQDATA",
+      "role": "DAILY_PIT_COMPANY_ACTION_SUPPLEMENT_CANDIDATE",
+      "current_decision": "STK_XR_XD_AND_STK_CAPITAL_CHANGE_FULL_ONLINE_EXPORT_BUILT_AND_HASH_VERIFIED__MULTISOURCE_V2_CANDIDATE_BUILT__DATE_ONLY_PIT_PROJECTION_AVAILABLE__FORMAL_VERSION_CHAIN_OPEN__EXTERNAL_JQDATASDK_QUOTA_UNVERIFIED__KEEP_INSPECTION_ONLY",
+      "probe_receipt": "reports/data-governance/rqdata-joinquant-company-action-fill-probe-20260805-v1/RESULT.json",
+      "full_export_intake_manifest": "data/market/quarantine/joinquant-company-actions/intake-20260805-full-shsz-v1/raw/extracted/jq_company_actions_full_20260805/MANIFEST.json",
+      "full_export_package_sha256": "7c51e5e5834892d57afe695f91799702285237717f0b1c104613550162ab2380",
+      "multisource_v2_candidate_root": "data/market/quarantine/cn-a-share-corporate-actions-multisource/candidate-20260805-v2",
+      "multisource_v2_verification": "reports/data-governance/corporate-action-multisource-fill-20260805-v2/VERIFICATION.json",
+      "confirmed_fill_fields": [
+        "BOARD_PLAN_PUBLICATION_DATE",
+        "SHAREHOLDERS_PLAN_PUBLICATION_DATE",
+        "IMPLEMENTATION_PUBLICATION_DATE",
+        "REGISTRATION_AND_EX_RIGHT_DATE",
+        "BONUS_CANCEL_PUBLICATION_DATE_FIELD",
+        "CAPITAL_CHANGE_EFFECTIVE_AND_PUBLICATION_DATE",
+        "CAPITAL_STRUCTURE_AFTER_CHANGE"
+      ],
+      "bounded_probe_codes": 2,
+      "full_market_export_built": true,
+      "full_market_export_verified": true,
+      "full_market_export_rows": {
+        "STK_XR_XD": 150087,
+        "STK_CAPITAL_CHANGE": 233526
+      },
+      "full_market_export_scope_note": "VENDOR_SHSZ_CODE_SPACE_PRESERVED__INCLUDES_B_SHARE_AND_TEMPORARY_CODES__IDENTITY_FILTER_NOT_APPLIED_TO_RAW",
+      "stage_observation_rows": 713872,
+      "multisource_v2_unified_rows": 1787017,
+      "date_only_pit_candidate_rows": 713851,
+      "formal_available_at_rows": 0,
+      "version_chain_gate": "NOT_MET",
+      "external_sdk_quota_verified": false,
+      "purpose_ceiling": "INSPECTION_ONLY",
+      "formal_admission": false
+    },
+    {
+      "source_id": "CHOICE",
+      "role": "HISTORICAL_ALTERNATIVE_CANDIDATE",
+      "current_decision": "NOT_EXECUTED__NO_PURCHASE_OR_CREDENTIAL_AUTHORIZED",
+      "formal_admission": false
+    },
+    {
+      "source_id": "IFIND",
+      "role": "HISTORICAL_ALTERNATIVE_CANDIDATE",
+      "current_decision": "NOT_EXECUTED__NO_PURCHASE_OR_CREDENTIAL_AUTHORIZED",
+      "formal_admission": false
+    },
+    {
+      "source_id": "CSMAR_PYTHON_API_PERSONAL",
+      "role": "POTENTIAL_DAILY_UPDATE_INTERFACE",
+      "current_decision": "AUTHENTICATION_PASS__LIST_DATABASES_ENTITLEMENT_DENIED__NOT_A_DAILY_UPDATE_SOURCE",
+      "rights_status": "PERSONAL_API_DATA_ENTITLEMENT_ZERO__TSINGHUA_WEB_ENTITLEMENT_NOT_MAPPED",
+      "secret_persistence": false,
+      "evidence": "reports/data-governance/csmar-python-api-entitlement-probe-20260730-v1/VERIFICATION.json",
+      "formal_admission": false
+    },
+    {
+      "source_id": "PUBLIC_OFFICIAL_APIS_PREFLIGHT",
+      "role": "GLOBAL_CONTEXT_AND_DISCLOSURE_NARROW_ADAPTER_CANDIDATES",
+      "current_decision": "PREFLIGHT_ONLY__ECB_BIS_US_TREASURY_HKMA_STRUCTURE_PASS__WORLD_BANK_IMF_BLS_SINGLE_ATTEMPT_FAIL__SEC_DOCUMENTATION_ONLY",
+      "pit_status": "NOT_CLOSED",
+      "rights_status": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "evidence": "reports/data-governance/public-official-api-preflight-20260730-v1/PREFLIGHT_RESULTS.json",
+      "formal_admission": false
+    },
+    {
+      "source_id": "PUBLIC_OFFICIAL_NO_KEY_API_INSPECTION_ADAPTERS",
+      "role": "GCTX_NARROW_INSPECTION_ADAPTERS",
+      "current_decision": "ECB_FIXTURE_PASS_LIVE_TLS_FAIL_CLOSED__BIS_US_TREASURY_HKMA_LIVE_STRUCTURE_PASS__INSPECTION_ONLY_NOT_ADMITTED",
+      "pit_status": "PUBLISHED_AT_AVAILABLE_AT_AND_REVISION_CHAIN_NOT_CLOSED",
+      "rights_status": "LOCAL_RETENTION_AND_INTERNAL_SHARING_NOT_CLOSED",
+      "evidence": "reports/data-governance/public-official-api-inspection-adapters-20260730-v1/VERIFICATION.json",
+      "formal_admission": false
+    },
+    {
+      "source_id": "SSE_SZSE_OFFICIAL_CALENDAR_SESSION_CLOSURE",
+      "role": "CORE02_OFFICIAL_CALENDAR_AND_SESSION_INSPECTION_CANDIDATE",
+      "current_decision": "SSE_SZSE_2015_2026_8454_VENUE_DATES__Q1_FAIL_Q2_FAIL_Q3_UNKNOWN_Q4_PASS__BSE_AND_COMPLETE_HISTORY_OPEN__FORMAL_ADMISSION_0__D2B_BLOCKED__INSPECTION_ONLY_NOT_ADMITTED",
+      "pit_status": "DATE_LEVEL_AVAILABLE_AT_PRESENT__INTRADAY_PUBLICATION_PRECISION_UNKNOWN",
+      "rights_status": "AUTOMATED_BULK_LOCAL_RETENTION_INTERNAL_SHARING_AND_REDISTRIBUTION_NOT_CLOSED",
+      "evidence": "reports/data-governance/core02-official-calendar-session-closure-20260730-v1/CORE02_GATE_RECEIPT.json",
+      "formal_admission": false
+    },
+    {
+      "source_id": "LOCAL_DAILY_UPDATE_INSPECTION_ENGINE",
+      "role": "LOCAL_NORMALIZED_INCREMENT_CANDIDATE_MERGE_ENGINE",
+      "current_decision": "LOCAL_CSV_JSONL_INCREMENT_ENGINE_PASS_14_OF_14__EXTRA_PAYLOAD_SHELL_META_AND_LINK_GUARDS_PASS__INSPECTION_ONLY__NO_DOWNLOADER_NO_PRODUCTION_PUBLISHER_NO_SCHEDULER",
+      "pit_status": "STRICT_REVISION_AND_AVAILABLE_AT_CONTRACT_SUPPORTED_FOR_NORMALIZED_INPUTS_ONLY",
+      "rights_status": "INHERITS_UNRESOLVED_SOURCE_SPECIFIC_RIGHTS__DOES_NOT_GRANT_RIGHTS",
+      "evidence": "reports/data-governance/local-daily-update-engine-20260730-v1/VERIFICATION.json",
+      "formal_admission": false
+    },
+    {
+      "source_id": "LOCAL_DAILY_ORCHESTRATION_STATE_LAYER",
+      "role": "INSPECTION_ONLY_TASK_LEDGER_WATERMARK_LOCK_AND_REPLAY",
+      "current_decision": "PASS_10_OF_10__BOUNDED_INSPECTION_WORKER_SHIPPED_SEPARATELY__STATE_LAYER_DOES_NOT_EXECUTE_ARBITRARY_COMMANDS__NO_PRODUCTION_WORKER_NO_SCHEDULER_NO_FORMAL_WRITE",
+      "pit_status": "ORCHESTRATION_ONLY__INHERITS_SOURCE_PIT_GAPS",
+      "rights_status": "DOES_NOT_GRANT_OR_CLOSE_SOURCE_RIGHTS",
+      "evidence": "reports/data-governance/local-daily-orchestration-state-layer-20260730-v1/VERIFICATION.json",
+      "formal_admission": false
+    },
+    {
+      "source_id": "LOCAL_DAILY_INSPECTION_WORKER",
+      "role": "INSPECTION_ONLY_COMPOSED_CALLER_FOR_ALREADY_LANDED_NORMALIZED_ONE_DATE_INPUT",
+      "current_decision": "PASS_34_OF_34__IDENTITY_DATE_REQUEST_AND_RESULT_HASH_BOUND__FAILURE_CLEARS_CLAIM__NO_NETWORK_NO_DOWNLOADER_NO_SCHEDULER_NO_FORMAL_WRITE",
+      "pit_status": "NORMALIZED_INPUT_CONTRACT_ONLY__INHERITS_SOURCE_PIT_GAPS",
+      "rights_status": "DOES_NOT_GRANT_OR_CLOSE_SOURCE_RIGHTS",
+      "evidence": "reports/data-governance/local-daily-inspection-worker-20260731-v1/VERIFICATION.json",
+      "formal_admission": false
+    },
+    {
+      "source_id": "LOCAL_SCHEMA_EVOLUTION_CLASSIFIER",
+      "role": "INSPECTION_ONLY_SCHEMA_DIFF_VERSION_AND_FIELD_COVERAGE_GATE",
+      "current_decision": "PASS_14_OF_14__COMPATIBLE_NULLABLE_ADDITION_CLASSIFIED__BREAKING_AND_UNKNOWN_FAIL_CLOSED",
+      "pit_status": "FIELD_COVERAGE_START_CONTRACT_ONLY__NO_REAL_SOURCE_SEMANTICS",
+      "rights_status": "DOES_NOT_GRANT_OR_CLOSE_SOURCE_RIGHTS",
+      "evidence": "reports/data-governance/schema-evolution-classifier-20260730-v1/VERIFICATION.json",
+      "formal_admission": false
+    },
+    {
+      "source_id": "LOCAL_REVISION_EVENT_LEDGER",
+      "role": "INSPECTION_ONLY_PIT_VINTAGE_LATE_WITHDRAW_REINSTATE_REPLAY",
+      "current_decision": "PASS_10_OF_10__STRICT_TIMEZONE_REVISION_AND_REFERENCE_GUARDS",
+      "pit_status": "MECHANICAL_REPLAY_CONTRACT_PASS__REAL_SOURCE_REVISION_CHAIN_NOT_CLOSED",
+      "rights_status": "DOES_NOT_GRANT_OR_CLOSE_SOURCE_RIGHTS",
+      "evidence": "reports/data-governance/revision-event-ledger-inspection-20260730-v1/VERIFICATION.json",
+      "formal_admission": false
+    },
+    {
+      "source_id": "TSINGHUA_LIBRARY_VENDOR_AUTOMATION_PREFLIGHT",
+      "role": "READ_ONLY_VENDOR_ENTITLEMENT_AND_MACHINE_INTERFACE_PREFLIGHT",
+      "current_decision": "CCER_PORTAL_TABLE_ENTITLEMENT_PRESENT__WEBAPI_ENTITLEMENT_NOT_CONFIRMED__CEIC_CAPITAL_IQ_ENTERPRISE_INTERFACES_NOT_PROVEN_IN_TSINGHUA_SUBSCRIPTION__NO_PRODUCTION_SOURCE",
+      "pit_status": "NOT_TESTED__NO_BUSINESS_API_CALLED",
+      "rights_status": "SOURCE_AND_CONTRACT_SPECIFIC_ENTITLEMENT_CONFIRMATION_REQUIRED",
+      "evidence": "reports/data-governance/tsinghua-vendor-automation-preflight-20260731-v1/VERIFICATION.json",
+      "formal_admission": false
+    }
+  ],
+  "formal_counts": {
+    "formal_source_admissions": 0,
+    "formal_core_snapshots": 0,
+    "formal_gctx_snapshots": 0,
+    "formal_research_base_datasets": 0
+  },
+  "latest_evidence_overlay_20260731": {
+    "stage_a_closure_control_v2": {
+      "queue_item_count": 26,
+      "nonpass_count": 25,
+      "blocking_nonpass_count": 22,
+      "stage_a_ready": "0/4",
+      "manifest_sha256": "d9c4189cd3a7b6f2cfd2f991f5aefc0eeab3e90000c86034add1fd858f344e1a"
+    },
+    "stage_a_evidence_consolidation_v4": {
+      "required_packages_audited": 9,
+      "queue_status_changes": 0,
+      "formal_stage_a": "0/4",
+      "formal_effect": "NONE",
+      "verify_only_at_seal": "PASS",
+      "post_authority_sync_live_verify": "FAIL__EXPECTED_AUTHORITY_GUARD_DRIFT__ERROR_SET_EXACT_MATCH",
+      "strict_upstream_package_count": 9,
+      "strict_upstream_package_pass_count": 9,
+      "internal_run_id": "stage-a-evidence-consolidation-20260730-v3",
+      "auditor_contract_version": "v3",
+      "path_semantics": "FOURTH_20260731_PACKAGING_SEAL_ONLY__NOT_FORMAL_EVIDENCE_ROOT__NOT_GATE_TRANSITION",
+      "report_root": "reports/data-governance/stage-a-evidence-consolidation-20260731-v4",
+      "report_manifest": "reports/data-governance/stage-a-evidence-consolidation-20260731-v4/REPORT_MANIFEST.json",
+      "manifest_sha256": "751ecff9d6bb39cbb88c919c01a910b92c3e8e50fd65676d0472c3f868bfc4d3",
+      "alias_receipt": "reports/data-governance/stage-a-evidence-consolidation-20260731-v4-alias-receipt-v1/ALIAS_RECEIPT.json",
+      "alias_manifest": "reports/data-governance/stage-a-evidence-consolidation-20260731-v4-alias-receipt-v1/REPORT_MANIFEST.json",
+      "alias_manifest_sha256": "587077cc0871960398bf4ec3ae4069c071410e81a3ced8212945f950f6dd4435",
+      "post_sync_receipt": "reports/data-governance/stage-a-authority-sync-post-verification-20260731-v1/POST_SYNC_VERIFICATION.json",
+      "post_sync_manifest": "reports/data-governance/stage-a-authority-sync-post-verification-20260731-v1/REPORT_MANIFEST.json",
+      "post_sync_manifest_sha256": "46652312bb20fe021c013b7bc06581c359fd324d525b192b7d9e826a89a03f75",
+      "formal_admissions": 0,
+      "d2b_status": "BLOCKED",
+      "admission_decision": "NOT_ADMITTED"
+    },
+    "core01": {
+      "source_files_verified": "47/47",
+      "current_nonpass_gates": "4/5",
+      "blocking_items": 11,
+      "bse_business_rows": 0,
+      "formal_admission": false
+    },
+    "core02": {
+      "Q1": "FAIL",
+      "Q2": "FAIL",
+      "Q3": "UNKNOWN",
+      "Q4": "PASS",
+      "iso_mic_subcheck": "PASS__XSHG_XSHE_BJSE_ACTIVE",
+      "formal_admission": false
+    },
+    "core03_core06": {
+      "source_bindings_verified": 19,
+      "text_markers_verified": 41,
+      "CORE03-Q2": "UNKNOWN",
+      "CORE03-Q3": "UNKNOWN",
+      "CORE06-Q3": "FAIL",
+      "CORE06-Q4": "FAIL",
+      "formal_admission": false
+    },
+    "trd_dalyr_null_zero_semantics_v2": {
+      "candidate_count": 8,
+      "partition_count": 464,
+      "raw_rows": 22476677,
+      "exact_duplicates_removed": 3785013,
+      "clean_rows": 18691664,
+      "key_conflicts": 0,
+      "volume_amount_zero_anomalies": 5,
+      "observed_semantics_assessment": "PARTIAL",
+      "current_stage_a_gate_CORE03-Q2": "UNKNOWN",
+      "current_stage_a_gate_CORE03-Q3": "UNKNOWN",
+      "gate_transition": false
+    }
+  },
+  "active_work_package": {
+    "work_package": "L1-D2A-04B_OFFICIAL_IDENTITY_CALENDAR_ACTION_STATUS_SOURCE_CLOSURE",
+    "status": "ACTIVE_AUTHORIZED_BOUNDED_SOURCE_CLOSURE__STAGE_A_PRE_ADMISSION_0_OF_4__CORE02_Q1_FAIL_Q2_FAIL_Q3_UNKNOWN_Q4_PASS__FORMAL_ADMISSIONS_0__D2B_BLOCKED__NO_PAID_NO_NEW_KEY_NO_BULK_BACKFILL__NOT_ADMITTED",
+    "execution_authorization_active": true,
+    "current_evidence_root": "reports/data-governance/stage-a-evidence-consolidation-20260731-v4",
+    "current_evidence_root_semantics": "BOUND_PACKAGING_PATH_ONLY__NOT_FORMAL_EVIDENCE_ROOT",
+    "current_evidence_alias_receipt": "reports/data-governance/stage-a-evidence-consolidation-20260731-v4-alias-receipt-v1/ALIAS_RECEIPT.json",
+    "architecture_baseline_root": "reports/data-governance/selected-core-two-stage-admission-architecture-audit-20260730-v1",
+    "csmar_status": "MANUAL_EXPORT_CANDIDATES_PRESERVED__THREE_MANIFEST_RIGHTS_SCOPE_USER_ATTESTED__INDEX_DAILY_INTAKE_18_ALIASES_12_UNIQUE_ZIPS__35_VERIFIED_DOWNLOAD_SOURCES_IN_RECYCLE_BIN_NOT_EMPTIED__CANDIDATE_PROJECTION_16_OF_20__PYTHON_API_AUTH_PASS_ENTITLEMENT_DENIED__FORMAL_ADMISSIONS_0",
+    "core02_status": "8454_SSE_SZSE_VENUE_DATES__Q1_FAIL_Q2_FAIL_Q3_UNKNOWN_Q4_PASS__FORMAL_ADMISSION_0__D2B_BLOCKED__NOT_ADMITTED",
+    "local_increment_engine_status": "INSPECTION_ONLY__RQDATA_SHSZ_AND_B_PATH_LIVE_CANDIDATE_COMPONENTS_PASS__FORMAL_PUBLISHER_MANUAL",
+    "local_orchestration_status": "INSPECTION_ONLY__UNIFIED_CANDIDATE_MAINTENANCE_WEEKDAYS_1920_PASS__OLD_TASKS_DISABLED__NO_AUTOMATIC_FORMAL_PROMOTION",
+    "candidate_asset_index_status": "PASS__26_ROOTS__92_EVIDENCE__67_MANIFESTS__FORMAL_EFFECT_NONE",
+    "local_inspection_worker_status": "PASS_34_OF_34__ALREADY_LANDED_NORMALIZED_ONE_DATE_INPUT_ONLY__NO_NETWORK_NO_DOWNLOADER_NO_SCHEDULER_NO_FORMAL_WRITE",
+    "tsinghua_vendor_preflight_status": "READ_ONLY_COMPLETED__CCER_PORTAL_TABLE_ENTITLEMENT_PRESENT__MACHINE_INTERFACE_ENTITLEMENTS_NOT_CONFIRMED__NO_PRODUCTION_SOURCE",
+    "resset_manual_export_status": "11_DATA_PACKAGES_SEALED__11_CANDIDATE_TABLES_MATERIALIZED__COMPANY_ACTION_MULTISOURCE_LEDGER_1073145_ROWS__28_ROWS_REPAIRED__01_AMBIGUOUS_ROW_QUARANTINED__RESEARCH_PRICE_ACTION_PROJECTION_PASS_DISCOVERY_ONLY__FORMAL_EVENT_PIT_OPEN__01_HF_GUIDE_ARCHIVED__12_DOWNLOADS_ORIGINALS_RECYCLED_RECOVERABLE__AFFECTS_CORE01_CORE03_CORE04_CORE05_CORE06_CORE07_CORE17__FORMAL_EFFECT_NONE__INSPECTION_ONLY_NOT_ADMITTED",
+    "resset_manual_export_evidence": "reports/data-governance/resset-r0-core01-core06-arrival-intake-20260802-v2/VERIFICATION.json",
+    "resset_company_actions_evidence": "reports/data-governance/resset-company-actions-schema-crosswalk-20260802-v1/README.md",
+    "joinquant_company_actions_status": "FULL_EXPORT_383613_RAW_ROWS_HASH_VERIFIED__MULTISOURCE_V2_1787017_ROWS__DATE_ONLY_PIT_713851_ROWS__FORMAL_VERSION_CHAIN_OPEN__INSPECTION_ONLY_NOT_ADMITTED",
+    "joinquant_company_actions_evidence": "reports/data-governance/corporate-action-multisource-fill-20260805-v2/VERIFICATION.json",
+    "resset_downloads_cleanup_receipt": "reports/data-governance/resset-downloads-consolidation-cleanup-20260804-v1/CLEANUP_RECEIPT.json",
+    "resset_vendor_dictionary_and_rights_evidence": "reports/data-governance/resset-vendor-dictionary-evidence-20260802-v1/README.md",
+    "schema_evolution_status": "INSPECTION_ONLY__NO_FORMAL_MIGRATION",
+    "revision_event_ledger_status": "INSPECTION_ONLY__REAL_SOURCE_REVISION_CHAIN_NOT_CLOSED",
+    "stage_a_mechanical_full_closure": "0_OF_43",
+    "stage_a_v2_queue": "26_ITEMS__25_NONPASS__22_BLOCKING_NONPASS__0_STATUS_CHANGES",
+    "completion_gate_passed": false
+  },
+  "last_completed_formal_admission_gate": {
+    "work_package": "L1-D2B_SELECTED_CORE_FORMAL_ADMISSION_GATE__CORE01_CORE02_CORE03_CORE06",
+    "classification": "LEGACY_COMPATIBILITY_ALIAS__POST_ADMISSION_AUDIT",
+    "status": "COMPLETED__RECLASSIFIED_POST_ADMISSION_AUDIT__HISTORICAL_0_OF_4__FORMAL_STATE_UNCHANGED",
+    "formal_admission_gate_run_status": "NOT_A_CURRENT_PRE_ADMISSION_GATE"
+  },
+  "current_selected_core_two_stage_gate": {
+    "work_package": "L1-D2A-04B_SELECTED_CORE_TWO_STAGE_ADMISSION_ARCHITECTURE_AUDIT",
+    "stage_a_status": "BLOCKED__0_OF_4_READY",
+    "stage_b_status": "BLOCKED__PHASE_A_NOT_READY",
+    "current_evidence_root": "reports/data-governance/stage-a-evidence-consolidation-20260731-v4",
+    "current_evidence_root_semantics": "BOUND_PACKAGING_PATH_ONLY__NOT_FORMAL_EVIDENCE_ROOT",
+    "current_evidence_alias_receipt": "reports/data-governance/stage-a-evidence-consolidation-20260731-v4-alias-receipt-v1/ALIAS_RECEIPT.json",
+    "stage_a_v2_queue_item_count": 26,
+    "stage_a_v2_blocking_nonpass_count": 22,
+    "stage_a_v2_queue_status_changes": 0,
+    "formal_mutation": false
+  },
+  "next_proposed_work_package": {
+    "work_package": "L1-D2B_G_DRIVE_SELECTED_CORE_BUILD_AND_EXPLORATORY_PIPELINE_SMOKE",
+    "status": "BLOCKED__STAGE_A_0_OF_4__D2A_04_COMPLETION_GATE_NOT_MET__REAL_DATA_PUBLISHER_UNAVAILABLE",
+    "requires_user_start": true
+  },
+  "next_formal_snapshot_work_package": {
+    "work_package": "L1-D2B_G_DRIVE_SELECTED_CORE_BUILD_AND_EXPLORATORY_PIPELINE_SMOKE",
+    "status": "BLOCKED__STAGE_A_0_OF_4__D2A_04_COMPLETION_GATE_NOT_MET__REAL_DATA_PUBLISHER_UNAVAILABLE",
+    "requires_user_start": true,
+    "requires_hash_bound_stage_b_authorization": true,
+    "requires_real_data_capable_publisher": true
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "mode": "local_daily_update_candidate",
+  "dataset_scope": "synthetic_fixture",
+  "dataset_id": "synthetic-daily-update",
+  "run_id": "synthetic-scheduled-20260730-v1",
+  "source_id": "SYNTHETIC_FIXTURE",
+  "dataset_schema_version": "candidate-v1",
+  "authorization_note": "Synthetic fixture only; no external source is authorized.",
+  "include_patterns": ["*.jsonl"],
+  "base_candidate": null,
+  "table": {
+    "table_name": "daily_price",
+    "expected_columns": ["security_id", "trade_date", "close"],
+    "column_types": {
+      "security_id": "VARCHAR",
+      "trade_date": "DATE",
+      "close": "DOUBLE"
+    },
+    "date_column": "trade_date",
+    "primary_key_columns": ["security_id", "trade_date"],
+    "required_columns": ["security_id", "trade_date", "close"],
+    "delimiter": ",",
+    "revision": null
+  },
+  "limits": {
+    "max_files": 10,
+    "max_total_input_bytes": 1000000,
+    "max_rows": 1000
+  }
+}

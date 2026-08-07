@@ -1,0 +1,880 @@
+{
+  "schema_version": 1,
+  "contract_version": "1.0.0",
+  "group_id": "CORE-01-08",
+  "datasets": [
+    {
+      "plan_id": "CORE-01",
+      "dataset_id": "cn-a-share-security-master-pit",
+      "schema_version": "1.0.0",
+      "grain": "永久证券身份、交易所代码有效区间与上市状态有效区间",
+      "pit_contract": {
+        "decision_time_rule": "研究时只允许读取 available_at <= decision_time 且 effective/valid 区间覆盖研究时点的版本；仅凭当前证券列表反推历史身份、名称或上市状态不合格。日期级公告若无可靠时分秒，available_at 保守设为公告日下一交易时段开始。",
+        "required_time_fields": [
+          "valid_from",
+          "valid_to",
+          "effective_from",
+          "effective_to",
+          "published_at",
+          "available_at",
+          "revision_id",
+          "snapshot_id"
+        ],
+        "revision_rule": "源端更正、代码/名称/板块/状态变更必须追加 revision_id 或新的有效区间；禁止覆盖旧记录。永久 security_id 不因代码或名称变化而变化，无法确认同一证券时必须建立待复核映射而非自动合并。"
+      },
+      "source_bindings": [
+        {
+          "binding_id": "core01_official_identity",
+          "primary_source_ids": ["SSE_OFFICIAL", "SZSE_OFFICIAL", "BSE_OFFICIAL", "CSRC_OFFICIAL"],
+          "calibration_source_ids": ["CNINFO_OFFICIAL", "CHINACLEAR_OFFICIAL"],
+          "license_gate": "REVIEW_REQUIRED_BEFORE_AUTOMATED_BULK_INGESTION; INTERNAL_NONCOMMERCIAL_USE_ONLY_UNTIL_REVIEW; NO_EXTERNAL_REDISTRIBUTION",
+          "ingestion_status": "SCHEMA_READY_INGESTION_BLOCKED_PENDING_ENDPOINT_AND_LICENSE_REVIEW",
+          "evidence_urls": [
+            "https://www.sse.com.cn/assortment/stock/list/share/",
+            "https://www.sse.com.cn/assortment/stock/list/delisting/",
+            "https://www.szse.cn/market/stock/list/index.html",
+            "https://www.szse.cn/market/stock/changename/index.html",
+            "https://www.szse.cn/market/stock/suspend/index.html",
+            "https://www.bse.cn/service/code_mapping.html",
+            "https://www.cninfo.com.cn/new/index"
+          ]
+        },
+        {
+          "binding_id": "core01_identity_normalization",
+          "primary_source_ids": ["INTERNAL_CORE01"],
+          "calibration_source_ids": ["SSE_OFFICIAL", "SZSE_OFFICIAL", "BSE_OFFICIAL", "CNINFO_OFFICIAL"],
+          "license_gate": "INTERNAL_DERIVATION_ONLY; INPUT_RECORDS_AND_LICENSE_RECEIPTS_MUST_BE_PINNED",
+          "ingestion_status": "CONTRACT_ONLY_NOT_IMPLEMENTED"
+        }
+      ],
+      "tables": [
+        {
+          "table_id": "security_identity",
+          "grain": "每个永久证券身份一行；跨交易所或重新上市事件是否复用身份必须由可审计映射决定",
+          "inherits": ["record_lineage", "security_key"],
+          "primary_key": ["security_id"],
+          "fields": [
+            {"name": "security_id", "dtype": "string", "nullable": false, "unit": "identifier", "description": "工作区永久证券标识，不随代码和简称变化", "source_binding": "core01_identity_normalization", "pit_role": "identity"},
+            {"name": "issuer_id", "dtype": "string", "nullable": false, "unit": "identifier", "description": "发行人永久标识，用于区分发行人与证券", "source_binding": "core01_identity_normalization", "pit_role": "identity"},
+            {"name": "instrument_type", "dtype": "string", "nullable": false, "unit": "code", "description": "证券大类，如 A_SHARE、REIT、PREFERRED_SHARE；本核心表研究入口仅启用 A_SHARE", "source_binding": "core01_official_identity", "pit_role": "fact"},
+            {"name": "share_class", "dtype": "string", "nullable": false, "unit": "code", "description": "股份类别，A 股必须显式标记", "source_binding": "core01_official_identity", "pit_role": "fact"},
+            {"name": "currency", "dtype": "string", "nullable": false, "unit": "ISO-4217", "description": "交易币种", "source_binding": "core01_official_identity", "pit_role": "fact"},
+            {"name": "isin", "dtype": "string", "nullable": true, "unit": "ISO-6166", "description": "可验证时保存 ISIN，不可得时保持 NULL", "source_binding": "core01_official_identity", "pit_role": "fact"},
+            {"name": "listing_episode_no", "dtype": "int32", "nullable": false, "unit": "count", "description": "同一永久证券身份的上市阶段序号", "source_binding": "core01_identity_normalization", "pit_role": "identity"},
+            {"name": "first_list_date", "dtype": "date32", "nullable": false, "unit": "calendar_date", "description": "该上市阶段首次上市日期", "source_binding": "core01_official_identity", "pit_role": "effective_time"},
+            {"name": "final_delist_date", "dtype": "date32", "nullable": true, "unit": "calendar_date", "description": "最终退市日期；未退市为 NULL", "source_binding": "core01_official_identity", "pit_role": "effective_time"}
+          ]
+        },
+        {
+          "table_id": "security_code_history",
+          "grain": "证券在交易所代码、名称和板块的一个有效区间一行",
+          "inherits": ["record_lineage", "security_key"],
+          "primary_key": ["security_id", "exchange_mic", "local_code", "valid_from", "revision_id"],
+          "fields": [
+            {"name": "security_id", "dtype": "string", "nullable": false, "unit": "identifier", "description": "永久证券标识", "source_binding": "core01_identity_normalization", "pit_role": "identity"},
+            {"name": "exchange_mic", "dtype": "string", "nullable": false, "unit": "ISO-10383", "description": "交易场所 MIC，覆盖上交所、深交所和北交所", "source_binding": "core01_official_identity", "pit_role": "fact"},
+            {"name": "local_code", "dtype": "string", "nullable": false, "unit": "identifier", "description": "交易所证券代码，保留前导零", "source_binding": "core01_official_identity", "pit_role": "fact"},
+            {"name": "short_name", "dtype": "string", "nullable": false, "unit": "text", "description": "该有效区间内官方证券简称", "source_binding": "core01_official_identity", "pit_role": "fact"},
+            {"name": "long_name", "dtype": "string", "nullable": true, "unit": "text", "description": "该有效区间内官方证券全称", "source_binding": "core01_official_identity", "pit_role": "fact"},
+            {"name": "board", "dtype": "string", "nullable": false, "unit": "code", "description": "主板、科创板、创业板、北交所等板块口径", "source_binding": "core01_official_identity", "pit_role": "fact"},
+            {"name": "valid_from", "dtype": "date32", "nullable": false, "unit": "calendar_date", "description": "代码、名称和板块事实生效起日", "source_binding": "core01_official_identity", "pit_role": "effective_time"},
+            {"name": "valid_to", "dtype": "date32", "nullable": true, "unit": "calendar_date", "description": "事实生效止日，当前有效为 NULL", "source_binding": "core01_official_identity", "pit_role": "effective_time"},
+            {"name": "change_reason", "dtype": "string", "nullable": true, "unit": "code", "description": "代码、名称或板块变更原因", "source_binding": "core01_official_identity", "pit_role": "fact"},
+            {"name": "announcement_id", "dtype": "string", "nullable": true, "unit": "identifier", "description": "支持该变更的官方公告标识", "source_binding": "core01_official_identity", "pit_role": "lineage"},
+            {"name": "published_at", "dtype": "timestamp[us,Asia/Shanghai]", "nullable": true, "unit": "timestamp", "description": "源端公开时间；源未提供可靠时间时保持 NULL", "source_binding": "core01_official_identity", "pit_role": "publication_time"},
+            {"name": "available_at", "dtype": "timestamp[us,Asia/Shanghai]", "nullable": false, "unit": "timestamp", "description": "按保守规则计算的最早可用于决策时间", "source_binding": "core01_identity_normalization", "pit_role": "availability_time"},
+            {"name": "revision_id", "dtype": "string", "nullable": false, "unit": "identifier", "description": "不可变修订版本标识", "source_binding": "core01_identity_normalization", "pit_role": "revision"}
+          ]
+        },
+        {
+          "table_id": "listing_status_history",
+          "grain": "证券每个官方上市状态有效区间及修订一行",
+          "inherits": ["record_lineage", "security_key"],
+          "primary_key": ["security_id", "effective_from", "status_code", "revision_id"],
+          "fields": [
+            {"name": "security_id", "dtype": "string", "nullable": false, "unit": "identifier", "description": "永久证券标识", "source_binding": "core01_identity_normalization", "pit_role": "identity"},
+            {"name": "exchange_mic", "dtype": "string", "nullable": false, "unit": "ISO-10383", "description": "状态所属交易场所", "source_binding": "core01_official_identity", "pit_role": "fact"},
+            {"name": "status_code", "dtype": "string", "nullable": false, "unit": "code", "description": "拟上市、上市、暂停上市、退市整理、终止上市等官方归一状态", "source_binding": "core01_identity_normalization", "pit_role": "fact"},
+            {"name": "effective_from", "dtype": "timestamp[us,Asia/Shanghai]", "nullable": false, "unit": "timestamp", "description": "状态事实生效时间", "source_binding": "core01_official_identity", "pit_role": "effective_time"},
+            {"name": "effective_to", "dtype": "timestamp[us,Asia/Shanghai]", "nullable": true, "unit": "timestamp", "description": "状态事实失效时间", "source_binding": "core01_official_identity", "pit_role": "effective_time"},
+            {"name": "decision_date", "dtype": "date32", "nullable": true, "unit": "calendar_date", "description": "交易所或监管决定日期", "source_binding": "core01_official_identity", "pit_role": "event_time"},
+            {"name": "reason", "dtype": "string", "nullable": true, "unit": "text", "description": "官方状态原因或摘要", "source_binding": "core01_official_identity", "pit_role": "fact"},
+            {"name": "announcement_id", "dtype": "string", "nullable": true, "unit": "identifier", "description": "官方公告标识", "source_binding": "core01_official_identity", "pit_role": "lineage"},
+            {"name": "published_at", "dtype": "timestamp[us,Asia/Shanghai]", "nullable": true, "unit": "timestamp", "description": "官方公告公开时间", "source_binding": "core01_official_identity", "pit_role": "publication_time"},
+            {"name": "available_at", "dtype": "timestamp[us,Asia/Shanghai]", "nullable": false, "unit": "timestamp", "description": "研究可安全使用的最早时间", "source_binding": "core01_identity_normalization", "pit_role": "availability_time"},
+            {"name": "revision_id", "dtype": "string", "nullable": false, "unit": "identifier", "description": "修订版本标识", "source_binding": "core01_identity_normalization", "pit_role": "revision"}
+          ]
+        }
+      ],
+      "quality_gates": [
+        {"gate_id": "CORE01-Q1", "severity": "BLOCK", "rule": "security_id 全局唯一，代码、名称变化不得生成新身份；无法证明同一性时进入 quarantine。"},
+        {"gate_id": "CORE01-Q2", "severity": "BLOCK", "rule": "同一 security_id 的代码与上市状态有效区间不得重叠或产生无解释缺口。"},
+        {"gate_id": "CORE01-Q3", "severity": "BLOCK", "rule": "完整覆盖上交所、深交所、北交所现存和退市 A 股，并出具按年份、场所、板块的覆盖矩阵。"},
+        {"gate_id": "CORE01-Q4", "severity": "BLOCK", "rule": "任何名称、代码、板块或状态历史均须有 published_at/available_at 证据或保守可用时点规则。"},
+        {"gate_id": "CORE01-Q5", "severity": "REVIEW", "rule": "跨官方源冲突必须并存并记录裁决，不得静默覆盖。"}
+      ],
+      "known_blockers": [
+        {"blocker_id": "CORE01-B1", "status": "OPEN", "blocks": "FULL_HISTORY_INGESTION", "description": "三交易所缺少统一公开的永久证券 ID，历史代码、名称及重新上市映射需可审计归一。"},
+        {"blocker_id": "CORE01-B2", "status": "OPEN", "blocks": "RESEARCH_GRADE", "description": "完整退市证券、早期名称变更和公告可用时点尚未验证。"},
+        {"blocker_id": "CORE01-B3", "status": "OPEN", "blocks": "AUTOMATED_BULK_INGESTION", "description": "官方页面/API 的自动化批量抓取、长期保存和再分发边界尚未形成逐源许可回执。"}
+      ]
+    },
+    {
+      "plan_id": "CORE-02",
+      "dataset_id": "cn-trading-calendar",
+      "schema_version": "1.0.0",
+      "grain": "交易场所日历日与交易时段规则有效区间",
+      "pit_contract": {
+        "decision_time_rule": "交易日和时段规则只在官方通知已公开后生效；年度休市安排之后发生的临时变更、应急停市或规则修订必须追加，不得用事后最终日历替代当时已知日历。",
+        "required_time_fields": ["calendar_date", "valid_from", "valid_to", "published_at", "available_at", "revision_id", "snapshot_id"],
+        "revision_rule": "年度安排、补充通知、临时休市和交易时段规则均作为不可变版本追加；同一场所同一日期的最终状态通过 decision_time 选择当时可见的最高修订。"
+      },
+      "source_bindings": [
+        {
+          "binding_id": "core02_official_calendar",
+          "primary_source_ids": ["SSE_OFFICIAL", "SZSE_OFFICIAL", "BSE_OFFICIAL"],
+          "calibration_source_ids": [],
+          "license_gate": "PUBLIC_RULE_AND_CALENDAR_REVIEW_REQUIRED_BEFORE_AUTOMATED_ARCHIVE; NO_EXTERNAL_REDISTRIBUTION_WITHOUT_REVIEW",
+          "ingestion_status": "SCHEMA_READY_MANUAL_EVIDENCE_ONLY",
+          "evidence_urls": [
+            "https://www.sse.com.cn/disclosure/dealinstruc/closed/",
+            "https://www.szse.cn/English/services/trading/calendar/index.html"
+          ]
+        },
+        {
+          "binding_id": "core02_official_session_rules",
+          "primary_source_ids": ["SSE_OFFICIAL", "SZSE_OFFICIAL", "BSE_OFFICIAL"],
+          "calibration_source_ids": ["CSRC_OFFICIAL"],
+          "license_gate": "PUBLIC_RULE_DOCUMENT_INTERNAL_USE; ARCHIVE_AND_REDISTRIBUTION_REVIEW_REQUIRED",
+          "ingestion_status": "SCHEMA_READY_HISTORICAL_RULE_ARCHIVE_INCOMPLETE",
+          "evidence_urls": [
+            "https://big5.sse.com.cn/site/cht/www.sse.com.cn/lawandrules/sselawsrules2025/trade/universal/c/c_20260424_10816492.shtml",
+            "https://docs.static.szse.cn/www/lawrules/rule/trade/W020260424690713155663.pdf",
+            "https://www.bse.cn/jygl_list/200028217.html"
+          ]
+        },
+        {
+          "binding_id": "core02_calendar_normalization",
+          "primary_source_ids": ["INTERNAL_UPSTREAM"],
+          "calibration_source_ids": ["SSE_OFFICIAL", "SZSE_OFFICIAL", "BSE_OFFICIAL"],
+          "license_gate": "INTERNAL_DERIVATION_ONLY; OFFICIAL_INPUT_AND_RULE_VERSION_MUST_BE_PINNED",
+          "ingestion_status": "CONTRACT_ONLY_NOT_IMPLEMENTED"
+        }
+      ],
+      "tables": [
+        {
+          "table_id": "trading_day",
+          "grain": "每个交易场所、日历日和修订一行",
+          "inherits": ["record_lineage"],
+          "primary_key": ["exchange_mic", "calendar_date", "revision_id"],
+          "fields": [
+            {"name": "exchange_mic", "dtype": "string", "nullable": false, "unit": "ISO-10383", "description": "交易场所 MIC", "source_binding": "core02_official_calendar", "pit_role": "fact"},
+            {"name": "calendar_date", "dtype": "date32", "nullable": false, "unit": "calendar_date", "description": "北京时间日历日期", "source_binding": "core02_official_calendar", "pit_role": "event_time"},
+            {"name": "is_trading_day", "dtype": "bool", "nullable": false, "unit": "boolean", "description": "该场所是否正常安排证券交易", "source_binding": "core02_official_calendar", "pit_role": "fact"},
+            {"name": "holiday_name", "dtype": "string", "nullable": true, "unit": "text", "description": "法定节假日或休市名称", "source_binding": "core02_official_calendar", "pit_role": "fact"},
+            {"name": "closure_reason", "dtype": "string", "nullable": true, "unit": "code", "description": "周末、节假日、临时停市或其他关闭原因", "source_binding": "core02_calendar_normalization", "pit_role": "fact"},
+            {"name": "previous_trading_date", "dtype": "date32", "nullable": true, "unit": "calendar_date", "description": "同场所前一交易日", "source_binding": "core02_calendar_normalization", "pit_role": "derived"},
+            {"name": "next_trading_date", "dtype": "date32", "nullable": true, "unit": "calendar_date", "description": "同场所后一交易日；仅作日历关系，不代表当时已知", "source_binding": "core02_calendar_normalization", "pit_role": "derived"},
+            {"name": "is_month_end", "dtype": "bool", "nullable": false, "unit": "boolean", "description": "该月最后交易日", "source_binding": "core02_calendar_normalization", "pit_role": "derived"},
+            {"name": "is_quarter_end", "dtype": "bool", "nullable": false, "unit": "boolean", "description": "该季最后交易日", "source_binding": "core02_calendar_normalization", "pit_role": "derived"},
+            {"name": "is_year_end", "dtype": "bool", "nullable": false, "unit": "boolean", "description": "该年最后交易日", "source_binding": "core02_calendar_normalization", "pit_role": "derived"},
+            {"name": "announcement_id", "dtype": "string", "nullable": true, "unit": "identifier", "description": "官方休市或变更通知标识", "source_binding": "core02_official_calendar", "pit_role": "lineage"},
+            {"name": "published_at", "dtype": "timestamp[us,Asia/Shanghai]", "nullable": true, "unit": "timestamp", "description": "官方通知公开时间", "source_binding": "core02_official_calendar", "pit_role": "publication_time"},
+            {"name": "available_at", "dtype": "timestamp[us,Asia/Shanghai]", "nullable": false, "unit": "timestamp", "description": "该版本日历最早可用于决策的时间", "source_binding": "core02_calendar_normalization", "pit_role": "availability_time"},
+            {"name": "revision_id", "dtype": "string", "nullable": false, "unit": "identifier", "description": "日历修订版本", "source_binding": "core02_calendar_normalization", "pit_role": "revision"}
+          ]
+        },
+        {
+          "table_id": "trading_session_rule",
+          "grain": "场所、市场板块、时段名称和规则有效区间一行",
+          "inherits": ["record_lineage"],
+          "primary_key": ["exchange_mic", "market_segment", "session_name", "valid_from", "revision_id"],
+          "fields": [
+            {"name": "exchange_mic", "dtype": "string", "nullable": false, "unit": "ISO-10383", "description": "交易场所 MIC", "source_binding": "core02_official_session_rules", "pit_role": "fact"},
+            {"name": "market_segment", "dtype": "string", "nullable": false, "unit": "code", "description": "主板、科创板、创业板、北交所等适用范围", "source_binding": "core02_calendar_normalization", "pit_role": "fact"},
+            {"name": "session_name", "dtype": "string", "nullable": false, "unit": "code", "description": "开盘集合竞价、连续竞价、收盘集合竞价等", "source_binding": "core02_calendar_normalization", "pit_role": "fact"},
+            {"name": "session_type", "dtype": "string", "nullable": false, "unit": "code", "description": "AUCTION、CONTINUOUS 或 CLOSED", "source_binding": "core02_calendar_normalization", "pit_role": "fact"},
+            {"name": "local_start_time", "dtype": "time64[us]", "nullable": false, "unit": "Asia/Shanghai_local_time", "description": "时段开始时间", "source_binding": "core02_official_session_rules", "pit_role": "effective_time"},
+            {"name": "local_end_time", "dtype": "time64[us]", "nullable": false, "unit": "Asia/Shanghai_local_time", "description": "时段结束时间", "source_binding": "core02_official_session_rules", "pit_role": "effective_time"},
+            {"name": "order_entry_allowed", "dtype": "bool", "nullable": false, "unit": "boolean", "description": "规则层面是否允许申报", "source_binding": "core02_official_session_rules", "pit_role": "fact"},
+            {"name": "cancel_allowed", "dtype": "bool", "nullable": false, "unit": "boolean", "description": "规则层面是否允许撤单", "source_binding": "core02_official_session_rules", "pit_role": "fact"},
+            {"name": "valid_from", "dtype": "date32", "nullable": false, "unit": "calendar_date", "description": "时段规则生效起日", "source_binding": "core02_official_session_rules", "pit_role": "effective_time"},
+            {"name": "valid_to", "dtype": "date32", "nullable": true, "unit": "calendar_date", "description": "时段规则失效日", "source_binding": "core02_official_session_rules", "pit_role": "effective_time"},
+            {"name": "rule_document_id", "dtype": "string", "nullable": false, "unit": "identifier", "description": "官方交易规则或通知标识", "source_binding": "core02_official_session_rules", "pit_role": "lineage"},
+            {"name": "published_at", "dtype": "timestamp[us,Asia/Shanghai]", "nullable": true, "unit": "timestamp", "description": "规则公开时间", "source_binding": "core02_official_session_rules", "pit_role": "publication_time"},
+            {"name": "available_at", "dtype": "timestamp[us,Asia/Shanghai]", "nullable": false, "unit": "timestamp", "description": "规则可安全用于决策的最早时间", "source_binding": "core02_calendar_normalization", "pit_role": "availability_time"},
+            {"name": "revision_id", "dtype": "string", "nullable": false, "unit": "identifier", "description": "规则修订版本", "source_binding": "core02_calendar_normalization", "pit_role": "revision"}
+          ]
+        }
+      ],
+      "quality_gates": [
+        {"gate_id": "CORE02-Q1", "severity": "BLOCK", "rule": "三交易所每个日历日必须有明确状态，交易日与交易时段规则可联结且无重叠。"},
+        {"gate_id": "CORE02-Q2", "severity": "BLOCK", "rule": "临时停市、补充休市通知和历史规则修订必须保留原公告与 available_at。"},
+        {"gate_id": "CORE02-Q3", "severity": "BLOCK", "rule": "交易日序列必须严格递增，previous/next 关系和月季年末标记可重算。"},
+        {"gate_id": "CORE02-Q4", "severity": "REVIEW", "rule": "场所间日历差异不得强制合并为单一中国交易日历。"}
+      ],
+      "known_blockers": [
+        {"blocker_id": "CORE02-B1", "status": "OPEN", "blocks": "FULL_HISTORY_INGESTION", "description": "三交易所没有经验证的统一全历史机器可读日历端点。"},
+        {"blocker_id": "CORE02-B2", "status": "OPEN", "blocks": "RESEARCH_GRADE", "description": "早期交易时段规则、临时停市和应急通知档案尚未补齐。"},
+        {"blocker_id": "CORE02-B3", "status": "OPEN", "blocks": "AUTOMATED_ARCHIVE", "description": "官方规则文档与日历页面的自动归档及再分发边界待逐源确认。"}
+      ]
+    },
+    {
+      "plan_id": "CORE-03",
+      "dataset_id": "cn-a-share-daily-raw",
+      "schema_version": "1.0.0",
+      "grain": "来源、证券和交易日的未复权日行情观察值，以及其不可变裁决版本",
+      "pit_contract": {
+        "decision_time_rule": "日行情不得早于对应交易场所收盘和源端文件可用时间进入研究；缺少可靠时分秒时，available_at 保守设为下一交易时段开始。盘后修订必须以新版本追加，盘中决策不得使用当日收盘字段。",
+        "required_time_fields": ["trade_date", "exchange_close_at", "published_at", "available_at", "revision_id", "snapshot_id"],
+        "revision_rule": "每个来源的更正记录追加 revision_id；跨源冲突保留全部 observation，curated 记录只保存带规则版本的裁决结果，禁止覆盖原始观察。"
+      },
+      "source_bindings": [
+        {
+          "binding_id": "core03_official_eod",
+          "primary_source_ids": ["SSE_OFFICIAL", "SZSE_OFFICIAL", "BSE_OFFICIAL"],
+          "calibration_source_ids": ["AKSHARE_ADAPTER", "TUSHARE_SECONDARY"],
+          "license_gate": "OFFICIAL_MARKET_DATA_LICENSE_AND_ENDPOINT_REVIEW_REQUIRED_BEFORE_BULK_HISTORY; INTERNAL_NONCOMMERCIAL_ONLY; NO_EXTERNAL_REDISTRIBUTION",
+          "ingestion_status": "SCHEMA_READY_INGESTION_BLOCKED_PENDING_LICENSE_ENDPOINT_AND_CAPACITY_APPROVAL",
+          "evidence_urls": [
+            "https://www.sse.com.cn/services/tradingtech/data/",
+            "https://www.szse.cn/www/English/services/dataServices/index.html",
+            "https://www.bse.cn/jygl_list/200028217.html"
+          ]
+        },
+        {
+          "binding_id": "core03_identity",
+          "primary_source_ids": ["INTERNAL_CORE01"],
+          "calibration_source_ids": ["SSE_OFFICIAL", "SZSE_OFFICIAL", "BSE_OFFICIAL"],
+          "license_gate": "INTERNAL_READ_ONLY_PINNED_SNAPSHOT",
+          "ingestion_status": "BLOCKED_BY_CORE01"
+        },
+        {
+          "binding_id": "core03_curated_resolution",
+          "primary_source_ids": ["INTERNAL_UPSTREAM"],
+          "calibration_source_ids": ["SSE_OFFICIAL", "SZSE_OFFICIAL", "BSE_OFFICIAL", "AKSHARE_ADAPTER", "TUSHARE_SECONDARY"],
+          "license_gate": "INTERNAL_DERIVATION_ONLY; ALL_INPUT_OBSERVATIONS_AND_SELECTION_RULES_MUST_BE_PINNED",
+          "ingestion_status": "CONTRACT_ONLY_NOT_IMPLEMENTED"
+        }
+      ],
+      "tables": [
+        {
+          "table_id": "daily_bar_observation",
+          "grain": "每来源、证券、交易日和修订一行未复权观察值",
+          "inherits": ["record_lineage", "security_key"],
+          "primary_key": ["source_id", "security_id", "trade_date", "revision_id"],
+          "fields": [
+            {"name": "security_id", "dtype": "string", "nullable": false, "unit": "identifier", "description": "CORE-01 永久证券标识", "source_binding": "core03_identity", "pit_role": "identity"},
+            {"name": "exchange_mic", "dtype": "string", "nullable": false, "unit": "ISO-10383", "description": "交易场所 MIC", "source_binding": "core03_official_eod", "pit_role": "fact"},
+            {"name": "local_code", "dtype": "string", "nullable": false, "unit": "identifier", "description": "源端证券代码，保留原样用于追溯", "source_binding": "core03_official_eod", "pit_role": "lineage"},
+            {"name": "trade_date", "dtype": "date32", "nullable": false, "unit": "calendar_date", "description": "交易日期", "source_binding": "core03_official_eod", "pit_role": "event_time"},
+            {"name": "currency", "dtype": "string", "nullable": false, "unit": "ISO-4217", "description": "价格和成交额币种", "source_binding": "core03_official_eod", "pit_role": "fact"},
+            {"name": "previous_close", "dtype": "decimal128(24,6)", "nullable": true, "unit": "CNY_per_share", "description": "源端昨收或参考价，不自行复权", "source_binding": "core03_official_eod", "pit_role": "fact"},
+            {"name": "open", "dtype": "decimal128(24,6)", "nullable": true, "unit": "CNY_per_share", "description": "未复权开盘价，无成交按源语义保留 NULL", "source_binding": "core03_official_eod", "pit_role": "fact"},
+            {"name": "high", "dtype": "decimal128(24,6)", "nullable": true, "unit": "CNY_per_share", "description": "未复权最高价", "source_binding": "core03_official_eod", "pit_role": "fact"},
+            {"name": "low", "dtype": "decimal128(24,6)", "nullable": true, "unit": "CNY_per_share", "description": "未复权最低价", "source_binding": "core03_official_eod", "pit_role": "fact"},
+            {"name": "close", "dtype": "decimal128(24,6)", "nullable": true, "unit": "CNY_per_share", "description": "未复权收盘价", "source_binding": "core03_official_eod", "pit_role": "fact"},
+            {"name": "volume_shares", "dtype": "int64", "nullable": true, "unit": "share", "description": "成交股数，源为手时必须显式换算并保留源单位于 lineage", "source_binding": "core03_official_eod", "pit_role": "fact"},
+            {"name": "turnover_cny", "dtype": "decimal128(28,4)", "nullable": true, "unit": "CNY", "description": "成交金额", "source_binding": "core03_official_eod", "pit_role": "fact"},
+            {"name": "number_of_trades", "dtype": "int64", "nullable": true, "unit": "count", "description": "成交笔数；官方历史不可得时为 NULL", "source_binding": "core03_official_eod", "pit_role": "fact"},
+            {"name": "trading_status_code", "dtype": "string", "nullable": false, "unit": "code", "description": "正常、停牌、无成交、退市整理等源端归一状态", "source_binding": "core03_curated_resolution", "pit_role": "fact"},
+            {"name": "exchange_close_at", "dtype": "timestamp[us,Asia/Shanghai]", "nullable": false, "unit": "timestamp", "description": "该日适用交易时段的正式收盘时间", "source_binding": "core03_curated_resolution", "pit_role": "event_time"},
+            {"name": "published_at", "dtype": "timestamp[us,Asia/Shanghai]", "nullable": true, "unit": "timestamp", "description": "源端行情文件或页面公开时间", "source_binding": "core03_official_eod", "pit_role": "publication_time"},
+            {"name": "available_at", "dtype": "timestamp[us,Asia/Shanghai]", "nullable": false, "unit": "timestamp", "description": "该观察值最早可用于研究决策的时间", "source_binding": "core03_curated_resolution", "pit_role": "availability_time"},
+            {"name": "revision_id", "dtype": "string", "nullable": false, "unit": "identifier", "description": "源端或内部修订版本", "source_binding": "core03_curated_resolution", "pit_role": "revision"}
+          ]
+        },
+        {
+          "table_id": "daily_bar_curated",
+          "grain": "证券、交易日和裁决版本一行的未复权规范值",
+          "inherits": ["record_lineage", "security_key", "derived_lineage"],
+          "primary_key": ["security_id", "trade_date", "selection_rule_version", "revision_id"],
+          "fields": [
+            {"name": "security_id", "dtype": "string", "nullable": false, "unit": "identifier", "description": "CORE-01 永久证券标识", "source_binding": "core03_identity", "pit_role": "identity"},
+            {"name": "trade_date", "dtype": "date32", "nullable": false, "unit": "calendar_date", "description": "交易日期", "source_binding": "core03_curated_resolution", "pit_role": "event_time"},
+            {"name": "previous_close", "dtype": "decimal128(24,6)", "nullable": true, "unit": "CNY_per_share", "description": "裁决后的未复权昨收或参考价", "source_binding": "core03_curated_resolution", "pit_role": "derived"},
+            {"name": "open", "dtype": "decimal128(24,6)", "nullable": true, "unit": "CNY_per_share", "description": "裁决后的未复权开盘价", "source_binding": "core03_curated_resolution", "pit_role": "derived"},
+            {"name": "high", "dtype": "decimal128(24,6)", "nullable": true, "unit": "CNY_per_share", "description": "裁决后的未复权最高价", "source_binding": "core03_curated_resolution", "pit_role": "derived"},
+            {"name": "low", "dtype": "decimal128(24,6)", "nullable": true, "unit": "CNY_per_share", "description": "裁决后的未复权最低价", "source_binding": "core03_curated_resolution", "pit_role": "derived"},
+            {"name": "close", "dtype": "decimal128(24,6)", "nullable": true, "unit": "CNY_per_share", "description": "裁决后的未复权收盘价", "source_binding": "core03_curated_resolution", "pit_role": "derived"},
+            {"name": "volume_shares", "dtype": "int64", "nullable": true, "unit": "share", "description": "裁决后的成交股数", "source_binding": "core03_curated_resolution", "pit_role": "derived"},
+            {"name": "turnover_cny", "dtype": "decimal128(28,4)", "nullable": true, "unit": "CNY", "description": "裁决后的成交金额", "source_binding": "core03_curated_resolution", "pit_role": "derived"},
+            {"name": "number_of_trades", "dtype": "int64", "nullable": true, "unit": "count", "description": "裁决后的成交笔数", "source_binding": "core03_curated_resolution", "pit_role": "derived"},
+            {"name": "trading_status_code", "dtype": "string", "nullable": false, "unit": "code", "description": "规范交易状态", "source_binding": "core03_curated_resolution", "pit_role": "derived"},
+            {"name": "selected_source_id", "dtype": "string", "nullable": false, "unit": "identifier", "description": "本版本采用的主观察来源", "source_binding": "core03_curated_resolution", "pit_role": "lineage"},
+            {"name": "conflict_flag", "dtype": "bool", "nullable": false, "unit": "boolean", "description": "是否存在未消解跨源冲突", "source_binding": "core03_curated_resolution", "pit_role": "quality"},
+            {"name": "selection_rule_version", "dtype": "string", "nullable": false, "unit": "identifier", "description": "来源优先级与裁决规则版本", "source_binding": "core03_curated_resolution", "pit_role": "rule_version"},
+            {"name": "available_at", "dtype": "timestamp[us,Asia/Shanghai]", "nullable": false, "unit": "timestamp", "description": "所有所选输入到齐且裁决完成后的可用时间", "source_binding": "core03_curated_resolution", "pit_role": "availability_time"},
+            {"name": "revision_id", "dtype": "string", "nullable": false, "unit": "identifier", "description": "不可变裁决版本", "source_binding": "core03_curated_resolution", "pit_role": "revision"}
+          ]
+        }
+      ],
+      "quality_gates": [
+        {"gate_id": "CORE03-Q1", "severity": "BLOCK", "rule": "按 source_id、security_id、trade_date、revision_id 唯一；日期必须存在于对应交易所交易日历。"},
+        {"gate_id": "CORE03-Q2", "severity": "BLOCK", "rule": "价格非负且 high >= max(open, close, low)、low <= min(open, close, high)；停牌和无成交的 NULL/0 语义必须由源规则定义。"},
+        {"gate_id": "CORE03-Q3", "severity": "BLOCK", "rule": "volume_shares 和 turnover_cny 非负，单位必须统一且换算可回溯，禁止把未知值填 0。"},
+        {"gate_id": "CORE03-Q4", "severity": "BLOCK", "rule": "现存与退市 A 股按交易日生成覆盖矩阵；缺行、停牌和未上市必须可区分。"},
+        {"gate_id": "CORE03-Q5", "severity": "BLOCK", "rule": "available_at 不早于 exchange_close_at；任何盘后修订不得泄漏到更早 decision_time。"},
+        {"gate_id": "CORE03-Q6", "severity": "REVIEW", "rule": "跨源差异超过字段容差时保留全部 observation 并阻断该记录的自动质量晋级。"}
+      ],
+      "known_blockers": [
+        {"blocker_id": "CORE03-B1", "status": "OPEN", "blocks": "BULK_HISTORY_INGESTION", "description": "三交易所官方日行情全历史端点、许可和可持续访问方式尚未逐一核准。"},
+        {"blocker_id": "CORE03-B2", "status": "OPEN", "blocks": "RESEARCH_GRADE", "description": "退市股票、早期历史、成交笔数及停牌无成交语义的完整性尚未验证。"},
+        {"blocker_id": "CORE03-B3", "status": "OPEN", "blocks": "FULL_BACKFILL", "description": "正式全历史回补前仍需提交容量、调用频率、失败恢复和增量维护报告并取得批准。"}
+      ]
+    },
+    {
+      "plan_id": "CORE-04",
+      "dataset_id": "cn-a-share-corporate-actions-pit",
+      "schema_version": "1.0.0",
+      "grain": "公司行动的阶段事件、权益条款与可复算调整事件修订",
+      "pit_contract": {
+        "decision_time_rule": "预案、董事会、股东大会、实施公告、除权除息与更正必须分别保存；研究只使用 available_at <= decision_time 的最高已知阶段，不得用实施结果回填早期决策时点。",
+        "required_time_fields": ["event_date", "effective_date", "record_date", "ex_date", "published_at", "available_at", "revision_id", "snapshot_id"],
+        "revision_rule": "同一 action_id 的阶段推进和更正均追加 revision_id，并用 supersedes_revision_id 显式链接；条款和调整事件随修订版本锁定，禁止原位改写。"
+      },
+      "source_bindings": [
+        {
+          "binding_id": "core04_official_action",
+          "primary_source_ids": ["CNINFO_OFFICIAL", "SSE_OFFICIAL", "SZSE_OFFICIAL", "BSE_OFFICIAL"],
+          "calibration_source_ids": ["CHINACLEAR_OFFICIAL"],
+          "license_gate": "DISCLOSURE_ARCHIVE_AND_AUTOMATED_EXTRACTION_REVIEW_REQUIRED; INTERNAL_RESEARCH_ONLY_UNTIL_REVIEW; NO_EXTERNAL_REDISTRIBUTION",
+          "ingestion_status": "SCHEMA_READY_INGESTION_BLOCKED_PENDING_ENDPOINT_LICENSE_AND_EXTRACTION_VALIDATION",
+          "evidence_urls": [
+            "https://www.cninfo.com.cn/new/index",
+            "https://www.sse.com.cn/assortment/stock/list/info/company/index.shtml",
+            "https://www.sse.com.cn/lawandrules/sselawsrules2025/stocks/mainipo/c/c_20260424_10816589.shtml"
+          ]
+        },
+        {
+          "binding_id": "core04_identity",
+          "primary_source_ids": ["INTERNAL_CORE01"],
+          "calibration_source_ids": ["CNINFO_OFFICIAL", "SSE_OFFICIAL", "SZSE_OFFICIAL", "BSE_OFFICIAL"],
+          "license_gate": "INTERNAL_READ_ONLY_PINNED_SNAPSHOT",
+          "ingestion_status": "BLOCKED_BY_CORE01"
+        },
+        {
+          "binding_id": "core04_adjustment_derivation",
+          "primary_source_ids": ["INTERNAL_CORE04"],
+          "calibration_source_ids": ["SSE_OFFICIAL", "SZSE_OFFICIAL", "BSE_OFFICIAL"],
+          "license_gate": "INTERNAL_DERIVATION_ONLY; ACTION_REVISION_AND_REFERENCE_PRICE_MUST_BE_PINNED",
+          "ingestion_status": "CONTRACT_ONLY_NOT_IMPLEMENTED",
+          "evidence_urls": [
+            "https://www.sse.com.cn/market/sseindex/calculation/c/10779732/files/8d71ca4badf14372a9659d3f7cadbbfc.pdf"
+          ]
+        }
+      ],
+      "tables": [
+        {
+          "table_id": "corporate_action_event",
+          "grain": "每项公司行动的每个披露阶段和修订一行",
+          "inherits": ["record_lineage", "security_key"],
+          "primary_key": ["action_id", "stage_code", "revision_id"],
+          "fields": [
+            {"name": "action_id", "dtype": "string", "nullable": false, "unit": "identifier", "description": "跨阶段稳定的公司行动标识", "source_binding": "core04_adjustment_derivation", "pit_role": "identity"},
+            {"name": "security_id", "dtype": "string", "nullable": false, "unit": "identifier", "description": "受影响证券永久标识", "source_binding": "core04_identity", "pit_role": "identity"},
+            {"name": "action_type", "dtype": "string", "nullable": false, "unit": "code", "description": "CASH_DIVIDEND、BONUS_SHARE、CAPITALIZATION、RIGHTS、SPLIT、CONSOLIDATION 等", "source_binding": "core04_adjustment_derivation", "pit_role": "fact"},
+            {"name": "stage_code", "dtype": "string", "nullable": false, "unit": "code", "description": "PLAN、BOARD_APPROVED、SHAREHOLDER_APPROVED、IMPLEMENTATION、COMPLETED、CANCELLED、CORRECTED", "source_binding": "core04_adjustment_derivation", "pit_role": "fact"},
+            {"name": "fiscal_period", "dtype": "string", "nullable": true, "unit": "report_period", "description": "利润分配所属报告期", "source_binding": "core04_official_action", "pit_role": "fact"},
+            {"name": "event_date", "dtype": "date32", "nullable": false, "unit": "calendar_date", "description": "本披露阶段对应的决策或实施事件日期", "source_binding": "core04_official_action", "pit_role": "event_time"},
+            {"name": "shareholder_meeting_date", "dtype": "date32", "nullable": true, "unit": "calendar_date", "description": "股东大会审议日期", "source_binding": "core04_official_action", "pit_role": "event_time"},
+            {"name": "record_date", "dtype": "date32", "nullable": true, "unit": "calendar_date", "description": "股权登记日", "source_binding": "core04_official_action", "pit_role": "effective_time"},
+            {"name": "ex_date", "dtype": "date32", "nullable": true, "unit": "calendar_date", "description": "除权除息日", "source_binding": "core04_official_action", "pit_role": "effective_time"},
+            {"name": "payment_date", "dtype": "date32", "nullable": true, "unit": "calendar_date", "description": "现金红利发放日", "source_binding": "core04_official_action", "pit_role": "effective_time"},
+            {"name": "new_shares_listing_date", "dtype": "date32", "nullable": true, "unit": "calendar_date", "description": "新增股份上市日", "source_binding": "core04_official_action", "pit_role": "effective_time"},
+            {"name": "effective_date", "dtype": "date32", "nullable": true, "unit": "calendar_date", "description": "该行动影响价格或股本的规范生效日", "source_binding": "core04_adjustment_derivation", "pit_role": "effective_time"},
+            {"name": "announcement_id", "dtype": "string", "nullable": false, "unit": "identifier", "description": "官方公告标识", "source_binding": "core04_official_action", "pit_role": "lineage"},
+            {"name": "announcement_url", "dtype": "string", "nullable": false, "unit": "URI", "description": "官方公告永久或可复核地址", "source_binding": "core04_official_action", "pit_role": "lineage"},
+            {"name": "published_at", "dtype": "timestamp[us,Asia/Shanghai]", "nullable": true, "unit": "timestamp", "description": "公告公开时间", "source_binding": "core04_official_action", "pit_role": "publication_time"},
+            {"name": "available_at", "dtype": "timestamp[us,Asia/Shanghai]", "nullable": false, "unit": "timestamp", "description": "该阶段可用于决策的最早时间", "source_binding": "core04_adjustment_derivation", "pit_role": "availability_time"},
+            {"name": "revision_id", "dtype": "string", "nullable": false, "unit": "identifier", "description": "不可变修订标识", "source_binding": "core04_adjustment_derivation", "pit_role": "revision"},
+            {"name": "supersedes_revision_id", "dtype": "string", "nullable": true, "unit": "identifier", "description": "被本版本替代的修订标识", "source_binding": "core04_adjustment_derivation", "pit_role": "revision"}
+          ]
+        },
+        {
+          "table_id": "corporate_action_terms",
+          "grain": "公司行动、修订和权益类别的一组规范条款一行",
+          "inherits": ["record_lineage", "security_key"],
+          "primary_key": ["action_id", "revision_id", "entitlement_share_class"],
+          "fields": [
+            {"name": "action_id", "dtype": "string", "nullable": false, "unit": "identifier", "description": "公司行动标识", "source_binding": "core04_adjustment_derivation", "pit_role": "identity"},
+            {"name": "security_id", "dtype": "string", "nullable": false, "unit": "identifier", "description": "受影响证券永久标识", "source_binding": "core04_identity", "pit_role": "identity"},
+            {"name": "revision_id", "dtype": "string", "nullable": false, "unit": "identifier", "description": "条款所属事件修订", "source_binding": "core04_adjustment_derivation", "pit_role": "revision"},
+            {"name": "entitlement_share_class", "dtype": "string", "nullable": false, "unit": "code", "description": "适用权益的股份类别", "source_binding": "core04_official_action", "pit_role": "fact"},
+            {"name": "basis_shares", "dtype": "decimal128(18,6)", "nullable": false, "unit": "share", "description": "公告条款分母，通常为每 10 股，规范化时保留原分母", "source_binding": "core04_official_action", "pit_role": "fact"},
+            {"name": "cash_gross", "dtype": "decimal128(24,8)", "nullable": true, "unit": "CNY_per_basis_shares", "description": "税前现金红利", "source_binding": "core04_official_action", "pit_role": "fact"},
+            {"name": "cash_net", "dtype": "decimal128(24,8)", "nullable": true, "unit": "CNY_per_basis_shares", "description": "公告明确时保存税后现金红利，否则 NULL", "source_binding": "core04_official_action", "pit_role": "fact"},
+            {"name": "bonus_shares", "dtype": "decimal128(24,8)", "nullable": true, "unit": "share_per_basis_shares", "description": "送股数量", "source_binding": "core04_official_action", "pit_role": "fact"},
+            {"name": "capitalization_shares", "dtype": "decimal128(24,8)", "nullable": true, "unit": "share_per_basis_shares", "description": "资本公积转增股数量", "source_binding": "core04_official_action", "pit_role": "fact"},
+            {"name": "rights_shares", "dtype": "decimal128(24,8)", "nullable": true, "unit": "share_per_basis_shares", "description": "配股数量", "source_binding": "core04_official_action", "pit_role": "fact"},
+            {"name": "rights_subscription_price", "dtype": "decimal128(24,8)", "nullable": true, "unit": "CNY_per_share", "description": "配股认购价", "source_binding": "core04_official_action", "pit_role": "fact"},
+            {"name": "split_multiplier", "dtype": "decimal128(24,12)", "nullable": true, "unit": "ratio", "description": "拆股后股数/拆股前股数；合股小于 1", "source_binding": "core04_official_action", "pit_role": "fact"},
+            {"name": "pre_action_total_shares", "dtype": "decimal128(28,4)", "nullable": true, "unit": "share", "description": "实施前总股本", "source_binding": "core04_official_action", "pit_role": "fact"},
+            {"name": "post_action_total_shares", "dtype": "decimal128(28,4)", "nullable": true, "unit": "share", "description": "实施后总股本", "source_binding": "core04_official_action", "pit_role": "fact"},
+            {"name": "tax_note", "dtype": "string", "nullable": true, "unit": "text", "description": "差异化税负和代扣规则原文摘要，不推断个体税后值", "source_binding": "core04_official_action", "pit_role": "fact"}
+          ]
+        },
+        {
+          "table_id": "corporate_action_adjustment_event",
+          "grain": "公司行动修订对应的一次价格与股份调整事件一行",
+          "inherits": ["record_lineage", "security_key", "derived_lineage"],
+          "primary_key": ["action_id", "revision_id", "formula_version"],
+          "fields": [
+            {"name": "action_id", "dtype": "string", "nullable": false, "unit": "identifier", "description": "公司行动标识", "source_binding": "core04_adjustment_derivation", "pit_role": "identity"},
+            {"name": "security_id", "dtype": "string", "nullable": false, "unit": "identifier", "description": "受影响证券标识", "source_binding": "core04_identity", "pit_role": "identity"},
+            {"name": "revision_id", "dtype": "string", "nullable": false, "unit": "identifier", "description": "输入条款修订标识", "source_binding": "core04_adjustment_derivation", "pit_role": "revision"},
+            {"name": "ex_date", "dtype": "date32", "nullable": false, "unit": "calendar_date", "description": "调整跳点所属除权除息日", "source_binding": "core04_official_action", "pit_role": "effective_time"},
+            {"name": "reference_trade_date", "dtype": "date32", "nullable": false, "unit": "calendar_date", "description": "调整公式引用的前一有效交易日", "source_binding": "core04_adjustment_derivation", "pit_role": "event_time"},
+            {"name": "reference_close", "dtype": "decimal128(24,6)", "nullable": false, "unit": "CNY_per_share", "description": "钉住的未复权参考收盘价", "source_binding": "core04_adjustment_derivation", "pit_role": "derived"},
+            {"name": "theoretical_ex_price", "dtype": "decimal128(24,8)", "nullable": false, "unit": "CNY_per_share", "description": "按明确公式和条款计算的理论除权除息价", "source_binding": "core04_adjustment_derivation", "pit_role": "derived"},
+            {"name": "price_multiplier", "dtype": "decimal128(24,12)", "nullable": false, "unit": "ratio", "description": "跨事件价格连续化乘数", "source_binding": "core04_adjustment_derivation", "pit_role": "derived"},
+            {"name": "share_multiplier", "dtype": "decimal128(24,12)", "nullable": false, "unit": "ratio", "description": "跨事件股份数量变化乘数", "source_binding": "core04_adjustment_derivation", "pit_role": "derived"},
+            {"name": "formula_version", "dtype": "string", "nullable": false, "unit": "identifier", "description": "调整公式与舍入口径版本", "source_binding": "core04_adjustment_derivation", "pit_role": "rule_version"},
+            {"name": "available_at", "dtype": "timestamp[us,Asia/Shanghai]", "nullable": false, "unit": "timestamp", "description": "所有输入均可见且计算完成后的最早时间", "source_binding": "core04_adjustment_derivation", "pit_role": "availability_time"}
+          ]
+        }
+      ],
+      "quality_gates": [
+        {"gate_id": "CORE04-Q1", "severity": "BLOCK", "rule": "预案与实施阶段必须分离，action_id 内日期顺序、阶段迁移和 supersedes 链可验证。"},
+        {"gate_id": "CORE04-Q2", "severity": "BLOCK", "rule": "所有比率必须保留原公告分母并可规范化到每股；未知税率、差异化权益不得推断为 0。"},
+        {"gate_id": "CORE04-Q3", "severity": "BLOCK", "rule": "调整公式必须钉住 action revision、参考行情 snapshot 和公式版本，且可逆重算。"},
+        {"gate_id": "CORE04-Q4", "severity": "BLOCK", "rule": "更正公告追加新版本，早期 decision_time 查询不得看到后续实施或更正条款。"},
+        {"gate_id": "CORE04-Q5", "severity": "REVIEW", "rule": "多项同日行动、差异化分红和跨股份类别权益必须进入专门复核队列。"}
+      ],
+      "known_blockers": [
+        {"blocker_id": "CORE04-B1", "status": "OPEN", "blocks": "FULL_HISTORY_INGESTION", "description": "历史公告格式差异大，结构化抽取、公告更正链和原文永久标识尚未完成验证。"},
+        {"blocker_id": "CORE04-B2", "status": "OPEN", "blocks": "RESEARCH_GRADE", "description": "差异化分红、税负、同日多行动和跨股份类别条款需要显式方法与人工抽样验收。"},
+        {"blocker_id": "CORE04-B3", "status": "OPEN", "blocks": "AUTOMATED_BULK_INGESTION", "description": "CNINFO、交易所和中国结算公开数据的自动抽取、存储及再分发边界待确认。"}
+      ]
+    },
+    {
+      "plan_id": "CORE-05",
+      "dataset_id": "cn-a-share-daily-adjusted",
+      "schema_version": "1.0.0",
+      "grain": "一个钉住知识截止时点的前复权投影、证券和交易日",
+      "pit_contract": {
+        "decision_time_rule": "每个前复权 projection 必须钉住 raw_snapshot_id、action_snapshot_id、knowledge_cutoff 与 base_trade_date；只能包含 available_at <= knowledge_cutoff 的公司行动版本。禁止把今天计算的 latest 前复权价格直接用于历史时点截面研究。",
+        "required_time_fields": ["knowledge_cutoff", "base_trade_date", "trade_date", "generated_at", "available_at", "revision_id", "snapshot_id"],
+        "revision_rule": "任何输入快照、公司行动修订、基准日或公式变化均创建新的 projection_id；旧因子和复权行情不可覆盖。"
+      },
+      "source_bindings": [
+        {
+          "binding_id": "core05_adjustment_projection",
+          "primary_source_ids": ["INTERNAL_CORE03", "INTERNAL_CORE04"],
+          "calibration_source_ids": ["INTERNAL_UPSTREAM"],
+          "license_gate": "INTERNAL_DERIVATION_ONLY; CORE03_AND_CORE04_LICENSES_PROPAGATE; PINNED_INPUT_SNAPSHOTS_REQUIRED",
+          "ingestion_status": "BLOCKED_BY_CORE03_AND_CORE04"
+        }
+      ],
+      "tables": [
+        {
+          "table_id": "adjustment_projection",
+          "grain": "每个前复权投影定义一行",
+          "inherits": ["record_lineage", "derived_lineage"],
+          "primary_key": ["projection_id"],
+          "fields": [
+            {"name": "projection_id", "dtype": "string", "nullable": false, "unit": "identifier", "description": "不可变前复权投影标识", "source_binding": "core05_adjustment_projection", "pit_role": "identity"},
+            {"name": "knowledge_cutoff", "dtype": "timestamp[us,Asia/Shanghai]", "nullable": false, "unit": "timestamp", "description": "允许纳入输入事实的最晚可用时点", "source_binding": "core05_adjustment_projection", "pit_role": "availability_time"},
+            {"name": "base_trade_date", "dtype": "date32", "nullable": false, "unit": "calendar_date", "description": "因子归一为 1 的前复权基准交易日", "source_binding": "core05_adjustment_projection", "pit_role": "effective_time"},
+            {"name": "raw_snapshot_id", "dtype": "string", "nullable": false, "unit": "identifier", "description": "钉住的 CORE-03 未复权行情快照", "source_binding": "core05_adjustment_projection", "pit_role": "lineage"},
+            {"name": "action_snapshot_id", "dtype": "string", "nullable": false, "unit": "identifier", "description": "钉住的 CORE-04 公司行动快照", "source_binding": "core05_adjustment_projection", "pit_role": "lineage"},
+            {"name": "formula_version", "dtype": "string", "nullable": false, "unit": "identifier", "description": "前复权链接、舍入和同日多行动规则版本", "source_binding": "core05_adjustment_projection", "pit_role": "rule_version"},
+            {"name": "generated_at", "dtype": "timestamp[us,Asia/Shanghai]", "nullable": false, "unit": "timestamp", "description": "投影实际生成时间", "source_binding": "core05_adjustment_projection", "pit_role": "computation_time"}
+          ]
+        },
+        {
+          "table_id": "forward_adjustment_factor",
+          "grain": "投影、证券和交易日一行的前复权价格因子",
+          "inherits": ["record_lineage", "security_key", "derived_lineage"],
+          "primary_key": ["projection_id", "security_id", "trade_date"],
+          "fields": [
+            {"name": "projection_id", "dtype": "string", "nullable": false, "unit": "identifier", "description": "前复权投影标识", "source_binding": "core05_adjustment_projection", "pit_role": "identity"},
+            {"name": "security_id", "dtype": "string", "nullable": false, "unit": "identifier", "description": "永久证券标识", "source_binding": "core05_adjustment_projection", "pit_role": "identity"},
+            {"name": "trade_date", "dtype": "date32", "nullable": false, "unit": "calendar_date", "description": "因子适用交易日", "source_binding": "core05_adjustment_projection", "pit_role": "event_time"},
+            {"name": "price_adjustment_factor", "dtype": "decimal128(30,16)", "nullable": false, "unit": "ratio", "description": "adjusted_price = raw_price * factor；基准日为 1", "source_binding": "core05_adjustment_projection", "pit_role": "derived"},
+            {"name": "included_action_count", "dtype": "int32", "nullable": false, "unit": "count", "description": "该日期至基准日之间纳入的公司行动数", "source_binding": "core05_adjustment_projection", "pit_role": "quality"},
+            {"name": "latest_included_action_available_at", "dtype": "timestamp[us,Asia/Shanghai]", "nullable": true, "unit": "timestamp", "description": "纳入行动中最晚的可用时点；无行动为 NULL", "source_binding": "core05_adjustment_projection", "pit_role": "availability_time"}
+          ]
+        },
+        {
+          "table_id": "equity_daily_forward_adjusted",
+          "grain": "投影、证券和交易日一行的前复权 OHLC",
+          "inherits": ["record_lineage", "security_key", "derived_lineage"],
+          "primary_key": ["projection_id", "security_id", "trade_date"],
+          "fields": [
+            {"name": "projection_id", "dtype": "string", "nullable": false, "unit": "identifier", "description": "前复权投影标识", "source_binding": "core05_adjustment_projection", "pit_role": "identity"},
+            {"name": "security_id", "dtype": "string", "nullable": false, "unit": "identifier", "description": "永久证券标识", "source_binding": "core05_adjustment_projection", "pit_role": "identity"},
+            {"name": "trade_date", "dtype": "date32", "nullable": false, "unit": "calendar_date", "description": "交易日期", "source_binding": "core05_adjustment_projection", "pit_role": "event_time"},
+            {"name": "adjusted_previous_close", "dtype": "decimal128(30,10)", "nullable": true, "unit": "CNY_per_share", "description": "前复权昨收或参考价", "source_binding": "core05_adjustment_projection", "pit_role": "derived"},
+            {"name": "adjusted_open", "dtype": "decimal128(30,10)", "nullable": true, "unit": "CNY_per_share", "description": "前复权开盘价", "source_binding": "core05_adjustment_projection", "pit_role": "derived"},
+            {"name": "adjusted_high", "dtype": "decimal128(30,10)", "nullable": true, "unit": "CNY_per_share", "description": "前复权最高价", "source_binding": "core05_adjustment_projection", "pit_role": "derived"},
+            {"name": "adjusted_low", "dtype": "decimal128(30,10)", "nullable": true, "unit": "CNY_per_share", "description": "前复权最低价", "source_binding": "core05_adjustment_projection", "pit_role": "derived"},
+            {"name": "adjusted_close", "dtype": "decimal128(30,10)", "nullable": true, "unit": "CNY_per_share", "description": "前复权收盘价", "source_binding": "core05_adjustment_projection", "pit_role": "derived"},
+            {"name": "price_adjustment_factor", "dtype": "decimal128(30,16)", "nullable": false, "unit": "ratio", "description": "与因子表一致的价格乘数", "source_binding": "core05_adjustment_projection", "pit_role": "derived"},
+            {"name": "raw_volume_shares", "dtype": "int64", "nullable": true, "unit": "share", "description": "成交量保持 CORE-03 原值；不隐式复权", "source_binding": "core05_adjustment_projection", "pit_role": "derived"},
+            {"name": "raw_turnover_cny", "dtype": "decimal128(28,4)", "nullable": true, "unit": "CNY", "description": "成交额保持 CORE-03 原值", "source_binding": "core05_adjustment_projection", "pit_role": "derived"}
+          ]
+        }
+      ],
+      "quality_gates": [
+        {"gate_id": "CORE05-Q1", "severity": "BLOCK", "rule": "projection_id 必须唯一对应 knowledge_cutoff、base_trade_date、两个输入 snapshot 和 formula_version。"},
+        {"gate_id": "CORE05-Q2", "severity": "BLOCK", "rule": "任何纳入公司行动的 available_at 不得晚于 knowledge_cutoff；未来公告泄漏直接阻断。"},
+        {"gate_id": "CORE05-Q3", "severity": "BLOCK", "rule": "因子在非行动区间保持常数，基准日精确为 1，事件跳点可由 CORE-04 重算并在容差内可逆。"},
+        {"gate_id": "CORE05-Q4", "severity": "BLOCK", "rule": "复权后 OHLC 保持次序；成交量和成交额不做未声明的隐式复权。"},
+        {"gate_id": "CORE05-Q5", "severity": "BLOCK", "rule": "相同输入快照和公式版本重复生成必须字节级或声明容差级确定。"}
+      ],
+      "known_blockers": [
+        {"blocker_id": "CORE05-B1", "status": "OPEN", "blocks": "IMPLEMENTATION", "description": "依赖 CORE-03 与 CORE-04 合格不可变快照，目前两者尚未接入。"},
+        {"blocker_id": "CORE05-B2", "status": "OPEN", "blocks": "RESEARCH_GRADE", "description": "差异化权益、同日多行动、晚到更正与前复权归一基准的精确方法尚待样例验收。"},
+        {"blocker_id": "CORE05-B3", "status": "OPEN", "blocks": "FACTOR_ENGINE_DEFAULT", "description": "因子研究必须明确采用 decision-time 投影或收益口径，禁止默认 latest 前复权切片；调用合同尚未实现。"}
+      ]
+    },
+    {
+      "plan_id": "CORE-06",
+      "dataset_id": "cn-a-share-tradability-daily-pit",
+      "schema_version": "1.0.0",
+      "grain": "官方可交易状态事件、涨跌幅规则有效区间与证券日级 PIT 状态",
+      "pit_contract": {
+        "decision_time_rule": "开盘可交易状态只能使用开盘前已公开且已生效的信息；收盘触及涨跌停、全天是否成交等盘后事实只能在收盘后使用。交易所规则允许申报不等于模型一定可成交，执行概率属于后续算法层。",
+        "required_time_fields": ["effective_from", "effective_to", "trade_date", "available_at_open", "available_at_close", "published_at", "available_at", "revision_id", "snapshot_id"],
+        "revision_rule": "停复牌、风险警示、退市整理、价格限制与规则变更均追加事件或规则版本；日级投影由钉住的事件、规则和行情快照生成，不覆盖旧版本。"
+      },
+      "source_bindings": [
+        {
+          "binding_id": "core06_official_status_rules",
+          "primary_source_ids": ["SSE_OFFICIAL", "SZSE_OFFICIAL", "BSE_OFFICIAL", "CNINFO_OFFICIAL"],
+          "calibration_source_ids": ["CSRC_OFFICIAL"],
+          "license_gate": "PUBLIC_RULE_AND_STATUS_ARCHIVE_REVIEW_REQUIRED; MARKET_STATUS_LICENSE_MAY_APPLY; NO_EXTERNAL_REDISTRIBUTION",
+          "ingestion_status": "SCHEMA_READY_HISTORICAL_STATUS_AND_LICENSE_REVIEW_INCOMPLETE",
+          "evidence_urls": [
+            "https://www.sse.com.cn/services/tradingtech/data/",
+            "https://www.szse.cn/www/English/services/dataServices/index.html",
+            "https://www.bse.cn/jygl_list/200028217.html",
+            "https://www.cninfo.com.cn/new/index"
+          ]
+        },
+        {
+          "binding_id": "core06_daily_derivation",
+          "primary_source_ids": ["INTERNAL_CORE01", "INTERNAL_CORE03", "INTERNAL_CORE04", "INTERNAL_UPSTREAM"],
+          "calibration_source_ids": ["SSE_OFFICIAL", "SZSE_OFFICIAL", "BSE_OFFICIAL"],
+          "license_gate": "INTERNAL_DERIVATION_ONLY; ALL_INPUT_SNAPSHOTS_AND_RULE_VERSIONS_MUST_BE_PINNED",
+          "ingestion_status": "BLOCKED_BY_CORE01_CORE02_CORE03_AND_STATUS_HISTORY"
+        }
+      ],
+      "tables": [
+        {
+          "table_id": "tradability_state_event",
+          "grain": "证券、状态类型、有效区间和修订一行",
+          "inherits": ["record_lineage", "security_key"],
+          "primary_key": ["security_id", "state_type", "effective_from", "revision_id"],
+          "fields": [
+            {"name": "security_id", "dtype": "string", "nullable": false, "unit": "identifier", "description": "永久证券标识", "source_binding": "core06_daily_derivation", "pit_role": "identity"},
+            {"name": "state_type", "dtype": "string", "nullable": false, "unit": "code", "description": "SUSPENSION、RISK_WARNING、DELISTING_PHASE、SPECIAL_TREATMENT 等状态类型", "source_binding": "core06_daily_derivation", "pit_role": "fact"},
+            {"name": "state_code", "dtype": "string", "nullable": false, "unit": "code", "description": "状态类型下的官方归一状态码", "source_binding": "core06_daily_derivation", "pit_role": "fact"},
+            {"name": "reason_code", "dtype": "string", "nullable": true, "unit": "code", "description": "停牌、风险警示或退市阶段原因", "source_binding": "core06_daily_derivation", "pit_role": "fact"},
+            {"name": "effective_from", "dtype": "timestamp[us,Asia/Shanghai]", "nullable": false, "unit": "timestamp", "description": "状态生效时间，能获得盘中复牌时间时保留时分秒", "source_binding": "core06_official_status_rules", "pit_role": "effective_time"},
+            {"name": "effective_to", "dtype": "timestamp[us,Asia/Shanghai]", "nullable": true, "unit": "timestamp", "description": "状态结束时间", "source_binding": "core06_official_status_rules", "pit_role": "effective_time"},
+            {"name": "announcement_id", "dtype": "string", "nullable": true, "unit": "identifier", "description": "状态公告或交易所通知标识", "source_binding": "core06_official_status_rules", "pit_role": "lineage"},
+            {"name": "published_at", "dtype": "timestamp[us,Asia/Shanghai]", "nullable": true, "unit": "timestamp", "description": "官方通知公开时间", "source_binding": "core06_official_status_rules", "pit_role": "publication_time"},
+            {"name": "available_at", "dtype": "timestamp[us,Asia/Shanghai]", "nullable": false, "unit": "timestamp", "description": "状态最早可安全用于决策的时间", "source_binding": "core06_daily_derivation", "pit_role": "availability_time"},
+            {"name": "revision_id", "dtype": "string", "nullable": false, "unit": "identifier", "description": "不可变状态修订", "source_binding": "core06_daily_derivation", "pit_role": "revision"}
+          ]
+        },
+        {
+          "table_id": "price_limit_rule_history",
+          "grain": "交易场所、板块、证券类型、风险状态和规则有效区间一行",
+          "inherits": ["record_lineage"],
+          "primary_key": ["exchange_mic", "board", "instrument_type", "risk_state", "valid_from", "rule_version"],
+          "fields": [
+            {"name": "exchange_mic", "dtype": "string", "nullable": false, "unit": "ISO-10383", "description": "交易场所 MIC", "source_binding": "core06_official_status_rules", "pit_role": "fact"},
+            {"name": "board", "dtype": "string", "nullable": false, "unit": "code", "description": "规则适用板块", "source_binding": "core06_daily_derivation", "pit_role": "fact"},
+            {"name": "instrument_type", "dtype": "string", "nullable": false, "unit": "code", "description": "规则适用证券类型", "source_binding": "core06_daily_derivation", "pit_role": "fact"},
+            {"name": "risk_state", "dtype": "string", "nullable": false, "unit": "code", "description": "NORMAL、ST、DELISTING 等规则状态", "source_binding": "core06_daily_derivation", "pit_role": "fact"},
+            {"name": "limit_mode", "dtype": "string", "nullable": false, "unit": "code", "description": "PERCENTAGE、NO_LIMIT 或 SPECIAL_RULE", "source_binding": "core06_daily_derivation", "pit_role": "fact"},
+            {"name": "upper_limit_rate", "dtype": "decimal128(12,8)", "nullable": true, "unit": "ratio", "description": "相对参考价的上限比例，无限制时 NULL", "source_binding": "core06_official_status_rules", "pit_role": "fact"},
+            {"name": "lower_limit_rate", "dtype": "decimal128(12,8)", "nullable": true, "unit": "ratio", "description": "相对参考价的下限比例，存正数绝对比例；无限制时 NULL", "source_binding": "core06_official_status_rules", "pit_role": "fact"},
+            {"name": "tick_size", "dtype": "decimal128(18,8)", "nullable": false, "unit": "CNY_per_share", "description": "价格最小变动单位", "source_binding": "core06_official_status_rules", "pit_role": "fact"},
+            {"name": "rounding_rule", "dtype": "string", "nullable": false, "unit": "code", "description": "涨跌停价格舍入口径", "source_binding": "core06_official_status_rules", "pit_role": "fact"},
+            {"name": "no_limit_day_rule", "dtype": "string", "nullable": true, "unit": "expression", "description": "IPO、恢复上市或其他无涨跌幅限制日规则", "source_binding": "core06_official_status_rules", "pit_role": "fact"},
+            {"name": "valid_from", "dtype": "date32", "nullable": false, "unit": "calendar_date", "description": "规则生效起日", "source_binding": "core06_official_status_rules", "pit_role": "effective_time"},
+            {"name": "valid_to", "dtype": "date32", "nullable": true, "unit": "calendar_date", "description": "规则失效日", "source_binding": "core06_official_status_rules", "pit_role": "effective_time"},
+            {"name": "rule_document_id", "dtype": "string", "nullable": false, "unit": "identifier", "description": "官方规则文件标识", "source_binding": "core06_official_status_rules", "pit_role": "lineage"},
+            {"name": "rule_version", "dtype": "string", "nullable": false, "unit": "identifier", "description": "内部规范规则版本", "source_binding": "core06_daily_derivation", "pit_role": "rule_version"},
+            {"name": "published_at", "dtype": "timestamp[us,Asia/Shanghai]", "nullable": true, "unit": "timestamp", "description": "规则公开时间", "source_binding": "core06_official_status_rules", "pit_role": "publication_time"},
+            {"name": "available_at", "dtype": "timestamp[us,Asia/Shanghai]", "nullable": false, "unit": "timestamp", "description": "规则最早可用于决策的时间", "source_binding": "core06_daily_derivation", "pit_role": "availability_time"}
+          ]
+        },
+        {
+          "table_id": "tradability_daily",
+          "grain": "钉住输入快照后，证券与交易日一行的场所级可交易状态",
+          "inherits": ["record_lineage", "security_key", "derived_lineage"],
+          "primary_key": ["security_id", "trade_date", "state_projection_id"],
+          "fields": [
+            {"name": "security_id", "dtype": "string", "nullable": false, "unit": "identifier", "description": "永久证券标识", "source_binding": "core06_daily_derivation", "pit_role": "identity"},
+            {"name": "trade_date", "dtype": "date32", "nullable": false, "unit": "calendar_date", "description": "交易日期", "source_binding": "core06_daily_derivation", "pit_role": "event_time"},
+            {"name": "state_projection_id", "dtype": "string", "nullable": false, "unit": "identifier", "description": "钉住事件、规则、日历和行情输入的状态投影标识", "source_binding": "core06_daily_derivation", "pit_role": "identity"},
+            {"name": "listing_status_at_open", "dtype": "string", "nullable": false, "unit": "code", "description": "开盘时已知的上市状态", "source_binding": "core06_daily_derivation", "pit_role": "derived"},
+            {"name": "risk_warning_at_open", "dtype": "bool", "nullable": false, "unit": "boolean", "description": "开盘时已知是否处于风险警示", "source_binding": "core06_daily_derivation", "pit_role": "derived"},
+            {"name": "suspended_at_open", "dtype": "bool", "nullable": false, "unit": "boolean", "description": "开盘时是否停牌", "source_binding": "core06_daily_derivation", "pit_role": "derived"},
+            {"name": "suspended_full_day", "dtype": "bool", "nullable": true, "unit": "boolean", "description": "收盘后确认是否全天停牌", "source_binding": "core06_daily_derivation", "pit_role": "derived"},
+            {"name": "resume_time", "dtype": "timestamp[us,Asia/Shanghai]", "nullable": true, "unit": "timestamp", "description": "盘中复牌实际或官方生效时间", "source_binding": "core06_official_status_rules", "pit_role": "effective_time"},
+            {"name": "venue_order_entry_allowed_at_open", "dtype": "bool", "nullable": false, "unit": "boolean", "description": "交易所规则层面的开盘申报许可，不代表策略可成交", "source_binding": "core06_daily_derivation", "pit_role": "derived"},
+            {"name": "price_limit_mode", "dtype": "string", "nullable": false, "unit": "code", "description": "当日涨跌幅限制模式", "source_binding": "core06_daily_derivation", "pit_role": "derived"},
+            {"name": "upper_limit_price", "dtype": "decimal128(24,6)", "nullable": true, "unit": "CNY_per_share", "description": "按当日规则和参考价计算的涨停价", "source_binding": "core06_daily_derivation", "pit_role": "derived"},
+            {"name": "lower_limit_price", "dtype": "decimal128(24,6)", "nullable": true, "unit": "CNY_per_share", "description": "按当日规则和参考价计算的跌停价", "source_binding": "core06_daily_derivation", "pit_role": "derived"},
+            {"name": "hit_upper_limit", "dtype": "bool", "nullable": true, "unit": "boolean", "description": "盘后确认日内是否触及涨停价", "source_binding": "core06_daily_derivation", "pit_role": "derived"},
+            {"name": "hit_lower_limit", "dtype": "bool", "nullable": true, "unit": "boolean", "description": "盘后确认日内是否触及跌停价", "source_binding": "core06_daily_derivation", "pit_role": "derived"},
+            {"name": "closed_at_upper_limit", "dtype": "bool", "nullable": true, "unit": "boolean", "description": "盘后确认是否收于涨停价", "source_binding": "core06_daily_derivation", "pit_role": "derived"},
+            {"name": "closed_at_lower_limit", "dtype": "bool", "nullable": true, "unit": "boolean", "description": "盘后确认是否收于跌停价", "source_binding": "core06_daily_derivation", "pit_role": "derived"},
+            {"name": "had_trade", "dtype": "bool", "nullable": true, "unit": "boolean", "description": "盘后确认当日是否有成交", "source_binding": "core06_daily_derivation", "pit_role": "derived"},
+            {"name": "available_at_open", "dtype": "timestamp[us,Asia/Shanghai]", "nullable": false, "unit": "timestamp", "description": "开盘状态切片的知识截止时间", "source_binding": "core06_daily_derivation", "pit_role": "availability_time"},
+            {"name": "available_at_close", "dtype": "timestamp[us,Asia/Shanghai]", "nullable": true, "unit": "timestamp", "description": "盘后事实齐备的可用时间", "source_binding": "core06_daily_derivation", "pit_role": "availability_time"},
+            {"name": "rule_version", "dtype": "string", "nullable": false, "unit": "identifier", "description": "当日状态投影采用的规则版本", "source_binding": "core06_daily_derivation", "pit_role": "rule_version"}
+          ]
+        }
+      ],
+      "quality_gates": [
+        {"gate_id": "CORE06-Q1", "severity": "BLOCK", "rule": "每个已上市证券和交易所日历日必须有可解释状态；未上市、停牌、无成交和缺失行不得混同。"},
+        {"gate_id": "CORE06-Q2", "severity": "BLOCK", "rule": "同一状态类型的有效区间不得无解释重叠，开盘状态不得引用开盘后才公开的事件。"},
+        {"gate_id": "CORE06-Q3", "severity": "BLOCK", "rule": "涨跌停价必须由前收/参考价、板块、风险状态、规则版本、tick 和舍入规则重算一致。"},
+        {"gate_id": "CORE06-Q4", "severity": "BLOCK", "rule": "IPO、重新上市、风险警示和退市整理等无涨跌幅或特殊限制阶段必须按历史规则处理。"},
+        {"gate_id": "CORE06-Q5", "severity": "REVIEW", "rule": "交易所可申报、当天有成交与策略可成交是三个不同事实；L1 禁止推断成交概率。"}
+      ],
+      "known_blockers": [
+        {"blocker_id": "CORE06-B1", "status": "OPEN", "blocks": "FULL_HISTORY_INGESTION", "description": "历史盘中停复牌时分秒、早期 ST/退市整理状态和公告可用时间尚未完整验证。"},
+        {"blocker_id": "CORE06-B2", "status": "OPEN", "blocks": "RESEARCH_GRADE", "description": "各板块历次涨跌幅、IPO/重上市无价格限制和舍入规则的有效期档案未冻结。"},
+        {"blocker_id": "CORE06-B3", "status": "OPEN", "blocks": "AUTOMATED_STATUS_INGESTION", "description": "市场状态文件与公告的历史授权和自动化获取边界待确认。"}
+      ]
+    },
+    {
+      "plan_id": "CORE-07",
+      "dataset_id": "cn-a-share-share-capital-daily-pit",
+      "schema_version": "1.0.0",
+      "grain": "官方股本变动事件、按知识截止时点投影的日级官方股本与独立自由流通股本口径",
+      "pit_contract": {
+        "decision_time_rule": "官方股本事实同时保存 effective_date 与 available_at；日级研究投影只能使用 available_at <= knowledge_cutoff 的事实，即使公告声明更早生效也不得事后回填到当时未知的决策切片。自由流通股本必须与官方流通/无限售股本分表保存。",
+        "required_time_fields": ["effective_date", "published_at", "available_at", "trade_date", "knowledge_cutoff", "revision_id", "snapshot_id"],
+        "revision_rule": "股本更正和补充公告追加 revision_id；日级官方股本与自由流通投影的任何输入或方法变化均生成新 projection_id/method_version，不覆盖旧版本。"
+      },
+      "source_bindings": [
+        {
+          "binding_id": "core07_official_capital",
+          "primary_source_ids": ["CNINFO_OFFICIAL", "SSE_OFFICIAL", "SZSE_OFFICIAL", "BSE_OFFICIAL"],
+          "calibration_source_ids": ["CHINACLEAR_OFFICIAL"],
+          "license_gate": "DISCLOSURE_AND_SHARE_CAPITAL_DATA_LICENSE_REVIEW_REQUIRED_BEFORE_BULK_HISTORY; INTERNAL_RESEARCH_ONLY; NO_EXTERNAL_REDISTRIBUTION",
+          "ingestion_status": "SCHEMA_READY_INGESTION_BLOCKED_PENDING_ENDPOINT_LICENSE_AND_HISTORY_VALIDATION",
+          "evidence_urls": [
+            "https://www.cninfo.com.cn/new/index",
+            "https://www.sse.com.cn/assortment/stock/list/info/company/index.shtml",
+            "https://www.szse.cn/www/English/services/dataServices/index.html"
+          ]
+        },
+        {
+          "binding_id": "core07_identity",
+          "primary_source_ids": ["INTERNAL_CORE01"],
+          "calibration_source_ids": ["SSE_OFFICIAL", "SZSE_OFFICIAL", "BSE_OFFICIAL"],
+          "license_gate": "INTERNAL_READ_ONLY_PINNED_SNAPSHOT",
+          "ingestion_status": "BLOCKED_BY_CORE01"
+        },
+        {
+          "binding_id": "core07_daily_projection",
+          "primary_source_ids": ["INTERNAL_CORE07", "INTERNAL_CORE04"],
+          "calibration_source_ids": ["CNINFO_OFFICIAL", "CHINACLEAR_OFFICIAL"],
+          "license_gate": "INTERNAL_DERIVATION_ONLY; INPUT_FACTS_METHOD_VERSION_AND_SNAPSHOTS_MUST_BE_PINNED",
+          "ingestion_status": "CONTRACT_ONLY_NOT_IMPLEMENTED"
+        }
+      ],
+      "tables": [
+        {
+          "table_id": "share_capital_event",
+          "grain": "证券、股本事实生效日、股份类别和修订一行",
+          "inherits": ["record_lineage", "security_key"],
+          "primary_key": ["security_id", "effective_date", "share_class", "revision_id"],
+          "fields": [
+            {"name": "security_id", "dtype": "string", "nullable": false, "unit": "identifier", "description": "永久证券标识", "source_binding": "core07_identity", "pit_role": "identity"},
+            {"name": "share_class", "dtype": "string", "nullable": false, "unit": "code", "description": "TOTAL、A、B、H 或其他股份类别", "source_binding": "core07_daily_projection", "pit_role": "fact"},
+            {"name": "effective_date", "dtype": "date32", "nullable": false, "unit": "calendar_date", "description": "股本事实生效日期", "source_binding": "core07_official_capital", "pit_role": "effective_time"},
+            {"name": "total_shares", "dtype": "decimal128(28,4)", "nullable": false, "unit": "share", "description": "官方总股本", "source_binding": "core07_official_capital", "pit_role": "fact"},
+            {"name": "a_shares", "dtype": "decimal128(28,4)", "nullable": true, "unit": "share", "description": "A 股股份数", "source_binding": "core07_official_capital", "pit_role": "fact"},
+            {"name": "unrestricted_a_shares", "dtype": "decimal128(28,4)", "nullable": true, "unit": "share", "description": "官方无限售条件 A 股或流通 A 股口径", "source_binding": "core07_official_capital", "pit_role": "fact"},
+            {"name": "restricted_a_shares", "dtype": "decimal128(28,4)", "nullable": true, "unit": "share", "description": "官方有限售条件 A 股", "source_binding": "core07_official_capital", "pit_role": "fact"},
+            {"name": "b_shares", "dtype": "decimal128(28,4)", "nullable": true, "unit": "share", "description": "B 股股份数", "source_binding": "core07_official_capital", "pit_role": "fact"},
+            {"name": "h_shares", "dtype": "decimal128(28,4)", "nullable": true, "unit": "share", "description": "H 股股份数", "source_binding": "core07_official_capital", "pit_role": "fact"},
+            {"name": "treasury_shares", "dtype": "decimal128(28,4)", "nullable": true, "unit": "share", "description": "官方明确披露时保存库存股，否则 NULL", "source_binding": "core07_official_capital", "pit_role": "fact"},
+            {"name": "change_shares", "dtype": "decimal128(28,4)", "nullable": true, "unit": "share", "description": "相对前一官方事实的变动股数", "source_binding": "core07_official_capital", "pit_role": "fact"},
+            {"name": "change_reason", "dtype": "string", "nullable": false, "unit": "code", "description": "IPO、增发、回购注销、送转、解禁、转股等原因", "source_binding": "core07_daily_projection", "pit_role": "fact"},
+            {"name": "announcement_id", "dtype": "string", "nullable": false, "unit": "identifier", "description": "股本变动公告或官方记录标识", "source_binding": "core07_official_capital", "pit_role": "lineage"},
+            {"name": "published_at", "dtype": "timestamp[us,Asia/Shanghai]", "nullable": true, "unit": "timestamp", "description": "官方事实公开时间", "source_binding": "core07_official_capital", "pit_role": "publication_time"},
+            {"name": "available_at", "dtype": "timestamp[us,Asia/Shanghai]", "nullable": false, "unit": "timestamp", "description": "该事实最早可用于决策的时间", "source_binding": "core07_daily_projection", "pit_role": "availability_time"},
+            {"name": "revision_id", "dtype": "string", "nullable": false, "unit": "identifier", "description": "不可变股本修订标识", "source_binding": "core07_daily_projection", "pit_role": "revision"}
+          ]
+        },
+        {
+          "table_id": "share_capital_daily_pit",
+          "grain": "股本投影、证券和交易日一行的官方口径股本",
+          "inherits": ["record_lineage", "security_key", "derived_lineage"],
+          "primary_key": ["projection_id", "security_id", "trade_date"],
+          "fields": [
+            {"name": "projection_id", "dtype": "string", "nullable": false, "unit": "identifier", "description": "钉住知识截止、股本事件快照和投影规则的标识", "source_binding": "core07_daily_projection", "pit_role": "identity"},
+            {"name": "security_id", "dtype": "string", "nullable": false, "unit": "identifier", "description": "永久证券标识", "source_binding": "core07_identity", "pit_role": "identity"},
+            {"name": "trade_date", "dtype": "date32", "nullable": false, "unit": "calendar_date", "description": "日级投影日期", "source_binding": "core07_daily_projection", "pit_role": "event_time"},
+            {"name": "knowledge_cutoff", "dtype": "timestamp[us,Asia/Shanghai]", "nullable": false, "unit": "timestamp", "description": "本投影允许使用事实的最晚可用时点", "source_binding": "core07_daily_projection", "pit_role": "availability_time"},
+            {"name": "official_total_shares", "dtype": "decimal128(28,4)", "nullable": false, "unit": "share", "description": "当时已知的官方总股本", "source_binding": "core07_daily_projection", "pit_role": "derived"},
+            {"name": "official_a_shares", "dtype": "decimal128(28,4)", "nullable": true, "unit": "share", "description": "当时已知的 A 股股份数", "source_binding": "core07_daily_projection", "pit_role": "derived"},
+            {"name": "official_unrestricted_a_shares", "dtype": "decimal128(28,4)", "nullable": true, "unit": "share", "description": "当时已知的官方无限售/流通 A 股", "source_binding": "core07_daily_projection", "pit_role": "derived"},
+            {"name": "official_restricted_a_shares", "dtype": "decimal128(28,4)", "nullable": true, "unit": "share", "description": "当时已知的有限售 A 股", "source_binding": "core07_daily_projection", "pit_role": "derived"},
+            {"name": "fact_effective_date", "dtype": "date32", "nullable": false, "unit": "calendar_date", "description": "被投影事实的官方生效日期", "source_binding": "core07_daily_projection", "pit_role": "effective_time"},
+            {"name": "fact_available_at", "dtype": "timestamp[us,Asia/Shanghai]", "nullable": false, "unit": "timestamp", "description": "被投影事实的源可用时间", "source_binding": "core07_daily_projection", "pit_role": "availability_time"},
+            {"name": "source_revision_id", "dtype": "string", "nullable": false, "unit": "identifier", "description": "被采用的股本事件修订", "source_binding": "core07_daily_projection", "pit_role": "lineage"}
+          ]
+        },
+        {
+          "table_id": "free_float_daily_derived",
+          "grain": "投影、证券、交易日和自由流通方法版本一行",
+          "inherits": ["record_lineage", "security_key", "derived_lineage"],
+          "primary_key": ["projection_id", "security_id", "trade_date", "free_float_method_version"],
+          "fields": [
+            {"name": "projection_id", "dtype": "string", "nullable": false, "unit": "identifier", "description": "与官方股本日级投影一致的标识", "source_binding": "core07_daily_projection", "pit_role": "identity"},
+            {"name": "security_id", "dtype": "string", "nullable": false, "unit": "identifier", "description": "永久证券标识", "source_binding": "core07_identity", "pit_role": "identity"},
+            {"name": "trade_date", "dtype": "date32", "nullable": false, "unit": "calendar_date", "description": "日级投影日期", "source_binding": "core07_daily_projection", "pit_role": "event_time"},
+            {"name": "free_float_shares", "dtype": "decimal128(28,4)", "nullable": true, "unit": "share", "description": "按独立方法估计的自由流通股本；输入不足时 NULL", "source_binding": "core07_daily_projection", "pit_role": "derived"},
+            {"name": "free_float_ratio", "dtype": "decimal128(18,10)", "nullable": true, "unit": "ratio", "description": "自由流通股本/官方总股本", "source_binding": "core07_daily_projection", "pit_role": "derived"},
+            {"name": "excluded_locked_shares", "dtype": "decimal128(28,4)", "nullable": true, "unit": "share", "description": "因锁定、战略持有或方法规定而剔除的股份数", "source_binding": "core07_daily_projection", "pit_role": "derived"},
+            {"name": "exclusion_evidence_complete", "dtype": "bool", "nullable": false, "unit": "boolean", "description": "自由流通剔除证据是否完整；不完整不得把缺失项视为 0", "source_binding": "core07_daily_projection", "pit_role": "quality"},
+            {"name": "free_float_method_version", "dtype": "string", "nullable": false, "unit": "identifier", "description": "自由流通定义、股东分类和阈值版本", "source_binding": "core07_daily_projection", "pit_role": "rule_version"},
+            {"name": "knowledge_cutoff", "dtype": "timestamp[us,Asia/Shanghai]", "nullable": false, "unit": "timestamp", "description": "自由流通输入的知识截止时点", "source_binding": "core07_daily_projection", "pit_role": "availability_time"},
+            {"name": "quality_flag", "dtype": "string", "nullable": false, "unit": "code", "description": "VALID、PARTIAL、CONFLICT、DO_NOT_USE", "source_binding": "core07_daily_projection", "pit_role": "quality"}
+          ]
+        }
+      ],
+      "quality_gates": [
+        {"gate_id": "CORE07-Q1", "severity": "BLOCK", "rule": "总股本与各股份类别组件在声明口径内可对账，所有股份数非负，单位统一为股。"},
+        {"gate_id": "CORE07-Q2", "severity": "BLOCK", "rule": "日级投影不得在 fact_available_at 之前前填；有效日早于公开日时必须保留两条时间轴。"},
+        {"gate_id": "CORE07-Q3", "severity": "BLOCK", "rule": "日级股本变化必须可追溯到股本事件或 CORE-04 公司行动，无法解释的跳变进入 quarantine。"},
+        {"gate_id": "CORE07-Q4", "severity": "BLOCK", "rule": "官方流通/无限售股本与派生自由流通股本不得共用字段或无版本转换。"},
+        {"gate_id": "CORE07-Q5", "severity": "BLOCK", "rule": "自由流通剔除证据不完整时输出 NULL/PARTIAL，禁止把未知战略或锁定股份填 0。"}
+      ],
+      "known_blockers": [
+        {"blocker_id": "CORE07-B1", "status": "OPEN", "blocks": "FULL_HISTORY_INGESTION", "description": "历史股本变动、跨上市股份类别、转股/期权/回购注销的完整有效日与公开时点尚未验证。"},
+        {"blocker_id": "CORE07-B2", "status": "OPEN", "blocks": "FREE_FLOAT_RESEARCH_GRADE", "description": "精确自由流通口径依赖历史股东身份、战略持有与锁定证据，公开官方数据未必完整。"},
+        {"blocker_id": "CORE07-B3", "status": "OPEN", "blocks": "AUTOMATED_BULK_INGESTION", "description": "公告、交易所股本服务和中国结算数据的批量许可及长期保存边界待确认。"}
+      ]
+    },
+    {
+      "plan_id": "CORE-08",
+      "dataset_id": "cn-a-share-daily-valuation",
+      "schema_version": "1.0.0",
+      "grain": "钉住知识截止和方法版本的证券日级市值、换手率与基本面估值指标",
+      "pit_contract": {
+        "decision_time_rule": "所有指标的 available_at 取价格、股本、财务报表、分红与计算完成时间的最大值；财务分母必须按实际公开时间选择，禁止用报告期末代替可用时间。收盘估值只能在收盘行情可用后进入研究。",
+        "required_time_fields": ["trade_date", "knowledge_cutoff", "price_available_at", "capital_available_at", "financial_available_at", "available_at", "revision_id", "snapshot_id"],
+        "revision_rule": "价格、股本、财务、分红输入快照或计算方法任何变化均生成新 valuation_projection_id/method_version；官方发布指标只作独立观察或校准，不覆盖内部可复算值。"
+      },
+      "source_bindings": [
+        {
+          "binding_id": "core08_market_valuation",
+          "primary_source_ids": ["INTERNAL_CORE03", "INTERNAL_CORE07"],
+          "calibration_source_ids": ["SSE_OFFICIAL", "SZSE_OFFICIAL", "BSE_OFFICIAL", "CSRC_OFFICIAL"],
+          "license_gate": "INTERNAL_DERIVATION_ONLY; CORE03_AND_CORE07_LICENSES_PROPAGATE; OFFICIAL_PUBLISHED_METRIC_ONLY_FOR_CALIBRATION_UNTIL_LICENSE_REVIEW",
+          "ingestion_status": "BLOCKED_BY_CORE03_AND_CORE07",
+          "evidence_urls": [
+            "https://www.sse.com.cn/aboutus/publication/monthly/explain/",
+            "https://www.csrc.gov.cn/csrc/c101954/c7555002/7555002/files/e4d83ebc724b46e2bcc7c4ef470e7592.pdf"
+          ]
+        },
+        {
+          "binding_id": "core08_fundamental_valuation",
+          "primary_source_ids": ["INTERNAL_UPSTREAM", "INTERNAL_CORE03", "INTERNAL_CORE07"],
+          "calibration_source_ids": ["SSE_OFFICIAL", "SZSE_OFFICIAL", "BSE_OFFICIAL", "CSRC_OFFICIAL"],
+          "license_gate": "INTERNAL_DERIVATION_ONLY; FINANCIAL_AND_DIVIDEND_INPUT_LICENSES_PROPAGATE; PINNED_PIT_SNAPSHOTS_REQUIRED",
+          "ingestion_status": "BLOCKED_BY_CORE13_CORE14_CORE17_CORE03_AND_CORE07",
+          "evidence_urls": [
+            "https://www.csrc.gov.cn/csrc/c101954/c7547588/content.shtml",
+            "https://www.csrc.gov.cn/csrc/c101954/c7088359/7088359/files/%E9%99%84%E4%BB%B63%EF%BC%9A%E8%AF%81%E5%88%B8%E6%9C%9F%E8%B4%A7%E4%B8%9A%E6%9C%BA%E6%9E%84%E5%86%85%E9%83%A8%E6%8E%A5%E5%8F%A3%E3%80%80%E8%B5%84%E8%AE%AF%E6%95%B0%E6%8D%AE.pdf"
+          ]
+        }
+      ],
+      "tables": [
+        {
+          "table_id": "daily_market_cap_turnover",
+          "grain": "估值投影、证券、交易日和方法版本一行",
+          "inherits": ["record_lineage", "security_key", "derived_lineage"],
+          "primary_key": ["valuation_projection_id", "security_id", "trade_date", "method_version"],
+          "fields": [
+            {"name": "valuation_projection_id", "dtype": "string", "nullable": false, "unit": "identifier", "description": "钉住价格、股本、知识截止和方法的估值投影标识", "source_binding": "core08_market_valuation", "pit_role": "identity"},
+            {"name": "security_id", "dtype": "string", "nullable": false, "unit": "identifier", "description": "永久证券标识", "source_binding": "core08_market_valuation", "pit_role": "identity"},
+            {"name": "trade_date", "dtype": "date32", "nullable": false, "unit": "calendar_date", "description": "估值交易日期", "source_binding": "core08_market_valuation", "pit_role": "event_time"},
+            {"name": "knowledge_cutoff", "dtype": "timestamp[us,Asia/Shanghai]", "nullable": false, "unit": "timestamp", "description": "本投影可使用事实的最晚可用时点", "source_binding": "core08_market_valuation", "pit_role": "availability_time"},
+            {"name": "raw_close", "dtype": "decimal128(24,6)", "nullable": false, "unit": "CNY_per_share", "description": "CORE-03 未复权收盘价；市值计算不用前复权价格", "source_binding": "core08_market_valuation", "pit_role": "derived"},
+            {"name": "turnover_cny", "dtype": "decimal128(28,4)", "nullable": true, "unit": "CNY", "description": "CORE-03 当日成交额", "source_binding": "core08_market_valuation", "pit_role": "derived"},
+            {"name": "volume_shares", "dtype": "int64", "nullable": true, "unit": "share", "description": "CORE-03 当日成交股数", "source_binding": "core08_market_valuation", "pit_role": "derived"},
+            {"name": "total_shares_denominator", "dtype": "decimal128(28,4)", "nullable": false, "unit": "share", "description": "用于总市值和总股本换手率的 PIT 总股本", "source_binding": "core08_market_valuation", "pit_role": "derived"},
+            {"name": "circulating_shares_denominator", "dtype": "decimal128(28,4)", "nullable": true, "unit": "share", "description": "用于流通市值和流通换手率的官方流通/无限售 A 股", "source_binding": "core08_market_valuation", "pit_role": "derived"},
+            {"name": "free_float_shares_denominator", "dtype": "decimal128(28,4)", "nullable": true, "unit": "share", "description": "用于自由流通市值和换手率的独立派生股本", "source_binding": "core08_market_valuation", "pit_role": "derived"},
+            {"name": "total_market_cap", "dtype": "decimal128(32,4)", "nullable": false, "unit": "CNY", "description": "raw_close * total_shares_denominator", "source_binding": "core08_market_valuation", "pit_role": "derived"},
+            {"name": "circulating_market_cap", "dtype": "decimal128(32,4)", "nullable": true, "unit": "CNY", "description": "raw_close * circulating_shares_denominator", "source_binding": "core08_market_valuation", "pit_role": "derived"},
+            {"name": "free_float_market_cap", "dtype": "decimal128(32,4)", "nullable": true, "unit": "CNY", "description": "raw_close * free_float_shares_denominator", "source_binding": "core08_market_valuation", "pit_role": "derived"},
+            {"name": "turnover_rate_total", "dtype": "decimal128(18,10)", "nullable": true, "unit": "ratio", "description": "volume_shares / total_shares_denominator", "source_binding": "core08_market_valuation", "pit_role": "derived"},
+            {"name": "turnover_rate_circulating", "dtype": "decimal128(18,10)", "nullable": true, "unit": "ratio", "description": "volume_shares / circulating_shares_denominator", "source_binding": "core08_market_valuation", "pit_role": "derived"},
+            {"name": "turnover_rate_free_float", "dtype": "decimal128(18,10)", "nullable": true, "unit": "ratio", "description": "volume_shares / free_float_shares_denominator", "source_binding": "core08_market_valuation", "pit_role": "derived"},
+            {"name": "price_available_at", "dtype": "timestamp[us,Asia/Shanghai]", "nullable": false, "unit": "timestamp", "description": "输入收盘行情的可用时间", "source_binding": "core08_market_valuation", "pit_role": "availability_time"},
+            {"name": "capital_available_at", "dtype": "timestamp[us,Asia/Shanghai]", "nullable": false, "unit": "timestamp", "description": "输入股本事实的可用时间", "source_binding": "core08_market_valuation", "pit_role": "availability_time"},
+            {"name": "available_at", "dtype": "timestamp[us,Asia/Shanghai]", "nullable": false, "unit": "timestamp", "description": "所有输入齐备并完成计算的最早时间", "source_binding": "core08_market_valuation", "pit_role": "availability_time"},
+            {"name": "method_version", "dtype": "string", "nullable": false, "unit": "identifier", "description": "市值、流通口径和换手率公式版本", "source_binding": "core08_market_valuation", "pit_role": "rule_version"}
+          ]
+        },
+        {
+          "table_id": "daily_fundamental_valuation",
+          "grain": "估值投影、证券、交易日和财务估值方法版本一行",
+          "inherits": ["record_lineage", "security_key", "derived_lineage"],
+          "primary_key": ["valuation_projection_id", "security_id", "trade_date", "valuation_method_version"],
+          "fields": [
+            {"name": "valuation_projection_id", "dtype": "string", "nullable": false, "unit": "identifier", "description": "钉住价格、股本、财务和分红快照的估值投影", "source_binding": "core08_fundamental_valuation", "pit_role": "identity"},
+            {"name": "security_id", "dtype": "string", "nullable": false, "unit": "identifier", "description": "永久证券标识", "source_binding": "core08_fundamental_valuation", "pit_role": "identity"},
+            {"name": "trade_date", "dtype": "date32", "nullable": false, "unit": "calendar_date", "description": "估值交易日期", "source_binding": "core08_fundamental_valuation", "pit_role": "event_time"},
+            {"name": "knowledge_cutoff", "dtype": "timestamp[us,Asia/Shanghai]", "nullable": false, "unit": "timestamp", "description": "本估值切片的知识截止时点", "source_binding": "core08_fundamental_valuation", "pit_role": "availability_time"},
+            {"name": "raw_close", "dtype": "decimal128(24,6)", "nullable": false, "unit": "CNY_per_share", "description": "估值分子所用未复权收盘价", "source_binding": "core08_fundamental_valuation", "pit_role": "derived"},
+            {"name": "total_market_cap", "dtype": "decimal128(32,4)", "nullable": false, "unit": "CNY", "description": "估值比率所用 PIT 总市值", "source_binding": "core08_fundamental_valuation", "pit_role": "derived"},
+            {"name": "net_income_ttm", "dtype": "decimal128(32,4)", "nullable": true, "unit": "CNY", "description": "PIT 归属口径 TTM 净利润分母事实", "source_binding": "core08_fundamental_valuation", "pit_role": "derived"},
+            {"name": "net_income_lyr", "dtype": "decimal128(32,4)", "nullable": true, "unit": "CNY", "description": "PIT 最近完整年度归属净利润", "source_binding": "core08_fundamental_valuation", "pit_role": "derived"},
+            {"name": "book_equity_latest", "dtype": "decimal128(32,4)", "nullable": true, "unit": "CNY", "description": "PIT 最新可用归属普通股股东权益", "source_binding": "core08_fundamental_valuation", "pit_role": "derived"},
+            {"name": "revenue_ttm", "dtype": "decimal128(32,4)", "nullable": true, "unit": "CNY", "description": "PIT TTM 营业收入", "source_binding": "core08_fundamental_valuation", "pit_role": "derived"},
+            {"name": "operating_cashflow_ttm", "dtype": "decimal128(32,4)", "nullable": true, "unit": "CNY", "description": "PIT TTM 经营活动现金流量净额", "source_binding": "core08_fundamental_valuation", "pit_role": "derived"},
+            {"name": "cash_dividend_ttm", "dtype": "decimal128(32,4)", "nullable": true, "unit": "CNY", "description": "PIT TTM 已公开并按方法确认的现金分红", "source_binding": "core08_fundamental_valuation", "pit_role": "derived"},
+            {"name": "pe_ttm", "dtype": "decimal128(24,10)", "nullable": true, "unit": "ratio", "description": "正净利润时 total_market_cap/net_income_ttm；非正时 NULL", "source_binding": "core08_fundamental_valuation", "pit_role": "derived"},
+            {"name": "pe_lyr", "dtype": "decimal128(24,10)", "nullable": true, "unit": "ratio", "description": "正最近年度净利润时的静态市盈率", "source_binding": "core08_fundamental_valuation", "pit_role": "derived"},
+            {"name": "earnings_yield_ttm", "dtype": "decimal128(24,12)", "nullable": true, "unit": "ratio", "description": "net_income_ttm/total_market_cap，允许保留负值", "source_binding": "core08_fundamental_valuation", "pit_role": "derived"},
+            {"name": "pb_lf", "dtype": "decimal128(24,10)", "nullable": true, "unit": "ratio", "description": "正权益时 total_market_cap/book_equity_latest", "source_binding": "core08_fundamental_valuation", "pit_role": "derived"},
+            {"name": "book_to_price", "dtype": "decimal128(24,12)", "nullable": true, "unit": "ratio", "description": "book_equity_latest/total_market_cap，保留符号", "source_binding": "core08_fundamental_valuation", "pit_role": "derived"},
+            {"name": "ps_ttm", "dtype": "decimal128(24,10)", "nullable": true, "unit": "ratio", "description": "正收入时 total_market_cap/revenue_ttm", "source_binding": "core08_fundamental_valuation", "pit_role": "derived"},
+            {"name": "sales_to_price", "dtype": "decimal128(24,12)", "nullable": true, "unit": "ratio", "description": "revenue_ttm/total_market_cap", "source_binding": "core08_fundamental_valuation", "pit_role": "derived"},
+            {"name": "pcf_ttm", "dtype": "decimal128(24,10)", "nullable": true, "unit": "ratio", "description": "正经营现金流时 total_market_cap/operating_cashflow_ttm", "source_binding": "core08_fundamental_valuation", "pit_role": "derived"},
+            {"name": "cashflow_to_price", "dtype": "decimal128(24,12)", "nullable": true, "unit": "ratio", "description": "operating_cashflow_ttm/total_market_cap，允许保留负值", "source_binding": "core08_fundamental_valuation", "pit_role": "derived"},
+            {"name": "dividend_yield_ttm", "dtype": "decimal128(24,12)", "nullable": true, "unit": "ratio", "description": "cash_dividend_ttm/total_market_cap，分红口径由方法版本定义", "source_binding": "core08_fundamental_valuation", "pit_role": "derived"},
+            {"name": "financial_report_period", "dtype": "string", "nullable": true, "unit": "report_period", "description": "主要财务分母对应最新报告期", "source_binding": "core08_fundamental_valuation", "pit_role": "lineage"},
+            {"name": "financial_revision_id", "dtype": "string", "nullable": true, "unit": "identifier", "description": "钉住的财务标准化修订标识", "source_binding": "core08_fundamental_valuation", "pit_role": "lineage"},
+            {"name": "financial_available_at", "dtype": "timestamp[us,Asia/Shanghai]", "nullable": true, "unit": "timestamp", "description": "所用财务事实的最晚公开可用时间", "source_binding": "core08_fundamental_valuation", "pit_role": "availability_time"},
+            {"name": "price_available_at", "dtype": "timestamp[us,Asia/Shanghai]", "nullable": false, "unit": "timestamp", "description": "所用收盘行情可用时间", "source_binding": "core08_fundamental_valuation", "pit_role": "availability_time"},
+            {"name": "capital_available_at", "dtype": "timestamp[us,Asia/Shanghai]", "nullable": false, "unit": "timestamp", "description": "所用总股本可用时间", "source_binding": "core08_fundamental_valuation", "pit_role": "availability_time"},
+            {"name": "available_at", "dtype": "timestamp[us,Asia/Shanghai]", "nullable": false, "unit": "timestamp", "description": "所有输入齐备并完成计算后的最早时间", "source_binding": "core08_fundamental_valuation", "pit_role": "availability_time"},
+            {"name": "nonpositive_denominator_flags", "dtype": "string", "nullable": false, "unit": "bitset", "description": "净利润、权益、收入、现金流等非正或零分母标记", "source_binding": "core08_fundamental_valuation", "pit_role": "quality"},
+            {"name": "valuation_method_version", "dtype": "string", "nullable": false, "unit": "identifier", "description": "TTM、归属口径、异常分母和分红确认方法版本", "source_binding": "core08_fundamental_valuation", "pit_role": "rule_version"}
+          ]
+        }
+      ],
+      "quality_gates": [
+        {"gate_id": "CORE08-Q1", "severity": "BLOCK", "rule": "市值必须使用未复权价格；总、流通和自由流通市值分别使用对应 PIT 股本，禁止混用口径。"},
+        {"gate_id": "CORE08-Q2", "severity": "BLOCK", "rule": "全部指标可由钉住输入与方法版本重算；available_at 必须等于或晚于所有输入可用时间。"},
+        {"gate_id": "CORE08-Q3", "severity": "BLOCK", "rule": "财务分母按实际公告/更正可用时间进入；禁止按报告期末提前可见或用未来修订回填。"},
+        {"gate_id": "CORE08-Q4", "severity": "BLOCK", "rule": "除数为 0 输出 NULL；传统 PE/PB/PS/PCF 对非正分母按方法输出 NULL，同时保留有经济意义的带符号反向收益率。"},
+        {"gate_id": "CORE08-Q5", "severity": "REVIEW", "rule": "交易所或第三方已发布估值仅作独立校准；方法差异必须解释，禁止静默替换内部可复算指标。"}
+      ],
+      "known_blockers": [
+        {"blocker_id": "CORE08-B1", "status": "OPEN", "blocks": "MARKET_CAP_AND_TURNOVER_BUILD", "description": "依赖 CORE-03 与 CORE-07 合格快照，目前尚未接入。"},
+        {"blocker_id": "CORE08-B2", "status": "OPEN", "blocks": "FUNDAMENTAL_VALUATION_BUILD", "description": "PE/PB/PS/PCF 与股息率依赖后续 CORE-13 财报、CORE-14 财务标准化和 CORE-17 分红输入；CORE-01～08 完成后该部分仍不能宣称可用。"},
+        {"blocker_id": "CORE08-B3", "status": "OPEN", "blocks": "RESEARCH_GRADE", "description": "金融行业分母、TTM 重构、负值处理、官方指标方法差异和历史自由流通口径仍需方法冻结与样例验收。"},
+        {"blocker_id": "CORE08-B4", "status": "OPEN", "blocks": "OFFICIAL_METRIC_CALIBRATION", "description": "官方日估值指标的历史获取和许可边界未确认，只能先冻结内部可复算合同。"}
+      ]
+    }
+  ]
+}

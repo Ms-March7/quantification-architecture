@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "candidate_assets.schema.json",
+  "title": "Quantification central candidate asset index",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "index_id",
+    "scan_root",
+    "candidate_root_count",
+    "evidence_file_count",
+    "manifest_file_count",
+    "content_fingerprint_sha256",
+    "purpose_ceiling",
+    "formal_effect",
+    "formal_catalog_write",
+    "candidate_roots"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "index_id": {"const": "candidate-assets-central-index-v1"},
+    "scan_root": {"const": "data/market/quarantine"},
+    "candidate_root_count": {"type": "integer", "minimum": 0},
+    "evidence_file_count": {"type": "integer", "minimum": 0},
+    "manifest_file_count": {"type": "integer", "minimum": 0},
+    "content_fingerprint_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "purpose_ceiling": {"const": "INSPECTION_ONLY"},
+    "formal_effect": {"const": "NONE"},
+    "formal_catalog_write": {"const": false},
+    "candidate_roots": {"type": "array"}
+  },
+  "additionalProperties": true
+}

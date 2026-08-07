@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "mode": "local_download_candidate",
+  "dataset_id": "csmar-trd-dalyr-pilot",
+  "run_id": "d2a04b-csmar-trd-dalyr-2005-2009-20260729-v1",
+  "source_id": "CSMAR_MANUAL_EXPORT",
+  "dataset_schema_version": "current-export-20260728-d2a04b-v1",
+  "authorized_local_research_download": true,
+  "source_access_note": "User authorized this manually downloaded TRD_Dalyr export for local academic research use through the Tsinghua institutional CSMAR session. Full-stream inspection identifies the actual business coverage as 2005-01-04 through 2009-12-31. No redistribution, formal source admission or research-readiness assertion is made.",
+  "include_patterns": [
+    "日个股回报率文件003237947(仅供清华大学使用).zip"
+  ],
+  "zip_member_patterns": [
+    "TRD_Dalyr*.csv"
+  ],
+  "table": {
+    "table_name": "trd_dalyr_d2a04b_2005_2009_candidate",
+    "expected_columns": [
+      "Stkcd",
+      "Trddt",
+      "Opnprc",
+      "Hiprc",
+      "Loprc",
+      "Clsprc",
+      "Dnshrtrd",
+      "Dnvaltrd",
+      "Dsmvosd",
+      "Dsmvtll",
+      "Dretwd",
+      "Dretnd",
+      "Adjprcwd",
+      "Adjprcnd",
+      "Markettype",
+      "Capchgdt",
+      "Trdsta",
+      "Ahshrtrd_D",
+      "Ahvaltrd_D",
+      "PreClosePrice",
+      "ChangeRatio",
+      "LimitDown",
+      "LimitUp",
+      "LimitStatus"
+    ],
+    "column_types": {
+      "Stkcd": "VARCHAR",
+      "Trddt": "DATE",
+      "Opnprc": "DOUBLE",
+      "Hiprc": "DOUBLE",
+      "Loprc": "DOUBLE",
+      "Clsprc": "DOUBLE",
+      "Dnshrtrd": "BIGINT",
+      "Dnvaltrd": "DOUBLE",
+      "Dsmvosd": "DOUBLE",
+      "Dsmvtll": "DOUBLE",
+      "Dretwd": "DOUBLE",
+      "Dretnd": "DOUBLE",
+      "Adjprcwd": "DOUBLE",
+      "Adjprcnd": "DOUBLE",
+      "Markettype": "INTEGER",
+      "Capchgdt": "DATE",
+      "Trdsta": "INTEGER",
+      "Ahshrtrd_D": "BIGINT",
+      "Ahvaltrd_D": "DOUBLE",
+      "PreClosePrice": "DOUBLE",
+      "ChangeRatio": "DOUBLE",
+      "LimitDown": "DOUBLE",
+      "LimitUp": "DOUBLE",
+      "LimitStatus": "INTEGER"
+    },
+    "date_column": "Trddt",
+    "key_columns": [
+      "Stkcd",
+      "Trddt"
+    ],
+    "required_columns": [
+      "Stkcd",
+      "Trddt"
+    ],
+    "delimiter": ",",
+    "encoding": "utf-8-sig",
+    "allow_extra_columns": false,
+    "partition_mode": "year_month"
+  },
+  "limits": {
+    "max_packages": 1,
+    "max_csv_sources": 2,
+    "max_archive_members": 4,
+    "max_total_input_bytes": 134217728,
+    "max_total_unpacked_bytes": 536870912,
+    "max_compression_ratio": 10,
+    "max_rows": 2000000
+  }
+}

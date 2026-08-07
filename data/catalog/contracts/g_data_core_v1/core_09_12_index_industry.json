@@ -1,0 +1,1472 @@
+{
+  "schema_version": 1,
+  "contract_version": "1.0.0",
+  "group_id": "CORE-09-12",
+  "datasets": [
+    {
+      "plan_id": "CORE-09",
+      "dataset_id": "cn-index-master",
+      "schema_version": "1.0.0",
+      "grain": "one record per provider-native index series, return variant, currency, methodology version and valid-time interval",
+      "pit_contract": {
+        "decision_time_rule": "An index or methodology version is visible only from its official publication/availability time; launch date, base date and back-calculated history never substitute for publication time.",
+        "required_time_fields": [
+          "base_date",
+          "launch_date",
+          "methodology_published_at",
+          "methodology_effective_at",
+          "valid_from",
+          "valid_to",
+          "available_at",
+          "revision_id",
+          "snapshot_id",
+          "ingested_at"
+        ],
+        "revision_rule": "Never overwrite an index name, code, category, return variant or methodology. Close the prior valid interval, append a new version, retain the official document URL/hash, and preserve code aliases and successor/predecessor links."
+      },
+      "source_bindings": [
+        {
+          "binding_id": "official_index_catalog",
+          "primary_source_ids": [
+            "SSE_INDEX_OFFICIAL",
+            "CSI_INDEX_OFFICIAL",
+            "CNI_INDEX_OFFICIAL",
+            "BSE_INDEX_OFFICIAL"
+          ],
+          "calibration_source_ids": [
+            "SSE_OFFICIAL",
+            "SZSE_OFFICIAL",
+            "BSE_OFFICIAL"
+          ],
+          "license_gate": "ALLOW_METADATA_PILOT_WITH_ATTRIBUTION; BLOCK_BULK_INGESTION_OR_REDISTRIBUTION_WHEN_PROVIDER_TERMS_OR_DATA_RIGHTS_ARE_NOT_DOCUMENTED",
+          "ingestion_status": "READY_FOR_METADATA_PILOT__FULL_CATALOG_BLOCKED_PENDING_ACCESS_AND_LICENSE_MATRIX"
+        },
+        {
+          "binding_id": "internal_index_identity",
+          "primary_source_ids": [
+            "INTERNAL_CORE09"
+          ],
+          "calibration_source_ids": [],
+          "license_gate": "INTERNAL_DERIVED_ONLY_AFTER_OFFICIAL_SOURCE_LICENSE_GATE_PASSES",
+          "ingestion_status": "PLANNED"
+        }
+      ],
+      "tables": [
+        {
+          "table_id": "index_master_version",
+          "grain": "one valid-time version of one provider-native index series",
+          "inherits": [
+            "record_lineage",
+            "index_key"
+          ],
+          "primary_key": [
+            "provider_id",
+            "index_code",
+            "return_variant",
+            "currency",
+            "methodology_version",
+            "valid_from"
+          ],
+          "fields": [
+            {
+              "name": "index_family_id",
+              "dtype": "string",
+              "nullable": false,
+              "unit": null,
+              "description": "Stable workspace identity joining price, total-return and net-total-return variants without collapsing provider-native series.",
+              "source_binding": "internal_index_identity",
+              "pit_role": "identity"
+            },
+            {
+              "name": "index_name_zh",
+              "dtype": "string",
+              "nullable": false,
+              "unit": null,
+              "description": "Official Chinese full name for this valid-time version.",
+              "source_binding": "official_index_catalog",
+              "pit_role": "dimension"
+            },
+            {
+              "name": "index_short_name_zh",
+              "dtype": "string",
+              "nullable": true,
+              "unit": null,
+              "description": "Official Chinese short name.",
+              "source_binding": "official_index_catalog",
+              "pit_role": "dimension"
+            },
+            {
+              "name": "index_name_en",
+              "dtype": "string",
+              "nullable": true,
+              "unit": null,
+              "description": "Official English full name where published.",
+              "source_binding": "official_index_catalog",
+              "pit_role": "dimension"
+            },
+            {
+              "name": "publisher_ids",
+              "dtype": "list<string>",
+              "nullable": false,
+              "unit": null,
+              "description": "All official joint publishers/owners; preserves SSE-CSI, SZSE-CNI and BSE-CSI joint publication.",
+              "source_binding": "official_index_catalog",
+              "pit_role": "dimension"
+            },
+            {
+              "name": "asset_class",
+              "dtype": "string",
+              "nullable": false,
+              "unit": null,
+              "description": "Equity, bond, fund, REITs, commodity, derivative, multi-asset or other official class.",
+              "source_binding": "official_index_catalog",
+              "pit_role": "dimension"
+            },
+            {
+              "name": "catalog_category",
+              "dtype": "string",
+              "nullable": false,
+              "unit": null,
+              "description": "Provider category normalized to broad/composite, size/board, industry/subindustry, theme/chain, style, strategy/factor/dividend, REITs, fund, bond, commodity, derivative or other.",
+              "source_binding": "official_index_catalog",
+              "pit_role": "dimension"
+            },
+            {
+              "name": "market_scope",
+              "dtype": "list<string>",
+              "nullable": false,
+              "unit": null,
+              "description": "Official markets/venues represented by the series.",
+              "source_binding": "official_index_catalog",
+              "pit_role": "dimension"
+            },
+            {
+              "name": "parent_price_index_code",
+              "dtype": "string",
+              "nullable": true,
+              "unit": null,
+              "description": "Provider-native parent price index code for a published return variant.",
+              "source_binding": "official_index_catalog",
+              "pit_role": "dimension"
+            },
+            {
+              "name": "base_date",
+              "dtype": "date32",
+              "nullable": false,
+              "unit": null,
+              "description": "Official base date; not a knowledge time.",
+              "source_binding": "official_index_catalog",
+              "pit_role": "reference_time"
+            },
+            {
+              "name": "base_value",
+              "dtype": "decimal(24,8)",
+              "nullable": false,
+              "unit": "index_points",
+              "description": "Official base point value.",
+              "source_binding": "official_index_catalog",
+              "pit_role": "value"
+            },
+            {
+              "name": "launch_date",
+              "dtype": "date32",
+              "nullable": false,
+              "unit": null,
+              "description": "Official live launch date; separates live history from back-calculated history.",
+              "source_binding": "official_index_catalog",
+              "pit_role": "valid_time_start"
+            },
+            {
+              "name": "termination_date",
+              "dtype": "date32",
+              "nullable": true,
+              "unit": null,
+              "description": "Official termination/cessation date if any.",
+              "source_binding": "official_index_catalog",
+              "pit_role": "valid_time_end"
+            },
+            {
+              "name": "calculation_frequency",
+              "dtype": "string",
+              "nullable": false,
+              "unit": null,
+              "description": "Official calculation/publication frequency, including real-time or end-of-day.",
+              "source_binding": "official_index_catalog",
+              "pit_role": "dimension"
+            },
+            {
+              "name": "weighting_method",
+              "dtype": "string",
+              "nullable": true,
+              "unit": null,
+              "description": "Official weighting method summary; full formula remains in the versioned methodology document.",
+              "source_binding": "official_index_catalog",
+              "pit_role": "dimension"
+            },
+            {
+              "name": "review_frequency",
+              "dtype": "string",
+              "nullable": true,
+              "unit": null,
+              "description": "Official scheduled sample-review frequency.",
+              "source_binding": "official_index_catalog",
+              "pit_role": "dimension"
+            },
+            {
+              "name": "methodology_url",
+              "dtype": "string",
+              "nullable": false,
+              "unit": null,
+              "description": "First-party methodology URL.",
+              "source_binding": "official_index_catalog",
+              "pit_role": "lineage"
+            },
+            {
+              "name": "methodology_sha256",
+              "dtype": "string",
+              "nullable": false,
+              "unit": null,
+              "description": "Hash of the legally retained methodology artifact or fetched evidence bytes.",
+              "source_binding": "official_index_catalog",
+              "pit_role": "revision"
+            },
+            {
+              "name": "methodology_published_at",
+              "dtype": "timestamp[us,Asia/Shanghai]",
+              "nullable": false,
+              "unit": null,
+              "description": "Official publication time of this methodology version.",
+              "source_binding": "official_index_catalog",
+              "pit_role": "publication_time"
+            },
+            {
+              "name": "methodology_effective_at",
+              "dtype": "timestamp[us,Asia/Shanghai]",
+              "nullable": false,
+              "unit": null,
+              "description": "Official effective time of this methodology version.",
+              "source_binding": "official_index_catalog",
+              "pit_role": "valid_time_start"
+            },
+            {
+              "name": "valid_from",
+              "dtype": "timestamp[us,Asia/Shanghai]",
+              "nullable": false,
+              "unit": null,
+              "description": "Start of this master-record valid-time interval.",
+              "source_binding": "official_index_catalog",
+              "pit_role": "valid_time_start"
+            },
+            {
+              "name": "valid_to",
+              "dtype": "timestamp[us,Asia/Shanghai]",
+              "nullable": true,
+              "unit": null,
+              "description": "Exclusive end of this master-record valid-time interval.",
+              "source_binding": "official_index_catalog",
+              "pit_role": "valid_time_end"
+            }
+          ]
+        },
+        {
+          "table_id": "index_code_alias_history",
+          "grain": "one provider/venue code alias valid-time interval for an index family",
+          "inherits": [
+            "record_lineage"
+          ],
+          "primary_key": [
+            "index_family_id",
+            "code_system",
+            "alias_code",
+            "valid_from"
+          ],
+          "fields": [
+            {
+              "name": "index_family_id",
+              "dtype": "string",
+              "nullable": false,
+              "unit": null,
+              "description": "Stable workspace index family identity.",
+              "source_binding": "internal_index_identity",
+              "pit_role": "identity"
+            },
+            {
+              "name": "code_system",
+              "dtype": "string",
+              "nullable": false,
+              "unit": null,
+              "description": "Provider code, exchange quote code, vendor publication code or retired official code system.",
+              "source_binding": "official_index_catalog",
+              "pit_role": "dimension"
+            },
+            {
+              "name": "alias_code",
+              "dtype": "string",
+              "nullable": false,
+              "unit": null,
+              "description": "Official code in the named code system.",
+              "source_binding": "official_index_catalog",
+              "pit_role": "identity"
+            },
+            {
+              "name": "valid_from",
+              "dtype": "timestamp[us,Asia/Shanghai]",
+              "nullable": false,
+              "unit": null,
+              "description": "Alias validity start.",
+              "source_binding": "official_index_catalog",
+              "pit_role": "valid_time_start"
+            },
+            {
+              "name": "valid_to",
+              "dtype": "timestamp[us,Asia/Shanghai]",
+              "nullable": true,
+              "unit": null,
+              "description": "Exclusive alias validity end.",
+              "source_binding": "official_index_catalog",
+              "pit_role": "valid_time_end"
+            },
+            {
+              "name": "announced_at",
+              "dtype": "timestamp[us,Asia/Shanghai]",
+              "nullable": false,
+              "unit": null,
+              "description": "Official time the alias/code change became known.",
+              "source_binding": "official_index_catalog",
+              "pit_role": "publication_time"
+            }
+          ]
+        },
+        {
+          "table_id": "index_coverage_matrix",
+          "grain": "one discovered index series by asset and coverage capability as of one catalog audit",
+          "inherits": [
+            "record_lineage",
+            "index_key"
+          ],
+          "primary_key": [
+            "provider_id",
+            "index_code",
+            "return_variant",
+            "currency",
+            "methodology_version",
+            "audit_date"
+          ],
+          "fields": [
+            {
+              "name": "audit_date",
+              "dtype": "date32",
+              "nullable": false,
+              "unit": null,
+              "description": "Catalog audit date.",
+              "source_binding": "official_index_catalog",
+              "pit_role": "transaction_time"
+            },
+            {
+              "name": "metadata_status",
+              "dtype": "enum[OK,MISSING,CONFLICT,BLOCKED_LICENSE,BLOCKED_ACCESS]",
+              "nullable": false,
+              "unit": null,
+              "description": "Metadata acquisition state.",
+              "source_binding": "official_index_catalog",
+              "pit_role": "value"
+            },
+            {
+              "name": "daily_status",
+              "dtype": "enum[OK,PARTIAL,MISSING,CONFLICT,BLOCKED_LICENSE,BLOCKED_ACCESS]",
+              "nullable": false,
+              "unit": null,
+              "description": "Official daily-history coverage state.",
+              "source_binding": "official_index_catalog",
+              "pit_role": "value"
+            },
+            {
+              "name": "constituent_history_status",
+              "dtype": "enum[OK,PARTIAL,MISSING,CONFLICT,BLOCKED_LICENSE,BLOCKED_ACCESS,NOT_APPLICABLE]",
+              "nullable": false,
+              "unit": null,
+              "description": "Historical constituent coverage state; current samples alone are PARTIAL.",
+              "source_binding": "official_index_catalog",
+              "pit_role": "value"
+            },
+            {
+              "name": "weight_history_status",
+              "dtype": "enum[OK,PARTIAL,MISSING,CONFLICT,BLOCKED_LICENSE,BLOCKED_ACCESS,NOT_APPLICABLE]",
+              "nullable": false,
+              "unit": null,
+              "description": "Historical weight coverage state; rebalance notices do not imply daily weights.",
+              "source_binding": "official_index_catalog",
+              "pit_role": "value"
+            },
+            {
+              "name": "asset_license_status",
+              "dtype": "enum[OK,REVIEW,BLOCKED,NOT_APPLICABLE]",
+              "nullable": false,
+              "unit": null,
+              "description": "Internal retention/use/share rights status for the exact asset.",
+              "source_binding": "official_index_catalog",
+              "pit_role": "value"
+            },
+            {
+              "name": "pit_status",
+              "dtype": "enum[OK,PARTIAL,MISSING,BLOCKED]",
+              "nullable": false,
+              "unit": null,
+              "description": "Whether publication/effective/version times support PIT use.",
+              "source_binding": "official_index_catalog",
+              "pit_role": "value"
+            }
+          ]
+        }
+      ],
+      "quality_gates": [
+        {
+          "gate_id": "IDX_MASTER_IDENTITY_UNIQUE",
+          "severity": "BLOCKING",
+          "rule": "Provider-native index identity is unique by provider_id + index_code + return_variant + currency + methodology_version + valid_from, while code aliases never collapse distinct providers or return variants."
+        },
+        {
+          "gate_id": "IDX_MASTER_FULL_DISCOVERY_ACCOUNTING",
+          "severity": "BLOCKING",
+          "rule": "Every index discoverable in each approved official catalog must appear in the coverage matrix as OK, PARTIAL, MISSING or BLOCKED; easy-to-download subsets are not allowed to masquerade as full coverage."
+        },
+        {
+          "gate_id": "IDX_MASTER_VARIANT_EXPLICIT",
+          "severity": "BLOCKING",
+          "rule": "Price, total-return and net-total-return variants and currencies are explicit; an unpublished variant is never synthesized inside CORE-09."
+        },
+        {
+          "gate_id": "IDX_MASTER_METHODOLOGY_VERSIONED",
+          "severity": "BLOCKING",
+          "rule": "Every usable series has a first-party methodology URL/hash, publication/effective time and non-overlapping valid-time versions."
+        },
+        {
+          "gate_id": "IDX_MASTER_LICENSE_DOCUMENTED",
+          "severity": "BLOCKING",
+          "rule": "The exact right for automated collection, local retention, cross-project internal sharing and any external redistribution is documented per provider and asset type before quality_status=OK."
+        }
+      ],
+      "known_blockers": [
+        {
+          "blocker_id": "IDX_FULL_CATALOG_EXPORT_UNCONFIRMED",
+          "severity": "HIGH",
+          "status": "OPEN",
+          "description": "SSE/CSI/CNI/BSE public sites expose catalog and detail pages, but a stable documented machine-readable full-catalog export and its automation terms are not confirmed. Official entrances: https://www.sse.com.cn/market/sseindex/indexlist/ ; https://www.csindex.com.cn/ ; https://www.cnindex.com.cn/module/index-detail.html ; https://www.bse.cn/nq/quotation.html",
+          "required_resolution": "Run per-provider metadata pilot using only documented public downloads/endpoints; record terms, response evidence and catalog totals before bulk discovery."
+        },
+        {
+          "blocker_id": "IDX_RIGHTS_NOT_UNIFORM",
+          "severity": "HIGH",
+          "status": "OPEN",
+          "description": "Index metadata, methodology documents, real-time values, end-of-day history and constituent weights have different rights. SSE allows non-commercial browsing/download but requires permission for real-time values and constituent weights; CNI data products may require an agreement/fee; BSE market-data use is licensed.",
+          "required_resolution": "Complete a field-level rights matrix from https://www.sse.com.cn/home/legal/ , https://www.sse.com.cn/lawandrules/sselawsrules2025/trade/universal/c/c_20250612_10781702.shtml , https://www.cnindex.com.cn/zh_services/data_licensing/index.html?act_menu=4&act_service=3 and https://www.bse.cn/application/guide.html."
+        }
+      ]
+    },
+    {
+      "plan_id": "CORE-10",
+      "dataset_id": "cn-index-constituents-weights-pit",
+      "schema_version": "1.0.0",
+      "grain": "one constituent membership interval, rebalance event or officially timestamped weight observation per index series and security",
+      "pit_contract": {
+        "decision_time_rule": "Membership and weights become knowable at official available_at, but become economically valid only at effective_at/weight_as_of. Backtests must apply both clocks and may never use a current constituent list to reconstruct prior periods.",
+        "required_time_fields": [
+          "announced_at",
+          "available_at",
+          "effective_at",
+          "valid_from",
+          "valid_to",
+          "weight_as_of",
+          "revision_id",
+          "snapshot_id",
+          "ingested_at"
+        ],
+        "revision_rule": "Append corrections as new revision_id records, preserve the superseded payload and source hash, and never rewrite a prior membership interval or weight observation in place."
+      },
+      "source_bindings": [
+        {
+          "binding_id": "official_index_membership",
+          "primary_source_ids": [
+            "SSE_INDEX_OFFICIAL",
+            "CSI_INDEX_OFFICIAL",
+            "CNI_INDEX_OFFICIAL",
+            "BSE_INDEX_OFFICIAL"
+          ],
+          "calibration_source_ids": [
+            "SSE_OFFICIAL",
+            "SZSE_OFFICIAL",
+            "BSE_OFFICIAL"
+          ],
+          "license_gate": "BLOCK_UNLESS_HISTORICAL_CONSTITUENT_AND_WEIGHT_RETENTION_RIGHTS_ARE_DOCUMENTED_FOR_THE_EXACT_PROVIDER_AND_SERIES",
+          "ingestion_status": "BLOCKED_LICENSE_AND_HISTORICAL_AVAILABILITY"
+        },
+        {
+          "binding_id": "internal_index_resolution",
+          "primary_source_ids": [
+            "INTERNAL_CORE09",
+            "INTERNAL_CORE01"
+          ],
+          "calibration_source_ids": [],
+          "license_gate": "INTERNAL_ONLY_AFTER_UPSTREAM_GATES_PASS",
+          "ingestion_status": "BLOCKED_BY_CORE09_AND_CORE01"
+        }
+      ],
+      "tables": [
+        {
+          "table_id": "index_constituent_interval",
+          "grain": "one security membership valid-time interval in one index series",
+          "inherits": [
+            "record_lineage",
+            "index_key",
+            "security_key"
+          ],
+          "primary_key": [
+            "provider_id",
+            "index_code",
+            "return_variant",
+            "currency",
+            "methodology_version",
+            "security_id",
+            "valid_from",
+            "revision_id"
+          ],
+          "fields": [
+            {
+              "name": "membership_action",
+              "dtype": "enum[ADD,REMOVE,RETAIN,INITIAL,UNKNOWN]",
+              "nullable": false,
+              "unit": null,
+              "description": "Official membership action represented by the event/interval.",
+              "source_binding": "official_index_membership",
+              "pit_role": "value"
+            },
+            {
+              "name": "adjustment_type",
+              "dtype": "enum[INITIAL,SCHEDULED,TEMPORARY,CORPORATE_ACTION,METHODOLOGY_CHANGE,CORRECTION,UNKNOWN]",
+              "nullable": false,
+              "unit": null,
+              "description": "Reason/type of sample change.",
+              "source_binding": "official_index_membership",
+              "pit_role": "dimension"
+            },
+            {
+              "name": "announced_at",
+              "dtype": "timestamp[us,Asia/Shanghai]",
+              "nullable": false,
+              "unit": null,
+              "description": "Official announcement timestamp; date-only releases use the documented conservative availability convention.",
+              "source_binding": "official_index_membership",
+              "pit_role": "publication_time"
+            },
+            {
+              "name": "effective_at",
+              "dtype": "timestamp[us,Asia/Shanghai]",
+              "nullable": false,
+              "unit": null,
+              "description": "Official sample-change effective timestamp.",
+              "source_binding": "official_index_membership",
+              "pit_role": "valid_time_start"
+            },
+            {
+              "name": "valid_from",
+              "dtype": "timestamp[us,Asia/Shanghai]",
+              "nullable": false,
+              "unit": null,
+              "description": "Membership interval start, normally equal to effective_at.",
+              "source_binding": "official_index_membership",
+              "pit_role": "valid_time_start"
+            },
+            {
+              "name": "valid_to",
+              "dtype": "timestamp[us,Asia/Shanghai]",
+              "nullable": true,
+              "unit": null,
+              "description": "Exclusive membership interval end.",
+              "source_binding": "official_index_membership",
+              "pit_role": "valid_time_end"
+            },
+            {
+              "name": "source_event_id",
+              "dtype": "string",
+              "nullable": false,
+              "unit": null,
+              "description": "Stable identifier for the official rebalance/adjustment announcement.",
+              "source_binding": "official_index_membership",
+              "pit_role": "lineage"
+            }
+          ]
+        },
+        {
+          "table_id": "index_weight_observation",
+          "grain": "one official weight for one index component at one explicitly defined as-of instant",
+          "inherits": [
+            "record_lineage",
+            "index_key",
+            "security_key"
+          ],
+          "primary_key": [
+            "provider_id",
+            "index_code",
+            "return_variant",
+            "currency",
+            "methodology_version",
+            "security_id",
+            "weight_as_of",
+            "weight_basis",
+            "revision_id"
+          ],
+          "fields": [
+            {
+              "name": "weight",
+              "dtype": "decimal(18,10)",
+              "nullable": false,
+              "unit": "fraction",
+              "description": "Official component weight as a fraction in [0,1].",
+              "source_binding": "official_index_membership",
+              "pit_role": "value"
+            },
+            {
+              "name": "weight_basis",
+              "dtype": "enum[CLOSE,NEXT_OPEN,REBALANCE_REFERENCE,INTRADAY,OTHER]",
+              "nullable": false,
+              "unit": null,
+              "description": "Provider-defined weight basis; close and next-open weights are distinct facts.",
+              "source_binding": "official_index_membership",
+              "pit_role": "dimension"
+            },
+            {
+              "name": "weight_as_of",
+              "dtype": "timestamp[us,Asia/Shanghai]",
+              "nullable": false,
+              "unit": null,
+              "description": "Economic reference instant for this weight.",
+              "source_binding": "official_index_membership",
+              "pit_role": "valid_time_start"
+            },
+            {
+              "name": "announced_at",
+              "dtype": "timestamp[us,Asia/Shanghai]",
+              "nullable": false,
+              "unit": null,
+              "description": "Official publication time where supplied.",
+              "source_binding": "official_index_membership",
+              "pit_role": "publication_time"
+            },
+            {
+              "name": "is_complete_weight_set",
+              "dtype": "boolean",
+              "nullable": false,
+              "unit": null,
+              "description": "True only when the source asserts a complete constituent weight set for the as-of instant.",
+              "source_binding": "official_index_membership",
+              "pit_role": "quality_flag"
+            }
+          ]
+        },
+        {
+          "table_id": "index_rebalance_event",
+          "grain": "one official index rebalance or temporary-adjustment event",
+          "inherits": [
+            "record_lineage",
+            "index_key"
+          ],
+          "primary_key": [
+            "provider_id",
+            "index_code",
+            "return_variant",
+            "currency",
+            "methodology_version",
+            "source_event_id",
+            "revision_id"
+          ],
+          "fields": [
+            {
+              "name": "source_event_id",
+              "dtype": "string",
+              "nullable": false,
+              "unit": null,
+              "description": "Official event identity.",
+              "source_binding": "official_index_membership",
+              "pit_role": "identity"
+            },
+            {
+              "name": "event_type",
+              "dtype": "enum[SCHEDULED,TEMPORARY,METHODOLOGY_CHANGE,CORRECTION,INITIAL]",
+              "nullable": false,
+              "unit": null,
+              "description": "Official event type.",
+              "source_binding": "official_index_membership",
+              "pit_role": "dimension"
+            },
+            {
+              "name": "announced_at",
+              "dtype": "timestamp[us,Asia/Shanghai]",
+              "nullable": false,
+              "unit": null,
+              "description": "Official event announcement time.",
+              "source_binding": "official_index_membership",
+              "pit_role": "publication_time"
+            },
+            {
+              "name": "effective_at",
+              "dtype": "timestamp[us,Asia/Shanghai]",
+              "nullable": false,
+              "unit": null,
+              "description": "Official event effective time.",
+              "source_binding": "official_index_membership",
+              "pit_role": "valid_time_start"
+            }
+          ]
+        }
+      ],
+      "quality_gates": [
+        {
+          "gate_id": "IDX_CONSTITUENT_NO_CURRENT_BACKFILL",
+          "severity": "BLOCKING",
+          "rule": "Current sample lists and current weights cannot populate any prior effective interval."
+        },
+        {
+          "gate_id": "IDX_CONSTITUENT_BITEMPORAL",
+          "severity": "BLOCKING",
+          "rule": "Every usable membership/weight record has both knowledge time and economic valid/as-of time; available_at later than a research decision blocks that record."
+        },
+        {
+          "gate_id": "IDX_CONSTITUENT_SECURITY_RESOLVED",
+          "severity": "BLOCKING",
+          "rule": "Every component resolves to an immutable CORE-01 security_id using code validity at effective_at."
+        },
+        {
+          "gate_id": "IDX_CONSTITUENT_INTERVAL_VALID",
+          "severity": "BLOCKING",
+          "rule": "Membership intervals for the same series/security do not overlap after revision resolution, and official add/remove deltas reconcile to the next complete sample set."
+        },
+        {
+          "gate_id": "IDX_WEIGHT_SUM",
+          "severity": "BLOCKING",
+          "rule": "Only a source-declared complete weight set is tested against the provider-specified total (normally 1 within 1e-6); partial/top-N lists are never rescaled to 1."
+        },
+        {
+          "gate_id": "IDX_CONSTITUENT_COVERAGE_TRUTHFUL",
+          "severity": "BLOCKING",
+          "rule": "Unavailable official history is explicitly MISSING or BLOCKED_LICENSE per series/date; dataset-level OK never implies universal coverage."
+        }
+      ],
+      "known_blockers": [
+        {
+          "blocker_id": "CSI_WEIGHT_DATA_LICENSED",
+          "severity": "CRITICAL",
+          "status": "OPEN",
+          "description": "Official CSI constituent/weight, corporate-action and divisor feeds require a data licence; the official service states access follows licence approval: https://www.ciis.com.hk/hongkong/sc/idata/csifundamentaldata/index.shtml",
+          "required_resolution": "Obtain documented internal-research/storage terms or keep CSI historical weights BLOCKED_LICENSE. Public current/top-N displays are not a substitute."
+        },
+        {
+          "blocker_id": "SSE_CONSTITUENT_WEIGHT_PERMISSION",
+          "severity": "CRITICAL",
+          "status": "OPEN",
+          "description": "SSE index rules require permission/agreement for use of constituent weights: https://www.sse.com.cn/lawandrules/sselawsrules2025/trade/universal/c/c_20250612_10781702.shtml",
+          "required_resolution": "Document a lawful internal-use entitlement before bulk retention or research use."
+        },
+        {
+          "blocker_id": "CNI_HISTORICAL_WEIGHTS_NOT_PUBLICLY_COMPLETE",
+          "severity": "CRITICAL",
+          "status": "OPEN",
+          "description": "CNI public detail pages show current samples/weights and historical rebalances, while its official product page treats sample lists, weights and adjustment lists as data services that may require agreement/fees: https://www.cnindex.com.cn/zh_services/data_licensing/index.html?act_menu=4&act_service=3",
+          "required_resolution": "Confirm exact free historical scope and rights, or mark historical weights/intervals BLOCKED_LICENSE or MISSING by series."
+        },
+        {
+          "blocker_id": "BSE_HISTORY_AND_DATA_USE_LIMITED",
+          "severity": "HIGH",
+          "status": "OPEN",
+          "description": "BSE publishes current samples and adjustment notices for Northbound 50 and Northbound Specialized and published a limited pre-launch point-history file, but complete historical component weights are not demonstrated; BSE market-data use is permission controlled: https://www.bse.cn/application/guide.html",
+          "required_resolution": "Use notices for verified membership deltas only after rights review; do not infer full daily weights."
+        }
+      ]
+    },
+    {
+      "plan_id": "CORE-11",
+      "dataset_id": "cn-industry-classification-pit",
+      "schema_version": "1.0.0",
+      "grain": "one versioned industry taxonomy node, one security classification interval, or one explicit crosswalk mapping per classification scheme",
+      "pit_contract": {
+        "decision_time_rule": "An industry assignment is usable only after the official result/notice becomes available. Reference period or taxonomy effective date cannot be backdated as the knowledge time. CSRC/CAPCO and Shenwan schemes coexist and are never overwritten into one another.",
+        "required_time_fields": [
+          "scheme_effective_at",
+          "reference_period_end",
+          "published_at",
+          "available_at",
+          "valid_from",
+          "valid_to",
+          "revision_id",
+          "snapshot_id",
+          "ingested_at"
+        ],
+        "revision_rule": "Append each taxonomy revision, classification release and correction. Preserve the exact official classification code and source release; close prior membership only when an official new result becomes effective."
+      },
+      "source_bindings": [
+        {
+          "binding_id": "official_regulatory_industry_taxonomy",
+          "primary_source_ids": [
+            "CSRC_OFFICIAL"
+          ],
+          "calibration_source_ids": [
+            "SSE_OFFICIAL",
+            "SZSE_OFFICIAL",
+            "BSE_OFFICIAL"
+          ],
+          "license_gate": "ALLOW_INTERNAL_ATTRIBUTED_USE_WITHOUT_ALTERATION_OR_RESALE; BLOCK_EXTERNAL_REDISTRIBUTION_AND_UNDOCUMENTED_DERIVATIVE_RIGHTS",
+          "ingestion_status": "READY_FOR_TAXONOMY_PILOT"
+        },
+        {
+          "binding_id": "official_regulatory_industry_membership",
+          "primary_source_ids": [
+            "CAPCO_OFFICIAL"
+          ],
+          "calibration_source_ids": [
+            "CSRC_OFFICIAL",
+            "SSE_OFFICIAL",
+            "SZSE_OFFICIAL",
+            "BSE_OFFICIAL"
+          ],
+          "license_gate": "ALLOW_ONLY_AFTER_CURRENT_OFFICIAL_ASSIGNMENT_PUBLISHER_AND_RETENTION_TERMS_ARE_REGISTERED",
+          "ingestion_status": "BLOCKED_PENDING_CAPCO_ENDPOINT_RETENTION_AND_HISTORY_COVERAGE_REVIEW"
+        },
+        {
+          "binding_id": "official_sws_industry",
+          "primary_source_ids": [
+            "SWS_RESEARCH_OFFICIAL"
+          ],
+          "calibration_source_ids": [
+            "TUSHARE_SECONDARY"
+          ],
+          "license_gate": "BLOCK_WITHOUT_WRITTEN_RIGHT_TO_COPY_RETAIN_AND_SHARE_TAXONOMY_AND_POINT_IN_TIME_SECURITY_MEMBERSHIP",
+          "ingestion_status": "BLOCKED_LICENSE_ACCESS_AND_PIT_HISTORY"
+        },
+        {
+          "binding_id": "internal_security_resolution",
+          "primary_source_ids": [
+            "INTERNAL_CORE01"
+          ],
+          "calibration_source_ids": [],
+          "license_gate": "INTERNAL_ONLY_AFTER_CORE01_PASSES",
+          "ingestion_status": "BLOCKED_BY_CORE01"
+        }
+      ],
+      "tables": [
+        {
+          "table_id": "industry_taxonomy_node",
+          "grain": "one node in one official taxonomy version",
+          "inherits": [
+            "record_lineage"
+          ],
+          "primary_key": [
+            "scheme_id",
+            "scheme_version",
+            "industry_code"
+          ],
+          "fields": [
+            {
+              "name": "scheme_id",
+              "dtype": "enum[CSRC_CAPCO,SW2021,OTHER_APPROVED]",
+              "nullable": false,
+              "unit": null,
+              "description": "Independent classification scheme; CSRC/CAPCO official baseline and Shenwan research scheme remain separate.",
+              "source_binding": "official_regulatory_industry_taxonomy",
+              "pit_role": "identity"
+            },
+            {
+              "name": "scheme_version",
+              "dtype": "string",
+              "nullable": false,
+              "unit": null,
+              "description": "Official taxonomy release/version, such as JR/T 0020-2024 or SW2021.",
+              "source_binding": "official_regulatory_industry_taxonomy",
+              "pit_role": "revision"
+            },
+            {
+              "name": "industry_code",
+              "dtype": "string",
+              "nullable": false,
+              "unit": null,
+              "description": "Official code, retained exactly as published.",
+              "source_binding": "official_regulatory_industry_taxonomy",
+              "pit_role": "identity"
+            },
+            {
+              "name": "industry_name_zh",
+              "dtype": "string",
+              "nullable": false,
+              "unit": null,
+              "description": "Official Chinese classification name.",
+              "source_binding": "official_regulatory_industry_taxonomy",
+              "pit_role": "dimension"
+            },
+            {
+              "name": "level",
+              "dtype": "int8",
+              "nullable": false,
+              "unit": null,
+              "description": "Hierarchy level within the named scheme; level labels are scheme-specific.",
+              "source_binding": "official_regulatory_industry_taxonomy",
+              "pit_role": "dimension"
+            },
+            {
+              "name": "level_name",
+              "dtype": "string",
+              "nullable": false,
+              "unit": null,
+              "description": "Official level label, e.g. category/subcategory/division/group or Shenwan level 1/2/3.",
+              "source_binding": "official_regulatory_industry_taxonomy",
+              "pit_role": "dimension"
+            },
+            {
+              "name": "parent_industry_code",
+              "dtype": "string",
+              "nullable": true,
+              "unit": null,
+              "description": "Parent node code in the same scheme/version.",
+              "source_binding": "official_regulatory_industry_taxonomy",
+              "pit_role": "dimension"
+            },
+            {
+              "name": "scheme_effective_at",
+              "dtype": "timestamp[us,Asia/Shanghai]",
+              "nullable": false,
+              "unit": null,
+              "description": "Official taxonomy effective time.",
+              "source_binding": "official_regulatory_industry_taxonomy",
+              "pit_role": "valid_time_start"
+            }
+          ]
+        },
+        {
+          "table_id": "security_industry_membership",
+          "grain": "one security assignment interval in one scheme and release",
+          "inherits": [
+            "record_lineage",
+            "security_key"
+          ],
+          "primary_key": [
+            "scheme_id",
+            "scheme_version",
+            "security_id",
+            "industry_code",
+            "valid_from",
+            "revision_id"
+          ],
+          "fields": [
+            {
+              "name": "scheme_id",
+              "dtype": "enum[CSRC_CAPCO,SW2021,OTHER_APPROVED]",
+              "nullable": false,
+              "unit": null,
+              "description": "Classification scheme identity.",
+              "source_binding": "official_regulatory_industry_membership",
+              "pit_role": "identity"
+            },
+            {
+              "name": "scheme_version",
+              "dtype": "string",
+              "nullable": false,
+              "unit": null,
+              "description": "Taxonomy version governing the assignment.",
+              "source_binding": "official_regulatory_industry_membership",
+              "pit_role": "revision"
+            },
+            {
+              "name": "industry_code",
+              "dtype": "string",
+              "nullable": false,
+              "unit": null,
+              "description": "Official assigned code; do not replace with a mapped code from another scheme.",
+              "source_binding": "official_regulatory_industry_membership",
+              "pit_role": "value"
+            },
+            {
+              "name": "assignment_level",
+              "dtype": "string",
+              "nullable": false,
+              "unit": null,
+              "description": "Deepest officially published level for this assignment.",
+              "source_binding": "official_regulatory_industry_membership",
+              "pit_role": "dimension"
+            },
+            {
+              "name": "release_id",
+              "dtype": "string",
+              "nullable": false,
+              "unit": null,
+              "description": "Official half-year/quarter/change release identity.",
+              "source_binding": "official_regulatory_industry_membership",
+              "pit_role": "lineage"
+            },
+            {
+              "name": "reference_period_end",
+              "dtype": "date32",
+              "nullable": false,
+              "unit": null,
+              "description": "Official classification reference period end; not a knowledge time.",
+              "source_binding": "official_regulatory_industry_membership",
+              "pit_role": "reference_time"
+            },
+            {
+              "name": "valid_from",
+              "dtype": "timestamp[us,Asia/Shanghai]",
+              "nullable": false,
+              "unit": null,
+              "description": "Assignment valid-time start; absent an official earlier effective time, use no earlier than published_at/available_at under the conservative PIT rule.",
+              "source_binding": "official_regulatory_industry_membership",
+              "pit_role": "valid_time_start"
+            },
+            {
+              "name": "valid_to",
+              "dtype": "timestamp[us,Asia/Shanghai]",
+              "nullable": true,
+              "unit": null,
+              "description": "Exclusive assignment valid-time end.",
+              "source_binding": "official_regulatory_industry_membership",
+              "pit_role": "valid_time_end"
+            },
+            {
+              "name": "is_explicitly_unclassified",
+              "dtype": "boolean",
+              "nullable": false,
+              "unit": null,
+              "description": "Explicitly distinguishes unknown/unclassified from missing extraction.",
+              "source_binding": "official_regulatory_industry_membership",
+              "pit_role": "quality_flag"
+            }
+          ]
+        },
+        {
+          "table_id": "industry_crosswalk",
+          "grain": "one explicit many-to-many mapping assertion between two taxonomy versions/schemes",
+          "inherits": [
+            "record_lineage"
+          ],
+          "primary_key": [
+            "from_scheme_id",
+            "from_scheme_version",
+            "from_industry_code",
+            "to_scheme_id",
+            "to_scheme_version",
+            "to_industry_code",
+            "mapping_version"
+          ],
+          "fields": [
+            {
+              "name": "from_scheme_id",
+              "dtype": "string",
+              "nullable": false,
+              "unit": null,
+              "description": "Source scheme.",
+              "source_binding": "official_regulatory_industry_taxonomy",
+              "pit_role": "identity"
+            },
+            {
+              "name": "from_scheme_version",
+              "dtype": "string",
+              "nullable": false,
+              "unit": null,
+              "description": "Source taxonomy version.",
+              "source_binding": "official_regulatory_industry_taxonomy",
+              "pit_role": "revision"
+            },
+            {
+              "name": "from_industry_code",
+              "dtype": "string",
+              "nullable": false,
+              "unit": null,
+              "description": "Source code.",
+              "source_binding": "official_regulatory_industry_taxonomy",
+              "pit_role": "identity"
+            },
+            {
+              "name": "to_scheme_id",
+              "dtype": "string",
+              "nullable": false,
+              "unit": null,
+              "description": "Target scheme.",
+              "source_binding": "official_sws_industry",
+              "pit_role": "identity"
+            },
+            {
+              "name": "to_scheme_version",
+              "dtype": "string",
+              "nullable": false,
+              "unit": null,
+              "description": "Target taxonomy version.",
+              "source_binding": "official_sws_industry",
+              "pit_role": "revision"
+            },
+            {
+              "name": "to_industry_code",
+              "dtype": "string",
+              "nullable": false,
+              "unit": null,
+              "description": "Target code.",
+              "source_binding": "official_sws_industry",
+              "pit_role": "identity"
+            },
+            {
+              "name": "mapping_type",
+              "dtype": "enum[EXACT,BROADER,NARROWER,OVERLAP,MANUAL_RESEARCH]",
+              "nullable": false,
+              "unit": null,
+              "description": "Mapping relation; one-to-one is never assumed.",
+              "source_binding": "internal_security_resolution",
+              "pit_role": "value"
+            },
+            {
+              "name": "mapping_version",
+              "dtype": "string",
+              "nullable": false,
+              "unit": null,
+              "description": "Immutable mapping release.",
+              "source_binding": "internal_security_resolution",
+              "pit_role": "revision"
+            }
+          ]
+        }
+      ],
+      "quality_gates": [
+        {
+          "gate_id": "INDUSTRY_SCHEMES_SEPARATE",
+          "severity": "BLOCKING",
+          "rule": "CSRC/CAPCO and Shenwan assignments are separate records keyed by scheme/version; crosswalks never overwrite original facts."
+        },
+        {
+          "gate_id": "INDUSTRY_TAXONOMY_VALID",
+          "severity": "BLOCKING",
+          "rule": "Codes are unique within scheme/version, parent nodes exist, hierarchy is acyclic and official level semantics are preserved."
+        },
+        {
+          "gate_id": "INDUSTRY_PIT_KNOWN",
+          "severity": "BLOCKING",
+          "rule": "Every research-usable assignment has official published_at/available_at and a non-overlapping valid interval; current assignments are never backfilled."
+        },
+        {
+          "gate_id": "INDUSTRY_SECURITY_RESOLVED",
+          "severity": "BLOCKING",
+          "rule": "Every assignment resolves to CORE-01 security_id at the release/effective time, including old and delisted codes."
+        },
+        {
+          "gate_id": "INDUSTRY_UNCLASSIFIED_EXPLICIT",
+          "severity": "BLOCKING",
+          "rule": "Unknown/unclassified securities remain explicit; missing values are never filled with a current class or another scheme."
+        },
+        {
+          "gate_id": "INDUSTRY_LICENSE_OK",
+          "severity": "BLOCKING",
+          "rule": "Taxonomy and membership copying, retention and cross-project use rights are documented separately for CSRC/CAPCO and Shenwan before quality_status=OK."
+        }
+      ],
+      "known_blockers": [
+        {
+          "blocker_id": "CSRC_LEGACY_RESULTS_END_2021Q3",
+          "severity": "CRITICAL",
+          "status": "OPEN",
+          "description": "The CSRC legacy classification-result archive publicly lists quarterly assignments only through 2021 Q3: https://www.csrc.gov.cn/csrc/c100103/common_list.shtml . The 2012 guide is repealed; the current regulator taxonomy is JR/T 0020-2024: https://www.csrc.gov.cn/csrc/c101954/c7520291/content.shtml",
+          "required_resolution": "Model old CSRC quarterly assignments as a legacy scheme/version; do not treat them as current."
+        },
+        {
+          "blocker_id": "CAPCO_RETENTION_AND_HISTORY_TERMS_UNVERIFIED",
+          "severity": "CRITICAL",
+          "status": "OPEN",
+          "description": "Current official company assignments are published half-yearly by the China Association for Public Companies, including 2025 H2 released 2026-04-03: https://www.capco.org.cn/xhgg/hyfl/hyfljg/index.html . CAPCO_OFFICIAL is registered, but automated download, internal retention and historical coverage terms are not yet evidenced.",
+          "required_resolution": "Record the exact CAPCO result endpoints, terms evidence and available historical issues before ingestion; do not alias CAPCO silently to CSRC_OFFICIAL."
+        },
+        {
+          "blocker_id": "SWS_COPY_AND_MEMBERSHIP_RIGHTS",
+          "severity": "CRITICAL",
+          "status": "OPEN",
+          "description": "The official SW2021 classification report states its copyright is reserved and reproduction/redistribution requires prior written authorization; the public download center does not establish complete PIT company-membership history: https://wxweb.swsresearch.com/swsreport/2021_08/328340.pdf and https://www.swsresearch.com/institute_sw/allIndex/downloadCenter/industryType",
+          "required_resolution": "Obtain written internal storage/share terms and a first-party PIT membership feed with publication/effective dates, or keep Shenwan membership BLOCKED_LICENSE_AND_PIT."
+        },
+        {
+          "blocker_id": "SWS_SECONDARY_NOT_AUTHORITATIVE",
+          "severity": "HIGH",
+          "status": "OPEN",
+          "description": "TUSHARE_SECONDARY may only calibrate identifiers and coverage; it cannot replace the official Shenwan source, and token/terms approval has not been granted.",
+          "required_resolution": "Do not ingest secondary membership until its separate access/licence approval; conflicts always quarantine."
+        }
+      ]
+    },
+    {
+      "plan_id": "CORE-12",
+      "dataset_id": "cn-index-daily",
+      "schema_version": "1.0.0",
+      "grain": "one official end-of-day observation per provider-native index series, return variant, currency and trade date",
+      "pit_contract": {
+        "decision_time_rule": "An end-of-day index value is usable only after its official publication/availability time. A series calculated before its live launch is flagged backcast and cannot be treated as contemporaneously observable before first_publication_at.",
+        "required_time_fields": [
+          "trade_date",
+          "calculation_at",
+          "published_at",
+          "available_at",
+          "first_publication_at",
+          "revision_id",
+          "snapshot_id",
+          "ingested_at"
+        ],
+        "revision_rule": "Append corrected official observations under a new revision_id, preserve prior values and hashes, and never overwrite or forward-fill a missing trading day."
+      },
+      "source_bindings": [
+        {
+          "binding_id": "official_index_daily_sse_csi",
+          "primary_source_ids": [
+            "SSE_INDEX_OFFICIAL",
+            "CSI_INDEX_OFFICIAL"
+          ],
+          "calibration_source_ids": [
+            "SSE_OFFICIAL"
+          ],
+          "license_gate": "BLOCK_BULK_EOD_HISTORY_UNLESS_INTERNAL_STORAGE_AND_RESEARCH_RIGHTS_ARE_DOCUMENTED; REALTIME_DATA_ALWAYS_REQUIRES_SEPARATE_PERMISSION",
+          "ingestion_status": "BLOCKED_LICENSE_AND_DOCUMENTED_HISTORY_EXPORT"
+        },
+        {
+          "binding_id": "official_index_daily_cni",
+          "primary_source_ids": [
+            "CNI_INDEX_OFFICIAL"
+          ],
+          "calibration_source_ids": [
+            "SZSE_OFFICIAL"
+          ],
+          "license_gate": "BLOCK_BULK_HISTORY_UNLESS_CNI_DATA_SERVICE_OR_PUBLIC_DOWNLOAD_TERMS_AUTHORIZE_INTERNAL_RETENTION",
+          "ingestion_status": "BLOCKED_LICENSE_REVIEW"
+        },
+        {
+          "binding_id": "official_index_daily_bse",
+          "primary_source_ids": [
+            "BSE_INDEX_OFFICIAL"
+          ],
+          "calibration_source_ids": [
+            "BSE_OFFICIAL"
+          ],
+          "license_gate": "BLOCK_UNLESS_BSE_MARKET_DATA_PERMISSION_COVERS_INTERNAL_HISTORICAL_RESEARCH_STORAGE",
+          "ingestion_status": "BLOCKED_LICENSE_REVIEW"
+        },
+        {
+          "binding_id": "internal_index_resolution_daily",
+          "primary_source_ids": [
+            "INTERNAL_CORE09"
+          ],
+          "calibration_source_ids": [],
+          "license_gate": "INTERNAL_ONLY_AFTER_CORE09_PASSES",
+          "ingestion_status": "BLOCKED_BY_CORE09"
+        }
+      ],
+      "tables": [
+        {
+          "table_id": "index_daily_bar",
+          "grain": "one official daily observation for one index series",
+          "inherits": [
+            "record_lineage",
+            "index_key"
+          ],
+          "primary_key": [
+            "provider_id",
+            "index_code",
+            "return_variant",
+            "currency",
+            "methodology_version",
+            "trade_date",
+            "revision_id"
+          ],
+          "fields": [
+            {
+              "name": "trade_date",
+              "dtype": "date32",
+              "nullable": false,
+              "unit": null,
+              "description": "Official market observation date.",
+              "source_binding": "official_index_daily_sse_csi",
+              "pit_role": "reference_time"
+            },
+            {
+              "name": "previous_close",
+              "dtype": "decimal(24,8)",
+              "nullable": true,
+              "unit": "index_points",
+              "description": "Official prior close where published.",
+              "source_binding": "official_index_daily_sse_csi",
+              "pit_role": "value"
+            },
+            {
+              "name": "open",
+              "dtype": "decimal(24,8)",
+              "nullable": true,
+              "unit": "index_points",
+              "description": "Official open; may be absent for end-of-day-only return variants or non-equity series.",
+              "source_binding": "official_index_daily_sse_csi",
+              "pit_role": "value"
+            },
+            {
+              "name": "high",
+              "dtype": "decimal(24,8)",
+              "nullable": true,
+              "unit": "index_points",
+              "description": "Official daily high where defined.",
+              "source_binding": "official_index_daily_sse_csi",
+              "pit_role": "value"
+            },
+            {
+              "name": "low",
+              "dtype": "decimal(24,8)",
+              "nullable": true,
+              "unit": "index_points",
+              "description": "Official daily low where defined.",
+              "source_binding": "official_index_daily_sse_csi",
+              "pit_role": "value"
+            },
+            {
+              "name": "close",
+              "dtype": "decimal(24,8)",
+              "nullable": false,
+              "unit": "index_points",
+              "description": "Official end-of-day index level.",
+              "source_binding": "official_index_daily_sse_csi",
+              "pit_role": "value"
+            },
+            {
+              "name": "change",
+              "dtype": "decimal(24,8)",
+              "nullable": true,
+              "unit": "index_points",
+              "description": "Official absolute change where published.",
+              "source_binding": "official_index_daily_sse_csi",
+              "pit_role": "value"
+            },
+            {
+              "name": "pct_change",
+              "dtype": "decimal(18,10)",
+              "nullable": true,
+              "unit": "fraction",
+              "description": "Official percentage change normalized to fraction where published.",
+              "source_binding": "official_index_daily_sse_csi",
+              "pit_role": "value"
+            },
+            {
+              "name": "aggregate_volume",
+              "dtype": "decimal(30,4)",
+              "nullable": true,
+              "unit": "provider_native_volume",
+              "description": "Aggregated component volume only where the provider defines/publishes it; never assume shares across asset classes.",
+              "source_binding": "official_index_daily_sse_csi",
+              "pit_role": "value"
+            },
+            {
+              "name": "aggregate_amount",
+              "dtype": "decimal(30,4)",
+              "nullable": true,
+              "unit": "CNY_or_provider_currency",
+              "description": "Aggregated component amount where officially published.",
+              "source_binding": "official_index_daily_sse_csi",
+              "pit_role": "value"
+            },
+            {
+              "name": "calculation_at",
+              "dtype": "timestamp[us,Asia/Shanghai]",
+              "nullable": false,
+              "unit": null,
+              "description": "Official end-of-day calculation timestamp or conservative documented convention.",
+              "source_binding": "official_index_daily_sse_csi",
+              "pit_role": "valid_time_start"
+            },
+            {
+              "name": "first_publication_at",
+              "dtype": "timestamp[us,Asia/Shanghai]",
+              "nullable": false,
+              "unit": null,
+              "description": "Series-level first official publication time used to identify pre-launch backcast observations.",
+              "source_binding": "internal_index_resolution_daily",
+              "pit_role": "knowledge_time"
+            },
+            {
+              "name": "history_regime",
+              "dtype": "enum[LIVE,BACKCAST,UNKNOWN]",
+              "nullable": false,
+              "unit": null,
+              "description": "Whether the observation was published contemporaneously or calculated retrospectively before launch.",
+              "source_binding": "internal_index_resolution_daily",
+              "pit_role": "quality_flag"
+            },
+            {
+              "name": "observation_status",
+              "dtype": "enum[FINAL,PROVISIONAL,CORRECTED,SUSPENDED,UNKNOWN]",
+              "nullable": false,
+              "unit": null,
+              "description": "Official/factual observation status.",
+              "source_binding": "official_index_daily_sse_csi",
+              "pit_role": "quality_flag"
+            }
+          ]
+        }
+      ],
+      "quality_gates": [
+        {
+          "gate_id": "IDX_DAILY_MASTER_RESOLVED",
+          "severity": "BLOCKING",
+          "rule": "Every bar resolves to exactly one CORE-09 series/methodology valid at trade_date; provider codes, currencies and return variants are explicit."
+        },
+        {
+          "gate_id": "IDX_DAILY_CLOSE_PRESENT",
+          "severity": "BLOCKING",
+          "rule": "Close is finite and positive; absent OHLC/volume fields remain NULL and are never imputed from close or component data."
+        },
+        {
+          "gate_id": "IDX_DAILY_OHLC_VALID",
+          "severity": "BLOCKING",
+          "rule": "When OHLC are published, high >= max(open,close), low <= min(open,close), high >= low; volume/amount are nonnegative under provider-native units."
+        },
+        {
+          "gate_id": "IDX_DAILY_VARIANT_NOT_COLLAPSED",
+          "severity": "BLOCKING",
+          "rule": "Price, total-return and net-total-return levels remain separate official observations; variant return relationships are checked but never forced by overwriting."
+        },
+        {
+          "gate_id": "IDX_DAILY_PIT_AND_BACKCAST",
+          "severity": "BLOCKING",
+          "rule": "available_at is after calculation/publication, and pre-launch observations are explicitly BACKCAST; PIT research cannot treat them as contemporaneously known."
+        },
+        {
+          "gate_id": "IDX_DAILY_CALENDAR_AND_GAPS",
+          "severity": "BLOCKING",
+          "rule": "Expected dates follow the series' official market/calendar; gaps, suspensions and non-publication are explicit and never forward-filled."
+        },
+        {
+          "gate_id": "IDX_DAILY_OFFICIAL_CALIBRATION",
+          "severity": "BLOCKING",
+          "rule": "Joint-publisher/exchange observations agree within the declared rounding tolerance; conflicts quarantine the exact series/date and are not majority-voted."
+        },
+        {
+          "gate_id": "IDX_DAILY_LICENSE_OK",
+          "severity": "BLOCKING",
+          "rule": "Automated historical collection, retention and internal cross-project research use are licensed/documented for each provider before quality_status=OK."
+        }
+      ],
+      "known_blockers": [
+        {
+          "blocker_id": "INDEX_EOD_HISTORY_LICENSE_SCOPE_UNCLEAR",
+          "severity": "CRITICAL",
+          "status": "OPEN",
+          "description": "Public pages show index charts/downloads, but rights for systematic full-history local retention are not uniform. SSE non-commercial website use does not override separate index/market-data rights; CNI calls index points and sample data data-service products; BSE states market-data use is licensed.",
+          "required_resolution": "Before bulk history, document exact end-of-day rights for every provider/series and keep real-time data out of this daily contract."
+        },
+        {
+          "blocker_id": "INDEX_FULL_HISTORY_EXPORT_NOT_PROVEN",
+          "severity": "HIGH",
+          "status": "OPEN",
+          "description": "Official public pages do not yet prove a stable complete daily export for every discovered index and return variant. CNI detail exposes daily/weekly/monthly history; SSE quote pages expose current fields; BSE exposes K-lines and a limited Northbound 50 pre-launch history notice.",
+          "required_resolution": "Produce a per-series coverage report with first/last date, gaps, variants, live/backcast boundary and official download evidence; unsupported series remain MISSING or BLOCKED_ACCESS."
+        },
+        {
+          "blocker_id": "INDEX_BACKCAST_LOOKAHEAD",
+          "severity": "HIGH",
+          "status": "OPEN",
+          "description": "Many official index histories start at a base date before launch, including BSE Northbound 50 history from 2022-04-29 published only in November 2022: https://www.bse.cn/bse_indices_news/200013831.html?flag=bse_bz50",
+          "required_resolution": "Store first_publication_at/history_regime and make research policy reject pre-publication observations unless the run explicitly permits documented backcast benchmarks."
+        }
+      ]
+    }
+  ]
+}

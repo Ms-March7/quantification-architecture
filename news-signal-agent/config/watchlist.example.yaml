@@ -1,0 +1,7 @@
+watchlist:
+  - symbol: SYMBOL_HERE
+    name: DISPLAY_NAME
+    asset_type: stock
+    market: MARKET_HERE
+    tags: []
+    metadata: {}

@@ -1,0 +1,48 @@
+notify:
+  enabled: false
+  default_channels: ["console"]
+  cooldown_minutes: 120
+  daily_limit_per_symbol: 3
+
+channels:
+  console:
+    enabled: true
+
+  wecom:
+    enabled: false
+    webhook_env: "WECOM_WEBHOOK_URL"
+
+  pushplus:
+    enabled: false
+    token_env: "PUSHPLUS_TOKEN"
+
+  serverchan:
+    enabled: false
+    sendkey_env: "SERVERCHAN_SENDKEY"
+
+  email:
+    enabled: false
+    smtp_host_env: "EMAIL_SMTP_HOST"
+    smtp_port_env: "EMAIL_SMTP_PORT"
+    username_env: "EMAIL_USERNAME"
+    password_env: "EMAIL_PASSWORD"
+    to_env: "EMAIL_TO"
+
+  sms_webhook:
+    enabled: false
+    webhook_env: "SMS_WEBHOOK_URL"
+    token_env: "SMS_WEBHOOK_TOKEN"
+    phone_env: "SMS_TO_PHONE"
+
+rules:
+  - name: "high_score_signal"
+    when: "abs(final_score) >= 80"
+    channels: ["console"]
+
+  - name: "new_top10_entry"
+    when: "entered_top10 == true"
+    channels: ["console"]
+
+  - name: "official_major_event"
+    when: "source_type in ['official', 'exchange', 'regulator'] and impact >= 80"
+    channels: ["console"]

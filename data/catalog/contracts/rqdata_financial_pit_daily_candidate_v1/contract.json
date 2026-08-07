@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "contract_id": "rqdata_financial_pit_daily_candidate_v1",
+  "status": "APPROVED_ENGINEERING_CONTRACT__CANDIDATE_ONLY__ROW_CAP_CALIBRATED_20260806",
+  "source": "Ricequant RQData",
+  "input": {
+    "queue_contract_id": "rqdata_b_path_daily_candidate_v1",
+    "queue_relative_path": "financial/queue.json",
+    "maintenance_discovery_root": "data/market/quarantine/rqdata-b-path-daily",
+    "maintenance_queue_selection": "OLDEST_PENDING_AS_OF_NOT_AFTER_THROUGH__ELSE_NEWEST_COMPLETE",
+    "endpoint": "get_pit_financials_ex",
+    "statements": "all"
+  },
+  "derivation": {
+    "available_at": "NEXT_VERIFIED_TRADING_DAY_AT_09_30_ASIA_SHANGHAI_AFTER_INFO_DATE",
+    "rice_create_tm": "PRESERVE_AS_VENDOR_METADATA_ONLY__NEVER_AVAILABLE_AT",
+    "event_contract_compatibility": "LOCAL_DERIVED_CHAIN__NOT_REVISION_EVENT_LEDGER_V1_ADMITTED",
+    "chain_grain": [
+      "order_book_id",
+      "quarter",
+      "metric"
+    ],
+    "same_chain_same_info_date_conflict": "FAIL_CLOSED"
+  },
+  "limits": {
+    "maximum_tasks_per_run": 1,
+    "maximum_securities_per_task": 400,
+    "maximum_lookback_quarters": 12,
+    "maximum_fields": 8,
+    "maximum_business_api_calls": 2,
+    "maximum_returned_rows": 50000,
+    "maximum_measured_quota_increment_bytes": 16777216,
+    "minimum_quota_remaining_before_run_bytes": 33554432,
+    "maximum_candidate_bytes_per_task": 33554432
+  },
+  "live_smoke_limits": {
+    "maximum_securities": 5,
+    "maximum_fields": 2,
+    "maximum_lookback_quarters": 4,
+    "maximum_business_api_calls": 2,
+    "maximum_returned_rows": 500,
+    "maximum_measured_quota_increment_bytes": 2097152,
+    "minimum_quota_remaining_before_run_bytes": 4194304,
+    "maximum_candidate_bytes": 4194304,
+    "queue_state_advance": false
+  },
+  "safety": {
+    "plan_network_calls": 0,
+    "plan_writes": 0,
+    "completed_queue_network_calls": 0,
+    "run_fail_closed": true,
+    "atomic_candidate_seal": true,
+    "artifact_sha256_required": true,
+    "purpose_ceiling": "INSPECTION_ONLY",
+    "quality_status": "NOT_ADMITTED",
+    "full_market_historical_backfill": false,
+    "catalog_write": false,
+    "roadmap_write": false,
+    "source_registry_write": false,
+    "quality_promotion": false,
+    "formal_snapshot_write": false,
+    "research_use": false,
+    "factor_runs": 0,
+    "credential_value_capture": false,
+    "scheduled_task_creation": false
+  },
+  "revision_note": "2026-08-06 first 400-security two-field task exceeded 10000 response rows while consuming less than 0.4 MiB; row cap raised to 50000 without changing the 16 MiB quota delta or 32 MiB sealed-candidate byte caps"
+}

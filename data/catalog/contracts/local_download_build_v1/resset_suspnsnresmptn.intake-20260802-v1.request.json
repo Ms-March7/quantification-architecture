@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "mode": "local_download_candidate",
+  "dataset_id": "resset-suspnsnresmptn-candidate",
+  "run_id": "intake-20260802-04pkg-v1",
+  "source_id": "RESSET_Tsinghua_manual_export",
+  "dataset_schema_version": "observed-export-20260802-v1",
+  "authorized_local_research_download": true,
+  "source_access_note": "User confirmed this RESSET table was exported through the Tsinghua institutional subscription for local student research. ResmptnDt is deliberately retained as VARCHAR because 1900-01-01 is an observed sentinel pending semantic closure. This request makes no formal source-admission, redistribution, complete historical tradability, or research-readiness claim.",
+  "include_patterns": [
+    "RESSET 股票_停复牌.zip"
+  ],
+  "zip_member_patterns": [
+    "RESSET_SUSPNSNRESMPTN_1.csv"
+  ],
+  "table": {
+    "table_name": "resset_suspnsnresmptn_candidate",
+    "expected_columns": [
+      "CompanyCode",
+      "ComCd",
+      "ISIN",
+      "R_SecuCode",
+      "StkCd",
+      "StkCdoTrd",
+      "LStkNm",
+      "CsrcIcCd1",
+      "CsrcIcCd2",
+      "SuspnsnDt",
+      "SuspnsnTime",
+      "SuspnsnReason",
+      "SuspnsnDesc",
+      "SuspnsnMat",
+      "SuspnsnType",
+      "ResmptnDt",
+      "ResmptnTime",
+      "ResmptnDesc",
+      "InfoPubDt",
+      "InfoSourceCd",
+      "PubDt",
+      "UpDt"
+    ],
+    "column_types": {
+      "CompanyCode": "VARCHAR",
+      "ComCd": "VARCHAR",
+      "ISIN": "VARCHAR",
+      "R_SecuCode": "VARCHAR",
+      "StkCd": "VARCHAR",
+      "StkCdoTrd": "VARCHAR",
+      "LStkNm": "VARCHAR",
+      "CsrcIcCd1": "VARCHAR",
+      "CsrcIcCd2": "VARCHAR",
+      "SuspnsnDt": "DATE",
+      "SuspnsnTime": "VARCHAR",
+      "SuspnsnReason": "VARCHAR",
+      "SuspnsnDesc": "VARCHAR",
+      "SuspnsnMat": "VARCHAR",
+      "SuspnsnType": "VARCHAR",
+      "ResmptnDt": "VARCHAR",
+      "ResmptnTime": "VARCHAR",
+      "ResmptnDesc": "VARCHAR",
+      "InfoPubDt": "DATE",
+      "InfoSourceCd": "VARCHAR",
+      "PubDt": "DATE",
+      "UpDt": "DATE"
+    },
+    "date_column": "SuspnsnDt",
+    "key_columns": [
+      "CompanyCode",
+      "StkCd",
+      "SuspnsnDt",
+      "SuspnsnTime",
+      "InfoPubDt",
+      "ResmptnDt",
+      "ResmptnTime"
+    ],
+    "required_columns": [
+      "CompanyCode",
+      "StkCd",
+      "SuspnsnDt",
+      "SuspnsnTime",
+      "InfoPubDt",
+      "ResmptnDt",
+      "ResmptnTime"
+    ],
+    "delimiter": ",",
+    "encoding": "utf-8",
+    "allow_extra_columns": false,
+    "partition_mode": "year_month"
+  },
+  "limits": {
+    "max_packages": 1,
+    "max_csv_sources": 1,
+    "max_archive_members": 10,
+    "max_total_input_bytes": 4194304,
+    "max_total_unpacked_bytes": 33554432,
+    "max_compression_ratio": 100,
+    "max_rows": 100000
+  }
+}

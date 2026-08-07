@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "plan_id": "l2-p0-qdata-factor-input-engineering-v1",
+  "work_package": "L2-P0_QDATA_FACTOR_INPUT_ENGINEERING",
+  "created_at": "2026-07-28T19:40:00+08:00",
+  "status": "DONE__RESOLVER_GATE_ONLY__REAL_DATA_RESEARCH_BLOCKED",
+  "scope": [
+    "Resolve one exact dataset_id and snapshot_id through the workspace qdata command with research intent.",
+    "Reject latest, paths used as identities, unregistered identities, mutable data, insufficient purpose ceilings, non-OK quality, uncleared licences, missing paths and missing authority evidence.",
+    "Return an immutable metadata descriptor without opening the resolved payload or starting factor generation."
+  ],
+  "allowed_inputs": [
+    "FIXTURE",
+    "SYNTHETIC"
+  ],
+  "real_data_gate": "REQUIRES_EXACT_QDATA_RESEARCH_RESOLUTION_OF_A_FORMALLY_ADMITTED_IMMUTABLE_SNAPSHOT",
+  "forbidden": [
+    "DIRECT_READ_OF_INSPECTION_ONLY_CANDIDATES",
+    "IC_OR_BACKTEST_ON_UNADMITTED_DATA",
+    "VALIDATION_OR_HOLDOUT_CONSUMPTION",
+    "FACTOR_EFFICACY_OR_INVESTMENT_CLAIM"
+  ],
+  "completion_gate": [
+    "Adapter unit tests pass.",
+    "Negative policy tests pass.",
+    "Current CSMAR candidate cannot be supplied as a direct path.",
+    "No factor run, research attempt, Validation or Holdout state is created."
+  ],
+  "r0_pv_bundle_preflight": {
+    "work_item": "A14_R0_CORE01_TO_CORE06_EXACT_INPUT_BUNDLE_PREFLIGHT",
+    "status": "DONE__FIXTURE_ONLY__PRODUCTION_PANELDATA_BLOCKED",
+    "module": "${QUANTIFICATION_ROOT}/多因子/factor_factory/qdata_input.py",
+    "test_module": "factor_factory.test_r0_input_bundle",
+    "required_dataset_ids": [
+      "cn-a-share-security-master-pit",
+      "cn-trading-calendar",
+      "cn-a-share-daily-raw",
+      "cn-a-share-corporate-actions-pit",
+      "cn-a-share-daily-adjusted",
+      "cn-a-share-tradability-daily-pit"
+    ],
+    "proof_before_payload_access": [
+      "SIX_EXACT_UNIQUE_IDENTITIES__NO_LATEST",
+      "SIX_QDATA_RESEARCH_RESOLUTIONS_ACCEPTED",
+      "IMMUTABLE__QUALITY_OK__RESEARCH_CEILING__RIGHTS_CLEARED",
+      "EXACT_FIVE_AUTHORITY_DOCUMENTS_PER_SNAPSHOT",
+      "MANIFEST_IDENTITY_AND_SNAPSHOT_CONTRACT",
+      "RESEARCH_WINDOW_COVERAGE",
+      "CROSS_SNAPSHOT_AS_OF_IDENTITY_CALENDAR_MARKET_TIMEZONE_NULL_PIT_AND_VALUE_CONVENTION"
+    ],
+    "output": "FROZEN_R0_PV_INPUT_BUNDLE_DESCRIPTOR__PAYLOAD_OPENED_FALSE",
+    "production_blockers": [
+      "CORE01_TO_CORE06_FORMAL_CATALOG_IDENTITIES_CURRENTLY_0_OF_6",
+      "REAL_DATA_PUBLISHER_AND_FORMAL_MANIFEST_RESEARCH_INPUT_CONTRACT_NOT_AVAILABLE",
+      "PAYLOAD_ADAPTER_AND_PANELDATA_NOT_EXECUTED"
+    ],
+    "forbidden": [
+      "CANDIDATE_PAYLOAD_READ",
+      "PANELDATA_BUILD",
+      "FACTOR_GENERATION_IC_BACKTEST",
+      "VALIDATION_OR_HOLDOUT"
+    ],
+    "report": "${QUANTIFICATION_ROOT}/reports/data-governance/l2-r0-pv-input-bundle-preflight-20260801-v1/README.md"
+  },
+  "verification": "${QUANTIFICATION_ROOT}/reports/data-governance/l2-p0-qdata-factor-input-engineering-20260728/VERIFICATION.json"
+}

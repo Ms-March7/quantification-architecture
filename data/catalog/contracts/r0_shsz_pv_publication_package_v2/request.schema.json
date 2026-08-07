@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.quantification/schemas/r0-shsz-pv-publication-package-request-v2.json",
+  "title": "R0_SHSZ_PV commit-clock publication package request v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "contract_id",
+    "package_id",
+    "candidate_manifest",
+    "r0_contract",
+    "rights_basis_bindings",
+    "education_license_observation",
+    "execution_authorization",
+    "publication_timestamps"
+  ],
+  "properties": {
+    "schema_version": {"const": 2},
+    "contract_id": {"const": "r0_shsz_pv_publication_package_request_v2"},
+    "package_id": {"$ref": "#/$defs/component"},
+    "candidate_manifest": {"$ref": "#/$defs/fileBinding"},
+    "r0_contract": {"$ref": "#/$defs/fileBinding"},
+    "rights_basis_bindings": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "csmar_rights_receipt",
+        "csmar_rights_verification",
+        "rqdata_quota_receipt"
+      ],
+      "properties": {
+        "csmar_rights_receipt": {"$ref": "#/$defs/fileBinding"},
+        "csmar_rights_verification": {"$ref": "#/$defs/fileBinding"},
+        "rqdata_quota_receipt": {"$ref": "#/$defs/fileBinding"}
+      }
+    },
+    "education_license_observation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "license_type",
+        "valid_until",
+        "observation_source",
+        "independent_verification",
+        "credential_value_captured"
+      ],
+      "properties": {
+        "license_type": {"const": "EDUCATION"},
+        "valid_until": {"const": "2028-08-31"},
+        "observation_source": {"const": "USER_PROVIDED_SCREENSHOT_AND_BOUNDED_QUOTA_RECEIPT"},
+        "independent_verification": {"const": false},
+        "credential_value_captured": {"const": false}
+      }
+    },
+    "execution_authorization": {"$ref": "#/$defs/fileBinding"},
+    "publication_timestamps": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["available_at"],
+      "properties": {
+        "available_at": {"type": "string"}
+      }
+    }
+  },
+  "$defs": {
+    "component": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._=-]{0,127}$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "fileBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["relative_path", "sha256", "bytes"],
+      "properties": {
+        "relative_path": {"type": "string"},
+        "sha256": {"$ref": "#/$defs/sha256"},
+        "bytes": {"type": "integer", "minimum": 1}
+      }
+    }
+  }
+}

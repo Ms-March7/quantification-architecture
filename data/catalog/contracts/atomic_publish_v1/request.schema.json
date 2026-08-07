@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.quantification/schemas/atomic-snapshot-request-v1.json",
+  "title": "L1-D12A isolated synthetic snapshot request",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "mode",
+    "run_id",
+    "dataset_id",
+    "snapshot_id",
+    "source_id",
+    "owner_project",
+    "store_id",
+    "contract_id",
+    "dataset_schema_version",
+    "ingest_date",
+    "created_at",
+    "available_at",
+    "partition_segments",
+    "license_status",
+    "quality_status",
+    "purpose_ceiling",
+    "quality_gate",
+    "consumers"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "mode": {"const": "synthetic_fixture"},
+    "run_id": {"$ref": "#/$defs/component"},
+    "dataset_id": {"$ref": "#/$defs/component"},
+    "snapshot_id": {"$ref": "#/$defs/component"},
+    "source_id": {"$ref": "#/$defs/component"},
+    "owner_project": {"$ref": "#/$defs/component"},
+    "store_id": {"$ref": "#/$defs/component"},
+    "contract_id": {"$ref": "#/$defs/component"},
+    "dataset_schema_version": {"$ref": "#/$defs/component"},
+    "ingest_date": {"type": "string", "format": "date"},
+    "created_at": {"type": "string", "format": "date-time"},
+    "available_at": {"type": "string", "format": "date-time"},
+    "partition_segments": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/component"},
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "license_status": {"const": "NOT_APPLICABLE"},
+    "quality_status": {"const": "REVIEW"},
+    "purpose_ceiling": {"const": "SMOKE_ONLY"},
+    "quality_gate": {"enum": ["PASS", "FAIL"]},
+    "quality_checks": {
+      "type": "array",
+      "items": {"type": "string"},
+      "uniqueItems": true
+    },
+    "consumers": {
+      "type": "array",
+      "items": {"type": "string"},
+      "uniqueItems": true
+    },
+    "expected_payload_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  },
+  "$defs": {
+    "component": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._=-]{0,127}$"
+    }
+  }
+}

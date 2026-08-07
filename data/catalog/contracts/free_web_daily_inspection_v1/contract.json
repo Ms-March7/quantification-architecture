@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "contract_id": "free-web-daily-dual-source-inspection-v1",
+  "status": "ACTIVE__BOUNDED_INSPECTION_ONLY__NO_FORMAL_ADMISSION",
+  "purpose_ceiling": "INSPECTION_ONLY",
+  "sources": [
+    {
+      "source_id": "SINA_WEB_QUOTE",
+      "role": "CANONICAL_ROW_CANDIDATE_AFTER_CROSS_CHECK",
+      "raw_encoding": "GB18030",
+      "documented_stable_api": false
+    },
+    {
+      "source_id": "TENCENT_WEB_QUOTE",
+      "role": "SECOND_ENDPOINT_FIELD_CROSS_CHECK__UPSTREAM_INDEPENDENCE_UNVERIFIED",
+      "raw_encoding": "GB18030",
+      "documented_stable_api": false,
+      "field_0_semantics": "UNRESOLVED_ROUTE_CODE__NOT_TRADING_STATUS"
+    }
+  ],
+  "network_limits": {
+    "max_symbols": 20,
+    "calls_per_source": 1,
+    "retries": 0,
+    "redirects_allowed": false,
+    "credentials_forbidden": true,
+    "paid_access_forbidden": true
+  },
+  "same_day_finality": {
+    "timezone": "Asia/Shanghai",
+    "cutoff_local_time": "15:45:00",
+    "minimum_final_observed_time": "15:00:00",
+    "rule": "A request for the current Shanghai calendar date is forbidden before the cutoff. In every accepted row, both source observation times must be at or after the regular 15:00 close."
+  },
+  "required_cross_source_fields": [
+    "trade_date",
+    "open",
+    "high",
+    "low",
+    "close",
+    "previous_close",
+    "volume",
+    "amount"
+  ],
+  "canonical_units": {
+    "prices": "CNY_PER_SHARE",
+    "volume": "SHARE",
+    "amount": "CNY"
+  },
+  "tolerances": {
+    "price_absolute": 0.000001,
+    "amount_cny_absolute": 1.0,
+    "volume_shares_absolute": 99,
+    "volume_rationale": "Tencent response is observed as rounded board lots while Sina exposes shares; sub-lot differences are retained as evidence."
+  },
+  "output_root": "tmp/free-web-daily-probe/",
+  "publication": {
+    "staging_required": true,
+    "atomic_directory_publish_required": true,
+    "failed_staging_cleanup_required": true,
+    "manifest_binds_script_contract_policy_and_request_metadata": true
+  },
+  "formal_effect": {
+    "source_admission": false,
+    "catalog_registration": false,
+    "quality_promotion": false,
+    "scheduler_creation": false,
+    "research_ready": false
+  }
+}

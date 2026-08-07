@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "contract_id": "ricequant-r0-coverage-probe-v1",
+  "authorized_on": "2026-08-03",
+  "status": "LIVE_COMPLETED__COVERAGE_AND_BOUNDED_PIT_PASS__BJSE_DAILY_DENIED__FLOW_RECONCILED__FORMAL_EFFECT_NONE",
+  "purpose_ceiling": "INSPECTION_ONLY",
+  "formal_admission": false,
+  "formal_catalog_write": false,
+  "quality_promotion": false,
+  "research_use": false,
+  "backtest_use": false,
+  "bulk_download": false,
+  "automated_trading": false,
+  "security": {
+    "authentication_source": "PROCESS_ENVIRONMENT_ONLY",
+    "credential_value_capture": false,
+    "credential_value_persistence": false,
+    "account_identity_capture": false
+  },
+  "request_budget": {
+    "maximum_business_api_calls": 17,
+    "maximum_incremental_flow_bytes": 8388608,
+    "master_calls": 1,
+    "calendar_calls": 1,
+    "action_order_book_ids": 2,
+    "action_start": "2010-01-01",
+    "action_end": "2021-12-31",
+    "price_small_order_book_ids": 32,
+    "price_small_trading_dates": 5,
+    "price_large_order_book_ids": 256,
+    "price_large_trading_dates": 60,
+    "price_sample_market_scope": "XSHG_XSHE_ONLY_AFTER_BJSE_PERMISSION_DENIAL",
+    "summary_only": true,
+    "payload_persistence": false
+  },
+  "allowed_api_calls": [
+    "user.get_quota",
+    "all_instruments",
+    "get_trading_dates",
+    "get_dividend_info",
+    "get_dividend",
+    "get_split",
+    "get_allotment",
+    "get_ex_factor",
+    "get_dividend_amount",
+    "get_price"
+  ],
+  "formal_limits": [
+    "bjse_daily_bar_permission_denied_for_current_license",
+    "all_instruments_latest_attributes_are_not_historical_pit_master",
+    "rice_create_tm_is_not_assumed_to_be_available_at",
+    "sample_flow_projection_is_not_full_history_coverage",
+    "no_source_rights_or_snapshot_admission_is_inferred"
+  ],
+  "prohibited_actions": [
+    "print_or_persist_credentials",
+    "persist_api_payload",
+    "bulk_history_request",
+    "write_datasets_json",
+    "publish_formal_snapshot",
+    "promote_quality",
+    "run_factor_or_backtest",
+    "open_validation_or_holdout",
+    "connect_broker_or_trade"
+  ]
+}

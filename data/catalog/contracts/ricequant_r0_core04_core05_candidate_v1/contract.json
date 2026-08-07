@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "contract_id": "ricequant-r0-core04-core05-candidate-v1",
+  "authorized_on": "2026-08-04",
+  "status": "COMPLETED__BOUNDED_CANDIDATE_AND_RECONCILIATION__FORMAL_EFFECT_NONE",
+  "purpose_ceiling": "INSPECTION_ONLY",
+  "scope": {
+    "venues": ["XSHG", "XSHE"],
+    "base_start": "2005-01-01",
+    "base_end": "2024-12-31",
+    "tail_start": "2025-01-01",
+    "tail_end": "2026-08-03",
+    "universe_anchor": "EXPLICIT_CSMAR_CORE04_CORE05_CANDIDATE_SECURITY_UNION"
+  },
+  "rqdata_endpoints": [
+    "get_dividend",
+    "get_split",
+    "get_allotment",
+    "get_ex_factor",
+    "user.get_quota"
+  ],
+  "request_budget": {
+    "maximum_incremental_flow_bytes": 41943040,
+    "soft_stop_incremental_flow_bytes": 37748736,
+    "initial_sample_ids": 32,
+    "maximum_ids_per_batch": 256,
+    "retry_count": 0,
+    "per_security_fallback": false,
+    "quota_check_after_every_business_call": true,
+    "stop_on_quota_measurement_failure": true,
+    "stop_endpoint_after_first_endpoint_error": true
+  },
+  "normalization": {
+    "raw_api_payload_persistence": false,
+    "minimum_common_fields": [
+      "source_endpoint",
+      "security_id",
+      "local_security_code",
+      "event_type",
+      "event_date",
+      "announcement_date",
+      "registration_date",
+      "ex_date",
+      "source_row_sha256"
+    ],
+    "segments": ["BASE_2005_2024", "TAIL_2025_20260803"],
+    "research_eligible": false
+  },
+  "reconciliation": {
+    "key": ["local_security_code", "event_date"],
+    "event_input": "data/market/quarantine/r0-core04-core05-split/candidate-20260801-v1/CORE04/corporate_action_event/source_observations.parquet",
+    "term_input": "data/market/quarantine/r0-core04-core05-split/candidate-20260801-v1/CORE04/corporate_action_terms/source_observations.parquet",
+    "factor_input": "data/market/quarantine/r0-core04-core05-split/candidate-20260801-v1/CORE04/corporate_action_adjustment_event/vendor_factor_observations.parquet",
+    "canonical_source_selection": false,
+    "silent_conflict_overwrite": false
+  },
+  "output_boundary": {
+    "candidate_root": "data/market/quarantine/ricequant-r0-core04-core05/candidate-20260804-v1",
+    "report_root": "reports/data-governance/ricequant-r0-core04-core05-candidate-20260804-v1",
+    "formal_catalog_write": false,
+    "roadmap_write": false,
+    "source_registry_write": false,
+    "quality_promotion": false,
+    "formal_snapshot_write": false,
+    "research_use": false
+  },
+  "security": {
+    "authentication_source": "EXISTING_RQDATA_RUNTIME_CONFIGURATION_ONLY",
+    "credential_value_capture": false,
+    "credential_value_persistence": false,
+    "account_identity_capture": false
+  },
+  "formal_limits": [
+    "RQDATA_INFO_DATES_DO_NOT_CLOSE_INTRADAY_AVAILABLE_AT",
+    "BOUNDED_VENDOR_ROWS_DO_NOT_PROVE_COMPLETE_REVISION_OR_WITHDRAWAL_CHAINS",
+    "CSMAR_AND_RQDATA_RIGHTS_REMAIN_UNVERIFIED_FOR_FORMAL_ADMISSION",
+    "CSMAR_ANCHORED_UNIVERSE_IS_NOT_A_FORMAL_HISTORICAL_IDENTITY_MASTER",
+    "RQDATA_EX_FACTOR_AND_CSMAR_FACTOR_ARE_CALIBRATION_ONLY",
+    "CORE04_AND_CORE05_FORMAL_GATES_REMAIN_UNCHANGED"
+  ]
+}

@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "mode": "local_download_candidate",
+  "dataset_id": "csmar-idx-chgsmp",
+  "run_id": "d2a04d-csmar-idx-chgsmp-future-effective-pilot-20260730-v1",
+  "source_id": "CSMAR_MANUAL_EXPORT",
+  "dataset_schema_version": "csmar-idx-chgsmp-observed-8col-20260730-candidate-v1",
+  "authorized_local_research_download": true,
+  "source_access_note": "The user manually triggered this CSMAR IDX_Chgsmp export under institution-provided academic access on 2026-07-30 and authorized local database processing. The exact ZIP SHA-256 a92786e597918636e6fb5390462fcd1fb3be7612c7bda8fe667756d2db682847, CRC integrity, descriptor, eight-column UTF-8-SIG CSV header, 279744 logical rows and zero duplicate (Indexcd, Chgsmp01, Chgsmp02, Chgsmp04, Chgsmp05, Chgsmp06, Chgsmp07) candidate keys were inspected before execution. Chgsmp01 spans 2026-06-16 through 2029-06-15 while Chgsmp06 spans 2026-05-29 through 2026-07-28, so the package contains announced future-effective events. The 122 records effective on the query upper boundary 2029-06-15 all belong to Indexcd 899302 and market SQS and require future-effective boundary review. Chgsmp01 must never be used as available_at; Chgsmp06 remains only an observed announcement-date candidate and does not close first-publication time, announcement identity, corrections, supersedes, provider identity, permanent security identity or revision history. Empty Chgsmp07 values remain source missingness and are not filled. This request authorizes only an isolated INSPECTION_ONLY/NOT_ADMITTED candidate. It does not assert redistribution rights, formal source admission, semantic or PIT closure, quality promotion, catalog registration or research readiness.",
+  "include_patterns": [
+    "指数取样变更文件094857265(仅供清华大学使用).zip"
+  ],
+  "zip_member_patterns": [
+    "IDX_Chgsmp.csv"
+  ],
+  "table": {
+    "table_name": "idx_chgsmp_candidate",
+    "expected_columns": [
+      "Indexcd",
+      "Chgsmp01",
+      "Chgsmp02",
+      "Chgsmp03",
+      "Chgsmp04",
+      "Chgsmp05",
+      "Chgsmp06",
+      "Chgsmp07"
+    ],
+    "column_types": {
+      "Indexcd": "VARCHAR",
+      "Chgsmp01": "DATE",
+      "Chgsmp02": "VARCHAR",
+      "Chgsmp03": "VARCHAR",
+      "Chgsmp04": "VARCHAR",
+      "Chgsmp05": "VARCHAR",
+      "Chgsmp06": "DATE",
+      "Chgsmp07": "VARCHAR"
+    },
+    "date_column": "Chgsmp01",
+    "key_columns": [
+      "Indexcd",
+      "Chgsmp01",
+      "Chgsmp02",
+      "Chgsmp04",
+      "Chgsmp05",
+      "Chgsmp06",
+      "Chgsmp07"
+    ],
+    "required_columns": [
+      "Indexcd",
+      "Chgsmp01",
+      "Chgsmp02",
+      "Chgsmp04",
+      "Chgsmp05",
+      "Chgsmp06",
+      "Chgsmp07"
+    ],
+    "delimiter": ",",
+    "encoding": "utf-8-sig",
+    "allow_extra_columns": false,
+    "partition_mode": "year_month"
+  },
+  "limits": {
+    "max_packages": 1,
+    "max_csv_sources": 1,
+    "max_archive_members": 3,
+    "max_total_input_bytes": 6362664,
+    "max_total_unpacked_bytes": 44988884,
+    "max_compression_ratio": 1000,
+    "max_rows": 280000
+  }
+}

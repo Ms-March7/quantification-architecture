@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "mode": "local_daily_orchestration_state",
+  "purpose_ceiling": "INSPECTION_ONLY",
+  "dataset_scope": "synthetic_fixture",
+  "job_id": "synthetic-local-daily-orchestration",
+  "dataset_id": "synthetic-daily-update",
+  "source_id": "SYNTHETIC_FIXTURE",
+  "timezone": "Asia/Shanghai",
+  "calendar_dates": [
+    "2026-07-30",
+    "2026-07-31",
+    "2026-08-03"
+  ],
+  "max_attempts": 3,
+  "lease_seconds": 300,
+  "authorization_note": "Synthetic contract example only; do not activate as a real scheduled job."
+}

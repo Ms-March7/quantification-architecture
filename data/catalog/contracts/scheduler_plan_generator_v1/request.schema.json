@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://quantification.local/contracts/scheduler_plan_generator_v1/request.schema.json",
+  "title": "Inspection-only Windows Task Scheduler XML plan request",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "mode",
+    "purpose_ceiling",
+    "plan_id",
+    "timezone",
+    "windows_timezone_id",
+    "account_placeholder",
+    "trigger_local_time",
+    "orchestration_request",
+    "jobs",
+    "safety",
+    "authorization_note"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "mode": {"const": "scheduler_plan_generator"},
+    "purpose_ceiling": {"const": "INSPECTION_ONLY"},
+    "plan_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$"
+    },
+    "timezone": {"const": "Asia/Shanghai"},
+    "windows_timezone_id": {"const": "China Standard Time"},
+    "account_placeholder": {"const": "__WINDOWS_ACCOUNT_PLACEHOLDER__"},
+    "trigger_local_time": {
+      "type": "string",
+      "pattern": "^(?:[01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$"
+    },
+    "orchestration_request": {"$ref": "#/$defs/relativePath"},
+    "jobs": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 366,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["trade_date", "update_request", "inbox"],
+        "properties": {
+          "trade_date": {"type": "string", "format": "date"},
+          "update_request": {"$ref": "#/$defs/relativePath"},
+          "inbox": {"$ref": "#/$defs/relativePath"}
+        }
+      }
+    },
+    "safety": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "task_registration",
+        "network_allowed",
+        "credentials_allowed",
+        "formal_data_write",
+        "formal_catalog_write",
+        "source_admission",
+        "quality_promotion",
+        "research_ready"
+      ],
+      "properties": {
+        "task_registration": {"const": false},
+        "network_allowed": {"const": false},
+        "credentials_allowed": {"const": false},
+        "formal_data_write": {"const": false},
+        "formal_catalog_write": {"const": false},
+        "source_admission": {"const": false},
+        "quality_promotion": {"const": false},
+        "research_ready": {"const": false}
+      }
+    },
+    "authorization_note": {"type": "string", "minLength": 1, "maxLength": 500}
+  },
+  "$defs": {
+    "relativePath": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?![A-Za-z]:)(?![/\\\\])(?!.*(?:^|[/\\\\])\\.\\.(?:[/\\\\]|$)).+$"
+    }
+  }
+}

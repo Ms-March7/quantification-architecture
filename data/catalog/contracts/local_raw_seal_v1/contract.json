@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "contract_id": "local_raw_seal_v1",
+  "status": "ACTIVE__LOCAL_HASH_BOUND_INSPECTION_ONLY__NO_FORMAL_EFFECT",
+  "purpose_ceiling": "INSPECTION_ONLY",
+  "engine_id": "local_raw_seal/v1",
+  "source_boundary": {
+    "allowed_root": "tmp/free-web-daily-probe/",
+    "required_shape": "<source_probe_run_id>/raw/<ordinary_file>",
+    "input_selection": "EXPLICIT_ALLOWLIST_ONLY",
+    "required_per_file_bindings": [
+      "source_id",
+      "workspace_relative_path",
+      "sha256",
+      "bytes"
+    ],
+    "directory_discovery_forbidden": true,
+    "network_forbidden": true,
+    "source_mutation_forbidden": true,
+    "source_deletion_forbidden": true,
+    "reparse_or_symlink_inputs_forbidden": true,
+    "max_inputs": 20
+  },
+  "output_boundary": {
+    "allowed_root": "tmp/local-raw-seal/",
+    "required_shape": "<seal_run_id>/",
+    "existing_output_behavior": "FAIL_CLOSED_NO_OVERWRITE",
+    "seal_mechanism": "SAME_VOLUME_STAGING_THEN_RENAME",
+    "required_artifacts": [
+      "sealed/<ordinal>-<source_id>.raw",
+      "SEAL_MANIFEST.json",
+      "SEAL_MANIFEST.sha256"
+    ],
+    "immutability_level": "TMP_WRITE_ONCE_HASH_BOUND_IMMUTABLE_STYLE_NOT_FORMAL_SNAPSHOT"
+  },
+  "formal_effect": {
+    "source_admission": false,
+    "catalog_registration": false,
+    "quality_promotion": false,
+    "production_raw_store_write": false,
+    "scheduler_creation": false,
+    "research_ready": false
+  }
+}

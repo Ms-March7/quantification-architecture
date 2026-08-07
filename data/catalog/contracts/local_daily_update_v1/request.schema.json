@@ -1,0 +1,139 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "qdata-local-daily-update-v1",
+  "title": "Inspection-only local daily update candidate request",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "mode",
+    "dataset_scope",
+    "dataset_id",
+    "run_id",
+    "source_id",
+    "dataset_schema_version",
+    "authorization_note",
+    "include_patterns",
+    "base_candidate",
+    "table",
+    "limits"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "mode": {"const": "local_daily_update_candidate"},
+    "dataset_scope": {
+      "enum": ["synthetic_fixture", "registered_inspection"]
+    },
+    "dataset_id": {"$ref": "#/$defs/component"},
+    "run_id": {"$ref": "#/$defs/component"},
+    "source_id": {"$ref": "#/$defs/component"},
+    "dataset_schema_version": {"$ref": "#/$defs/component"},
+    "authorization_note": {"type": "string", "minLength": 1},
+    "include_patterns": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "base_candidate": {
+      "type": ["string", "null"],
+      "minLength": 1
+    },
+    "table": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "table_name",
+        "expected_columns",
+        "column_types",
+        "date_column",
+        "primary_key_columns",
+        "required_columns",
+        "delimiter",
+        "revision"
+      ],
+      "properties": {
+        "table_name": {
+          "type": "string",
+          "pattern": "^[A-Za-z_][A-Za-z0-9_]{0,62}$"
+        },
+        "expected_columns": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "column_types": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": {
+            "enum": [
+              "VARCHAR",
+              "DATE",
+              "TIMESTAMP_TZ",
+              "DOUBLE",
+              "BIGINT",
+              "BOOLEAN"
+            ]
+          }
+        },
+        "date_column": {"type": "string", "minLength": 1},
+        "primary_key_columns": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "required_columns": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "delimiter": {"enum": [",", "\t", ";", "|"]},
+        "revision": {
+          "oneOf": [
+            {"type": "null"},
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "business_key_columns",
+                "revision_column",
+                "available_at_column",
+                "policy"
+              ],
+              "properties": {
+                "business_key_columns": {
+                  "type": "array",
+                  "minItems": 1,
+                  "uniqueItems": true,
+                  "items": {"type": "string", "minLength": 1}
+                },
+                "revision_column": {"type": "string", "minLength": 1},
+                "available_at_column": {"type": "string", "minLength": 1},
+                "policy": {"const": "APPEND_ONLY_STRICT"}
+              }
+            }
+          ]
+        }
+      }
+    },
+    "limits": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["max_files", "max_total_input_bytes", "max_rows"],
+      "properties": {
+        "max_files": {"type": "integer", "minimum": 1},
+        "max_total_input_bytes": {"type": "integer", "minimum": 1},
+        "max_rows": {"type": "integer", "minimum": 1}
+      }
+    }
+  },
+  "$defs": {
+    "component": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._=-]{0,127}$"
+    }
+  }
+}

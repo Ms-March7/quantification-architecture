@@ -1,0 +1,19 @@
+version: 0.1
+name: capital-flow-attribution-fixture
+description: Offline S1 accounting-fixture validation contract.
+type: json
+artifact: outputs/capital-flow-attribution/data/validation.json
+required_fields:
+  - schema_version
+  - expected_workflow_status
+  - actual_workflow_status
+  - expectation_matched
+  - checks
+  - test_status
+allowed_workflow_status:
+  - DONE
+  - REVIEW
+  - BLOCKED
+allowed_test_status:
+  - PASS
+  - FAIL

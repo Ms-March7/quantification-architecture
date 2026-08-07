@@ -1,0 +1,220 @@
+version: 0.1
+project: quant-research-reliability
+
+case_status_values:
+  pass: The tested behavior matched the reliability contract.
+  review: The run completed but needs human interpretation.
+  fail: The tested behavior violated a reliability, safety, schema, or report contract.
+
+case_groups:
+  golden:
+    description: Known-good offline scenarios that should remain stable over time.
+  failure:
+    description: Deliberately degraded inputs that should trigger warnings, downgrade, or refusal.
+  contract:
+    description: Cross-target schema, symbol, date, output path, and report-safety checks.
+  live:
+    description: Optional read-only online probes. Disabled by default.
+
+cases:
+  - id: capital_flow_attribution_good_fixture
+    group: golden
+    status: active
+    target: capital_flow_attribution
+    mode: quick
+    adapter_entrypoint: offline_fixture
+    fixture: fixtures/golden/capital-flow-attribution-good
+    expected_status: pass
+    assertions:
+      - required_artifacts_exist
+      - attribution_fixture_expectation_matches
+      - output_stays_under_run_dir
+    reliability_question: >
+      Do balanced ETF and margin accounting inputs produce a DONE workflow state
+      without escaping the isolated Harness run directory?
+    failure_meaning: >
+      The S1 accounting implementation or its machine-readable output contract changed.
+
+  - id: capital_flow_attribution_bad_fixture
+    group: failure
+    status: active
+    target: capital_flow_attribution
+    mode: quick
+    adapter_entrypoint: offline_fixture
+    fixture: fixtures/failure/capital-flow-attribution-conflict
+    expected_status: pass
+    assertions:
+      - required_artifacts_exist
+      - attribution_fixture_expectation_matches
+      - output_stays_under_run_dir
+    reliability_question: >
+      Are a margin identity conflict and a missing ETF NAV downgraded to REVIEW
+      while the regression test itself passes?
+    failure_meaning: >
+      The workflow may silently accept inconsistent balances or invent ETF flow
+      when an accounting input is missing.
+
+  - id: relative_dominance_csv_contract
+    group: golden
+    status: disabled
+    target: stock_relative_dominance
+    mode: quick
+    adapter_entrypoint: local_csv_report
+    fixture: fixtures/golden/relative-dominance-etf-pair
+    params:
+      symbols: 588170,159995
+      start_date: "2024-01-01"
+      end_date: "2024-03-29"
+      benchmark_symbol: "159995"
+    expected_status: pass
+    assertions:
+      - required_artifacts_exist
+      - csv_has_required_columns
+      - symbols_match_requested_universe
+      - date_range_is_explicit
+      - report_mentions_source_and_adjustment
+      - output_stays_under_run_dir
+    reliability_question: >
+      Can the relative-dominance workflow produce stable machine-readable
+      outputs and a readable report from local CSV data without online fetches?
+    failure_meaning: >
+      A schema, output path, or report contract changed and downstream ranking
+      consumers may no longer be reliable.
+
+  - id: capital_flow_stale_data_failure
+    group: failure
+    status: disabled
+    target: capital_flow_monitor
+    mode: quick
+    adapter_entrypoint: user_csv_report
+    fixture: fixtures/failure/stale-capital-flow
+    expected_status: review
+    assertions:
+      - required_artifacts_exist
+      - report_mentions_stale_data
+      - no_strong_conclusion
+      - source_timestamp_is_visible
+      - output_stays_under_run_dir
+    reliability_question: >
+      Does the capital-flow workflow detect stale evidence and downgrade the
+      conclusion instead of treating the input as fresh market evidence?
+    failure_meaning: >
+      The workflow may silently use stale capital-flow data and produce
+      overconfident daily monitoring conclusions.
+
+  - id: event_study_missing_prices_failure
+    group: failure
+    status: disabled
+    target: risk_warning_event_study
+    mode: quick
+    adapter_entrypoint: offline_event_window_report
+    fixture: fixtures/failure/missing-prices-event-study
+    params:
+      start_date: "2024-01-01"
+      end_date: "2024-03-29"
+      benchmark_symbol: 000300.SH
+      extra_args: []
+    expected_status: review
+    assertions:
+      - required_artifacts_exist
+      - missing_prices_are_flagged
+      - sample_size_is_visible
+      - no_strong_conclusion
+      - output_stays_under_run_dir
+    reliability_question: >
+      Does the event-study workflow surface missing price coverage and prevent
+      strong event-window claims when event data cannot be evaluated safely?
+    failure_meaning: >
+      The event-study workflow may report conclusions even when the price
+      evidence is incomplete.
+
+  - id: event_study_duplicate_announcements_contract
+    group: failure
+    status: disabled
+    target: risk_warning_event_study
+    mode: full
+    adapter_entrypoint: offline_event_window_report
+    fixture: fixtures/failure/duplicate-announcements
+    params:
+      start_date: "2024-01-01"
+      end_date: "2024-03-29"
+      benchmark_symbol: 000300.SH
+      extra_args:
+        - --dedupe-overlap-days
+        - "7"
+    expected_status: pass
+    assertions:
+      - required_artifacts_exist
+      - duplicate_events_are_visible_or_deduped
+      - filtered_out_events_are_explained
+      - sample_size_is_visible
+      - output_stays_under_run_dir
+    reliability_question: >
+      Does the event-study workflow avoid double-counting duplicated
+      announcements and expose the sample funnel in its outputs?
+    failure_meaning: >
+      Historical event statistics may be distorted by duplicate announcements
+      or unreported sample filtering.
+
+  - id: cross_skill_symbol_date_contract
+    group: contract
+    status: disabled
+    targets:
+      - stock_relative_dominance
+      - capital_flow_monitor
+      - risk_warning_event_study
+    mode: full
+    fixtures:
+      - fixtures/golden/relative-dominance-etf-pair
+      - fixtures/golden/capital-flow-basic
+      - fixtures/golden/event-study-basic
+    expected_status: pass
+    assertions:
+      - shared_symbol_format_is_documented
+      - dates_use_iso_format
+      - outputs_have_status_or_quality_fields
+      - generated_outputs_do_not_enter_skill_dirs
+      - downstream_contracts_are_parseable
+    reliability_question: >
+      Can outputs from the major finance workflows share enough symbol, date,
+      status, and quality conventions to support a future quant-workbench
+      report or plugin?
+    failure_meaning: >
+      Individual workflows may run, but their outputs may not compose safely
+      into a larger research system.
+
+  - id: finance_report_overclaim_contract
+    group: contract
+    status: active
+    target: finance_report_safety
+    mode: full
+    fixture: fixtures/contract/report-overclaim-samples
+    expected_status: review
+    assertions:
+      - weak_evidence_does_not_get_strong_language
+      - report_distinguishes_observation_from_advice
+      - sample_limitations_are_visible
+      - data_source_and_date_range_are_visible
+    reliability_question: >
+      Can the report-safety layer detect generated or human reports that make
+      over-strong claims under weak, stale, or incomplete evidence?
+    failure_meaning: >
+      Research reports may look polished while exceeding the evidence actually
+      available.
+
+  - id: quant_data_mcp_schema_probe
+    group: live
+    status: deferred
+    target: quant_data_mcp
+    mode: live
+    expected_status: review
+    assertions:
+      - mcp_tool_exists
+      - probe_response_has_schema_version
+      - probe_response_has_source_metadata
+      - probe_response_handles_empty_results
+    reliability_question: >
+      When the future quant_data MCP exists, does it expose enough schema and
+      source metadata for skills and reports to trust its responses?
+    failure_meaning: >
+      Skills may need to compensate for unclear or unstable MCP responses.

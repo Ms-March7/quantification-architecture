@@ -1,0 +1,9 @@
+{
+  "expected_workflow_status": "DONE",
+  "margin": [
+    {"id": "sse", "previous_balance": 1000, "current_balance": 1030, "financing_buy": 80, "repayment": 50}
+  ],
+  "etf": [
+    {"id": "510000.SH", "previous_shares": 100, "current_shares": 110, "previous_nav": 2.0, "current_nav": 2.1}
+  ]
+}

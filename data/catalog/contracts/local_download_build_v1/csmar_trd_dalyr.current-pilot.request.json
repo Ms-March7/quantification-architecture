@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "mode": "local_download_candidate",
+  "dataset_id": "csmar-trd-dalyr-pilot",
+  "run_id": "pilot-current-export-20260728-v2",
+  "source_id": "CSMAR_MANUAL_EXPORT",
+  "dataset_schema_version": "current-export-20260728-pilot-v1",
+  "authorized_local_research_download": true,
+  "source_access_note": "User confirms daily_2025_01_all_fields_pilot.zip was manually downloaded under approved local academic research access; no redistribution or formal admission is asserted.",
+  "include_patterns": [
+    "daily_2025_01_all_fields_pilot.zip"
+  ],
+  "zip_member_patterns": [
+    "TRD_Dalyr.csv"
+  ],
+  "table": {
+    "table_name": "trd_dalyr_current_pilot",
+    "expected_columns": [
+      "Stkcd",
+      "Trddt",
+      "Opnprc",
+      "Hiprc",
+      "Loprc",
+      "Clsprc",
+      "Dnshrtrd",
+      "Dnvaltrd",
+      "Dsmvosd",
+      "Dsmvtll",
+      "Dretwd",
+      "Dretnd",
+      "Adjprcwd",
+      "Adjprcnd",
+      "Markettype",
+      "Capchgdt",
+      "Trdsta",
+      "Ahshrtrd_D",
+      "Ahvaltrd_D",
+      "PreClosePrice",
+      "ChangeRatio",
+      "LimitDown",
+      "LimitUp",
+      "LimitStatus"
+    ],
+    "column_types": {
+      "Stkcd": "VARCHAR",
+      "Trddt": "DATE",
+      "Opnprc": "DOUBLE",
+      "Hiprc": "DOUBLE",
+      "Loprc": "DOUBLE",
+      "Clsprc": "DOUBLE",
+      "Dnshrtrd": "BIGINT",
+      "Dnvaltrd": "DOUBLE",
+      "Dsmvosd": "DOUBLE",
+      "Dsmvtll": "DOUBLE",
+      "Dretwd": "DOUBLE",
+      "Dretnd": "DOUBLE",
+      "Adjprcwd": "DOUBLE",
+      "Adjprcnd": "DOUBLE",
+      "Markettype": "INTEGER",
+      "Capchgdt": "DATE",
+      "Trdsta": "INTEGER",
+      "Ahshrtrd_D": "BIGINT",
+      "Ahvaltrd_D": "DOUBLE",
+      "PreClosePrice": "DOUBLE",
+      "ChangeRatio": "DOUBLE",
+      "LimitDown": "DOUBLE",
+      "LimitUp": "DOUBLE",
+      "LimitStatus": "INTEGER"
+    },
+    "date_column": "Trddt",
+    "key_columns": [
+      "Stkcd",
+      "Trddt"
+    ],
+    "required_columns": [
+      "Stkcd",
+      "Trddt"
+    ],
+    "delimiter": ",",
+    "encoding": "utf-8-sig",
+    "allow_extra_columns": false,
+    "partition_mode": "year_month"
+  },
+  "limits": {
+    "max_packages": 1,
+    "max_csv_sources": 1,
+    "max_archive_members": 10,
+    "max_total_input_bytes": 1073741824,
+    "max_total_unpacked_bytes": 2147483648,
+    "max_compression_ratio": 1000,
+    "max_rows": 10000000
+  }
+}

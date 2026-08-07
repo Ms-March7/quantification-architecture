@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "contract_id": "candidate_daily_maintenance_v1",
+  "purpose": "统一运行候选层日维护并刷新中央候选资产索引",
+  "step_order": [
+    "rqdata_shsz_price_volume",
+    "rqdata_b_path",
+    "rqdata_financial_pit",
+    "joinquant_share_capital_pit",
+    "candidate_asset_index"
+  ],
+  "entrypoints": {
+    "rqdata_shsz_price_volume": "control/tools/run_rqdata_shsz_daily_update.py",
+    "rqdata_b_path": "control/tools/run_rqdata_b_path_daily_update.py",
+    "rqdata_financial_pit": "control/tools/run_rqdata_financial_pit_daily_update.py",
+    "joinquant_share_capital_pit": "control/tools/build_joinquant_share_capital_pit_candidate.py",
+    "candidate_asset_index": "control/tools/build_candidate_asset_index.py"
+  },
+  "candidate_worker_policy": {
+    "rqdata_financial_pit": {
+      "queue_selection": "OLDEST_PENDING_ELIGIBLE_QUEUE__ELSE_NEWEST_COMPLETE",
+      "maximum_tasks_per_maintenance_run": 1,
+      "completed_queue": "NO_CHANGE__QUEUE_COMPLETE__NO_NETWORK",
+      "missing_queue": "SKIPPED__NO_ELIGIBLE_LOCAL_FINANCIAL_QUEUE__NO_NETWORK_NO_WRITE"
+    },
+    "joinquant_share_capital_pit": {
+      "source_kind": "SEALED_LOCAL_MANUAL_SOURCE_ONLY",
+      "unchanged_committed_candidate": "NO_CHANGE__VERIFY_HASHES_ONLY__NO_NETWORK",
+      "missing_source": "SKIPPED__NO_NETWORK_NO_WRITE",
+      "changed_source_or_incomplete_immutable_output": "FAIL_CLOSED__NEW_VERSION_REQUIRED",
+      "overwrite_existing_output": false
+    }
+  },
+  "safety": {
+    "purpose_ceiling": "INSPECTION_ONLY",
+    "run_fail_closed": true,
+    "formal_catalog_write": false,
+    "formal_snapshot_write": false,
+    "quality_promotion": false,
+    "research_run": false,
+    "validation_or_holdout_consumption": false,
+    "credential_value_read": false,
+    "credential_value_capture": false,
+    "candidate_index_write": true,
+    "candidate_transaction_receipt_write": true
+  },
+  "failure_semantics": {
+    "lock_implementation": "WINDOWS_OS_BYTE_RANGE_LOCK__AUTO_RELEASE_ON_PROCESS_EXIT",
+    "continue_independent_steps": true,
+    "index_after_data_steps_even_if_one_data_step_failed": true,
+    "do_not_rollback_sealed_immutable_candidates": true,
+    "any_failed_step_makes_overall_status_fail_closed": true
+  },
+  "scheduler": {
+    "task_name": "Quantification-Candidate-Daily-Maintenance",
+    "weekdays_only": true,
+    "local_start_time": "19:20",
+    "start_when_available": true,
+    "multiple_instances": "IGNORE_NEW",
+    "execution_time_limit": "PT3H"
+  }
+}

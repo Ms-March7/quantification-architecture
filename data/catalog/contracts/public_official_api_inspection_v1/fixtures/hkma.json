@@ -1,0 +1,17 @@
+{
+  "header": {
+    "success": true,
+    "err_code": "0000",
+    "err_msg": "No error found."
+  },
+  "result": {
+    "datasize": 1,
+    "records": [
+      {
+        "end_of_day": "2000-01-03",
+        "usd": 1.0,
+        "cny": 1.0
+      }
+    ]
+  }
+}

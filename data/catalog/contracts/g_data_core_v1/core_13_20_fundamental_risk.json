@@ -1,0 +1,2332 @@
+{
+  "schema_version": 1,
+  "contract_version": "1.0.0",
+  "group_id": "CORE-13-20",
+  "datasets": [
+    {
+      "plan_id": "CORE-13",
+      "dataset_id": "cn-a-share-financial-statements-pit",
+      "schema_version": "1.0.0",
+      "grain": "one reported financial-statement line item in one immutable disclosure revision and statement scope",
+      "pit_contract": {
+        "decision_time_rule": "A fact is usable only when available_at <= decision_time. Preserve the source timestamp; when the official source exposes only a date or an untrusted timestamp, set available_at conservatively to the next exchange session open and record the fallback reason.",
+        "required_time_fields": [
+          "report_period_start",
+          "report_period_end",
+          "published_at",
+          "available_at",
+          "ingested_at",
+          "revised_at",
+          "revision_id",
+          "snapshot_id"
+        ],
+        "revision_rule": "Never overwrite a filed value. A correction, supplementary filing, accounting error correction, or restatement creates a new document_revision_id and revision_id linked by supersedes_revision_id; earlier snapshots remain reproducible."
+      },
+      "source_bindings": [
+        {
+          "binding_id": "FINANCIAL_DISCLOSURE_OFFICIAL",
+          "primary_source_ids": [
+            "CNINFO_OFFICIAL",
+            "SSE_OFFICIAL",
+            "SZSE_OFFICIAL",
+            "BSE_OFFICIAL"
+          ],
+          "calibration_source_ids": [
+            "CSRC_OFFICIAL"
+          ],
+          "license_gate": "BLOCK_IF_AUTOMATED_BULK_ACCESS_LOCAL_STORAGE_OR_INTERNAL_SHARING_TERMS_ARE_NOT_RECORDED_PER_ENDPOINT",
+          "ingestion_status": "CONTRACT_ONLY_NO_DOWNLOAD"
+        },
+        {
+          "binding_id": "FINANCIAL_SCHEMA_REGULATORY",
+          "primary_source_ids": [
+            "CSRC_OFFICIAL"
+          ],
+          "calibration_source_ids": [],
+          "license_gate": "PUBLIC_REGULATORY_TEXT_SCHEMA_USE_ALLOWED_SUBJECT_TO_SOURCE_ATTRIBUTION",
+          "ingestion_status": "REFERENCE_ONLY"
+        }
+      ],
+      "tables": [
+        {
+          "table_id": "financial_document_versions",
+          "grain": "one official periodic-report or correction document revision for one issuer",
+          "inherits": [
+            "record_lineage",
+            "security_key"
+          ],
+          "primary_key": [
+            "security_id",
+            "disclosure_id",
+            "document_revision_id"
+          ],
+          "fields": [
+            {
+              "name": "disclosure_id",
+              "dtype": "string",
+              "nullable": false,
+              "unit": "1",
+              "description": "Stable official announcement or filing identity.",
+              "source_binding": "FINANCIAL_DISCLOSURE_OFFICIAL",
+              "pit_role": "key"
+            },
+            {
+              "name": "document_revision_id",
+              "dtype": "string",
+              "nullable": false,
+              "unit": "1",
+              "description": "Immutable identity of this document body/version.",
+              "source_binding": "FINANCIAL_DISCLOSURE_OFFICIAL",
+              "pit_role": "revision"
+            },
+            {
+              "name": "report_type",
+              "dtype": "enum<ANNUAL,SEMIANNUAL,Q1,Q3,CORRECTION,SUPPLEMENT>",
+              "nullable": false,
+              "unit": "1",
+              "description": "Regulatory report or correction type.",
+              "source_binding": "FINANCIAL_SCHEMA_REGULATORY",
+              "pit_role": "metadata"
+            },
+            {
+              "name": "report_period_start",
+              "dtype": "date32",
+              "nullable": true,
+              "unit": "date",
+              "description": "Start of the covered reporting period when applicable.",
+              "source_binding": "FINANCIAL_DISCLOSURE_OFFICIAL",
+              "pit_role": "event_time"
+            },
+            {
+              "name": "report_period_end",
+              "dtype": "date32",
+              "nullable": false,
+              "unit": "date",
+              "description": "End of the accounting period; not an availability timestamp.",
+              "source_binding": "FINANCIAL_DISCLOSURE_OFFICIAL",
+              "pit_role": "event_time"
+            },
+            {
+              "name": "published_at",
+              "dtype": "timestamp[us,Asia/Shanghai]",
+              "nullable": false,
+              "unit": "timestamp",
+              "description": "First official public disclosure timestamp retained exactly when available.",
+              "source_binding": "FINANCIAL_DISCLOSURE_OFFICIAL",
+              "pit_role": "published_at"
+            },
+            {
+              "name": "available_at",
+              "dtype": "timestamp[us,Asia/Shanghai]",
+              "nullable": false,
+              "unit": "timestamp",
+              "description": "Earliest conservative timestamp at which the research system may observe this document.",
+              "source_binding": "FINANCIAL_DISCLOSURE_OFFICIAL",
+              "pit_role": "available_at"
+            },
+            {
+              "name": "revised_at",
+              "dtype": "timestamp[us,Asia/Shanghai]",
+              "nullable": true,
+              "unit": "timestamp",
+              "description": "Official correction/restatement time, null for the initial filing.",
+              "source_binding": "FINANCIAL_DISCLOSURE_OFFICIAL",
+              "pit_role": "revision"
+            },
+            {
+              "name": "revision_id",
+              "dtype": "string",
+              "nullable": false,
+              "unit": "1",
+              "description": "Dataset revision identity used by every extracted line item.",
+              "source_binding": "FINANCIAL_DISCLOSURE_OFFICIAL",
+              "pit_role": "revision"
+            },
+            {
+              "name": "supersedes_revision_id",
+              "dtype": "string",
+              "nullable": true,
+              "unit": "1",
+              "description": "Prior revision superseded by this filing without deleting it.",
+              "source_binding": "FINANCIAL_DISCLOSURE_OFFICIAL",
+              "pit_role": "revision"
+            },
+            {
+              "name": "document_hash",
+              "dtype": "fixed_size_binary[32]",
+              "nullable": false,
+              "unit": "sha256",
+              "description": "SHA-256 of the exact official document payload.",
+              "source_binding": "FINANCIAL_DISCLOSURE_OFFICIAL",
+              "pit_role": "lineage"
+            }
+          ]
+        },
+        {
+          "table_id": "financial_statement_facts",
+          "grain": "one reported line item for one document revision, statement, scope, period and comparison role",
+          "inherits": [
+            "record_lineage",
+            "security_key"
+          ],
+          "primary_key": [
+            "security_id",
+            "disclosure_id",
+            "document_revision_id",
+            "statement_scope",
+            "statement_type",
+            "report_period_end",
+            "comparison_role",
+            "line_item_id",
+            "revision_id"
+          ],
+          "fields": [
+            {
+              "name": "disclosure_id",
+              "dtype": "string",
+              "nullable": false,
+              "unit": "1",
+              "description": "Foreign key to the official disclosure document.",
+              "source_binding": "FINANCIAL_DISCLOSURE_OFFICIAL",
+              "pit_role": "key"
+            },
+            {
+              "name": "document_revision_id",
+              "dtype": "string",
+              "nullable": false,
+              "unit": "1",
+              "description": "Foreign key to the immutable document body/version.",
+              "source_binding": "FINANCIAL_DISCLOSURE_OFFICIAL",
+              "pit_role": "revision"
+            },
+            {
+              "name": "report_period_start",
+              "dtype": "date32",
+              "nullable": true,
+              "unit": "date",
+              "description": "Start date for duration facts; null for instant balance-sheet facts.",
+              "source_binding": "FINANCIAL_DISCLOSURE_OFFICIAL",
+              "pit_role": "event_time"
+            },
+            {
+              "name": "report_period_end",
+              "dtype": "date32",
+              "nullable": false,
+              "unit": "date",
+              "description": "Accounting period end represented by the value.",
+              "source_binding": "FINANCIAL_DISCLOSURE_OFFICIAL",
+              "pit_role": "event_time"
+            },
+            {
+              "name": "statement_scope",
+              "dtype": "enum<CONSOLIDATED,PARENT,OTHER>",
+              "nullable": false,
+              "unit": "1",
+              "description": "Consolidated and parent-company statements are never collapsed.",
+              "source_binding": "FINANCIAL_SCHEMA_REGULATORY",
+              "pit_role": "key"
+            },
+            {
+              "name": "statement_type",
+              "dtype": "enum<BALANCE_SHEET,INCOME_STATEMENT,CASH_FLOW,CHANGES_IN_EQUITY,NOTE_TABLE>",
+              "nullable": false,
+              "unit": "1",
+              "description": "Three primary statements plus equity changes and structured note tables.",
+              "source_binding": "FINANCIAL_SCHEMA_REGULATORY",
+              "pit_role": "key"
+            },
+            {
+              "name": "accounting_standard",
+              "dtype": "string",
+              "nullable": false,
+              "unit": "1",
+              "description": "Accounting basis disclosed by the issuer, including sector-specific variants.",
+              "source_binding": "FINANCIAL_DISCLOSURE_OFFICIAL",
+              "pit_role": "metadata"
+            },
+            {
+              "name": "taxonomy_version",
+              "dtype": "string",
+              "nullable": true,
+              "unit": "1",
+              "description": "XBRL/regulatory taxonomy version when present.",
+              "source_binding": "FINANCIAL_SCHEMA_REGULATORY",
+              "pit_role": "metadata"
+            },
+            {
+              "name": "comparison_role",
+              "dtype": "enum<CURRENT_PERIOD,PRIOR_COMPARATIVE,RESTATED_COMPARATIVE>",
+              "nullable": false,
+              "unit": "1",
+              "description": "Distinguishes current values from prior comparatives and later restatements.",
+              "source_binding": "FINANCIAL_DISCLOSURE_OFFICIAL",
+              "pit_role": "revision"
+            },
+            {
+              "name": "is_cumulative",
+              "dtype": "boolean",
+              "nullable": false,
+              "unit": "1",
+              "description": "True for year-to-date duration facts as reported.",
+              "source_binding": "FINANCIAL_DISCLOSURE_OFFICIAL",
+              "pit_role": "metadata"
+            },
+            {
+              "name": "line_item_id",
+              "dtype": "string",
+              "nullable": false,
+              "unit": "1",
+              "description": "Versioned normalized line-item identity; all source rows remain representable.",
+              "source_binding": "FINANCIAL_SCHEMA_REGULATORY",
+              "pit_role": "key"
+            },
+            {
+              "name": "raw_line_item_name",
+              "dtype": "string",
+              "nullable": false,
+              "unit": "text",
+              "description": "Verbatim source label retained beside the normalized identity.",
+              "source_binding": "FINANCIAL_DISCLOSURE_OFFICIAL",
+              "pit_role": "value"
+            },
+            {
+              "name": "value",
+              "dtype": "decimal128(38,10)",
+              "nullable": true,
+              "unit": "source_reported",
+              "description": "Reported numeric value; missing stays null and is never converted to zero.",
+              "source_binding": "FINANCIAL_DISCLOSURE_OFFICIAL",
+              "pit_role": "value"
+            },
+            {
+              "name": "currency",
+              "dtype": "string",
+              "nullable": true,
+              "unit": "ISO-4217",
+              "description": "Reported currency where the line item is monetary.",
+              "source_binding": "FINANCIAL_DISCLOSURE_OFFICIAL",
+              "pit_role": "metadata"
+            },
+            {
+              "name": "reported_unit",
+              "dtype": "string",
+              "nullable": false,
+              "unit": "text",
+              "description": "Exact report unit and scale before canonical conversion.",
+              "source_binding": "FINANCIAL_DISCLOSURE_OFFICIAL",
+              "pit_role": "metadata"
+            },
+            {
+              "name": "published_at",
+              "dtype": "timestamp[us,Asia/Shanghai]",
+              "nullable": false,
+              "unit": "timestamp",
+              "description": "Inherited official document publication time repeated for efficient PIT filtering.",
+              "source_binding": "FINANCIAL_DISCLOSURE_OFFICIAL",
+              "pit_role": "published_at"
+            },
+            {
+              "name": "available_at",
+              "dtype": "timestamp[us,Asia/Shanghai]",
+              "nullable": false,
+              "unit": "timestamp",
+              "description": "Conservative research availability time for this exact revision.",
+              "source_binding": "FINANCIAL_DISCLOSURE_OFFICIAL",
+              "pit_role": "available_at"
+            },
+            {
+              "name": "revised_at",
+              "dtype": "timestamp[us,Asia/Shanghai]",
+              "nullable": true,
+              "unit": "timestamp",
+              "description": "Official revision time when this value is a correction or restatement.",
+              "source_binding": "FINANCIAL_DISCLOSURE_OFFICIAL",
+              "pit_role": "revision"
+            },
+            {
+              "name": "revision_id",
+              "dtype": "string",
+              "nullable": false,
+              "unit": "1",
+              "description": "Immutable fact revision identity.",
+              "source_binding": "FINANCIAL_DISCLOSURE_OFFICIAL",
+              "pit_role": "revision"
+            }
+          ]
+        }
+      ],
+      "quality_gates": [
+        "Every fact resolves to one hashed official document revision and one permanent security identity.",
+        "Primary keys are unique; consolidated and parent statements, report types, comparative roles and taxonomy versions never silently merge.",
+        "published_at and available_at are non-null; date-only disclosures use the documented conservative next-session fallback.",
+        "Balance-sheet accounting identity, statement totals/subtotals, cash-flow reconciliation and cross-statement sign/unit checks pass within declared tolerances.",
+        "Expected statements for each report type are either present or explicitly MISSING; missing facts remain null with reason codes.",
+        "Corrections and restatements form an acyclic revision chain and never mutate an older snapshot."
+      ],
+      "known_blockers": [
+        "CNInfo and exchange web access does not by itself establish permission for automated bulk collection, local storage, or redistribution; endpoint-level terms must be recorded before ingestion.",
+        "Complete historical XBRL coverage and precise intraday publication timestamps are not guaranteed, especially for older filings.",
+        "General, bank, insurance and securities-company statement taxonomies require separate versioned mappings; PDF-only rows cannot be dropped when no canonical item exists."
+      ]
+    },
+    {
+      "plan_id": "CORE-14",
+      "dataset_id": "cn-a-share-financial-indicators-pit",
+      "schema_version": "1.0.0",
+      "grain": "one reported or deterministically derived financial metric for one issuer, reporting period, scope, basis and revision",
+      "pit_contract": {
+        "decision_time_rule": "A metric is usable only when all inputs have available_at <= decision_time; derived available_at equals the maximum availability of its inputs and computation publication time.",
+        "required_time_fields": [
+          "report_period_start",
+          "report_period_end",
+          "published_at",
+          "available_at",
+          "revised_at",
+          "revision_id",
+          "snapshot_id"
+        ],
+        "revision_rule": "Reported metrics inherit the filing revision. Any changed input, formula, comparison basis, or restatement creates a new revision_id and formula_version; previously published metric facts remain immutable."
+      },
+      "source_bindings": [
+        {
+          "binding_id": "FINANCIAL_METRIC_DERIVED",
+          "primary_source_ids": [
+            "INTERNAL_CORE13"
+          ],
+          "calibration_source_ids": [
+            "CNINFO_OFFICIAL",
+            "SSE_OFFICIAL",
+            "SZSE_OFFICIAL",
+            "BSE_OFFICIAL"
+          ],
+          "license_gate": "INHERIT_ALL_CORE13_SOURCE_AND_USE_RESTRICTIONS",
+          "ingestion_status": "BLOCKED_UNTIL_CORE13_INPUT_SNAPSHOT_EXISTS"
+        },
+        {
+          "binding_id": "FINANCIAL_METRIC_REPORTED",
+          "primary_source_ids": [
+            "CNINFO_OFFICIAL",
+            "SSE_OFFICIAL",
+            "SZSE_OFFICIAL",
+            "BSE_OFFICIAL"
+          ],
+          "calibration_source_ids": [
+            "INTERNAL_CORE13"
+          ],
+          "license_gate": "BLOCK_IF_OFFICIAL_DISCLOSURE_ENDPOINT_TERMS_ARE_NOT_RECORDED",
+          "ingestion_status": "CONTRACT_ONLY_NO_DOWNLOAD"
+        }
+      ],
+      "tables": [
+        {
+          "table_id": "financial_metric_facts",
+          "grain": "one metric value by issuer, period, statement scope, measurement basis, formula and revision",
+          "inherits": [
+            "record_lineage",
+            "security_key",
+            "derived_lineage"
+          ],
+          "primary_key": [
+            "security_id",
+            "report_period_end",
+            "statement_scope",
+            "metric_id",
+            "measurement_basis",
+            "formula_version",
+            "revision_id"
+          ],
+          "fields": [
+            {
+              "name": "report_period_start",
+              "dtype": "date32",
+              "nullable": true,
+              "unit": "date",
+              "description": "Start date of the represented period or calculation window.",
+              "source_binding": "FINANCIAL_METRIC_DERIVED",
+              "pit_role": "event_time"
+            },
+            {
+              "name": "report_period_end",
+              "dtype": "date32",
+              "nullable": false,
+              "unit": "date",
+              "description": "Accounting period end.",
+              "source_binding": "FINANCIAL_METRIC_DERIVED",
+              "pit_role": "event_time"
+            },
+            {
+              "name": "statement_scope",
+              "dtype": "enum<CONSOLIDATED,PARENT,OTHER>",
+              "nullable": false,
+              "unit": "1",
+              "description": "Financial statement scope used by the metric.",
+              "source_binding": "FINANCIAL_METRIC_DERIVED",
+              "pit_role": "key"
+            },
+            {
+              "name": "metric_id",
+              "dtype": "string",
+              "nullable": false,
+              "unit": "1",
+              "description": "Versioned identifier covering scale/per-share, profitability, growth, solvency, efficiency, cash quality and non-recurring-adjusted metrics.",
+              "source_binding": "FINANCIAL_METRIC_DERIVED",
+              "pit_role": "key"
+            },
+            {
+              "name": "metric_group",
+              "dtype": "enum<SCALE,PER_SHARE,PROFITABILITY,GROWTH,SOLVENCY,LEVERAGE,EFFICIENCY,CASH_QUALITY,NON_RECURRING,SPECIALIZED_FINANCIAL_INSTITUTION>",
+              "nullable": false,
+              "unit": "1",
+              "description": "Semantic family of the indicator.",
+              "source_binding": "FINANCIAL_METRIC_DERIVED",
+              "pit_role": "metadata"
+            },
+            {
+              "name": "measurement_basis",
+              "dtype": "enum<REPORTED,POINT_IN_TIME,YTD,SINGLE_QUARTER,TTM,YOY,QOQ>",
+              "nullable": false,
+              "unit": "1",
+              "description": "Keeps reported, single-quarter, trailing and growth bases distinct.",
+              "source_binding": "FINANCIAL_METRIC_DERIVED",
+              "pit_role": "key"
+            },
+            {
+              "name": "value",
+              "dtype": "decimal128(38,12)",
+              "nullable": true,
+              "unit": "metric_defined",
+              "description": "Metric value; undefined divisions and unavailable histories stay null.",
+              "source_binding": "FINANCIAL_METRIC_DERIVED",
+              "pit_role": "value"
+            },
+            {
+              "name": "formula_expression",
+              "dtype": "string",
+              "nullable": true,
+              "unit": "text",
+              "description": "Machine-readable formula for derived metrics; null only for directly reported metrics.",
+              "source_binding": "FINANCIAL_METRIC_DERIVED",
+              "pit_role": "lineage"
+            },
+            {
+              "name": "formula_version",
+              "dtype": "string",
+              "nullable": false,
+              "unit": "1",
+              "description": "Immutable version of the formula, sector treatment, sign and denominator rules.",
+              "source_binding": "FINANCIAL_METRIC_DERIVED",
+              "pit_role": "revision"
+            },
+            {
+              "name": "input_fact_refs",
+              "dtype": "json",
+              "nullable": false,
+              "unit": "1",
+              "description": "Exact CORE-13 fact identities and revisions used to calculate the metric.",
+              "source_binding": "FINANCIAL_METRIC_DERIVED",
+              "pit_role": "lineage"
+            },
+            {
+              "name": "missing_reason",
+              "dtype": "string",
+              "nullable": true,
+              "unit": "1",
+              "description": "Reason for a null value, such as missing prior period, zero denominator or incomparable scope.",
+              "source_binding": "FINANCIAL_METRIC_DERIVED",
+              "pit_role": "quality"
+            },
+            {
+              "name": "published_at",
+              "dtype": "timestamp[us,Asia/Shanghai]",
+              "nullable": false,
+              "unit": "timestamp",
+              "description": "Publication time of the reported metric or latest required input.",
+              "source_binding": "FINANCIAL_METRIC_DERIVED",
+              "pit_role": "published_at"
+            },
+            {
+              "name": "available_at",
+              "dtype": "timestamp[us,Asia/Shanghai]",
+              "nullable": false,
+              "unit": "timestamp",
+              "description": "Maximum input availability and calculation publication time.",
+              "source_binding": "FINANCIAL_METRIC_DERIVED",
+              "pit_role": "available_at"
+            },
+            {
+              "name": "revised_at",
+              "dtype": "timestamp[us,Asia/Shanghai]",
+              "nullable": true,
+              "unit": "timestamp",
+              "description": "Time this metric revision became available after an input restatement or formula change.",
+              "source_binding": "FINANCIAL_METRIC_DERIVED",
+              "pit_role": "revision"
+            },
+            {
+              "name": "revision_id",
+              "dtype": "string",
+              "nullable": false,
+              "unit": "1",
+              "description": "Immutable metric revision identity.",
+              "source_binding": "FINANCIAL_METRIC_DERIVED",
+              "pit_role": "revision"
+            }
+          ]
+        }
+      ],
+      "quality_gates": [
+        "Every derived metric resolves to immutable CORE-13 input facts, formula_version and input snapshot hashes.",
+        "available_at equals or exceeds the latest required input; no later filing or restatement is backdated.",
+        "Single-quarter values use comparable cumulative periods and Q4 equals annual minus Q3 YTD only when scope, taxonomy and revision basis match.",
+        "TTM, YoY and QoQ windows require complete comparable inputs; no interpolation, zero fill or silent denominator substitution is allowed.",
+        "Reported and derived versions are retained separately and material differences are CONFLICT, not overwritten.",
+        "General-company formulas are not applied to banks, insurers or securities firms without a versioned sector formula family."
+      ],
+      "known_blockers": [
+        "CORE-13 has not yet produced an admitted immutable input snapshot.",
+        "Historical taxonomy changes and irregular reporting periods limit some single-quarter and growth reconstructions.",
+        "Cross-sector indicator names can share labels while having different definitions; sector-specific formula dictionaries remain to be implemented."
+      ]
+    },
+    {
+      "plan_id": "CORE-15",
+      "dataset_id": "cn-a-share-earnings-guidance-express-pit",
+      "schema_version": "1.0.0",
+      "grain": "one earnings-guidance, earnings-express or correction event revision and its metric observations",
+      "pit_contract": {
+        "decision_time_rule": "Use only an event revision whose available_at <= decision_time. Guidance ranges remain ranges; later express reports, periodic reports and corrections do not rewrite what was known earlier.",
+        "required_time_fields": [
+          "report_period_end",
+          "published_at",
+          "available_at",
+          "revised_at",
+          "revision_id",
+          "snapshot_id"
+        ],
+        "revision_rule": "Each correction or updated estimate is a new event revision linked to the prior event through supersedes_revision_id. Actual periodic-report outcomes are calibration facts, not revisions of the historical guidance."
+      },
+      "source_bindings": [
+        {
+          "binding_id": "EARNINGS_EVENT_OFFICIAL",
+          "primary_source_ids": [
+            "CNINFO_OFFICIAL",
+            "SSE_OFFICIAL",
+            "SZSE_OFFICIAL",
+            "BSE_OFFICIAL"
+          ],
+          "calibration_source_ids": [
+            "CSRC_OFFICIAL",
+            "INTERNAL_CORE13"
+          ],
+          "license_gate": "BLOCK_IF_OFFICIAL_ANNOUNCEMENT_ENDPOINT_TERMS_ARE_NOT_RECORDED",
+          "ingestion_status": "CONTRACT_ONLY_NO_DOWNLOAD"
+        }
+      ],
+      "tables": [
+        {
+          "table_id": "earnings_event_versions",
+          "grain": "one official guidance/express announcement revision for one issuer and report period",
+          "inherits": [
+            "record_lineage",
+            "security_key"
+          ],
+          "primary_key": [
+            "security_id",
+            "event_id",
+            "revision_id"
+          ],
+          "fields": [
+            {
+              "name": "event_id",
+              "dtype": "string",
+              "nullable": false,
+              "unit": "1",
+              "description": "Stable identity across original and correction announcements.",
+              "source_binding": "EARNINGS_EVENT_OFFICIAL",
+              "pit_role": "key"
+            },
+            {
+              "name": "event_type",
+              "dtype": "enum<GUIDANCE,EXPRESS,GUIDANCE_CORRECTION,EXPRESS_CORRECTION>",
+              "nullable": false,
+              "unit": "1",
+              "description": "Official disclosure type.",
+              "source_binding": "EARNINGS_EVENT_OFFICIAL",
+              "pit_role": "metadata"
+            },
+            {
+              "name": "report_period_end",
+              "dtype": "date32",
+              "nullable": false,
+              "unit": "date",
+              "description": "Period to which the estimate or express report applies.",
+              "source_binding": "EARNINGS_EVENT_OFFICIAL",
+              "pit_role": "event_time"
+            },
+            {
+              "name": "guidance_class",
+              "dtype": "enum<PRE_INCREASE,PRE_DECREASE,PRE_PROFIT,PRE_LOSS,TURNAROUND,CONTINUED_LOSS,UNCERTAIN,NOT_APPLICABLE,OTHER>",
+              "nullable": false,
+              "unit": "1",
+              "description": "Normalized class while retaining the source wording in raw evidence.",
+              "source_binding": "EARNINGS_EVENT_OFFICIAL",
+              "pit_role": "value"
+            },
+            {
+              "name": "cause_text",
+              "dtype": "string",
+              "nullable": true,
+              "unit": "text",
+              "description": "Issuer explanation of the expected change.",
+              "source_binding": "EARNINGS_EVENT_OFFICIAL",
+              "pit_role": "value"
+            },
+            {
+              "name": "uncertainty_text",
+              "dtype": "string",
+              "nullable": true,
+              "unit": "text",
+              "description": "Disclosed uncertainties, pending accounting treatments or unaudited status.",
+              "source_binding": "EARNINGS_EVENT_OFFICIAL",
+              "pit_role": "quality"
+            },
+            {
+              "name": "published_at",
+              "dtype": "timestamp[us,Asia/Shanghai]",
+              "nullable": false,
+              "unit": "timestamp",
+              "description": "Official publication timestamp.",
+              "source_binding": "EARNINGS_EVENT_OFFICIAL",
+              "pit_role": "published_at"
+            },
+            {
+              "name": "available_at",
+              "dtype": "timestamp[us,Asia/Shanghai]",
+              "nullable": false,
+              "unit": "timestamp",
+              "description": "Conservative research availability timestamp.",
+              "source_binding": "EARNINGS_EVENT_OFFICIAL",
+              "pit_role": "available_at"
+            },
+            {
+              "name": "revised_at",
+              "dtype": "timestamp[us,Asia/Shanghai]",
+              "nullable": true,
+              "unit": "timestamp",
+              "description": "Publication time of a correction/update.",
+              "source_binding": "EARNINGS_EVENT_OFFICIAL",
+              "pit_role": "revision"
+            },
+            {
+              "name": "revision_id",
+              "dtype": "string",
+              "nullable": false,
+              "unit": "1",
+              "description": "Immutable event revision identity.",
+              "source_binding": "EARNINGS_EVENT_OFFICIAL",
+              "pit_role": "revision"
+            },
+            {
+              "name": "supersedes_revision_id",
+              "dtype": "string",
+              "nullable": true,
+              "unit": "1",
+              "description": "Prior guidance/express revision superseded by this event.",
+              "source_binding": "EARNINGS_EVENT_OFFICIAL",
+              "pit_role": "revision"
+            }
+          ]
+        },
+        {
+          "table_id": "earnings_event_metrics",
+          "grain": "one disclosed metric range or point for one earnings event revision",
+          "inherits": [
+            "record_lineage",
+            "security_key"
+          ],
+          "primary_key": [
+            "security_id",
+            "event_id",
+            "metric_id",
+            "revision_id"
+          ],
+          "fields": [
+            {
+              "name": "event_id",
+              "dtype": "string",
+              "nullable": false,
+              "unit": "1",
+              "description": "Foreign key to the earnings event version.",
+              "source_binding": "EARNINGS_EVENT_OFFICIAL",
+              "pit_role": "key"
+            },
+            {
+              "name": "metric_id",
+              "dtype": "string",
+              "nullable": false,
+              "unit": "1",
+              "description": "Metric such as revenue, operating profit, total profit, net profit, ex-non-recurring net profit, equity, EPS or ROE.",
+              "source_binding": "EARNINGS_EVENT_OFFICIAL",
+              "pit_role": "key"
+            },
+            {
+              "name": "point_value",
+              "dtype": "decimal128(38,10)",
+              "nullable": true,
+              "unit": "source_reported",
+              "description": "Point estimate or express value when disclosed.",
+              "source_binding": "EARNINGS_EVENT_OFFICIAL",
+              "pit_role": "value"
+            },
+            {
+              "name": "lower_bound",
+              "dtype": "decimal128(38,10)",
+              "nullable": true,
+              "unit": "source_reported",
+              "description": "Lower bound of an estimate range; not replaced by a midpoint.",
+              "source_binding": "EARNINGS_EVENT_OFFICIAL",
+              "pit_role": "value"
+            },
+            {
+              "name": "upper_bound",
+              "dtype": "decimal128(38,10)",
+              "nullable": true,
+              "unit": "source_reported",
+              "description": "Upper bound of an estimate range.",
+              "source_binding": "EARNINGS_EVENT_OFFICIAL",
+              "pit_role": "value"
+            },
+            {
+              "name": "change_lower_pct",
+              "dtype": "float64",
+              "nullable": true,
+              "unit": "percent",
+              "description": "Lower bound of issuer-disclosed year-on-year change.",
+              "source_binding": "EARNINGS_EVENT_OFFICIAL",
+              "pit_role": "value"
+            },
+            {
+              "name": "change_upper_pct",
+              "dtype": "float64",
+              "nullable": true,
+              "unit": "percent",
+              "description": "Upper bound of issuer-disclosed year-on-year change.",
+              "source_binding": "EARNINGS_EVENT_OFFICIAL",
+              "pit_role": "value"
+            },
+            {
+              "name": "currency",
+              "dtype": "string",
+              "nullable": true,
+              "unit": "ISO-4217",
+              "description": "Currency for monetary metrics.",
+              "source_binding": "EARNINGS_EVENT_OFFICIAL",
+              "pit_role": "metadata"
+            },
+            {
+              "name": "revision_id",
+              "dtype": "string",
+              "nullable": false,
+              "unit": "1",
+              "description": "Exact event revision supplying the metric.",
+              "source_binding": "EARNINGS_EVENT_OFFICIAL",
+              "pit_role": "revision"
+            }
+          ]
+        }
+      ],
+      "quality_gates": [
+        "Every event and metric resolves to an official announcement payload and permanent security identity.",
+        "Guidance ranges preserve lower and upper bounds; midpoint is never a canonical L1 fact.",
+        "Correction chains are complete and acyclic; original guidance remains available for historical PIT reconstruction.",
+        "Metric signs, units, currencies, report periods and comparison periods are explicit and internally consistent.",
+        "Later periodic-report actuals may calculate forecast error but never overwrite the earlier guidance/express event.",
+        "Date-only or ambiguous publication times use the documented next-session fallback."
+      ],
+      "known_blockers": [
+        "Historical announcement categories and templates differ across exchanges and years.",
+        "Narrative-only causes and uncertainty disclosures require versioned extraction with retained raw text.",
+        "Official bulk-access and storage permissions remain endpoint-specific and must be cleared before backfill."
+      ]
+    },
+    {
+      "plan_id": "CORE-16",
+      "dataset_id": "cn-a-share-audit-opinions-pit",
+      "schema_version": "1.0.0",
+      "grain": "one financial-statement or internal-control audit report revision and its separately classified matters",
+      "pit_contract": {
+        "decision_time_rule": "Audit facts become usable only at the official report available_at. An opinion or matter disclosed later cannot be attached retrospectively to the report period for earlier decisions.",
+        "required_time_fields": [
+          "report_period_end",
+          "audit_report_date",
+          "published_at",
+          "available_at",
+          "revised_at",
+          "revision_id",
+          "snapshot_id"
+        ],
+        "revision_rule": "Corrected audit reports, reissued financial statements, accounting error corrections and changed internal-control conclusions create new revisions linked to the prior report; opinion taxonomies are versioned."
+      },
+      "source_bindings": [
+        {
+          "binding_id": "AUDIT_DISCLOSURE_OFFICIAL",
+          "primary_source_ids": [
+            "CNINFO_OFFICIAL",
+            "SSE_OFFICIAL",
+            "SZSE_OFFICIAL",
+            "BSE_OFFICIAL"
+          ],
+          "calibration_source_ids": [
+            "CSRC_OFFICIAL"
+          ],
+          "license_gate": "BLOCK_IF_OFFICIAL_ANNOUNCEMENT_ENDPOINT_TERMS_ARE_NOT_RECORDED",
+          "ingestion_status": "CONTRACT_ONLY_NO_DOWNLOAD"
+        },
+        {
+          "binding_id": "AUDIT_TAXONOMY_REGULATORY",
+          "primary_source_ids": [
+            "CSRC_OFFICIAL"
+          ],
+          "calibration_source_ids": [],
+          "license_gate": "PUBLIC_REGULATORY_TEXT_SCHEMA_USE_ALLOWED_SUBJECT_TO_SOURCE_ATTRIBUTION",
+          "ingestion_status": "REFERENCE_ONLY"
+        }
+      ],
+      "tables": [
+        {
+          "table_id": "audit_report_versions",
+          "grain": "one audit or review report revision by issuer, period and audit scope",
+          "inherits": [
+            "record_lineage",
+            "security_key"
+          ],
+          "primary_key": [
+            "security_id",
+            "audit_report_id",
+            "audit_scope",
+            "revision_id"
+          ],
+          "fields": [
+            {
+              "name": "audit_report_id",
+              "dtype": "string",
+              "nullable": false,
+              "unit": "1",
+              "description": "Stable official audit report identity.",
+              "source_binding": "AUDIT_DISCLOSURE_OFFICIAL",
+              "pit_role": "key"
+            },
+            {
+              "name": "report_period_end",
+              "dtype": "date32",
+              "nullable": false,
+              "unit": "date",
+              "description": "Financial reporting period covered by the audit report.",
+              "source_binding": "AUDIT_DISCLOSURE_OFFICIAL",
+              "pit_role": "event_time"
+            },
+            {
+              "name": "audit_scope",
+              "dtype": "enum<FINANCIAL_STATEMENTS,INTERNAL_CONTROL,REVIEW,OTHER_ASSURANCE>",
+              "nullable": false,
+              "unit": "1",
+              "description": "Financial and internal-control opinions remain separate facts.",
+              "source_binding": "AUDIT_TAXONOMY_REGULATORY",
+              "pit_role": "key"
+            },
+            {
+              "name": "opinion_code",
+              "dtype": "enum<UNMODIFIED,QUALIFIED,ADVERSE,DISCLAIMER,NOT_APPLICABLE,UNKNOWN>",
+              "nullable": false,
+              "unit": "1",
+              "description": "Opinion class; emphasis and other matters are not misclassified as modified opinions.",
+              "source_binding": "AUDIT_TAXONOMY_REGULATORY",
+              "pit_role": "value"
+            },
+            {
+              "name": "accounting_firm_name",
+              "dtype": "string",
+              "nullable": false,
+              "unit": "text",
+              "description": "Signing accounting firm as disclosed.",
+              "source_binding": "AUDIT_DISCLOSURE_OFFICIAL",
+              "pit_role": "metadata"
+            },
+            {
+              "name": "signing_cpas",
+              "dtype": "list<string>",
+              "nullable": true,
+              "unit": "text",
+              "description": "Names of signing certified public accountants.",
+              "source_binding": "AUDIT_DISCLOSURE_OFFICIAL",
+              "pit_role": "metadata"
+            },
+            {
+              "name": "audit_report_number",
+              "dtype": "string",
+              "nullable": true,
+              "unit": "1",
+              "description": "Official report number.",
+              "source_binding": "AUDIT_DISCLOSURE_OFFICIAL",
+              "pit_role": "metadata"
+            },
+            {
+              "name": "audit_report_date",
+              "dtype": "date32",
+              "nullable": false,
+              "unit": "date",
+              "description": "Date printed on the signed audit report; distinct from public availability.",
+              "source_binding": "AUDIT_DISCLOSURE_OFFICIAL",
+              "pit_role": "event_time"
+            },
+            {
+              "name": "going_concern_flag",
+              "dtype": "boolean",
+              "nullable": false,
+              "unit": "1",
+              "description": "Whether material uncertainty related to going concern is communicated.",
+              "source_binding": "AUDIT_DISCLOSURE_OFFICIAL",
+              "pit_role": "value"
+            },
+            {
+              "name": "emphasis_matter_flag",
+              "dtype": "boolean",
+              "nullable": false,
+              "unit": "1",
+              "description": "Presence of an emphasis-of-matter section, independent of opinion code.",
+              "source_binding": "AUDIT_DISCLOSURE_OFFICIAL",
+              "pit_role": "value"
+            },
+            {
+              "name": "published_at",
+              "dtype": "timestamp[us,Asia/Shanghai]",
+              "nullable": false,
+              "unit": "timestamp",
+              "description": "Official publication timestamp of the report.",
+              "source_binding": "AUDIT_DISCLOSURE_OFFICIAL",
+              "pit_role": "published_at"
+            },
+            {
+              "name": "available_at",
+              "dtype": "timestamp[us,Asia/Shanghai]",
+              "nullable": false,
+              "unit": "timestamp",
+              "description": "Conservative system-observable timestamp.",
+              "source_binding": "AUDIT_DISCLOSURE_OFFICIAL",
+              "pit_role": "available_at"
+            },
+            {
+              "name": "revised_at",
+              "dtype": "timestamp[us,Asia/Shanghai]",
+              "nullable": true,
+              "unit": "timestamp",
+              "description": "Official release time of a corrected/reissued audit report.",
+              "source_binding": "AUDIT_DISCLOSURE_OFFICIAL",
+              "pit_role": "revision"
+            },
+            {
+              "name": "revision_id",
+              "dtype": "string",
+              "nullable": false,
+              "unit": "1",
+              "description": "Immutable audit report revision.",
+              "source_binding": "AUDIT_DISCLOSURE_OFFICIAL",
+              "pit_role": "revision"
+            }
+          ]
+        },
+        {
+          "table_id": "audit_report_matters",
+          "grain": "one separately identified audit, going-concern, internal-control or correction matter in one report revision",
+          "inherits": [
+            "record_lineage",
+            "security_key"
+          ],
+          "primary_key": [
+            "security_id",
+            "audit_report_id",
+            "matter_id",
+            "revision_id"
+          ],
+          "fields": [
+            {
+              "name": "audit_report_id",
+              "dtype": "string",
+              "nullable": false,
+              "unit": "1",
+              "description": "Foreign key to the audit report version.",
+              "source_binding": "AUDIT_DISCLOSURE_OFFICIAL",
+              "pit_role": "key"
+            },
+            {
+              "name": "matter_id",
+              "dtype": "string",
+              "nullable": false,
+              "unit": "1",
+              "description": "Stable matter identity within the report revision.",
+              "source_binding": "AUDIT_DISCLOSURE_OFFICIAL",
+              "pit_role": "key"
+            },
+            {
+              "name": "matter_type",
+              "dtype": "enum<BASIS_FOR_MODIFIED_OPINION,EMPHASIS_OF_MATTER,OTHER_MATTER,MATERIAL_UNCERTAINTY_GOING_CONCERN,KEY_AUDIT_MATTER,INTERNAL_CONTROL_DEFICIENCY,ACCOUNTING_CORRECTION,REGULATORY_QUALITY_EVENT>",
+              "nullable": false,
+              "unit": "1",
+              "description": "Regulatory/audit matter taxonomy.",
+              "source_binding": "AUDIT_TAXONOMY_REGULATORY",
+              "pit_role": "value"
+            },
+            {
+              "name": "matter_text",
+              "dtype": "string",
+              "nullable": false,
+              "unit": "text",
+              "description": "Verbatim matter text or lossless extracted text with source span.",
+              "source_binding": "AUDIT_DISCLOSURE_OFFICIAL",
+              "pit_role": "value"
+            },
+            {
+              "name": "affected_line_item_ids",
+              "dtype": "list<string>",
+              "nullable": true,
+              "unit": "1",
+              "description": "Mapped CORE-13 line items affected by the matter when determinable.",
+              "source_binding": "AUDIT_DISCLOSURE_OFFICIAL",
+              "pit_role": "metadata"
+            },
+            {
+              "name": "quantified_impact",
+              "dtype": "decimal128(38,10)",
+              "nullable": true,
+              "unit": "source_reported",
+              "description": "Issuer/auditor-quantified effect; null when not quantified.",
+              "source_binding": "AUDIT_DISCLOSURE_OFFICIAL",
+              "pit_role": "value"
+            },
+            {
+              "name": "revision_id",
+              "dtype": "string",
+              "nullable": false,
+              "unit": "1",
+              "description": "Audit report revision containing the matter.",
+              "source_binding": "AUDIT_DISCLOSURE_OFFICIAL",
+              "pit_role": "revision"
+            }
+          ]
+        }
+      ],
+      "quality_gates": [
+        "Opinion class follows the applicable audit-standard version; qualified, adverse and disclaimer are distinct.",
+        "Emphasis, other matter, key audit matters and going-concern sections remain separate from the opinion code.",
+        "Financial-statement and internal-control audit opinions are never merged.",
+        "Every opinion and matter resolves to a signed official report hash, firm, report date, issuer and period.",
+        "Corrections/reissues form immutable revision chains; date-only publication times use a conservative availability fallback.",
+        "Unknown or unparsed opinion text is REVIEW, never defaulted to unmodified."
+      ],
+      "known_blockers": [
+        "Older scanned PDFs can prevent reliable matter-level extraction and signer/report-number capture.",
+        "Audit terminology and report structure changed across standard revisions and internal-control regimes.",
+        "Official announcement bulk-access and storage terms must be cleared before historical backfill."
+      ]
+    },
+    {
+      "plan_id": "CORE-17",
+      "dataset_id": "cn-a-share-dividends-rights-pit",
+      "schema_version": "1.0.0",
+      "grain": "one dividend, bonus issue, capitalisation or rights scheme stage/revision for one security class",
+      "pit_contract": {
+        "decision_time_rule": "Only scheme stages whose available_at <= decision_time are usable. Proposal, shareholder approval and implementation are separate facts; record/ex/payment/listing dates do not make a proposal historically implemented.",
+        "required_time_fields": [
+          "scheme_period_end",
+          "published_at",
+          "available_at",
+          "effective_date",
+          "revised_at",
+          "revision_id",
+          "snapshot_id"
+        ],
+        "revision_rule": "Each board proposal, shareholder approval, implementation announcement, cancellation or correction appends a stage revision linked by scheme_id and supersedes_revision_id. Implemented terms never overwrite proposal terms."
+      },
+      "source_bindings": [
+        {
+          "binding_id": "DISTRIBUTION_EVENT_OFFICIAL",
+          "primary_source_ids": [
+            "CNINFO_OFFICIAL",
+            "SSE_OFFICIAL",
+            "SZSE_OFFICIAL",
+            "BSE_OFFICIAL"
+          ],
+          "calibration_source_ids": [
+            "INTERNAL_CORE04",
+            "INTERNAL_CORE07",
+            "CSRC_OFFICIAL"
+          ],
+          "license_gate": "BLOCK_IF_OFFICIAL_ANNOUNCEMENT_OR_EVENT_TABLE_TERMS_ARE_NOT_RECORDED",
+          "ingestion_status": "CONTRACT_ONLY_NO_DOWNLOAD"
+        }
+      ],
+      "tables": [
+        {
+          "table_id": "distribution_scheme_versions",
+          "grain": "one scheme lifecycle stage/revision and target share class",
+          "inherits": [
+            "record_lineage",
+            "security_key"
+          ],
+          "primary_key": [
+            "security_id",
+            "scheme_id",
+            "scheme_stage",
+            "target_share_class",
+            "revision_id"
+          ],
+          "fields": [
+            {
+              "name": "scheme_id",
+              "dtype": "string",
+              "nullable": false,
+              "unit": "1",
+              "description": "Stable identity joining proposal, approval, implementation and correction stages.",
+              "source_binding": "DISTRIBUTION_EVENT_OFFICIAL",
+              "pit_role": "key"
+            },
+            {
+              "name": "action_type",
+              "dtype": "enum<CASH_DIVIDEND,STOCK_DIVIDEND,CAPITAL_RESERVE_CONVERSION,RIGHTS_ISSUE,COMPOSITE,CANCELLATION>",
+              "nullable": false,
+              "unit": "1",
+              "description": "Economic right/action type.",
+              "source_binding": "DISTRIBUTION_EVENT_OFFICIAL",
+              "pit_role": "metadata"
+            },
+            {
+              "name": "scheme_stage",
+              "dtype": "enum<BOARD_PROPOSAL,SHAREHOLDER_APPROVED,IMPLEMENTATION,CANCELLED,CORRECTED,COMPLETED>",
+              "nullable": false,
+              "unit": "1",
+              "description": "Lifecycle stage; implementation is never inferred from a proposal.",
+              "source_binding": "DISTRIBUTION_EVENT_OFFICIAL",
+              "pit_role": "key"
+            },
+            {
+              "name": "scheme_period_end",
+              "dtype": "date32",
+              "nullable": true,
+              "unit": "date",
+              "description": "Fiscal period to which the distribution relates.",
+              "source_binding": "DISTRIBUTION_EVENT_OFFICIAL",
+              "pit_role": "event_time"
+            },
+            {
+              "name": "target_share_class",
+              "dtype": "string",
+              "nullable": false,
+              "unit": "1",
+              "description": "A/B/other security class receiving or subscribing to the right.",
+              "source_binding": "DISTRIBUTION_EVENT_OFFICIAL",
+              "pit_role": "key"
+            },
+            {
+              "name": "base_share_count",
+              "dtype": "int64",
+              "nullable": true,
+              "unit": "shares",
+              "description": "Distribution base after explicitly disclosed exclusions such as repurchased shares.",
+              "source_binding": "DISTRIBUTION_EVENT_OFFICIAL",
+              "pit_role": "value"
+            },
+            {
+              "name": "base_scope_text",
+              "dtype": "string",
+              "nullable": true,
+              "unit": "text",
+              "description": "Verbatim description of the distribution base and excluded shares.",
+              "source_binding": "DISTRIBUTION_EVENT_OFFICIAL",
+              "pit_role": "value"
+            },
+            {
+              "name": "cash_dividend_per_share",
+              "dtype": "decimal128(38,12)",
+              "nullable": true,
+              "unit": "currency_per_share",
+              "description": "Gross cash dividend per share before investor-specific tax.",
+              "source_binding": "DISTRIBUTION_EVENT_OFFICIAL",
+              "pit_role": "value"
+            },
+            {
+              "name": "stock_dividend_ratio",
+              "dtype": "decimal128(38,12)",
+              "nullable": true,
+              "unit": "shares_per_share",
+              "description": "Bonus shares per existing share.",
+              "source_binding": "DISTRIBUTION_EVENT_OFFICIAL",
+              "pit_role": "value"
+            },
+            {
+              "name": "capitalisation_ratio",
+              "dtype": "decimal128(38,12)",
+              "nullable": true,
+              "unit": "shares_per_share",
+              "description": "Capital-reserve conversion shares per existing share.",
+              "source_binding": "DISTRIBUTION_EVENT_OFFICIAL",
+              "pit_role": "value"
+            },
+            {
+              "name": "rights_subscription_ratio",
+              "dtype": "decimal128(38,12)",
+              "nullable": true,
+              "unit": "rights_per_share",
+              "description": "Subscription rights per eligible existing share.",
+              "source_binding": "DISTRIBUTION_EVENT_OFFICIAL",
+              "pit_role": "value"
+            },
+            {
+              "name": "rights_subscription_price",
+              "dtype": "decimal128(38,12)",
+              "nullable": true,
+              "unit": "currency_per_share",
+              "description": "Subscription price for a rights issue.",
+              "source_binding": "DISTRIBUTION_EVENT_OFFICIAL",
+              "pit_role": "value"
+            },
+            {
+              "name": "currency",
+              "dtype": "string",
+              "nullable": true,
+              "unit": "ISO-4217",
+              "description": "Currency of cash dividend or subscription price.",
+              "source_binding": "DISTRIBUTION_EVENT_OFFICIAL",
+              "pit_role": "metadata"
+            },
+            {
+              "name": "record_date",
+              "dtype": "date32",
+              "nullable": true,
+              "unit": "date",
+              "description": "Official entitlement record date.",
+              "source_binding": "DISTRIBUTION_EVENT_OFFICIAL",
+              "pit_role": "effective_time"
+            },
+            {
+              "name": "ex_date",
+              "dtype": "date32",
+              "nullable": true,
+              "unit": "date",
+              "description": "Official ex-right/ex-dividend date.",
+              "source_binding": "DISTRIBUTION_EVENT_OFFICIAL",
+              "pit_role": "effective_time"
+            },
+            {
+              "name": "payment_date",
+              "dtype": "date32",
+              "nullable": true,
+              "unit": "date",
+              "description": "Cash dividend payment date.",
+              "source_binding": "DISTRIBUTION_EVENT_OFFICIAL",
+              "pit_role": "effective_time"
+            },
+            {
+              "name": "new_shares_listing_date",
+              "dtype": "date32",
+              "nullable": true,
+              "unit": "date",
+              "description": "Listing date of bonus, conversion or rights shares.",
+              "source_binding": "DISTRIBUTION_EVENT_OFFICIAL",
+              "pit_role": "effective_time"
+            },
+            {
+              "name": "effective_date",
+              "dtype": "date32",
+              "nullable": true,
+              "unit": "date",
+              "description": "Stage-specific economic effective date; usually the ex date for implemented distributions.",
+              "source_binding": "DISTRIBUTION_EVENT_OFFICIAL",
+              "pit_role": "effective_time"
+            },
+            {
+              "name": "published_at",
+              "dtype": "timestamp[us,Asia/Shanghai]",
+              "nullable": false,
+              "unit": "timestamp",
+              "description": "Official stage announcement timestamp.",
+              "source_binding": "DISTRIBUTION_EVENT_OFFICIAL",
+              "pit_role": "published_at"
+            },
+            {
+              "name": "available_at",
+              "dtype": "timestamp[us,Asia/Shanghai]",
+              "nullable": false,
+              "unit": "timestamp",
+              "description": "Conservative research availability timestamp.",
+              "source_binding": "DISTRIBUTION_EVENT_OFFICIAL",
+              "pit_role": "available_at"
+            },
+            {
+              "name": "revised_at",
+              "dtype": "timestamp[us,Asia/Shanghai]",
+              "nullable": true,
+              "unit": "timestamp",
+              "description": "Official correction/cancellation timestamp.",
+              "source_binding": "DISTRIBUTION_EVENT_OFFICIAL",
+              "pit_role": "revision"
+            },
+            {
+              "name": "revision_id",
+              "dtype": "string",
+              "nullable": false,
+              "unit": "1",
+              "description": "Immutable scheme-stage revision identity.",
+              "source_binding": "DISTRIBUTION_EVENT_OFFICIAL",
+              "pit_role": "revision"
+            }
+          ]
+        }
+      ],
+      "quality_gates": [
+        "Proposal, shareholder approval, implementation, cancellation and correction stages remain distinct and form one auditable scheme lifecycle.",
+        "Terms are security-class aware and retain distribution base, exclusions, currency, tax wording and raw ratios.",
+        "Record, ex, payment and listing dates satisfy exchange-specific ordering rules or are explicitly missing/reviewed.",
+        "Per-share terms times the disclosed base reconcile to announced totals within rounding tolerance.",
+        "Implemented events reconcile bidirectionally with CORE-04 adjustment factors and CORE-07 share-capital changes without overwriting conflicts.",
+        "Corrections append a revision and never mutate the originally visible proposal or implementation."
+      ],
+      "known_blockers": [
+        "Historical proposals, approvals and implementation notices are not always linked by a stable official scheme identity.",
+        "Differential distributions, repurchased-share exclusions, multiple share classes and investor-specific tax rules require full-text evidence.",
+        "Official event-table and announcement bulk-use permissions remain to be documented before backfill."
+      ]
+    },
+    {
+      "plan_id": "CORE-18",
+      "dataset_id": "cn-a-share-business-segments-pit",
+      "schema_version": "1.0.0",
+      "grain": "one reported business-segment metric by issuer, period, statement scope, dimension, raw segment label and disclosure revision",
+      "pit_contract": {
+        "decision_time_rule": "A segment fact or mapping is usable only when its available_at <= decision_time. Later renaming or restatement cannot be projected backward without an explicitly versioned mapping.",
+        "required_time_fields": [
+          "report_period_start",
+          "report_period_end",
+          "published_at",
+          "available_at",
+          "effective_from",
+          "revised_at",
+          "revision_id",
+          "snapshot_id"
+        ],
+        "revision_rule": "Preserve every disclosed label and table revision. Restated segment facts and normalized-label mappings append new revision and mapping_version records; old classifications remain queryable."
+      },
+      "source_bindings": [
+        {
+          "binding_id": "SEGMENT_DISCLOSURE_OFFICIAL",
+          "primary_source_ids": [
+            "CNINFO_OFFICIAL",
+            "SSE_OFFICIAL",
+            "SZSE_OFFICIAL",
+            "BSE_OFFICIAL"
+          ],
+          "calibration_source_ids": [
+            "CSRC_OFFICIAL",
+            "INTERNAL_CORE13"
+          ],
+          "license_gate": "BLOCK_IF_OFFICIAL_PERIODIC_REPORT_ENDPOINT_TERMS_ARE_NOT_RECORDED",
+          "ingestion_status": "CONTRACT_ONLY_NO_DOWNLOAD"
+        }
+      ],
+      "tables": [
+        {
+          "table_id": "business_segment_facts",
+          "grain": "one metric for one source-reported segment label, dimension and document revision",
+          "inherits": [
+            "record_lineage",
+            "security_key"
+          ],
+          "primary_key": [
+            "security_id",
+            "disclosure_id",
+            "statement_scope",
+            "report_period_end",
+            "dimension_type",
+            "raw_segment_key",
+            "metric_id",
+            "revision_id"
+          ],
+          "fields": [
+            {
+              "name": "disclosure_id",
+              "dtype": "string",
+              "nullable": false,
+              "unit": "1",
+              "description": "Official periodic-report document identity.",
+              "source_binding": "SEGMENT_DISCLOSURE_OFFICIAL",
+              "pit_role": "key"
+            },
+            {
+              "name": "report_period_start",
+              "dtype": "date32",
+              "nullable": true,
+              "unit": "date",
+              "description": "Start of the segment reporting period.",
+              "source_binding": "SEGMENT_DISCLOSURE_OFFICIAL",
+              "pit_role": "event_time"
+            },
+            {
+              "name": "report_period_end",
+              "dtype": "date32",
+              "nullable": false,
+              "unit": "date",
+              "description": "End of the segment reporting period.",
+              "source_binding": "SEGMENT_DISCLOSURE_OFFICIAL",
+              "pit_role": "event_time"
+            },
+            {
+              "name": "statement_scope",
+              "dtype": "enum<CONSOLIDATED,PARENT,OTHER>",
+              "nullable": false,
+              "unit": "1",
+              "description": "Reporting scope for the segment table.",
+              "source_binding": "SEGMENT_DISCLOSURE_OFFICIAL",
+              "pit_role": "key"
+            },
+            {
+              "name": "dimension_type",
+              "dtype": "enum<REPORTED_INDUSTRY,PRODUCT_SERVICE,GEOGRAPHY,SALES_MODE,OPERATING_SEGMENT,OTHER>",
+              "nullable": false,
+              "unit": "1",
+              "description": "Issuer-reported segmentation dimension; dimensions are not added together.",
+              "source_binding": "SEGMENT_DISCLOSURE_OFFICIAL",
+              "pit_role": "key"
+            },
+            {
+              "name": "raw_segment_key",
+              "dtype": "string",
+              "nullable": false,
+              "unit": "1",
+              "description": "Stable key generated from the verbatim source label and source table position.",
+              "source_binding": "SEGMENT_DISCLOSURE_OFFICIAL",
+              "pit_role": "key"
+            },
+            {
+              "name": "raw_segment_name",
+              "dtype": "string",
+              "nullable": false,
+              "unit": "text",
+              "description": "Verbatim issuer-reported label.",
+              "source_binding": "SEGMENT_DISCLOSURE_OFFICIAL",
+              "pit_role": "value"
+            },
+            {
+              "name": "normalized_segment_id",
+              "dtype": "string",
+              "nullable": true,
+              "unit": "1",
+              "description": "Optional normalized identity; null when mapping is uncertain.",
+              "source_binding": "SEGMENT_DISCLOSURE_OFFICIAL",
+              "pit_role": "metadata"
+            },
+            {
+              "name": "mapping_version",
+              "dtype": "string",
+              "nullable": true,
+              "unit": "1",
+              "description": "Version of the non-destructive raw-to-normalized segment mapping.",
+              "source_binding": "SEGMENT_DISCLOSURE_OFFICIAL",
+              "pit_role": "revision"
+            },
+            {
+              "name": "metric_id",
+              "dtype": "string",
+              "nullable": false,
+              "unit": "1",
+              "description": "Revenue, cost, gross profit, gross margin, external/intersegment revenue, assets, liabilities, capex, depreciation/amortization or other reported segment metric.",
+              "source_binding": "SEGMENT_DISCLOSURE_OFFICIAL",
+              "pit_role": "key"
+            },
+            {
+              "name": "value",
+              "dtype": "decimal128(38,10)",
+              "nullable": true,
+              "unit": "source_reported",
+              "description": "Reported segment value; source zeros are retained, unknowns remain null.",
+              "source_binding": "SEGMENT_DISCLOSURE_OFFICIAL",
+              "pit_role": "value"
+            },
+            {
+              "name": "currency",
+              "dtype": "string",
+              "nullable": true,
+              "unit": "ISO-4217",
+              "description": "Currency for monetary segment facts.",
+              "source_binding": "SEGMENT_DISCLOSURE_OFFICIAL",
+              "pit_role": "metadata"
+            },
+            {
+              "name": "reported_unit",
+              "dtype": "string",
+              "nullable": false,
+              "unit": "text",
+              "description": "Exact source unit and scale.",
+              "source_binding": "SEGMENT_DISCLOSURE_OFFICIAL",
+              "pit_role": "metadata"
+            },
+            {
+              "name": "effective_from",
+              "dtype": "date32",
+              "nullable": true,
+              "unit": "date",
+              "description": "Start date of a segment-definition regime when disclosed or determinable.",
+              "source_binding": "SEGMENT_DISCLOSURE_OFFICIAL",
+              "pit_role": "effective_time"
+            },
+            {
+              "name": "published_at",
+              "dtype": "timestamp[us,Asia/Shanghai]",
+              "nullable": false,
+              "unit": "timestamp",
+              "description": "Official publication timestamp.",
+              "source_binding": "SEGMENT_DISCLOSURE_OFFICIAL",
+              "pit_role": "published_at"
+            },
+            {
+              "name": "available_at",
+              "dtype": "timestamp[us,Asia/Shanghai]",
+              "nullable": false,
+              "unit": "timestamp",
+              "description": "Conservative research availability timestamp.",
+              "source_binding": "SEGMENT_DISCLOSURE_OFFICIAL",
+              "pit_role": "available_at"
+            },
+            {
+              "name": "revised_at",
+              "dtype": "timestamp[us,Asia/Shanghai]",
+              "nullable": true,
+              "unit": "timestamp",
+              "description": "Official restatement/correction timestamp.",
+              "source_binding": "SEGMENT_DISCLOSURE_OFFICIAL",
+              "pit_role": "revision"
+            },
+            {
+              "name": "revision_id",
+              "dtype": "string",
+              "nullable": false,
+              "unit": "1",
+              "description": "Immutable segment fact revision.",
+              "source_binding": "SEGMENT_DISCLOSURE_OFFICIAL",
+              "pit_role": "revision"
+            }
+          ]
+        },
+        {
+          "table_id": "segment_mapping_versions",
+          "grain": "one issuer-specific raw segment label mapping over an effective interval",
+          "inherits": [
+            "record_lineage",
+            "security_key",
+            "derived_lineage"
+          ],
+          "primary_key": [
+            "security_id",
+            "dimension_type",
+            "raw_segment_key",
+            "mapping_version"
+          ],
+          "fields": [
+            {
+              "name": "dimension_type",
+              "dtype": "string",
+              "nullable": false,
+              "unit": "1",
+              "description": "Segmentation dimension to which the label belongs.",
+              "source_binding": "SEGMENT_DISCLOSURE_OFFICIAL",
+              "pit_role": "key"
+            },
+            {
+              "name": "raw_segment_key",
+              "dtype": "string",
+              "nullable": false,
+              "unit": "1",
+              "description": "Source label identity being mapped.",
+              "source_binding": "SEGMENT_DISCLOSURE_OFFICIAL",
+              "pit_role": "key"
+            },
+            {
+              "name": "normalized_segment_id",
+              "dtype": "string",
+              "nullable": true,
+              "unit": "1",
+              "description": "Normalized issuer-specific segment identity; null preserves unresolved mappings.",
+              "source_binding": "SEGMENT_DISCLOSURE_OFFICIAL",
+              "pit_role": "value"
+            },
+            {
+              "name": "mapping_confidence",
+              "dtype": "float64",
+              "nullable": false,
+              "unit": "ratio_0_1",
+              "description": "Mapping confidence; never used to silently coerce low-confidence mappings.",
+              "source_binding": "SEGMENT_DISCLOSURE_OFFICIAL",
+              "pit_role": "quality"
+            },
+            {
+              "name": "effective_from",
+              "dtype": "date32",
+              "nullable": false,
+              "unit": "date",
+              "description": "First reporting period for which the mapping is valid.",
+              "source_binding": "SEGMENT_DISCLOSURE_OFFICIAL",
+              "pit_role": "effective_time"
+            },
+            {
+              "name": "effective_to",
+              "dtype": "date32",
+              "nullable": true,
+              "unit": "date",
+              "description": "Last valid reporting period; null means open-ended, not necessarily current truth.",
+              "source_binding": "SEGMENT_DISCLOSURE_OFFICIAL",
+              "pit_role": "effective_time"
+            },
+            {
+              "name": "mapping_version",
+              "dtype": "string",
+              "nullable": false,
+              "unit": "1",
+              "description": "Immutable mapping rule/version.",
+              "source_binding": "SEGMENT_DISCLOSURE_OFFICIAL",
+              "pit_role": "revision"
+            }
+          ]
+        }
+      ],
+      "quality_gates": [
+        "Verbatim segment labels, source table positions, dimensions, report scope and units are retained even when normalization fails.",
+        "Revenue/cost/gross-profit arithmetic and disclosed totals reconcile within tolerance; unexplained residuals remain explicit.",
+        "Industry, product, geography, sales-mode and operating-segment dimensions are never summed across dimensions.",
+        "Mappings are issuer-specific, effective-dated and versioned; low-confidence mappings remain null/REVIEW rather than forced.",
+        "Restated tables and changed segment definitions append revisions and do not rewrite earlier PIT snapshots.",
+        "Segment facts resolve to admitted CORE-13 report revisions and official document hashes."
+      ],
+      "known_blockers": [
+        "Segment tables are frequently PDF-only and disclosure depth varies by issuer, industry and year.",
+        "Issuer-defined labels, reorganisations and changes in statistical scope make cross-period normalization non-trivial.",
+        "Costs, segment assets, intersegment transactions and geographical details are not uniformly disclosed; missing fields cannot be imputed in L1.",
+        "Official bulk-access and storage terms must be documented before historical ingestion."
+      ]
+    },
+    {
+      "plan_id": "CORE-19",
+      "dataset_id": "cn-market-benchmarks-riskfree",
+      "schema_version": "1.0.0",
+      "grain": "one official benchmark-rate observation by series, tenor, observation date and revision, plus separately versioned cash-return projections",
+      "pit_contract": {
+        "decision_time_rule": "A rate is usable only after the provider's official publication time and local availability. Preserve each provider schedule: Shibor around 11:00, FR/FDR around 11:30, ChinaBond curves around 17:30, and PBOC operations at the timestamp shown in the official announcement; do not backdate to observation_date.",
+        "required_time_fields": [
+          "observation_date",
+          "published_at",
+          "available_at",
+          "revised_at",
+          "revision_id",
+          "snapshot_id"
+        ],
+        "revision_rule": "Official corrections or changed downloaded payloads append a revision. Derived cash returns pin the source series revision, compounding/day-count convention and formula version; no provider observation is overwritten."
+      },
+      "source_bindings": [
+        {
+          "binding_id": "TREASURY_CURVE_CHINABOND",
+          "primary_source_ids": [
+            "CHINABOND_OFFICIAL"
+          ],
+          "calibration_source_ids": [
+            "PBOC_OFFICIAL"
+          ],
+          "license_gate": "BLOCK_UNTIL_CHINABOND_PERMISSION_FOR_AUTOMATED_RETRIEVAL_LOCAL_STORAGE_AND_INTERNAL_RESEARCH_USE_IS_RECORDED",
+          "ingestion_status": "LICENSE_BLOCKED_CONTRACT_ONLY"
+        },
+        {
+          "binding_id": "INTERBANK_RATE_CHINAMONEY",
+          "primary_source_ids": [
+            "CHINAMONEY_OFFICIAL"
+          ],
+          "calibration_source_ids": [
+            "PBOC_OFFICIAL"
+          ],
+          "license_gate": "BLOCK_UNTIL_WRITTEN_CFETS_PERMISSION_OR_AN_AUTHORIZED_FEED_COVERS_COPY_STORAGE_USE_AND_DERIVATION",
+          "ingestion_status": "LICENSE_BLOCKED_CONTRACT_ONLY"
+        },
+        {
+          "binding_id": "POLICY_RATE_PBOC",
+          "primary_source_ids": [
+            "PBOC_OFFICIAL"
+          ],
+          "calibration_source_ids": [
+            "CHINAMONEY_OFFICIAL"
+          ],
+          "license_gate": "PUBLIC_GOVERNMENT_ANNOUNCEMENT_TERMS_AND_ATTRIBUTION_MUST_BE_CAPTURED_BEFORE_AUTOMATION",
+          "ingestion_status": "CONTRACT_ONLY_NO_DOWNLOAD"
+        },
+        {
+          "binding_id": "CASH_RETURN_DERIVED",
+          "primary_source_ids": [
+            "INTERNAL_UPSTREAM"
+          ],
+          "calibration_source_ids": [],
+          "license_gate": "INHERIT_SOURCE_SERIES_LICENSE_AND_DERIVATIVE_USE_RESTRICTIONS",
+          "ingestion_status": "BLOCKED_UNTIL_RATE_INPUT_IS_ADMITTED"
+        }
+      ],
+      "tables": [
+        {
+          "table_id": "rate_series_master",
+          "grain": "one official rate-series definition and methodology version",
+          "inherits": [
+            "record_lineage"
+          ],
+          "primary_key": [
+            "series_id",
+            "methodology_version"
+          ],
+          "fields": [
+            {
+              "name": "series_id",
+              "dtype": "string",
+              "nullable": false,
+              "unit": "1",
+              "description": "Stable series identity including provider, family, tenor and quote type.",
+              "source_binding": "TREASURY_CURVE_CHINABOND",
+              "pit_role": "key"
+            },
+            {
+              "name": "series_family",
+              "dtype": "enum<TREASURY_YIELD_CURVE,SHIBOR,FR,FDR,PBOC_OMO_POLICY_RATE>",
+              "nullable": false,
+              "unit": "1",
+              "description": "Short government yield, unsecured interbank, secured repo fixing or policy-rate family.",
+              "source_binding": "TREASURY_CURVE_CHINABOND",
+              "pit_role": "metadata"
+            },
+            {
+              "name": "provider_id",
+              "dtype": "string",
+              "nullable": false,
+              "unit": "1",
+              "description": "CHINABOND, CHINAMONEY/CFETS or PBOC provider identity.",
+              "source_binding": "TREASURY_CURVE_CHINABOND",
+              "pit_role": "metadata"
+            },
+            {
+              "name": "tenor",
+              "dtype": "string",
+              "nullable": false,
+              "unit": "ISO-8601-duration",
+              "description": "Examples: P1D, P7D, P14D, P1M, P3M, P6M, P9M, P1Y.",
+              "source_binding": "TREASURY_CURVE_CHINABOND",
+              "pit_role": "key"
+            },
+            {
+              "name": "rate_type",
+              "dtype": "enum<YIELD_TO_MATURITY,SPOT_RATE,FIXING,POLICY_RATE>",
+              "nullable": false,
+              "unit": "1",
+              "description": "Economic interpretation of the rate.",
+              "source_binding": "TREASURY_CURVE_CHINABOND",
+              "pit_role": "metadata"
+            },
+            {
+              "name": "day_count",
+              "dtype": "string",
+              "nullable": false,
+              "unit": "1",
+              "description": "Provider-defined day-count convention, e.g. ACT/360 for Shibor.",
+              "source_binding": "INTERBANK_RATE_CHINAMONEY",
+              "pit_role": "metadata"
+            },
+            {
+              "name": "compounding",
+              "dtype": "string",
+              "nullable": false,
+              "unit": "1",
+              "description": "Provider quote compounding/simple-interest convention.",
+              "source_binding": "TREASURY_CURVE_CHINABOND",
+              "pit_role": "metadata"
+            },
+            {
+              "name": "collateral_scope",
+              "dtype": "string",
+              "nullable": true,
+              "unit": "text",
+              "description": "Null for unsecured Shibor; explicit collateral/participant scope for FR/FDR.",
+              "source_binding": "INTERBANK_RATE_CHINAMONEY",
+              "pit_role": "metadata"
+            },
+            {
+              "name": "publication_time_rule",
+              "dtype": "string",
+              "nullable": false,
+              "unit": "text",
+              "description": "Official publication schedule and timezone.",
+              "source_binding": "INTERBANK_RATE_CHINAMONEY",
+              "pit_role": "published_at"
+            },
+            {
+              "name": "methodology_version",
+              "dtype": "string",
+              "nullable": false,
+              "unit": "1",
+              "description": "Official methodology version for the series.",
+              "source_binding": "TREASURY_CURVE_CHINABOND",
+              "pit_role": "revision"
+            }
+          ]
+        },
+        {
+          "table_id": "rate_observations",
+          "grain": "one official rate observation for one series, date and revision",
+          "inherits": [
+            "record_lineage"
+          ],
+          "primary_key": [
+            "series_id",
+            "observation_date",
+            "revision_id"
+          ],
+          "fields": [
+            {
+              "name": "series_id",
+              "dtype": "string",
+              "nullable": false,
+              "unit": "1",
+              "description": "Foreign key to the rate series master.",
+              "source_binding": "TREASURY_CURVE_CHINABOND",
+              "pit_role": "key"
+            },
+            {
+              "name": "observation_date",
+              "dtype": "date32",
+              "nullable": false,
+              "unit": "date",
+              "description": "Provider business/operation date; distinct from publication time.",
+              "source_binding": "TREASURY_CURVE_CHINABOND",
+              "pit_role": "event_time"
+            },
+            {
+              "name": "rate_value",
+              "dtype": "decimal128(18,8)",
+              "nullable": true,
+              "unit": "annual_percent",
+              "description": "Official annualised percent rate; missing never becomes zero.",
+              "source_binding": "TREASURY_CURVE_CHINABOND",
+              "pit_role": "value"
+            },
+            {
+              "name": "published_at",
+              "dtype": "timestamp[us,Asia/Shanghai]",
+              "nullable": false,
+              "unit": "timestamp",
+              "description": "Official publication timestamp according to the provider schedule or page timestamp.",
+              "source_binding": "TREASURY_CURVE_CHINABOND",
+              "pit_role": "published_at"
+            },
+            {
+              "name": "available_at",
+              "dtype": "timestamp[us,Asia/Shanghai]",
+              "nullable": false,
+              "unit": "timestamp",
+              "description": "Maximum of official publication and verified local availability.",
+              "source_binding": "TREASURY_CURVE_CHINABOND",
+              "pit_role": "available_at"
+            },
+            {
+              "name": "revised_at",
+              "dtype": "timestamp[us,Asia/Shanghai]",
+              "nullable": true,
+              "unit": "timestamp",
+              "description": "Official correction or changed-payload detection time.",
+              "source_binding": "TREASURY_CURVE_CHINABOND",
+              "pit_role": "revision"
+            },
+            {
+              "name": "revision_id",
+              "dtype": "string",
+              "nullable": false,
+              "unit": "1",
+              "description": "Immutable observation revision.",
+              "source_binding": "TREASURY_CURVE_CHINABOND",
+              "pit_role": "revision"
+            }
+          ]
+        },
+        {
+          "table_id": "cash_return_projections",
+          "grain": "one deterministic cash-return projection for one source rate revision and accrual date",
+          "inherits": [
+            "record_lineage",
+            "derived_lineage"
+          ],
+          "primary_key": [
+            "series_id",
+            "accrual_date",
+            "formula_version",
+            "revision_id"
+          ],
+          "fields": [
+            {
+              "name": "series_id",
+              "dtype": "string",
+              "nullable": false,
+              "unit": "1",
+              "description": "Pinned official rate series selected by research configuration.",
+              "source_binding": "CASH_RETURN_DERIVED",
+              "pit_role": "key"
+            },
+            {
+              "name": "accrual_date",
+              "dtype": "date32",
+              "nullable": false,
+              "unit": "date",
+              "description": "Date over which the cash return accrues.",
+              "source_binding": "CASH_RETURN_DERIVED",
+              "pit_role": "event_time"
+            },
+            {
+              "name": "accrual_days",
+              "dtype": "int16",
+              "nullable": false,
+              "unit": "calendar_days",
+              "description": "Explicit calendar-day accrual count, including documented weekend/holiday treatment.",
+              "source_binding": "CASH_RETURN_DERIVED",
+              "pit_role": "metadata"
+            },
+            {
+              "name": "cash_return",
+              "dtype": "float64",
+              "nullable": true,
+              "unit": "decimal_return",
+              "description": "Deterministically derived cash return; null if the required rate was not yet available.",
+              "source_binding": "CASH_RETURN_DERIVED",
+              "pit_role": "value"
+            },
+            {
+              "name": "formula_version",
+              "dtype": "string",
+              "nullable": false,
+              "unit": "1",
+              "description": "Pinned annualisation, compounding, lag and holiday rule.",
+              "source_binding": "CASH_RETURN_DERIVED",
+              "pit_role": "revision"
+            },
+            {
+              "name": "available_at",
+              "dtype": "timestamp[us,Asia/Shanghai]",
+              "nullable": false,
+              "unit": "timestamp",
+              "description": "Availability of the selected source observation and completed projection.",
+              "source_binding": "CASH_RETURN_DERIVED",
+              "pit_role": "available_at"
+            },
+            {
+              "name": "revision_id",
+              "dtype": "string",
+              "nullable": false,
+              "unit": "1",
+              "description": "Immutable projection revision tied to the source observation revision.",
+              "source_binding": "CASH_RETURN_DERIVED",
+              "pit_role": "revision"
+            }
+          ]
+        }
+      ],
+      "quality_gates": [
+        "Series identity pins provider, family, tenor, rate type, currency, methodology, day count and compounding convention.",
+        "Shibor includes O/N, 1W, 2W, 1M, 3M, 6M, 9M and 1Y; FR/FDR include 001/007/014; short government curves include at least 3M, 6M and 1Y when licensed and available.",
+        "Publication schedules are enforced as PIT cutoffs; observation_date is never substituted for published_at.",
+        "Expected business-day observations are present or explicitly MISSING/STALE; values and basis-point changes receive range/unit checks without assuming rates cannot be negative.",
+        "Official observations and cash-return projections are separate tables; research configuration must pin one series and formula version.",
+        "License gates are hard blockers: no raw, curated or derived publication is created from an unlicensed source."
+      ],
+      "known_blockers": [
+        "CFETS states that copying, transmission, storage, use and derivative creation of its market data require written permission; public page visibility is insufficient.",
+        "ChinaBond pages reserve rights and direct users to data-product channels; automated retrieval and internal storage permission must be documented.",
+        "Historical endpoints, revision behavior and intraday publication timestamps require small-sample verification after permission is resolved.",
+        "PBOC 7-day reverse-repo rate is a policy-rate series, not interchangeable with a market risk-free return; research must explicitly choose its cash benchmark."
+      ]
+    },
+    {
+      "plan_id": "CORE-20",
+      "dataset_id": "cn-a-share-risk-exposures-daily",
+      "schema_version": "1.0.0",
+      "grain": "one reproducible raw risk descriptor by security, exposure date, model, descriptor, lookback, benchmark and version",
+      "pit_contract": {
+        "decision_time_rule": "An exposure is usable only when every pinned input snapshot and the completed calculation have available_at <= decision_time. End-of-day exposures are intended for decisions no earlier than the next eligible session unless a stricter model contract says otherwise.",
+        "required_time_fields": [
+          "exposure_date",
+          "estimation_start",
+          "estimation_end",
+          "calculated_at",
+          "available_at",
+          "revision_id",
+          "snapshot_id"
+        ],
+        "revision_rule": "Input snapshot, universe, benchmark, methodology, window or code changes create a new model_version/formula_version and revision_id. Published exposures never overwrite older model snapshots."
+      },
+      "source_bindings": [
+        {
+          "binding_id": "RISK_EXPOSURE_INPUTS",
+          "primary_source_ids": [
+            "INTERNAL_CORE03",
+            "INTERNAL_CORE07",
+            "INTERNAL_CORE09",
+            "INTERNAL_CORE10",
+            "INTERNAL_CORE11",
+            "INTERNAL_UPSTREAM"
+          ],
+          "calibration_source_ids": [],
+          "license_gate": "ALL_INPUT_SNAPSHOTS_MUST_BE_ADMITTED_FOR_RESEARCH_AND_DERIVATIVE_PUBLICATION_MUST_BE_ALLOWED_BY_EACH_SOURCE_LICENSE",
+          "ingestion_status": "BLOCKED_UNTIL_CORE_INPUT_SNAPSHOTS_EXIST"
+        },
+        {
+          "binding_id": "RISK_EXPOSURE_DERIVED",
+          "primary_source_ids": [
+            "INTERNAL_UPSTREAM"
+          ],
+          "calibration_source_ids": [],
+          "license_gate": "INHERIT_UPSTREAM_LICENSE_PURPOSE_CEILING_AND_PUBLICATION_RESTRICTIONS",
+          "ingestion_status": "CONTRACT_ONLY_NOT_COMPUTED"
+        }
+      ],
+      "tables": [
+        {
+          "table_id": "risk_descriptor_daily",
+          "grain": "one raw, non-imputed descriptor value by security, date, model, benchmark/window and revision",
+          "inherits": [
+            "record_lineage",
+            "security_key",
+            "derived_lineage"
+          ],
+          "primary_key": [
+            "security_id",
+            "exposure_date",
+            "model_id",
+            "descriptor_id",
+            "lookback_id",
+            "benchmark_id",
+            "model_version",
+            "revision_id"
+          ],
+          "fields": [
+            {
+              "name": "exposure_date",
+              "dtype": "date32",
+              "nullable": false,
+              "unit": "date",
+              "description": "Market date represented by the descriptor.",
+              "source_binding": "RISK_EXPOSURE_DERIVED",
+              "pit_role": "event_time"
+            },
+            {
+              "name": "model_id",
+              "dtype": "string",
+              "nullable": false,
+              "unit": "1",
+              "description": "Risk-input model family identity.",
+              "source_binding": "RISK_EXPOSURE_DERIVED",
+              "pit_role": "key"
+            },
+            {
+              "name": "descriptor_id",
+              "dtype": "string",
+              "nullable": false,
+              "unit": "1",
+              "description": "Versioned descriptor such as industry membership, log total/official-float/free-float cap, beta, total/residual volatility, turnover/Amihud liquidity or momentum/reversal.",
+              "source_binding": "RISK_EXPOSURE_DERIVED",
+              "pit_role": "key"
+            },
+            {
+              "name": "descriptor_family",
+              "dtype": "enum<INDUSTRY,SIZE,BETA,VOLATILITY,LIQUIDITY,MOMENTUM,REVERSAL>",
+              "nullable": false,
+              "unit": "1",
+              "description": "Basic risk descriptor family approved for the core gate.",
+              "source_binding": "RISK_EXPOSURE_DERIVED",
+              "pit_role": "metadata"
+            },
+            {
+              "name": "descriptor_value",
+              "dtype": "float64",
+              "nullable": true,
+              "unit": "descriptor_defined",
+              "description": "Raw, reproducible descriptor value; no L1 imputation, winsorisation, cross-sectional standardisation or neutralisation.",
+              "source_binding": "RISK_EXPOSURE_DERIVED",
+              "pit_role": "value"
+            },
+            {
+              "name": "transform_state",
+              "dtype": "enum<RAW_DESCRIPTOR>",
+              "nullable": false,
+              "unit": "1",
+              "description": "Confirms that L2 statistical transformations are not mixed into the L1 core input.",
+              "source_binding": "RISK_EXPOSURE_DERIVED",
+              "pit_role": "metadata"
+            },
+            {
+              "name": "lookback_id",
+              "dtype": "string",
+              "nullable": false,
+              "unit": "1",
+              "description": "Pinned window/lag definition, including standard 12-minus-1 momentum where applicable.",
+              "source_binding": "RISK_EXPOSURE_DERIVED",
+              "pit_role": "key"
+            },
+            {
+              "name": "benchmark_id",
+              "dtype": "string",
+              "nullable": false,
+              "unit": "1",
+              "description": "Pinned official index/return variant for beta or excess-return calculations; use NOT_APPLICABLE when irrelevant.",
+              "source_binding": "RISK_EXPOSURE_INPUTS",
+              "pit_role": "key"
+            },
+            {
+              "name": "industry_taxonomy",
+              "dtype": "string",
+              "nullable": true,
+              "unit": "1",
+              "description": "Pinned CSRC, Shenwan or other admitted taxonomy for industry descriptors.",
+              "source_binding": "RISK_EXPOSURE_INPUTS",
+              "pit_role": "metadata"
+            },
+            {
+              "name": "market_cap_basis",
+              "dtype": "enum<TOTAL,OFFICIAL_TRADABLE,DERIVED_FREE_FLOAT,NOT_APPLICABLE>",
+              "nullable": false,
+              "unit": "1",
+              "description": "Prevents total, official tradable and derived free-float size exposures from being conflated.",
+              "source_binding": "RISK_EXPOSURE_INPUTS",
+              "pit_role": "metadata"
+            },
+            {
+              "name": "return_basis",
+              "dtype": "string",
+              "nullable": false,
+              "unit": "1",
+              "description": "Pinned adjusted-price/total-return input convention and source snapshot.",
+              "source_binding": "RISK_EXPOSURE_INPUTS",
+              "pit_role": "metadata"
+            },
+            {
+              "name": "estimation_start",
+              "dtype": "date32",
+              "nullable": true,
+              "unit": "date",
+              "description": "First observation in the estimation window.",
+              "source_binding": "RISK_EXPOSURE_DERIVED",
+              "pit_role": "event_time"
+            },
+            {
+              "name": "estimation_end",
+              "dtype": "date32",
+              "nullable": false,
+              "unit": "date",
+              "description": "Last input date, never later than exposure_date.",
+              "source_binding": "RISK_EXPOSURE_DERIVED",
+              "pit_role": "event_time"
+            },
+            {
+              "name": "observation_count",
+              "dtype": "int32",
+              "nullable": false,
+              "unit": "trading_observations",
+              "description": "Number of valid observations used after explicit tradability handling.",
+              "source_binding": "RISK_EXPOSURE_DERIVED",
+              "pit_role": "quality"
+            },
+            {
+              "name": "coverage_ratio",
+              "dtype": "float64",
+              "nullable": false,
+              "unit": "ratio_0_1",
+              "description": "Observed coverage of the required estimation window.",
+              "source_binding": "RISK_EXPOSURE_DERIVED",
+              "pit_role": "quality"
+            },
+            {
+              "name": "missing_reason",
+              "dtype": "string",
+              "nullable": true,
+              "unit": "1",
+              "description": "Reason for null exposure, e.g. IPO history, suspension, missing benchmark or failed input gate.",
+              "source_binding": "RISK_EXPOSURE_DERIVED",
+              "pit_role": "quality"
+            },
+            {
+              "name": "input_snapshot_refs",
+              "dtype": "json",
+              "nullable": false,
+              "unit": "1",
+              "description": "Exact upstream dataset_id, snapshot_id and hashes used in the calculation.",
+              "source_binding": "RISK_EXPOSURE_INPUTS",
+              "pit_role": "lineage"
+            },
+            {
+              "name": "formula_version",
+              "dtype": "string",
+              "nullable": false,
+              "unit": "1",
+              "description": "Pinned formula, lags, minimum observations, suspension treatment and numerical implementation.",
+              "source_binding": "RISK_EXPOSURE_DERIVED",
+              "pit_role": "revision"
+            },
+            {
+              "name": "model_version",
+              "dtype": "string",
+              "nullable": false,
+              "unit": "1",
+              "description": "Immutable collection of descriptor definitions and input contracts.",
+              "source_binding": "RISK_EXPOSURE_DERIVED",
+              "pit_role": "revision"
+            },
+            {
+              "name": "calculated_at",
+              "dtype": "timestamp[us,Asia/Shanghai]",
+              "nullable": false,
+              "unit": "timestamp",
+              "description": "Completion time of the deterministic calculation.",
+              "source_binding": "RISK_EXPOSURE_DERIVED",
+              "pit_role": "published_at"
+            },
+            {
+              "name": "available_at",
+              "dtype": "timestamp[us,Asia/Shanghai]",
+              "nullable": false,
+              "unit": "timestamp",
+              "description": "Maximum upstream availability and calculation completion time.",
+              "source_binding": "RISK_EXPOSURE_DERIVED",
+              "pit_role": "available_at"
+            },
+            {
+              "name": "revision_id",
+              "dtype": "string",
+              "nullable": false,
+              "unit": "1",
+              "description": "Immutable exposure revision identity.",
+              "source_binding": "RISK_EXPOSURE_DERIVED",
+              "pit_role": "revision"
+            }
+          ]
+        }
+      ],
+      "quality_gates": [
+        "All upstream snapshots pass their research-use, PIT, license and quality gates and are pinned by immutable hashes.",
+        "No input date or effective classification exceeds exposure_date; available_at is at least the latest upstream availability and calculation completion.",
+        "Descriptor formulas, benchmark/return variants, windows, lags, minimum observations, IPO/suspension treatment and market-cap basis are versioned.",
+        "Industry memberships use effective-dated CORE-11 classifications; index-based benchmarks use exact CORE-09/10 identities and return variants.",
+        "Nulls from insufficient history, suspension or missing inputs remain null with reason codes; no zero fill or hidden imputation is allowed.",
+        "L1 publishes raw descriptors only. Winsorisation, standardisation, industry neutralisation and missing-value imputation are separate L2 artifacts.",
+        "A deterministic rerun from the same input hashes and code version reproduces values within declared numerical tolerance."
+      ],
+      "known_blockers": [
+        "Required admitted upstream snapshots for adjusted returns, tradability, share capital, index returns, industry classifications and risk-free rates do not yet exist.",
+        "A default benchmark/window need not be silently chosen in L1; each model release must pin its configuration and may publish multiple variants.",
+        "This open implementation is not a vendor risk model and must not claim Barra-style comparability without an independently specified validation contract.",
+        "Source licenses may restrict publication of derived exposures even when internal computation is allowed; restrictions are inherited field by field."
+      ]
+    }
+  ]
+}

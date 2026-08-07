@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://quantification.local/contracts/daily_pipeline_health_v1/request.schema.json",
+  "title": "Inspection-only daily pipeline health request",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "mode",
+    "purpose_ceiling",
+    "run_id",
+    "as_of",
+    "through_date",
+    "max_watermark_lag_due_dates",
+    "orchestration_request",
+    "orchestration_database",
+    "candidate_manifests",
+    "quarantine_receipts"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "mode": {"const": "daily_pipeline_health"},
+    "purpose_ceiling": {"const": "INSPECTION_ONLY"},
+    "run_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+    },
+    "as_of": {"type": "string", "format": "date-time"},
+    "through_date": {"type": "string", "format": "date"},
+    "max_watermark_lag_due_dates": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 4000
+    },
+    "orchestration_request": {"$ref": "#/$defs/boundFile"},
+    "orchestration_database": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["relative_path"],
+      "properties": {
+        "relative_path": {"type": "string", "minLength": 1}
+      }
+    },
+    "candidate_manifests": {
+      "type": "array",
+      "maxItems": 4000,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "run_date",
+          "relative_path",
+          "sha256",
+          "bytes",
+          "expected_row_count",
+          "expected_date_min",
+          "expected_date_max"
+        ],
+        "properties": {
+          "run_date": {"type": "string", "format": "date"},
+          "relative_path": {"type": "string", "minLength": 1},
+          "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+          "bytes": {"type": "integer", "minimum": 0},
+          "expected_row_count": {"type": "integer", "minimum": 0},
+          "expected_date_min": {"type": "string", "format": "date"},
+          "expected_date_max": {"type": "string", "format": "date"}
+        }
+      }
+    },
+    "quarantine_receipts": {
+      "type": "array",
+      "maxItems": 4000,
+      "items": {"$ref": "#/$defs/boundFile"}
+    }
+  },
+  "$defs": {
+    "boundFile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["relative_path", "sha256", "bytes"],
+      "properties": {
+        "relative_path": {"type": "string", "minLength": 1},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "bytes": {"type": "integer", "minimum": 0}
+      }
+    }
+  }
+}

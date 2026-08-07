@@ -1,0 +1,622 @@
+{
+  "authority_precedence": [
+    "snapshot_manifest_or_provenance",
+    "project_data_catalog_or_run_manifest",
+    "workspace_dataset_catalog"
+  ],
+  "catalog_mode": "federated_logical_catalog",
+  "datasets": [
+    {
+      "authority_paths": [
+        "${QUANTIFICATION_ROOT}/capital-flow-attribution/DATA_CATALOG.md",
+        "${QUANTIFICATION_ROOT}/data/capital-flow/eastmoney/000001-159995-399001-588170-20d-c9ba783e8c99a833/data/fetch_manifest.json"
+      ],
+      "consumers": [
+        "capital-flow-attribution"
+      ],
+      "dataset_id": "cfa-eastmoney-capital-flow-smoke",
+      "known_limits": [
+        "仅用于字段、缺失和报告安全测试",
+        "供应商资金流标签不代表真实投资者身份"
+      ],
+      "license_status": "UNVERIFIED",
+      "lifecycle": "historical",
+      "mutability": "immutable",
+      "owner_project": "capital-flow-attribution",
+      "physical_path": "${QUANTIFICATION_ROOT}/data/capital-flow/eastmoney/000001-159995-399001-588170-20d-c9ba783e8c99a833",
+      "purpose_ceiling": "SMOKE_ONLY",
+      "quality_status": "PARTIAL",
+      "snapshot_id": "2026-07-08-20d-4-symbols",
+      "store_id": "capital-flow-legacy-smoke"
+    },
+    {
+      "authority_paths": [
+        "${QUANTIFICATION_ROOT}/capital-flow-attribution/DATA_CATALOG.md"
+      ],
+      "consumers": [],
+      "dataset_id": "cfa-legacy-skill-smoke-run",
+      "known_limits": [
+        "退役 Skill 历史产物，只用于审计和回归"
+      ],
+      "license_status": "UNVERIFIED",
+      "lifecycle": "historical",
+      "mutability": "immutable",
+      "owner_project": "capital-flow-attribution",
+      "physical_path": "${QUANTIFICATION_ROOT}/资金流向skill/20260708-smoke-000001-399001-588170-159995",
+      "purpose_ceiling": "DO_NOT_USE",
+      "quality_status": "PARTIAL",
+      "snapshot_id": "2026-07-08",
+      "store_id": "legacy-capital-flow-skill-output"
+    },
+    {
+      "authority_paths": [
+        "${QUANTIFICATION_ROOT}/capital-flow-attribution/DATA_CATALOG.md"
+      ],
+      "consumers": [],
+      "dataset_id": "cfa-s1-pilot-intermediate",
+      "known_limits": [
+        "失败与中间证据，不得与 v10 拼接或重复计数"
+      ],
+      "license_status": "MIXED",
+      "lifecycle": "failed",
+      "member_paths": [
+        "${QUANTIFICATION_ROOT}/data/capital-flow-attribution/s1/20260718-s1-pilot-v1",
+        "${QUANTIFICATION_ROOT}/data/capital-flow-attribution/s1/20260718-s1-pilot-v2",
+        "${QUANTIFICATION_ROOT}/data/capital-flow-attribution/s1/20260718-s1-pilot-v3",
+        "${QUANTIFICATION_ROOT}/data/capital-flow-attribution/s1/20260718-s1-pilot-v4",
+        "${QUANTIFICATION_ROOT}/data/capital-flow-attribution/s1/20260718-s1-pilot-v5",
+        "${QUANTIFICATION_ROOT}/data/capital-flow-attribution/s1/20260718-s1-pilot-v6",
+        "${QUANTIFICATION_ROOT}/data/capital-flow-attribution/s1/20260718-s1-pilot-v7",
+        "${QUANTIFICATION_ROOT}/data/capital-flow-attribution/s1/20260718-s1-pilot-v8",
+        "${QUANTIFICATION_ROOT}/data/capital-flow-attribution/s1/20260718-s1-pilot-v9"
+      ],
+      "mutability": "immutable",
+      "owner_project": "capital-flow-attribution",
+      "physical_path": "${QUANTIFICATION_ROOT}/data/capital-flow-attribution/s1",
+      "purpose_ceiling": "DO_NOT_USE",
+      "quality_status": "FAILED",
+      "snapshot_id": "20260718-v1-v9",
+      "store_id": "capital-flow-attribution-runs"
+    },
+    {
+      "authority_paths": [
+        "${QUANTIFICATION_ROOT}/data/capital-flow-attribution/s1/20260718-s1-pilot-v10/manifests/dataset_manifest.json",
+        "${QUANTIFICATION_ROOT}/data/capital-flow-attribution/s1/20260718-s1-pilot-v10/manifests/raw_files.json"
+      ],
+      "consumers": [
+        "capital-flow-attribution"
+      ],
+      "dataset_id": "cfa-s1-pilot",
+      "known_limits": [
+        "G1=REVIEW",
+        "5 个数据族 MISSING，1 个 CONFLICT",
+        "不得用于身份归因或投资建议"
+      ],
+      "license_status": "MIXED",
+      "lifecycle": "review",
+      "mutability": "immutable",
+      "owner_project": "capital-flow-attribution",
+      "physical_path": "${QUANTIFICATION_ROOT}/data/capital-flow-attribution/s1/20260718-s1-pilot-v10",
+      "purpose_ceiling": "RESEARCH_ONLY",
+      "quality_status": "REVIEW",
+      "snapshot_id": "20260718-v10",
+      "store_id": "capital-flow-attribution-runs"
+    },
+    {
+      "authority_paths": [
+        "${QUANTIFICATION_ROOT}/data/capital-flow-attribution/s1/20260719-s1r-pilot-v11/manifests/dataset_manifest.json",
+        "${QUANTIFICATION_ROOT}/data/capital-flow-attribution/s1/20260719-s1r-pilot-v11/manifests/raw_files.json"
+      ],
+      "consumers": [
+        "capital-flow-attribution"
+      ],
+      "dataset_id": "cfa-s1r-pilot",
+      "known_limits": [
+        "Pandera 与 Parquet/DuckDB 往返通过不等于 G1 通过",
+        "不得用于身份归因或投资建议"
+      ],
+      "license_status": "MIXED",
+      "lifecycle": "review",
+      "mutability": "immutable",
+      "owner_project": "capital-flow-attribution",
+      "physical_path": "${QUANTIFICATION_ROOT}/data/capital-flow-attribution/s1/20260719-s1r-pilot-v11",
+      "purpose_ceiling": "RESEARCH_ONLY",
+      "quality_status": "REVIEW",
+      "snapshot_id": "20260719-v11",
+      "store_id": "capital-flow-attribution-runs"
+    },
+    {
+      "authority_paths": [
+        "${QUANTIFICATION_ROOT}/capital-flow-attribution/DATA_CATALOG.md"
+      ],
+      "consumers": [
+        "capital-flow-attribution"
+      ],
+      "dataset_id": "cfa-s1r-akshare-adapter-smoke",
+      "known_limits": [
+        "当前截面、聚合来源、许可未核验；只验证适配器"
+      ],
+      "license_status": "UNVERIFIED",
+      "lifecycle": "smoke",
+      "mutability": "immutable",
+      "owner_project": "capital-flow-attribution",
+      "physical_path": "${QUANTIFICATION_ROOT}/tmp/capital-flow-attribution/20260719-s1r-adapter-smoke-v3",
+      "purpose_ceiling": "SMOKE_ONLY",
+      "quality_status": "PARTIAL",
+      "snapshot_id": "20260719-v3",
+      "store_id": "capital-flow-temporary-runs"
+    },
+    {
+      "authority_paths": [
+        "${QUANTIFICATION_ROOT}/capital-flow-attribution/DATA_CATALOG.md"
+      ],
+      "consumers": [],
+      "dataset_id": "cfa-g1-research-failed",
+      "known_limits": [
+        "失败或被否决的中间运行，仅用于故障取证与回归测试"
+      ],
+      "license_status": "MIXED",
+      "lifecycle": "failed",
+      "member_paths": [
+        "${QUANTIFICATION_ROOT}/data/capital-flow-attribution/research/20260719-g1-research-v12",
+        "${QUANTIFICATION_ROOT}/data/capital-flow-attribution/research/20260719-g1-research-v13",
+        "${QUANTIFICATION_ROOT}/data/capital-flow-attribution/research/20260719-g1-research-v14",
+        "${QUANTIFICATION_ROOT}/data/capital-flow-attribution/research/20260719-g1-research-v15",
+        "${QUANTIFICATION_ROOT}/data/capital-flow-attribution/research/20260719-g1-research-v16",
+        "${QUANTIFICATION_ROOT}/data/capital-flow-attribution/research/20260719-g1-research-v17",
+        "${QUANTIFICATION_ROOT}/data/capital-flow-attribution/research/20260719-g1-research-v18",
+        "${QUANTIFICATION_ROOT}/data/capital-flow-attribution/research/20260719-g1-research-v19",
+        "${QUANTIFICATION_ROOT}/data/capital-flow-attribution/research/20260719-g1-research-v20",
+        "${QUANTIFICATION_ROOT}/data/capital-flow-attribution/research/20260719-g1-research-v21"
+      ],
+      "mutability": "immutable",
+      "owner_project": "capital-flow-attribution",
+      "physical_path": "${QUANTIFICATION_ROOT}/data/capital-flow-attribution/research",
+      "purpose_ceiling": "DO_NOT_USE",
+      "quality_status": "FAILED",
+      "snapshot_id": "20260719-v12-v21",
+      "store_id": "capital-flow-attribution-runs"
+    },
+    {
+      "authority_paths": [
+        "${QUANTIFICATION_ROOT}/data/capital-flow-attribution/research/20260719-g1-research-v22/manifests/dataset_manifest.json",
+        "${QUANTIFICATION_ROOT}/data/capital-flow-attribution/research/20260719-g1-research-v22/manifests/raw_files.json"
+      ],
+      "consumers": [
+        "capital-flow-attribution"
+      ],
+      "dataset_id": "cfa-g1-research",
+      "known_limits": [
+        "G1=REVIEW，G2/G3 未评估",
+        "NAV 与历史融资代理许可未验证",
+        "multi_factor_published=false",
+        "investment_recommendation=false"
+      ],
+      "license_status": "MIXED",
+      "lifecycle": "review",
+      "mutability": "immutable",
+      "owner_project": "capital-flow-attribution",
+      "physical_path": "${QUANTIFICATION_ROOT}/data/capital-flow-attribution/research/20260719-g1-research-v22",
+      "purpose_ceiling": "RESEARCH_ONLY",
+      "quality_status": "REVIEW",
+      "snapshot_id": "20260719-v22",
+      "store_id": "capital-flow-attribution-runs"
+    },
+    {
+      "authority_paths": [
+        "${QUANTIFICATION_ROOT}/news-signal-agent/README.md"
+      ],
+      "consumers": [
+        "news-signal-agent"
+      ],
+      "dataset_id": "news-signal-agent-state",
+      "known_limits": [
+        "应用工作库，不是冻结研究快照",
+        "尚未形成可供多因子读取的正式事件特征发布"
+      ],
+      "license_status": "MIXED",
+      "lifecycle": "active",
+      "mutability": "mutable",
+      "owner_project": "news-signal-agent",
+      "physical_path": "${QUANTIFICATION_ROOT}/news-signal-agent/data/news_signal_agent.sqlite3",
+      "purpose_ceiling": "ENGINEERING_ONLY",
+      "quality_status": "UNMANAGED",
+      "snapshot_id": "working-2026-06-27",
+      "store_id": "news-signal-application-state"
+    },
+    {
+      "authority_paths": [
+        "${QUANTIFICATION_ROOT}/CWOPT相关/CWOPT/README.md"
+      ],
+      "consumers": [
+        "cwopt"
+      ],
+      "dataset_id": "cwopt-history-cache",
+      "known_limits": [
+        "独立实验缓存，文件命名和版本尚未标准化",
+        "不得自动进入资金流、多因子或新闻主线"
+      ],
+      "license_status": "MIXED",
+      "lifecycle": "unmanaged",
+      "mutability": "mutable",
+      "owner_project": "cwopt",
+      "physical_path": "${QUANTIFICATION_ROOT}/CWOPT相关/CWOPT/data/history",
+      "purpose_ceiling": "ENGINEERING_ONLY",
+      "quality_status": "UNMANAGED",
+      "snapshot_id": "working-2026-07-14",
+      "store_id": "cwopt-history-cache"
+    },
+    {
+      "authority_paths": [
+        "${QUANTIFICATION_ROOT}/CWOPT相关/CWOPT/README.md"
+      ],
+      "consumers": [
+        "cwopt"
+      ],
+      "dataset_id": "cwopt-router-cache",
+      "known_limits": [
+        "包含路由模型和 panel_base_features NPZ 缓存",
+        "来源、schema、available_at 和重建合同尚未完整登记",
+        "不得自动进入资金流、多因子或新闻主线"
+      ],
+      "license_status": "MIXED",
+      "lifecycle": "unmanaged",
+      "mutability": "mutable",
+      "owner_project": "cwopt",
+      "physical_path": "${QUANTIFICATION_ROOT}/CWOPT相关/CWOPT/data/router",
+      "purpose_ceiling": "ENGINEERING_ONLY",
+      "quality_status": "UNMANAGED",
+      "snapshot_id": "working-2026-07-19",
+      "store_id": "cwopt-router-cache"
+    },
+    {
+      "authority_paths": [
+        "${QUANTIFICATION_ROOT}/stock-relative-dominance-release/README.md"
+      ],
+      "consumers": [],
+      "dataset_id": "stock-relative-dominance-cache",
+      "known_limits": [
+        "对应 Skill 已禁用且尚未升级",
+        "只保留为可重建缓存的审计记录，不得形成研究结论"
+      ],
+      "license_status": "UNVERIFIED",
+      "lifecycle": "historical",
+      "mutability": "mutable",
+      "owner_project": "stock-relative-dominance",
+      "physical_path": "${QUANTIFICATION_ROOT}/tmp/stock-relative-dominance/cache",
+      "purpose_ceiling": "DO_NOT_USE",
+      "quality_status": "UNMANAGED",
+      "snapshot_id": "working-2026-07-19",
+      "store_id": "relative-dominance-temporary-cache"
+    },
+    {
+      "authority_paths": [
+        "${QUANTIFICATION_ROOT}/reports/storage-migration/data-consolidation-20260719/README.md"
+      ],
+      "consumers": [],
+      "content_hash": "025d3114d068facd9dcc9af66847b67ad7f1295ceb526d5f394fd2872689273c",
+      "dataset_id": "news-release-mirror-db-copy",
+      "hash_algorithm": "sha256-file-v1",
+      "known_limits": [
+        "发布镜像中的旧数据库副本，不是权威工作库",
+        "只用于追溯或回滚，不得作为应用、研究或发布输入"
+      ],
+      "license_status": "MIXED",
+      "lifecycle": "historical",
+      "mutability": "immutable",
+      "owner_project": "workspace",
+      "physical_path": "${QUANTIFICATION_ROOT}/archive/data-duplicates/news-signal-agent-github/20260628-news_signal_agent.sqlite3",
+      "purpose_ceiling": "DO_NOT_USE",
+      "quality_status": "UNMANAGED",
+      "snapshot_id": "2026-06-28",
+      "store_id": "archived-data-duplicates"
+    },
+    {
+      "authority_paths": [
+        "${QUANTIFICATION_ROOT}/data/market/snapshots/cn-a-share-r0-shsz-pv-panel/20050104-20260803-v1/request.json",
+        "${QUANTIFICATION_ROOT}/data/market/snapshots/cn-a-share-r0-shsz-pv-panel/20050104-20260803-v1/manifest.json",
+        "${QUANTIFICATION_ROOT}/data/market/snapshots/cn-a-share-r0-shsz-pv-panel/20050104-20260803-v1/provenance.json",
+        "${QUANTIFICATION_ROOT}/data/market/snapshots/cn-a-share-r0-shsz-pv-panel/20050104-20260803-v1/partition-manifest.json",
+        "${QUANTIFICATION_ROOT}/data/market/snapshots/cn-a-share-r0-shsz-pv-panel/20050104-20260803-v1/quality/summary.json"
+      ],
+      "available_at": "2026-08-04T09:30:00+08:00",
+      "consumers": [
+        "multi-factor"
+      ],
+      "content_hash": "26309d36b7c08096fff55df100f1d27df8412b106ea48f282ce0f7caad37084b",
+      "dataset_id": "cn-a-share-r0-shsz-pv-panel",
+      "hash_algorithm": "sha256-snapshot-contract-v1",
+      "independent_contract_verification": false,
+      "known_limits": [
+        "R0_SHSZ_PV narrow gate only; canonical R0_PV and CORE20 remain unchanged",
+        "Declared user-scoped rights; no independent contract verification or legal opinion",
+        "XSHG/XSHE ordinary A shares only; BJSE, B shares and 600849.XSHG excluded",
+        "ST and suspension unknowns remain explicit and are never signal-rank inputs",
+        "Coverage ends at the complete trade date 2026-08-03"
+      ],
+      "legal_opinion": false,
+      "license_status": "DECLARED",
+      "lifecycle": "frozen",
+      "mutability": "immutable",
+      "notes": "R0_SHSZ_PV v2 immutable price-volume panel; publication package is dry-run validated and does not itself publish.",
+      "owner_project": "workspace",
+      "physical_path": "${QUANTIFICATION_ROOT}/data/market/snapshots/cn-a-share-r0-shsz-pv-panel/20050104-20260803-v1",
+      "published_at": "2026-08-04T08:11:01.624731+00:00",
+      "purpose_ceiling": "RESEARCH_ONLY",
+      "quality_status": "OK",
+      "rights_basis_sha256": "bf4adeb0015dcb2c6e349d76ed4a5750f0d54cc93b55b89944a84f44a5ce1c62",
+      "rights_status": "DECLARED__NOT_VERIFIED__NO_LEGAL_OPINION",
+      "snapshot_id": "20050104-20260803-v1",
+      "store_id": "workspace-market-snapshots",
+      "upstream_evidence_sha256": {
+        "csmar_rights_receipt": "1d07b07304fe767ce7edda2d2563d816c73e52fe7b1c21ef30bccb1db9498661",
+        "csmar_rights_verification": "7812ec87e7b84d12518036679bf630cfa8a756996d3c513baa1b21869429de83",
+        "rqdata_quota_receipt": "42f71ef91c91e5c9f8c62580ddcb8c5157951209e9b6d8995482443b923df71e"
+      }
+    }
+  ],
+  "owners": [
+    "workspace",
+    "capital-flow-attribution",
+    "multi-factor",
+    "news-signal-agent",
+    "cwopt",
+    "stock-relative-dominance",
+    "shadow-portfolio"
+  ],
+  "physical_migration": true,
+  "publication_contracts": [
+    {
+      "artifact": "versioned capital-flow feature snapshot",
+      "consumer": "multi-factor",
+      "producer": "capital-flow-attribution",
+      "requirements": [
+        "G1/G2/G3 全部通过",
+        "冻结 schema、available_at、许可、单位、hash 和 manifest",
+        "只发布 derived 特征，不让多因子直接读取 Capital Flow 内部工作表"
+      ],
+      "status": "blocked"
+    },
+    {
+      "artifact": "versioned news-event feature snapshot",
+      "consumer": "multi-factor",
+      "producer": "news-signal-agent",
+      "requirements": [
+        "DEFERRED_BY_USER_2026_07_20：须由用户明确重新启用",
+        "从可变 SQLite 导出不可变快照",
+        "登记事件 schema、去重规则、published_at/available_at、许可和内容 hash",
+        "通过泄漏与时间可用性审计"
+      ],
+      "status": "blocked"
+    },
+    {
+      "artifact": "approved factor and model bundle",
+      "consumer": "shadow-portfolio",
+      "producer": "multi-factor",
+      "requirements": [
+        "正式注册运行并通过 Validation/Holdout",
+        "阶段门明确允许 SHADOW_ONLY",
+        "保留成本、容量、风险和人工批准证据"
+      ],
+      "status": "blocked"
+    }
+  ],
+  "retired_datasets": [
+    {
+      "cleanup_receipt": "${QUANTIFICATION_ROOT}/reports/storage-cleanup/legacy-data-retirement-20260720/DELETION_RECEIPT.json",
+      "content_hash": "5fae39a4857c8d5b07a44b1f14609c195c5a265d21c97e776b34d6b08a6dda6d",
+      "dataset_id": "cn-a-share-qlib-daily",
+      "deleted_bytes": 715204082,
+      "deleted_files": 61188,
+      "former_physical_path": "${QUANTIFICATION_ROOT}/多因子/data/market/snapshots/2026-07-14/qlib_bin",
+      "hash_algorithm": "sha256-tree-v1",
+      "owner_project": "multi-factor",
+      "reason": "用户决定不以现有社区 Qlib 作为过渡数据；依赖审计和逐文件清单完成后删除数据本体。",
+      "retained_authority_paths": [
+        "${QUANTIFICATION_ROOT}/多因子/quant_data_core/releases/cn-a-share-qlib-daily/2026-07-14/manifest.json",
+        "${QUANTIFICATION_ROOT}/多因子/data/market/snapshots/2026-07-14/PROVENANCE.json"
+      ],
+      "retired_at": "2026-07-20T21:26:49+08:00",
+      "snapshot_id": "2026-07-14",
+      "status": "PAYLOAD_DELETED_METADATA_RETAINED"
+    },
+    {
+      "cleanup_receipt": "${QUANTIFICATION_ROOT}/reports/storage-cleanup/legacy-data-retirement-20260720/DELETION_RECEIPT.json",
+      "content_hash": "7fd0dffe3196b126fd071cb549d6cf42c5a84816d59b71a31205a2dbb273200f",
+      "dataset_id": "cn-a-share-qlib-daily",
+      "deleted_bytes": 715868066,
+      "deleted_files": 61198,
+      "former_physical_path": "${QUANTIFICATION_ROOT}/多因子/data/market/snapshots/cn-a-share-qlib-daily/2026-07-18/qlib_bin",
+      "hash_algorithm": "sha256-tree-v1",
+      "owner_project": "multi-factor",
+      "reason": "用户决定不以现有社区 Qlib 作为过渡数据；依赖审计和逐文件清单完成后删除数据本体。",
+      "retained_authority_paths": [
+        "${QUANTIFICATION_ROOT}/多因子/quant_data_core/releases/cn-a-share-qlib-daily/2026-07-18/manifest.json",
+        "${QUANTIFICATION_ROOT}/多因子/data/market/snapshots/cn-a-share-qlib-daily/2026-07-18/PROVENANCE.json"
+      ],
+      "retired_at": "2026-07-20T21:26:49+08:00",
+      "snapshot_id": "2026-07-18",
+      "status": "PAYLOAD_DELETED_METADATA_RETAINED"
+    }
+  ],
+  "schema_version": 1,
+  "stores": [
+    {
+      "authority_paths": [
+        "${QUANTIFICATION_ROOT}/data/market/README.md",
+        "${QUANTIFICATION_ROOT}/data/catalog/ACCESS_POLICY.md"
+      ],
+      "kind": "immutable_snapshot_store",
+      "lifecycle": "active",
+      "mutability": "append_only",
+      "notes": "从 2026-07-19 之后新增的共享行情快照统一发布到这里；两个旧 Qlib 数据本体已于 2026-07-20 删除，不复制、不链接、不复用。",
+      "owner_project": "workspace",
+      "physical_root": "${QUANTIFICATION_ROOT}/data/market/snapshots",
+      "purpose_ceiling": "RESEARCH_ONLY",
+      "store_id": "workspace-market-snapshots"
+    },
+    {
+      "authority_paths": [
+        "${QUANTIFICATION_ROOT}/data/published/README.md",
+        "${QUANTIFICATION_ROOT}/data/catalog/ACCESS_POLICY.md"
+      ],
+      "kind": "published_feature_store",
+      "lifecycle": "active",
+      "mutability": "append_only",
+      "notes": "只接收通过发布合同的不可变因子、风险、资金流和事件快照；当前尚无已发布数据集，新闻正文与新闻事件特征建设已由用户暂停。",
+      "owner_project": "workspace",
+      "physical_root": "${QUANTIFICATION_ROOT}/data/published",
+      "purpose_ceiling": "SHADOW_ONLY",
+      "store_id": "workspace-published-features"
+    },
+    {
+      "authority_paths": [
+        "${QUANTIFICATION_ROOT}/capital-flow-attribution/DATA_CATALOG.md",
+        "${QUANTIFICATION_ROOT}/capital-flow-attribution/protocol/DATA_CONTRACT.md"
+      ],
+      "kind": "shared_run_store",
+      "lifecycle": "review",
+      "mutability": "append_only",
+      "notes": "每个运行目录内部保留 raw、normalized/parquet、catalog 和 manifests；已完成运行不得原地覆盖。",
+      "owner_project": "capital-flow-attribution",
+      "physical_root": "${QUANTIFICATION_ROOT}/data/capital-flow-attribution",
+      "purpose_ceiling": "RESEARCH_ONLY",
+      "store_id": "capital-flow-attribution-runs"
+    },
+    {
+      "authority_paths": [
+        "${QUANTIFICATION_ROOT}/capital-flow-attribution/DATA_CATALOG.md"
+      ],
+      "kind": "historical_output_store",
+      "lifecycle": "historical",
+      "mutability": "append_only",
+      "notes": "旧东方财富资金流缓存；供应商标签不代表投资者身份。",
+      "owner_project": "capital-flow-attribution",
+      "physical_root": "${QUANTIFICATION_ROOT}/data/capital-flow",
+      "purpose_ceiling": "SMOKE_ONLY",
+      "store_id": "capital-flow-legacy-smoke"
+    },
+    {
+      "authority_paths": [
+        "${QUANTIFICATION_ROOT}/capital-flow-attribution/DATA_CATALOG.md"
+      ],
+      "kind": "historical_output_store",
+      "lifecycle": "historical",
+      "mutability": "append_only",
+      "notes": "已退役 Skill 的历史运行，只用于审计和回归。",
+      "owner_project": "capital-flow-attribution",
+      "physical_root": "${QUANTIFICATION_ROOT}/资金流向skill",
+      "purpose_ceiling": "DO_NOT_USE",
+      "store_id": "legacy-capital-flow-skill-output"
+    },
+    {
+      "authority_paths": [
+        "${QUANTIFICATION_ROOT}/capital-flow-attribution/DATA_CATALOG.md"
+      ],
+      "kind": "temporary_run_store",
+      "lifecycle": "active",
+      "mutability": "mixed",
+      "notes": "临时与冒烟运行；登记不改变 STORAGE_POLICY 的删除闸门。",
+      "owner_project": "capital-flow-attribution",
+      "physical_root": "${QUANTIFICATION_ROOT}/tmp/capital-flow-attribution",
+      "purpose_ceiling": "SMOKE_ONLY",
+      "store_id": "capital-flow-temporary-runs"
+    },
+    {
+      "authority_paths": [
+        "${QUANTIFICATION_ROOT}/多因子/quant_data_core/catalog.sqlite3",
+        "${QUANTIFICATION_ROOT}/多因子/quant_data_core/README.md"
+      ],
+      "kind": "immutable_snapshot_store",
+      "lifecycle": "historical",
+      "mutability": "append_only",
+      "notes": "用户于2026-07-20决定不再把现有社区Qlib作为过渡数据；数据本体已删除，仅保留 release manifest、provenance、项目 release catalog 和工作区 tombstone 供历史审计。",
+      "owner_project": "multi-factor",
+      "physical_root": "${QUANTIFICATION_ROOT}/多因子/data/market",
+      "purpose_ceiling": "DO_NOT_USE",
+      "store_id": "multi-factor-market-snapshots"
+    },
+    {
+      "authority_paths": [
+        "${QUANTIFICATION_ROOT}/多因子/DATA_LAKE.md",
+        "${QUANTIFICATION_ROOT}/多因子/PROTOCOL_V6.md"
+      ],
+      "kind": "immutable_research_evidence_store",
+      "lifecycle": "frozen",
+      "mutability": "append_only",
+      "notes": "2026-07-19 已审计并清理全部终止运行 factor_cache；当前仅保留约 10.632 MiB 正式研究证据并按不可变证据保护。运行结果仍不自动视为可复用数据集。",
+      "owner_project": "multi-factor",
+      "physical_root": "${QUANTIFICATION_ROOT}/多因子/research_runs",
+      "purpose_ceiling": "RESEARCH_ONLY",
+      "store_id": "multi-factor-research-evidence"
+    },
+    {
+      "authority_paths": [
+        "${QUANTIFICATION_ROOT}/news-signal-agent/README.md"
+      ],
+      "kind": "application_state_store",
+      "lifecycle": "active",
+      "mutability": "mutable",
+      "notes": "工作 SQLite 和缓存，不是可直接进入多因子研究的冻结事件特征快照。",
+      "owner_project": "news-signal-agent",
+      "physical_root": "${QUANTIFICATION_ROOT}/news-signal-agent/data",
+      "purpose_ceiling": "ENGINEERING_ONLY",
+      "store_id": "news-signal-application-state"
+    },
+    {
+      "authority_paths": [
+        "${QUANTIFICATION_ROOT}/CWOPT相关/CWOPT/README.md"
+      ],
+      "kind": "experimental_cache_store",
+      "lifecycle": "unmanaged",
+      "mutability": "mutable",
+      "notes": "CWOPT 独立实验线路的历史和决策缓存，不自动进入量化主线。",
+      "owner_project": "cwopt",
+      "physical_root": "${QUANTIFICATION_ROOT}/CWOPT相关/CWOPT/data/history",
+      "purpose_ceiling": "ENGINEERING_ONLY",
+      "store_id": "cwopt-history-cache"
+    },
+    {
+      "authority_paths": [
+        "${QUANTIFICATION_ROOT}/CWOPT相关/CWOPT/README.md"
+      ],
+      "kind": "experimental_cache_store",
+      "lifecycle": "unmanaged",
+      "mutability": "mutable",
+      "notes": "CWOPT 的路由模型和 panel_base_features NPZ 缓存；可重建性和来源尚未完整登记，不自动进入主线。",
+      "owner_project": "cwopt",
+      "physical_root": "${QUANTIFICATION_ROOT}/CWOPT相关/CWOPT/data/router",
+      "purpose_ceiling": "ENGINEERING_ONLY",
+      "store_id": "cwopt-router-cache"
+    },
+    {
+      "authority_paths": [
+        "${QUANTIFICATION_ROOT}/stock-relative-dominance-release/README.md"
+      ],
+      "kind": "temporary_run_store",
+      "lifecycle": "historical",
+      "mutability": "mutable",
+      "notes": "已禁用相对强弱流程遗留的在线行情缓存；只用于审计，不能进入主线。",
+      "owner_project": "stock-relative-dominance",
+      "physical_root": "${QUANTIFICATION_ROOT}/tmp/stock-relative-dominance/cache",
+      "purpose_ceiling": "DO_NOT_USE",
+      "store_id": "relative-dominance-temporary-cache"
+    },
+    {
+      "authority_paths": [
+        "${QUANTIFICATION_ROOT}/archive/data-duplicates/README.md",
+        "${QUANTIFICATION_ROOT}/reports/storage-migration/data-consolidation-20260719/README.md"
+      ],
+      "kind": "historical_output_store",
+      "lifecycle": "historical",
+      "mutability": "append_only",
+      "notes": "从运行或发布位置移出的非权威数据副本；只用于追溯和回滚。",
+      "owner_project": "workspace",
+      "physical_root": "${QUANTIFICATION_ROOT}/archive/data-duplicates",
+      "purpose_ceiling": "DO_NOT_USE",
+      "store_id": "archived-data-duplicates"
+    }
+  ],
+  "updated_at": "2026-08-04T08:11:01.624731+00:00",
+  "workspace_root": "${QUANTIFICATION_ROOT}"
+}

@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "mode": "local_download_candidate",
+  "dataset_id": "csmar-idx-chgsmp",
+  "run_id": "REPLACE_WITH_RUN_ID",
+  "source_id": "CSMAR_MANUAL_EXPORT",
+  "dataset_schema_version": "csmar-idx-chgsmp-observed-8col-candidate-v1",
+  "authorized_local_research_download": false,
+  "source_access_note": "Reference-only request for the CSMAR index constituent-change table. Replace the package filename and run identity only after reviewing the exact ZIP, descriptor, order-sensitive CSV header, user authorization, source-rights boundary and both date fields. Chgsmp01 is an effective change date; Chgsmp06 is the observed announcement date. Neither field alone proves a complete first-available timestamp or revision chain. Future effective dates must not be treated as information available before Chgsmp06. This template never authorizes source admission, quality promotion, catalog registration or research use.",
+  "include_patterns": [
+    "REPLACE_WITH_EXACT_DOWNLOADED_PACKAGE_FILENAME.zip"
+  ],
+  "zip_member_patterns": [
+    "IDX_Chgsmp.csv"
+  ],
+  "table": {
+    "table_name": "idx_chgsmp_candidate",
+    "expected_columns": [
+      "Indexcd",
+      "Chgsmp01",
+      "Chgsmp02",
+      "Chgsmp03",
+      "Chgsmp04",
+      "Chgsmp05",
+      "Chgsmp06",
+      "Chgsmp07"
+    ],
+    "column_types": {
+      "Indexcd": "VARCHAR",
+      "Chgsmp01": "DATE",
+      "Chgsmp02": "VARCHAR",
+      "Chgsmp03": "VARCHAR",
+      "Chgsmp04": "VARCHAR",
+      "Chgsmp05": "VARCHAR",
+      "Chgsmp06": "DATE",
+      "Chgsmp07": "VARCHAR"
+    },
+    "date_column": "Chgsmp01",
+    "key_columns": [
+      "Indexcd",
+      "Chgsmp01",
+      "Chgsmp02",
+      "Chgsmp04",
+      "Chgsmp05",
+      "Chgsmp06",
+      "Chgsmp07"
+    ],
+    "required_columns": [
+      "Indexcd",
+      "Chgsmp01",
+      "Chgsmp02",
+      "Chgsmp04",
+      "Chgsmp05",
+      "Chgsmp06",
+      "Chgsmp07"
+    ],
+    "delimiter": ",",
+    "encoding": "utf-8-sig",
+    "allow_extra_columns": false,
+    "partition_mode": "year_month"
+  },
+  "limits": {
+    "max_packages": 1,
+    "max_csv_sources": 1,
+    "max_archive_members": 3,
+    "max_total_input_bytes": 1073741824,
+    "max_total_unpacked_bytes": 2147483648,
+    "max_compression_ratio": 1000,
+    "max_rows": 10000000
+  }
+}

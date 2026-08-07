@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "contract_id": "free-web-daily-run-health-monitor-v1",
+  "status": "ACTIVE__READ_ONLY__FAIL_CLOSED__INSPECTION_ONLY",
+  "input_root": "tmp/free-web-daily-probe/<run_id>/",
+  "target_engine_id": "free_web_daily_dual_source_probe/v1",
+  "required_run_status": "PASS_BOUNDED_DUAL_SOURCE_INSPECTION_ONLY",
+  "required_files": [
+    "MANIFEST.json",
+    "RESULTS.json",
+    "raw/sina.response",
+    "raw/tencent.response",
+    "normalized/reconciled.csv",
+    "quality/findings.json"
+  ],
+  "required_invariants": [
+    "exact_disk_file_set",
+    "manifest_byte_and_sha256_binding",
+    "explicit_target_trade_date_matches_results_raw_and_normalized",
+    "exactly_two_raw_sources",
+    "raw_source_symbols_match_requested_symbols",
+    "all_requested_symbols_accepted",
+    "zero_quality_findings",
+    "normalized_rows_recompute_exactly_from_raw_sources",
+    "purpose_ceiling_is_inspection_only",
+    "all_formal_grants_are_false"
+  ],
+  "runtime_boundary": {
+    "read_only": true,
+    "network_requests": 0,
+    "files_written": 0,
+    "catalog_writes": 0,
+    "snapshot_publications": 0,
+    "scheduler_mutations": 0
+  },
+  "exit_codes": {
+    "0": "PASS_HEALTHY_BOUNDED_INSPECTION_ONLY",
+    "2": "FAIL_CLOSED"
+  },
+  "formal_effect": {
+    "source_admission": false,
+    "catalog_registration": false,
+    "quality_promotion": false,
+    "scheduler_creation": false,
+    "research_ready": false
+  }
+}

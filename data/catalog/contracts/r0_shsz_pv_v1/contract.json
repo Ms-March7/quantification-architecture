@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "contract_id": "r0_shsz_pv_v1",
+  "gate_id": "R0_SHSZ_PV",
+  "status": "ACTIVE__INDEPENDENT_NARROW_GATE__CURRENTLY_FAIL_CLOSED",
+  "independence": {
+    "canonical_gate": "R0_PV",
+    "canonical_gate_modified": false,
+    "canonical_gate_satisfied_by_this_contract": false,
+    "counts_toward_core20": false
+  },
+  "scope": {
+    "venues": [
+      "XSHG",
+      "XSHE"
+    ],
+    "window_start": "2005-01-01",
+    "window_end": "2024-12-31",
+    "excluded_conflict_key_count": 375,
+    "unknown_and_conflict_policy": "EXCLUDE_FAIL_CLOSED",
+    "availability_policy": "strictly next observed venue-board open session at 09:30 Asia/Shanghai",
+    "bjse_in_scope": false,
+    "out_of_scope_upstream_references": "MAY_APPEAR_ONLY_AS_EXCLUSION_OR_AUDIT_EVIDENCE__NEVER_AS_ELIGIBLE_ROWS"
+  },
+  "evidence_manifests": {
+    "price_volume": {
+      "path": "data/market/quarantine/r0-pv-bounded/candidate-20260801-v1/CANDIDATE_MANIFEST.json",
+      "bytes": 55026,
+      "sha256": "5019f636059b82003c269263340e1e603cdded3b7695fa81e33bf328b6d8448b",
+      "run_id": "r0-pv-bounded-candidate-20260801-v1",
+      "critical_entries": []
+    },
+    "core03_core06": {
+      "path": "data/market/quarantine/r0-core03-core06-bounded-state/candidate-20260801-v2/CANDIDATE_MANIFEST.json",
+      "bytes": 9215,
+      "sha256": "c22acc3cb0ce341a3830d5cd7b772a2e9cc819cc021240d78a5dad07c97f6ec6",
+      "run_id": "r0-core03-core06-bounded-state-candidate-20260801-v2",
+      "critical_entries": [
+        "GATE_DECISION.json",
+        "INPUT_BINDINGS.json"
+      ]
+    },
+    "core04_core05": {
+      "path": "data/market/quarantine/r0-core04-core05-split/candidate-20260801-v1/CANDIDATE_MANIFEST.json",
+      "bytes": 5903,
+      "sha256": "b0401aed702b4eb4c2cf4d93cca1cbd30de3839d3710d7bf679b9101f5f5a4a9",
+      "run_id": "r0-core04-core05-split-candidate-20260801-v1",
+      "critical_entries": [
+        "data/market/quarantine/r0-core04-core05-split/candidate-20260801-v1/GATE_DECISION.json",
+        "data/market/quarantine/r0-core04-core05-split/candidate-20260801-v1/PROJECTION_REPLAY_VERIFICATION.json"
+      ]
+    },
+    "preadmission_v4": {
+      "path": "data/market/quarantine/r0-core01-06-bounded-preadmission/candidate-20260801-v4/CANDIDATE_MANIFEST.json",
+      "bytes": 7613,
+      "sha256": "0f416d9910fae82e8ce33ce359511cce841cb12eb8185bddb902d5791f33a3de",
+      "run_id": "r0-core01-06-bounded-preadmission-20260801-v4",
+      "critical_entries": [
+        "data/market/quarantine/r0-core01-06-bounded-preadmission/candidate-20260801-v4/AGGREGATE_DECISION.json",
+        "data/market/quarantine/r0-core01-06-bounded-preadmission/candidate-20260801-v4/CORE01/GATE_EVIDENCE.json",
+        "data/market/quarantine/r0-core01-06-bounded-preadmission/candidate-20260801-v4/CORE02/GATE_EVIDENCE.json",
+        "data/market/quarantine/r0-core01-06-bounded-preadmission/candidate-20260801-v4/CORE03/GATE_EVIDENCE.json",
+        "data/market/quarantine/r0-core01-06-bounded-preadmission/candidate-20260801-v4/CORE04/GATE_EVIDENCE.json",
+        "data/market/quarantine/r0-core01-06-bounded-preadmission/candidate-20260801-v4/CORE05/GATE_EVIDENCE.json",
+        "data/market/quarantine/r0-core01-06-bounded-preadmission/candidate-20260801-v4/CORE06/GATE_EVIDENCE.json"
+      ]
+    }
+  },
+  "gate_open_requirements": {
+    "all_evidence_integrity_checks_pass": true,
+    "all_six_core_formal_status": "PASS__ADMITTED",
+    "formal_ready_count": 6,
+    "formal_fail_count": 0,
+    "formal_research_rows_minimum": 1,
+    "core04_complete_revision_chain": true,
+    "core04_strict_action_rows_minimum": 1,
+    "core05_strict_projection_event_input_rows_minimum": 1,
+    "core06_open_execution_eligible_rows_minimum": 1
+  },
+  "current_required_fail_closed_assertions": {
+    "core04_complete_revision_chain": false,
+    "core04_strict_action_rows": 0,
+    "core05_strict_projection_event_input_rows": 0,
+    "core06_open_execution_eligible_rows": 0,
+    "formal_ready_count": 0,
+    "formal_research_rows": 0
+  },
+  "verifier": {
+    "path": "control/tools/verify_r0_shsz_pv_gate.py",
+    "read_only": true,
+    "network_requests": 0,
+    "factor_runs": 0,
+    "exit_codes": {
+      "0": "RESEARCH_GATE_PASS",
+      "2": "EVIDENCE_INTEGRITY_PASS__RESEARCH_GATE_FAIL_CLOSED",
+      "3": "EVIDENCE_OR_CONTRACT_INTEGRITY_FAIL"
+    }
+  },
+  "forbidden_effects": {
+    "datasets_json_write": true,
+    "roadmap_write": true,
+    "source_registry_write": true,
+    "snapshot_publication": true,
+    "quality_promotion": true,
+    "factor_execution": true,
+    "canonical_r0_pv_change": true
+  }
+}

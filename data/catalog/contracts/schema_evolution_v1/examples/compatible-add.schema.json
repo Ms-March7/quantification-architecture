@@ -1,0 +1,36 @@
+{
+  "schema_contract_version": 1,
+  "dataset_id": "synthetic-daily-prices",
+  "schema_version": "1.1.0",
+  "dataset_coverage_start": "1990-12-19",
+  "primary_key": [
+    "security_id",
+    "trade_date"
+  ],
+  "fields": [
+    {
+      "name": "security_id",
+      "logical_type": "VARCHAR",
+      "nullable": false,
+      "field_coverage_start": "1990-12-19"
+    },
+    {
+      "name": "trade_date",
+      "logical_type": "DATE",
+      "nullable": false,
+      "field_coverage_start": "1990-12-19"
+    },
+    {
+      "name": "close",
+      "logical_type": "DOUBLE",
+      "nullable": true,
+      "field_coverage_start": "1990-12-19"
+    },
+    {
+      "name": "turnover",
+      "logical_type": "DOUBLE",
+      "nullable": true,
+      "field_coverage_start": "2003-01-02"
+    }
+  ]
+}

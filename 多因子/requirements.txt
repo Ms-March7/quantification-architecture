@@ -1,0 +1,4 @@
+numpy==1.24.1
+duckdb==1.5.4
+tzdata==2026.3
+pytz==2026.2

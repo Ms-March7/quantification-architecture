@@ -1,0 +1,257 @@
+version: 0.1
+project: quant-research-reliability
+
+defaults:
+  project_root: ${QUANTIFICATION_ROOT}
+  temp_root: ${QUANTIFICATION_ROOT}/tmp/harness/quant-research-reliability
+  report_root: ${QUANTIFICATION_ROOT}/reports/harness/quant-research-reliability
+  live_mode_default: false
+
+target_types:
+  skill:
+    description: A filesystem-backed Codex skill with scripts and output contracts.
+  script:
+    description: A standalone deterministic local script or command.
+  mcp:
+    description: A tool server or connector probe target.
+  report:
+    description: A generated or user-provided report to audit for safety and contract compliance.
+  plugin:
+    description: A packaged bundle of skills, MCP tools, scripts, assets, and metadata.
+
+targets:
+  - id: capital_flow_attribution
+    type: script
+    status: active
+    category: finance
+    path: ${QUANTIFICATION_ROOT}/capital-flow-attribution
+    adapter: skill_script_adapter
+    entrypoints:
+      offline_fixture:
+        command:
+          - ${QUANTIFICATION_ROOT}/capital-flow-attribution/.venv/Scripts/python.exe
+          - scripts/run_s1.py
+          - fixture
+          - --fixture
+          - "{fixture}/input.json"
+          - --output-dir
+          - "{run_dir}/outputs/capital-flow-attribution"
+        cwd: ${QUANTIFICATION_ROOT}/capital-flow-attribution
+    expected_artifacts:
+      - outputs/capital-flow-attribution/data/validation.json
+      - outputs/capital-flow-attribution/results/summary.md
+    contracts:
+      - contracts/capital-flow-attribution.schema.yaml
+      - contracts/symbol-date.schema.yaml
+    notes:
+      - Offline target for ETF and margin accounting identities, missing inputs, and conflict downgrades.
+      - A correctly rejected bad fixture is a Harness PASS while its research workflow status remains REVIEW.
+
+  - id: stock_relative_dominance
+    type: skill
+    status: needs_upgrade
+    category: finance
+    path: ${QUANTIFICATION_ROOT}/.agents/skills-disabled/needs-upgrade/stock-relative-dominance
+    adapter: skill_script_adapter
+    entrypoints:
+      self_test:
+        command:
+          - ${QUANTIFICATION_ROOT}/.agents/skills-disabled/needs-upgrade/stock-relative-dominance/scripts/relative_dominance_report.cmd
+          - --self-test
+      local_csv_report:
+        command:
+          - ${QUANTIFICATION_ROOT}/.agents/skills-disabled/needs-upgrade/stock-relative-dominance/scripts/relative_dominance_report.cmd
+          - --source
+          - csv
+          - --csv
+          - "{fixture}/prices.csv"
+          - --symbols
+          - "{symbols}"
+          - --start
+          - "{start_date}"
+          - --end
+          - "{end_date}"
+          - --adjust
+          - qfq
+          - --benchmark
+          - "{benchmark_symbol}"
+          - --min-observations
+          - "5"
+          - --periods
+          - 1,3,5
+          - --no-progress
+          - --output
+          - "{run_dir}/outputs/stock-relative-dominance"
+    expected_artifacts:
+      - outputs/stock-relative-dominance/summary.md
+      - outputs/stock-relative-dominance/ranking.csv
+      - outputs/stock-relative-dominance/pairwise_return_probability.csv
+      - outputs/stock-relative-dominance/pairwise_drawdown_probability.csv
+      - outputs/stock-relative-dominance/report.html
+    contracts:
+      - contracts/ranking.schema.yaml
+      - contracts/symbol-date.schema.yaml
+    notes:
+      - Disabled from automatic skill discovery pending a methodology and purpose upgrade.
+      - Historical offline fixtures remain available for explicit upgrade testing only.
+
+  - id: capital_flow_monitor
+    type: skill
+    status: pending_replacement
+    category: finance
+    path: ${QUANTIFICATION_ROOT}/.agents/skills-disabled/pending-replacement/a-share-capital-flow-monitor
+    adapter: skill_script_adapter
+    entrypoints:
+      self_tests:
+        commands:
+          - - py
+            - scripts/fetch_daily_capital_flow.py
+            - --self-test
+          - - py
+            - scripts/augment_capital_flow_context.py
+            - --self-test
+          - - py
+            - scripts/normalize_capital_flow.py
+            - --self-test
+          - - py
+            - scripts/validate_capital_flow_sources.py
+            - --self-test
+          - - py
+            - scripts/build_capital_flow_report.py
+            - --self-test
+          - - py
+            - scripts/cleanup_capital_flow_runs.py
+            - --self-test
+          - - py
+            - scripts/run_capital_flow_monitor.py
+            - --self-test
+        cwd: ${QUANTIFICATION_ROOT}/.agents/skills-disabled/pending-replacement/a-share-capital-flow-monitor
+      user_csv_report:
+        commands:
+          - py
+          - scripts/normalize_capital_flow.py
+          - --input
+          - "{fixture}/capital_flow.csv"
+          - --output-dir
+          - "{run_dir}/outputs/capital-flow"
+        post_commands:
+          - - py
+            - scripts/validate_capital_flow_sources.py
+            - --input
+            - "{run_dir}/outputs/capital-flow/data/normalized_capital_flow.csv"
+            - --output-dir
+            - "{run_dir}/outputs/capital-flow"
+            - --expected-families
+            - main_force,northbound
+            - --max-age-hours
+            - "72"
+          - - py
+            - scripts/build_capital_flow_report.py
+            - --input
+            - "{run_dir}/outputs/capital-flow/data/normalized_capital_flow.csv"
+            - --output-dir
+            - "{run_dir}/outputs/capital-flow"
+            - --expected-families
+            - main_force,northbound
+            - --title
+            - Capital Flow Harness Fixture
+        cwd: ${QUANTIFICATION_ROOT}/.agents/skills-disabled/pending-replacement/a-share-capital-flow-monitor
+    expected_artifacts:
+      - outputs/capital-flow/data/normalized_capital_flow.csv
+      - outputs/capital-flow/data/coverage.csv
+      - outputs/capital-flow/data/coverage_summary.csv
+      - outputs/capital-flow/results/summary.md
+      - outputs/capital-flow/results/report.html
+    contracts:
+      - contracts/capital-flow.schema.yaml
+      - contracts/symbol-date.schema.yaml
+    notes:
+      - Disabled from automatic skill discovery while replacement coverage is evaluated.
+      - capital-flow-attribution is more rigorous but does not yet cover every V0 monitoring behavior.
+
+  - id: risk_warning_event_study
+    type: skill
+    status: needs_upgrade
+    category: finance
+    path: ${QUANTIFICATION_ROOT}/.agents/skills-disabled/needs-upgrade/a-share-risk-warning-event-study
+    adapter: skill_script_adapter
+    entrypoints:
+      self_tests:
+        commands:
+          - - py
+            - scripts/fetch_cninfo_events.py
+            - --self-test
+          - - py
+            - scripts/fetch_price_bars.py
+            - --self-test
+          - - py
+            - scripts/make_trading_calendar.py
+            - --self-test
+          - - py
+            - scripts/enrich_event_features.py
+            - --self-test
+          - - py
+            - scripts/event_store.py
+            - --self-test
+          - - py
+            - scripts/event_window_report.py
+            - --self-test
+        cwd: ${QUANTIFICATION_ROOT}/.agents/skills-disabled/needs-upgrade/a-share-risk-warning-event-study
+      offline_event_window_report:
+        command:
+          - py
+          - scripts/event_window_report.py
+          - --events
+          - "{fixture}/events.csv"
+          - --prices
+          - "{fixture}/prices.csv"
+          - --out
+          - "{run_dir}/outputs/event-study"
+          - --start-date
+          - "{start_date}"
+          - --end-date
+          - "{end_date}"
+          - --benchmark-symbol
+          - "{benchmark_symbol}"
+          - --html-report
+          - "{extra_args}"
+        cwd: ${QUANTIFICATION_ROOT}/.agents/skills-disabled/needs-upgrade/a-share-risk-warning-event-study
+    expected_artifacts:
+      - outputs/event-study/event_windows.csv
+      - outputs/event-study/filtered_out_events.csv
+      - outputs/event-study/matched_events.csv
+      - outputs/event-study/summary.md
+      - outputs/event-study/report.html
+    contracts:
+      - contracts/event-windows.schema.yaml
+      - contracts/symbol-date.schema.yaml
+    notes:
+      - Disabled from automatic skill discovery until source coverage, matching, and statistics are upgraded.
+      - Historical golden and failure fixtures remain available for explicit upgrade testing only.
+
+  - id: quant_data_mcp
+    type: mcp
+    status: planned
+    category: finance
+    adapter: mcp_probe_adapter
+    server: quant_data
+    probes:
+      - get_price_bars
+      - get_announcements
+      - get_capital_flow
+    contracts:
+      - contracts/symbol-date.schema.yaml
+    notes:
+      - Placeholder for future local finance data MCP.
+      - Keep planned until the MCP is implemented and registered.
+
+  - id: finance_report_safety
+    type: report
+    status: planned
+    category: finance
+    adapter: report_audit_adapter
+    contracts:
+      - contracts/report-safety.schema.yaml
+    notes:
+      - Placeholder for auditing existing Markdown or HTML research reports.
+      - Useful for detecting over-strong conclusions under weak evidence.

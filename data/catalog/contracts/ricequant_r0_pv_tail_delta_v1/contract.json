@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "contract_id": "ricequant-r0-pv-tail-delta-v1",
+  "status": "QUARANTINE_ONLY__NOT_ADMITTED",
+  "scope": {
+    "venues": ["XSHG", "XSHE"],
+    "security_type": "A_SHARE_COMMON_STOCK",
+    "base_reference_start": "2025-01-01",
+    "base_reference_end": "2026-07-28",
+    "calibration_date": "2026-07-28",
+    "delta_trade_dates": [
+      "2026-07-29",
+      "2026-07-30",
+      "2026-07-31",
+      "2026-08-03"
+    ],
+    "fields": [
+      "open",
+      "high",
+      "low",
+      "close",
+      "prev_close",
+      "volume",
+      "total_turnover",
+      "limit_up",
+      "limit_down"
+    ],
+    "bjse_included": false
+  },
+  "source_bindings": {
+    "base_candidate": "tmp/local-dataset-build/csmar-trd-dalyr-pilot/d2a04b-csmar-trd-dalyr-2022-2026-20260728-v1",
+    "base_manifest_sha256": "2b4af1d492979ea4d6243b33da7bc2414041e2815779806662fec649c8c33396",
+    "base_copy_allowed": false,
+    "base_use": "HASH_PINNED_LOGICAL_REFERENCE_ONLY",
+    "tail_source": "Ricequant RQData Python API",
+    "tail_adjust_type": "none",
+    "tail_skip_suspended": false,
+    "st_history_candidate": "tmp/local-dataset-build/resset-stkspctrmt/manual-export-20260802-zero-loss-v2",
+    "st_history_manifest_sha256": "4164f9a1e452890504d6a86b64663d2524a358157de0f5f0ce9238dab9e85e50",
+    "st_history_use": "HASH_PINNED_MECHANICAL_INTERVAL_MAPPING__NOT_ADMITTED"
+  },
+  "request_budget": {
+    "retry_count": 0,
+    "maximum_quota_bytes": 31457280,
+    "maximum_universe_rows": 6000,
+    "maximum_price_dates": 5,
+    "maximum_price_fields": 9,
+    "maximum_business_api_calls": 4,
+    "call_plan": [
+      "user.get_quota before",
+      "all_instruments type=CS",
+      "get_price one batch for calibration plus four delta dates",
+      "user.get_quota after"
+    ]
+  },
+  "persistence": {
+    "raw_calibration_and_delta": true,
+    "curated_delta_only": true,
+    "copy_base_partitions": false,
+    "candidate_root": "data/market/quarantine/r0-pv-tail-delta/candidate-20260804-v1",
+    "purpose_ceiling": "INSPECTION_ONLY",
+    "formal_catalog_write": false,
+    "source_registry_write": false,
+    "roadmap_write": false,
+    "factor_run": false
+  },
+  "security": {
+    "credential_read_or_capture": false,
+    "credential_value_output": false,
+    "credential_value_persistence": false,
+    "sanitized_numeric_quota_only": true
+  },
+  "failure_policy": {
+    "unexpected_api_error": "STOP_NO_RETRY",
+    "quota_delta_exceeds_budget": "FAIL_CLOSED_KEEP_STAGING_QUARANTINE",
+    "missing_delta_date": "FAIL_CLOSED_KEEP_STAGING_QUARANTINE",
+    "duplicate_security_date_key": "FAIL_CLOSED_KEEP_STAGING_QUARANTINE",
+    "base_hash_mismatch": "FAIL_BEFORE_API_CALL",
+    "cross_source_conflict": "RETAIN_BOTH_REPORT_NO_SILENT_OVERRIDE"
+  },
+  "formal_boundaries": {
+    "source_admission": false,
+    "quality_promotion": false,
+    "research_ready": false,
+    "r0_gate_closed": false,
+    "vendor_available_at_established": false,
+    "complete_suspension_semantics_established": false,
+    "complete_st_risk_warning_history_established": false,
+    "complete_limit_rule_history_established": false,
+    "complete_corporate_action_revision_chain_established": false
+  }
+}

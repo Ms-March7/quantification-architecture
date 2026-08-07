@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "mode": "local_download_candidate",
+  "dataset_id": "example-csmar-daily",
+  "run_id": "manual-export-20260728-v1",
+  "source_id": "CSMAR_MANUAL_EXPORT",
+  "dataset_schema_version": "candidate-v1",
+  "authorized_local_research_download": true,
+  "source_access_note": "User confirms this package was downloaded under the approved local learning/research access.",
+  "include_patterns": [
+    "*.csv",
+    "**/*.csv",
+    "*.zip",
+    "**/*.zip"
+  ],
+  "zip_member_patterns": [
+    "*.csv",
+    "**/*.csv"
+  ],
+  "table": {
+    "table_name": "daily_candidate",
+    "expected_columns": [
+      "Stkcd",
+      "Trddt",
+      "Clsprc"
+    ],
+    "column_types": {
+      "Stkcd": "VARCHAR",
+      "Trddt": "DATE",
+      "Clsprc": "DOUBLE"
+    },
+    "date_column": "Trddt",
+    "key_columns": [
+      "Stkcd",
+      "Trddt"
+    ],
+    "required_columns": [
+      "Stkcd",
+      "Trddt",
+      "Clsprc"
+    ],
+    "delimiter": ",",
+    "encoding": "utf-8-sig",
+    "allow_extra_columns": false,
+    "partition_mode": "year_month"
+  },
+  "limits": {
+    "max_packages": 10000,
+    "max_csv_sources": 100000,
+    "max_archive_members": 200000,
+    "max_total_input_bytes": 2199023255552,
+    "max_total_unpacked_bytes": 4398046511104,
+    "max_compression_ratio": 1000,
+    "max_rows": 10000000000
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "factor_set_id": "r0-full-market-engineering-smoke-10-v1",
+  "protocol_id": "full-market-layered-factor-research-c-v1.1",
+  "status": "ENGINEERING_SMOKE_ONLY__NO_RESEARCH_EVALUATION",
+  "research_input": "cn-a-share-r0-shsz-pv-panel@20050104-20260803-v1",
+  "date_range": ["2026-01-05", "2026-08-03"],
+  "universe": "ALL_DYNAMIC_XSHG_XSHE_ORDINARY_A_IN_FORMAL_PANEL",
+  "accelerator": "cpu",
+  "max_panel_cells": 1500000,
+  "forbidden_outputs": ["IC", "group_returns", "backtest", "validation", "holdout", "factor_values"],
+  "factors": [
+    {"factor_id": "local_intraday_return", "source": "local", "formula": "safe_div(sub($close,$open),$open)"},
+    {"factor_id": "rq_intraday_location", "source": "ricequant_definition_reimplemented", "formula": "safe_div(sub($close,$open),sub($high,$low))"},
+    {"factor_id": "local_overnight_gap", "source": "local", "formula": "safe_div(sub($open,delay($close,1)),delay($close,1))"},
+    {"factor_id": "jq_alpha191_015", "source": "joinquant_definition_reimplemented", "formula": "safe_div(sub($open,delay($close,1)),delay($close,1))"},
+    {"factor_id": "local_close_momentum_5", "source": "local", "formula": "safe_div(delta($close,5),delay($close,5))"},
+    {"factor_id": "jq_alpha191_018", "source": "joinquant_definition_reimplemented", "formula": "safe_div($close,delay($close,5))"},
+    {"factor_id": "local_close_volatility_20", "source": "local", "formula": "ts_std(safe_div(delta($close,1),delay($close,1)),20)"},
+    {"factor_id": "local_volume_ratio_5_20", "source": "local", "formula": "safe_div(ts_mean($volume,5),ts_mean($volume,20))"},
+    {"factor_id": "local_price_position_20", "source": "local", "formula": "safe_div(sub($close,ts_min($close,20)),sub(ts_max($close,20),ts_min($close,20)))"},
+    {"factor_id": "jq_alpha101_006", "source": "joinquant_definition_reimplemented", "formula": "neg(ts_corr($open,$volume,10))"}
+  ],
+  "exact_equivalence_checks": [
+    ["local_overnight_gap", "jq_alpha191_015"]
+  ]
+}

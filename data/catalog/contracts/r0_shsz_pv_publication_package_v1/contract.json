@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "contract_id": "r0_shsz_pv_publication_package_v1",
+  "status": "ENGINEERING_VERIFIED_PENDING_PRODUCTION_PACKAGE_DRY_RUN",
+  "builder": "control/tools/build_r0_shsz_pv_publication_package.py",
+  "input_request_contract": "r0_shsz_pv_publication_package_request_v1",
+  "candidate_contract": "candidate_manifest_v1",
+  "r0_contract": "r0_shsz_pv_v2",
+  "dataset_id": "cn-a-share-r0-shsz-pv-panel",
+  "snapshot_id": "20050104-20260803-v1",
+  "default_mode": "PLAN_NO_WRITE",
+  "materialize_flag": "--materialize-package",
+  "materialize_scope": "TMP_PACKAGE_AND_DRY_RUN_REQUESTS_ONLY",
+  "formal_publication_surface": false,
+  "credential_read_surface": false,
+  "rights_status": "DECLARED__NOT_VERIFIED__NO_LEGAL_OPINION",
+  "stage_targets": [
+    "R0-SHSZ-IDENTITY",
+    "R0-SHSZ-CALENDAR",
+    "R0-SHSZ-PV",
+    "R0-SHSZ-EXECUTION-MASK"
+  ],
+  "canonical_r0_pv_effect": "NONE",
+  "canonical_core20_effect": "NONE",
+  "formal_effect": "NONE"
+}

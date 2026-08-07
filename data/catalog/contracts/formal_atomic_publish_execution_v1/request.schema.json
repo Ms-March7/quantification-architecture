@@ -1,0 +1,166 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.quantification/schemas/formal-atomic-publish-execution-v1.json",
+  "title": "Hash-bound formal atomic publication execution request v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "contract_id",
+    "execution_id",
+    "preflight_request",
+    "catalog_before",
+    "target",
+    "payload_layout",
+    "publication_profile",
+    "state_machine_requirements"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "contract_id": {"const": "formal_atomic_publish_execution_v1"},
+    "execution_id": {"$ref": "#/$defs/component"},
+    "preflight_request": {"$ref": "#/$defs/evidenceBinding"},
+    "catalog_before": {"$ref": "#/$defs/fileBinding"},
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["dataset_id", "snapshot_id", "formal_root", "target_relative_path"],
+      "properties": {
+        "dataset_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{2,127}$"},
+        "snapshot_id": {"$ref": "#/$defs/component"},
+        "formal_root": {"enum": ["data/market/snapshots", "data/published"]},
+        "target_relative_path": {"type": "string"}
+      }
+    },
+    "payload_layout": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "source_relative_path",
+          "layer",
+          "snapshot_relative_path",
+          "sha256",
+          "bytes"
+        ],
+        "properties": {
+          "source_relative_path": {"type": "string"},
+          "layer": {"enum": ["raw", "curated"]},
+          "snapshot_relative_path": {"type": "string"},
+          "sha256": {"$ref": "#/$defs/sha256"},
+          "bytes": {"type": "integer"}
+        }
+      }
+    },
+    "publication_profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "store_id",
+        "owner_project",
+        "lifecycle",
+        "mutability",
+        "purpose_ceiling",
+        "license_status",
+        "quality_status",
+        "consumers",
+        "known_limits",
+        "notes",
+        "source_id",
+        "dataset_contract_id",
+        "dataset_schema_version",
+        "research_input_contract",
+        "available_at",
+        "published_at",
+        "partition_segments"
+      ],
+      "properties": {
+        "store_id": {"$ref": "#/$defs/component"},
+        "owner_project": {"$ref": "#/$defs/component"},
+        "lifecycle": {"const": "frozen"},
+        "mutability": {"const": "immutable"},
+        "purpose_ceiling": {"const": "RESEARCH_ONLY"},
+        "license_status": {"enum": ["DECLARED", "VERIFIED"]},
+        "quality_status": {"const": "OK"},
+        "consumers": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/$defs/component"}
+        },
+        "known_limits": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"type": "string"}
+        },
+        "notes": {"type": "string"},
+        "source_id": {"$ref": "#/$defs/component"},
+        "dataset_contract_id": {"$ref": "#/$defs/component"},
+        "dataset_schema_version": {"$ref": "#/$defs/component"},
+        "research_input_contract": {"type": "object"},
+        "available_at": {"type": "string"},
+        "published_at": {"type": "string"},
+        "partition_segments": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/component"}
+        }
+      }
+    },
+    "state_machine_requirements": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "require_private_staging",
+        "require_same_volume_finalize",
+        "require_catalog_compare_and_swap",
+        "require_crash_recovery",
+        "require_qdata_postcondition_before_success",
+        "require_catalog_rollback_on_qdata_failure",
+        "consume_authorization_only_after_qdata_success",
+        "failure_action"
+      ],
+      "properties": {
+        "require_private_staging": {"const": true},
+        "require_same_volume_finalize": {"const": true},
+        "require_catalog_compare_and_swap": {"const": true},
+        "require_crash_recovery": {"const": true},
+        "require_qdata_postcondition_before_success": {"const": true},
+        "require_catalog_rollback_on_qdata_failure": {"const": true},
+        "consume_authorization_only_after_qdata_success": {"const": true},
+        "failure_action": {"const": "ROLLBACK_OR_FAIL_CLOSED"}
+      }
+    }
+  },
+  "$defs": {
+    "component": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._=-]{0,127}$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "fileBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["relative_path", "sha256", "bytes"],
+      "properties": {
+        "relative_path": {"type": "string"},
+        "sha256": {"$ref": "#/$defs/sha256"},
+        "bytes": {"type": "integer"}
+      }
+    },
+    "evidenceBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["relative_path", "sha256", "bytes", "contract_id"],
+      "properties": {
+        "relative_path": {"type": "string"},
+        "sha256": {"$ref": "#/$defs/sha256"},
+        "bytes": {"type": "integer"},
+        "contract_id": {"const": "formal_publisher_preflight_v1"}
+      }
+    }
+  }
+}

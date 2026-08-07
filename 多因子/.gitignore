@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+.venv/
+.state/
+.tmp/
+data/market/snapshots/*/qlib_bin/
+data/market/snapshots/*.tar.gz
+research_runs/**/factor_cache/
+research_runs/**/.run.lock
+*.sqlite3-wal
+*.sqlite3-shm

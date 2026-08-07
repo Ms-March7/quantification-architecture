@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "contract_id": "daily_pipeline_health_v1",
+  "status": "ACTIVE__READ_ONLY__FAIL_CLOSED__INSPECTION_ONLY",
+  "engine_id": "daily_pipeline_health/v1",
+  "input_boundary": {
+    "orchestration_request": "EXPLICIT_WORKSPACE_RELATIVE_BYTE_AND_SHA256_BINDING",
+    "orchestration_database": "EXPLICIT_REQUEST_DERIVED_SQLITE_PATH_READ_ONLY",
+    "candidate_manifests": "EXPLICIT_ALLOWLIST_ONLY_NO_DIRECTORY_DISCOVERY",
+    "quarantine_receipts": "EXPLICIT_ALLOWLIST_ONLY_NO_DIRECTORY_DISCOVERY",
+    "network_forbidden": true,
+    "input_mutation_forbidden": true,
+    "reparse_or_symlink_inputs_forbidden": true
+  },
+  "health_checks": [
+    "sqlite_integrity_request_and_inspection_boundary_binding",
+    "stored_vs_recomputed_contiguous_watermark_and_job_status",
+    "watermark_due_date_lag_and_earliest_unfinished",
+    "terminal_failures_and_expired_leases",
+    "sealed_candidate_payload_content_and_sqlite_result_hash_binding",
+    "candidate_row_count_date_coverage_and_monotonic_history",
+    "quarantine_receipt_hash_identity_rollback_and_boundary_binding"
+  ],
+  "output_boundary": {
+    "default": "STDOUT_ONLY",
+    "optional_path": "tmp/daily-pipeline-health/<run_id>.json",
+    "existing_output_behavior": "FAIL_CLOSED_NO_OVERWRITE",
+    "publication": "SAME_VOLUME_COMPLETE_TEMP_FILE_THEN_ATOMIC_HARD_LINK",
+    "health_failure_exit_code": 3,
+    "invalid_input_exit_code": 2
+  },
+  "formal_effect": {
+    "source_admission": false,
+    "catalog_registration": false,
+    "quality_promotion": false,
+    "formal_snapshot_write": false,
+    "scheduler_creation": false,
+    "alert_delivery": false,
+    "research_ready": false
+  }
+}

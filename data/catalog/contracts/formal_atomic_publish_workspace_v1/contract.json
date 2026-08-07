@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "contract_id": "formal_atomic_publish_workspace_v1",
+  "status": "PASS__WORKSPACE_EXECUTION_ENGINE_VERIFIED__DEFAULT_DISABLED__NO_REAL_PUBLICATION_EXECUTED",
+  "publisher": "control/tools/execute_formal_atomic_publish_workspace.py",
+  "input_contract": "formal_atomic_publish_execution_v1",
+  "execution_surface": "EXACT_WORKSPACE_ROOT_AND_CATALOG_BASELINE_AND_EXPLICIT_EXECUTE_FLAG",
+  "default_mode": "DRY_RUN_NO_WRITE",
+  "execute_flag": "--execute-workspace",
+  "catalog_path": "data/catalog/datasets.json",
+  "formal_roots": [
+    "data/market/snapshots",
+    "data/published"
+  ],
+  "accepted_license_status": [
+    "DECLARED",
+    "VERIFIED"
+  ],
+  "rights_receipt_required_for_every_license_status": true,
+  "quality_status": "OK",
+  "dataset_lifecycle": "frozen",
+  "research_input_contract": "REQUIRED_AND_COPIED_EXACTLY_TO_MANIFEST",
+  "authority_documents": [
+    "request.json",
+    "manifest.json",
+    "provenance.json",
+    "partition-manifest.json",
+    "quality/summary.json"
+  ],
+  "state_guards": [
+    "PRIVATE_STAGING",
+    "SAME_VOLUME_FINALIZE",
+    "CATALOG_COMPARE_AND_SWAP",
+    "QDATA_RESEARCH_POSTCONDITION",
+    "AUTHORIZATION_CONSUMED_AFTER_QDATA",
+    "STALE_LOCK_HASH_RECOVERY",
+    "CATALOG_ROLLBACK_ON_QDATA_FAILURE"
+  ],
+  "real_publication_performed_by_engine_verification": false
+}

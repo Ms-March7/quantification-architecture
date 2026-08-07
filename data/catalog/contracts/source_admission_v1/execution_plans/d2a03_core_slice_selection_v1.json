@@ -1,0 +1,118 @@
+{
+  "schema_version": 1,
+  "selection_id": "d2a03-evidence-selection-20260728-v1",
+  "securities": [
+    {
+      "local_code": "000001",
+      "exchange_mic_claim": "XSHE",
+      "anchor_date": "2022-06-30",
+      "selection_event_class": "STABLE_LISTING",
+      "selection_note": "1212 observed dates; exchange and identity remain candidate claims"
+    },
+    {
+      "local_code": "000591",
+      "exchange_mic_claim": "XSHE",
+      "anchor_date": "2023-06-30",
+      "selection_event_class": "STABLE_LISTING",
+      "selection_note": "stable-market sample with separate 2025 CNINFO dividend metadata"
+    },
+    {
+      "local_code": "300259",
+      "exchange_mic_claim": "XSHE",
+      "anchor_date": "2020-08-24",
+      "selection_event_class": "STABLE_LISTING",
+      "selection_note": "ChiNext rule-transition pressure sample; rule meaning not admitted"
+    },
+    {
+      "local_code": "601208",
+      "exchange_mic_claim": "XSHG",
+      "anchor_date": "2024-12-31",
+      "selection_event_class": "DELISTING_OR_CORPORATE_ACTION_BOUNDARY",
+      "selection_note": "multiple observed Capchgdt values and separate CNINFO metadata; no action is inferred"
+    },
+    {
+      "local_code": "300816",
+      "exchange_mic_claim": "XSHE",
+      "anchor_date": "2020-02-10",
+      "selection_event_class": "IPO_OR_NO_CONVENTIONAL_PRICE_LIMIT",
+      "selection_note": "first observed market date equals candidate listing date; official IPO proof remains missing"
+    },
+    {
+      "local_code": "688981",
+      "exchange_mic_claim": "XSHG",
+      "anchor_date": "2020-07-16",
+      "selection_event_class": "IPO_OR_NO_CONVENTIONAL_PRICE_LIMIT",
+      "selection_note": "first observed market date; official IPO and limit-rule proof remain missing"
+    },
+    {
+      "local_code": "002586",
+      "exchange_mic_claim": "XSHE",
+      "anchor_date": "2024-04-30",
+      "selection_event_class": "ST_OR_RISK_WARNING",
+      "selection_note": "official annual-report PIT sample and multiple observed status codes; risk-warning history remains unverified"
+    },
+    {
+      "local_code": "600182",
+      "exchange_mic_claim": "XSHG",
+      "anchor_date": "2020-06-12",
+      "selection_event_class": "SUSPENSION_OR_NO_TRADE",
+      "selection_note": "observed internal date gap; gap is not classified as suspension"
+    },
+    {
+      "local_code": "600289",
+      "exchange_mic_claim": "XSHG",
+      "anchor_date": "2024-11-08",
+      "selection_event_class": "DELISTING_OR_CORPORATE_ACTION_BOUNDARY",
+      "selection_note": "observations end before candidate maximum date; no delisting inference"
+    },
+    {
+      "local_code": "600090",
+      "exchange_mic_claim": "XSHG",
+      "anchor_date": "2021-04-30",
+      "selection_event_class": "DELISTING_OR_CORPORATE_ACTION_BOUNDARY",
+      "selection_note": "official report correction chain plus later observation gaps; annual-report revision is not a corporate action"
+    },
+    {
+      "local_code": "688086",
+      "exchange_mic_claim": "XSHG",
+      "anchor_date": "2023-04-24",
+      "selection_event_class": "SUSPENSION_OR_NO_TRADE",
+      "selection_note": "observed internal date gap and early terminal date; neither is classified without official evidence"
+    },
+    {
+      "local_code": "600608",
+      "exchange_mic_claim": "XSHG",
+      "anchor_date": "2022-06-30",
+      "selection_event_class": "ST_OR_RISK_WARNING",
+      "selection_note": "single observed status-code regime with limit events; semantics remain unverified"
+    },
+    {
+      "local_code": "603259",
+      "exchange_mic_claim": "XSHG",
+      "anchor_date": "2022-06-30",
+      "selection_event_class": "DELISTING_OR_CORPORATE_ACTION_BOUNDARY",
+      "selection_note": "many observed Capchgdt changes form an anomaly pressure sample, not action proof"
+    },
+    {
+      "local_code": "920000",
+      "exchange_mic_claim": "XBSE",
+      "anchor_date": "2021-11-15",
+      "selection_event_class": "STABLE_LISTING",
+      "selection_note": "Markettype 64 and 92xxxx namespace; XBSE mapping remains unresolved"
+    },
+    {
+      "local_code": "832317",
+      "exchange_mic_claim": "XBSE",
+      "anchor_date": "2021-10-20",
+      "selection_event_class": "DELISTING_OR_CORPORATE_ACTION_BOUNDARY",
+      "selection_note": "Markettype 64 and legacy 83xxxx namespace; mapping and terminal state remain unresolved"
+    },
+    {
+      "local_code": "833523",
+      "exchange_mic_claim": "XBSE",
+      "anchor_date": "2024-04-28",
+      "selection_event_class": "DELISTING_OR_CORPORATE_ACTION_BOUNDARY",
+      "selection_note": "negative coverage control: official BSE fixture has no D2A02 rows and no admitted identity mapping"
+    }
+  ]
+}

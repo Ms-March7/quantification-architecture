@@ -1,0 +1,9 @@
+{
+  "expected_workflow_status": "REVIEW",
+  "margin": [
+    {"id": "conflict", "previous_balance": 1000, "current_balance": 1200, "financing_buy": 80, "repayment": 50}
+  ],
+  "etf": [
+    {"id": "missing-nav", "previous_shares": 100, "current_shares": 110, "previous_nav": 2.0, "current_nav": null}
+  ]
+}

@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "contract_id": "ricequant-r0-closure-probe-v1",
+  "authorized_on": "2026-08-03",
+  "status": "LIVE_BOUNDED_CAPABILITY_PASS__14_NONEMPTY_3_EMPTY_0_ERROR__FORMAL_EFFECT_NONE",
+  "target_research_gate": "R0_PV",
+  "target_plan_ids": [
+    "CORE-01",
+    "CORE-02",
+    "CORE-03",
+    "CORE-04",
+    "CORE-05",
+    "CORE-06"
+  ],
+  "purpose_ceiling": "INSPECTION_ONLY",
+  "formal_admission": false,
+  "formal_catalog_write": false,
+  "quality_promotion": false,
+  "research_use": false,
+  "backtest_use": false,
+  "bulk_download": false,
+  "automated_trading": false,
+  "security": {
+    "license_configured_interactively_by_user": true,
+    "license_value_in_cli_args": false,
+    "license_value_in_output": false,
+    "license_value_in_workspace": false,
+    "account_identity_capture": false
+  },
+  "runtime_semantics": {
+    "enable_bjse": true,
+    "core03_adjust_type": "none",
+    "skip_suspended": false,
+    "rqdata_pre_adjusted_price_role": "CALIBRATION_ONLY",
+    "core05_formal_projection": "DERIVE_FROM_PINNED_CORE03_RAW_AND_CORE04_ACTIONS"
+  },
+  "request_budget": {
+    "maximum_business_api_calls": 17,
+    "maximum_price_order_book_ids": 4,
+    "maximum_price_trading_dates": 5,
+    "instrument_universe_anchor_dates": 1,
+    "action_history_start": "2024-01-01",
+    "action_history_end": "2026-08-03",
+    "summary_only": true,
+    "payload_persistence": false
+  },
+  "allowed_order_book_ids": [
+    "603986.XSHG",
+    "000001.XSHE",
+    "300750.XSHE",
+    "688981.XSHG"
+  ],
+  "allowed_api_calls": [
+    "all_instruments",
+    "get_share_transformation",
+    "get_symbol_change_info",
+    "get_trading_dates",
+    "get_trading_periods",
+    "get_price_adjust_none",
+    "get_price_adjust_pre",
+    "get_dividend_info",
+    "get_dividend",
+    "get_split",
+    "get_allotment",
+    "get_ex_factor",
+    "is_st_stock",
+    "is_suspended",
+    "get_special_treatment_info",
+    "user.get_quota"
+  ],
+  "prohibited_actions": [
+    "read_or_print_license",
+    "persist_api_payload",
+    "bulk_history_request",
+    "write_datasets_json",
+    "publish_formal_snapshot",
+    "promote_quality",
+    "run_factor_ic_or_backtest",
+    "open_validation_or_holdout",
+    "connect_broker_or_trade"
+  ],
+  "core_evidence_map": {
+    "CORE-01": [
+      "all_instruments",
+      "get_share_transformation",
+      "get_symbol_change_info"
+    ],
+    "CORE-02": ["get_trading_dates", "get_trading_periods"],
+    "CORE-03": ["get_price_adjust_none"],
+    "CORE-04": [
+      "get_dividend_info",
+      "get_dividend",
+      "get_split",
+      "get_allotment"
+    ],
+    "CORE-05": ["get_ex_factor", "get_price_adjust_pre"],
+    "CORE-06": [
+      "get_special_treatment_info",
+      "is_st_stock",
+      "is_suspended",
+      "get_price_adjust_none"
+    ]
+  },
+  "success_boundary": {
+    "probe_pass": "API_ENTITLEMENT_AND_SCHEMA_EVIDENCE_ONLY",
+    "r0_data_gate_pass_requires": [
+      "field_semantics_and_units_verified",
+      "historical_identity_and_delisting_coverage_verified",
+      "official_calendar_and_rule_version_calibration",
+      "corporate_action_pit_and_revision_chain_verified",
+      "retention_derivation_and_immutable_export_rights_verified",
+      "six_formal_immutable_snapshots_registered",
+      "qdata_research_resolution_passed",
+      "l2_pit_survivorship_adjustment_tradability_tests_passed"
+    ]
+  }
+}

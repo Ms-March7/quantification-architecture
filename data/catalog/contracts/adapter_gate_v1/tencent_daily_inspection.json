@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "contract_id": "adapter-gate-v1-tencent-daily-inspection",
+  "status": "OBSERVED_WIDTH_ONLY__RAW_FIELD_MAPPING_BLOCKED",
+  "purpose_ceiling": "SMOKE_ONLY",
+  "source_admission": false,
+  "row_mapping_cardinality": "ONE_TO_ONE",
+  "observed_at": "2026-07-26",
+  "expected_raw_field_count": 11,
+  "required_normalized_fields": [
+    "security_id",
+    "trade_date",
+    "open",
+    "high",
+    "low",
+    "close",
+    "volume",
+    "turnover",
+    "amount"
+  ],
+  "primary_key_fields": [
+    "security_id",
+    "trade_date"
+  ],
+  "critical_non_null_fields": [
+    "security_id",
+    "trade_date",
+    "open",
+    "high",
+    "low",
+    "close"
+  ],
+  "field_types": {
+    "security_id": "string",
+    "trade_date": "date",
+    "open": "number",
+    "high": "number",
+    "low": "number",
+    "close": "number",
+    "volume": "number",
+    "turnover": "number",
+    "amount": "number"
+  },
+  "numeric_fields": [
+    "open",
+    "high",
+    "low",
+    "close",
+    "volume",
+    "turnover",
+    "amount"
+  ],
+  "non_negative_fields": [
+    "volume",
+    "turnover",
+    "amount"
+  ],
+  "positive_fields": [
+    "open",
+    "high",
+    "low",
+    "close"
+  ],
+  "expected_units": {
+    "open": "CNY_PER_SHARE",
+    "high": "CNY_PER_SHARE",
+    "low": "CNY_PER_SHARE",
+    "close": "CNY_PER_SHARE",
+    "volume": "SHARE",
+    "turnover": "PERCENT_POINTS",
+    "amount": "CNY"
+  },
+  "ohlc_fields": {
+    "open": "open",
+    "high": "high",
+    "low": "low",
+    "close": "close"
+  }
+}

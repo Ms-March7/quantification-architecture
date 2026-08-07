@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.quantification/schemas/formal-atomic-publish-isolated-execution-receipt-v1.json",
+  "title": "Isolated formal atomic publication execution receipt v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "contract_id",
+    "execution_id",
+    "status",
+    "state",
+    "write_performed",
+    "isolated_workspace",
+    "journal_path",
+    "authorization_ledger_path",
+    "catalog_path",
+    "snapshot_path",
+    "formal_effect",
+    "real_workspace_write"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "contract_id": {"const": "formal_atomic_publish_isolated_executor_v1"},
+    "execution_id": {"type": "string", "minLength": 1},
+    "status": {
+      "enum": [
+        "PASS__ISOLATED_EXECUTION_DISABLED__NO_WRITE",
+        "PUBLISHED",
+        "NO_CHANGE"
+      ]
+    },
+    "state": {"enum": ["INPUT_INVENTORY_SEALED", "PUBLISHED"]},
+    "write_performed": {"type": "boolean"},
+    "isolated_workspace": {"type": "string", "minLength": 1},
+    "journal_path": {"type": "string", "minLength": 1},
+    "authorization_ledger_path": {"type": "string", "minLength": 1},
+    "catalog_path": {"type": "string", "minLength": 1},
+    "snapshot_path": {"type": "string", "minLength": 1},
+    "formal_effect": {"const": "ISOLATED_COPY_ONLY"},
+    "real_workspace_write": {"const": false}
+  }
+}

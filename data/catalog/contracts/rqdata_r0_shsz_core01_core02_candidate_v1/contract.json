@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "contract_id": "rqdata-r0-shsz-core01-core02-candidate-v1",
+  "purpose_ceiling": "INSPECTION_ONLY",
+  "quality_status": "NOT_ADMITTED",
+  "formal_effect": "NONE",
+  "catalog_write": false,
+  "research_use": false,
+  "credential_value_capture": false,
+  "request_budget": {
+    "maximum_business_api_calls": 2,
+    "bulk_download": false
+  },
+  "scope": {
+    "mics": ["XSHG", "XSHE"],
+    "instrument_type": "CS",
+    "base_start": "2005-01-04",
+    "base_end": "2024-12-31",
+    "incremental_start": "2025-01-01",
+    "complete_through": "2026-08-03"
+  },
+  "pinned_inputs": {
+    "baseline_episodes": "data/market/quarantine/r0-official-identity/bounded-listing-episodes-sse-szse-2005-2024-20260801-v1/derived/internal_listing_episode_candidates.jsonl",
+    "baseline_exclusion_ledger": "data/market/quarantine/r0-official-identity/bounded-listing-episodes-sse-szse-2005-2024-20260801-v1/derived/exclusion_ledger.jsonl",
+    "baseline_calendar": "data/market/quarantine/r0-core03-core06-bounded-state/candidate-20260801-v2/venue_calendar_daily.parquet"
+  },
+  "hard_expected_checks": {
+    "baseline_episode_rows": 5155,
+    "baseline_exclusion_keys": 375,
+    "rqdata_exact_unique_matches_for_old_exclusions": 367,
+    "old_exclusions_still_unmatched": 8,
+    "baseline_calendar_dates": 4858,
+    "baseline_calendar_set_equal": true,
+    "unmatched_old_exclusion_keys": [
+      "XSHG|600849",
+      "XSHG|900935",
+      "XSHG|900949",
+      "XSHG|900950",
+      "XSHG|900951",
+      "XSHG|900953",
+      "XSHG|900956",
+      "XSHG|900957"
+    ]
+  },
+  "semantic_limits": [
+    "RQData date=None security master exposes latest attributes and is not a historical PIT master.",
+    "A unique local-code join is not permanent issuer identity or a cross-code history proof.",
+    "Vendor listed/de-listed fields are retained as observed; their end-boundary and revision semantics remain unverified.",
+    "The candidate may support R0_SHSZ_PV inspection engineering only after exact manifest binding; it cannot open a formal research gate."
+  ]
+}

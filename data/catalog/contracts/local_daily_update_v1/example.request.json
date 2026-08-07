@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "mode": "local_daily_update_candidate",
+  "dataset_scope": "synthetic_fixture",
+  "dataset_id": "synthetic-local-daily-example",
+  "run_id": "example-20260730-v1",
+  "source_id": "SYNTHETIC_FIXTURE",
+  "dataset_schema_version": "candidate-v1",
+  "authorization_note": "Synthetic fixture only; no external source or credential.",
+  "include_patterns": [
+    "*.jsonl",
+    "**/*.jsonl",
+    "*.csv",
+    "**/*.csv"
+  ],
+  "base_candidate": null,
+  "table": {
+    "table_name": "daily_example",
+    "expected_columns": [
+      "security_id",
+      "trade_date",
+      "close",
+      "revision_id",
+      "available_at"
+    ],
+    "column_types": {
+      "security_id": "VARCHAR",
+      "trade_date": "DATE",
+      "close": "DOUBLE",
+      "revision_id": "BIGINT",
+      "available_at": "TIMESTAMP_TZ"
+    },
+    "date_column": "trade_date",
+    "primary_key_columns": [
+      "security_id",
+      "trade_date",
+      "revision_id"
+    ],
+    "required_columns": [
+      "security_id",
+      "trade_date",
+      "close",
+      "revision_id",
+      "available_at"
+    ],
+    "delimiter": ",",
+    "revision": {
+      "business_key_columns": [
+        "security_id",
+        "trade_date"
+      ],
+      "revision_column": "revision_id",
+      "available_at_column": "available_at",
+      "policy": "APPEND_ONLY_STRICT"
+    }
+  },
+  "limits": {
+    "max_files": 100,
+    "max_total_input_bytes": 1073741824,
+    "max_rows": 1000000
+  }
+}

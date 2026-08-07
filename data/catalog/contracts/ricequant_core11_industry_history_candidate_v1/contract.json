@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "contract_id": "ricequant-core11-industry-history-candidate-v1",
+  "status": "AUTHORIZED_INSPECTION_ONLY_CANDIDATE_BUILD",
+  "source": "Ricequant RQData",
+  "target_plan_id": "CORE-11",
+  "target_dataset_id": "cn-industry-classification-pit",
+  "scope": {
+    "classification": "citics_2019",
+    "level": 1,
+    "mapping_anchor_date": "2026-08-03",
+    "history": "maximum returned membership intervals",
+    "markets": ["XSHG", "XSHE"]
+  },
+  "limits": {
+    "maximum_business_api_calls": 40,
+    "maximum_returned_membership_rows": 50000,
+    "maximum_measured_quota_increment_bytes": 26214400
+  },
+  "output": {
+    "root": "data/market/quarantine/cn-industry-classification-pit/ricequant-citics2019-level1-history-20260805-v1",
+    "format": "deterministic_utf8_csv_plus_manifest",
+    "purpose_ceiling": "INSPECTION_ONLY",
+    "formal_admission": false,
+    "catalog_write": false,
+    "research_use": false
+  },
+  "pit_boundary": {
+    "membership_start_cancel_dates_are_provider_effective_intervals": true,
+    "vendor_retrieval_time_is_not_available_at": true,
+    "historical_revision_chain_proven": false,
+    "retroactive_revision_risk": "UNRESOLVED"
+  },
+  "credential_policy": "PROCESS_ENV_ONLY__DO_NOT_CAPTURE_OR_PERSIST",
+  "failure_policy": "FAIL_CLOSED__KEEP_STAGING_FOR_AUDIT__NO_CATALOG_EFFECT"
+}

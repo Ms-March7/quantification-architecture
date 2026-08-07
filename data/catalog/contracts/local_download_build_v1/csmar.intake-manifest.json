@@ -1,0 +1,362 @@
+{
+  "schema_version": 1,
+  "manifest_id": "csmar-local-intake-v3-20260729",
+  "updated_at": "2026-07-29",
+  "status": "CANDIDATE_INTAKE_ONLY__33PKG_TRANSACTION_SEALED__13_NEW_CANDIDATES_PASS__2_RAW_ONLY_QUARANTINE__NO_FORMAL_ADMISSION",
+  "provider": "CSMAR",
+  "source_id": "CSMAR_MANUAL_EXPORT",
+  "scope": "Files manually downloaded under the user's approved local learning/research access",
+  "authorization": {
+    "basis": "USER_CONFIRMED_ACADEMIC_RESEARCH_ACCESS",
+    "authorized_local_research_download_required": true,
+    "independently_verified_by_tool": false,
+    "credentials_permitted_in_manifest": false,
+    "secrets_present": false,
+    "external_redistribution_authorized": false
+  },
+  "source_document": {
+    "title": "CSMAR China Stock Market Trading Database Manual",
+    "document_date": "2024-02-05",
+    "url": "https://file.csmar.com/group1/M00/AA/99/CuIKV2XAnKiABeLbAB4nDGC5Ano840.pdf",
+    "role": "Expected field-name and type reference only; actual export metadata remains authoritative for each package"
+  },
+  "execution": {
+    "tool": "control/tools/build_downloaded_dataset.py",
+    "default_mode": "PLAN",
+    "explicit_build_flag": "--execute",
+    "network_access": false,
+    "formal_catalog_write": false,
+    "source_admission": false,
+    "quality_promotion": false,
+    "purpose_ceiling": "INSPECTION_ONLY"
+  },
+  "transactional_intakes": [
+    {
+      "run_id": "intake-20260729-33pkg-v1",
+      "canonical_root": "data/market/quarantine/csmar-manual-export/intake-20260729-33pkg-v1",
+      "package_count": 33,
+      "package_bytes": 2038345395,
+      "c_source_packages": 18,
+      "f_source_packages": 15,
+      "independent_sha256_status": "PASS__33_OF_33",
+      "zip_read_status": "PASS__122_ENTRIES",
+      "source_deletion_status": "PASS__33_VERIFIED_SOURCES_DELETED",
+      "source_deleted_bytes": 2038345395,
+      "intake_manifest": "data/market/quarantine/csmar-manual-export/intake-20260729-33pkg-v1/INTAKE_MANIFEST.json",
+      "source_deletion_receipt": "data/market/quarantine/csmar-manual-export/intake-20260729-33pkg-v1/SOURCE_DELETION_RECEIPT.json",
+      "purpose_ceiling": "INSPECTION_ONLY",
+      "formal_admission": false
+    }
+  ],
+  "candidate_batches": [
+    {
+      "batch_id": "csmar-33pkg-financial-candidates-20260729-v1",
+      "request_count": 13,
+      "candidate_count": 13,
+      "mechanical_pass_count": 13,
+      "row_count": 80109,
+      "partition_count": 1303,
+      "candidate_bytes": 33113057,
+      "dataset_ids": [
+        "csmar-fin-auditstats",
+        "csmar-fs-bcombas",
+        "csmar-fs-bcomins",
+        "csmar-fs-bcomscfd",
+        "csmar-fs-bcomscfi",
+        "csmar-fs-icombas",
+        "csmar-fs-icomins",
+        "csmar-fs-icomscfd",
+        "csmar-fs-icomscfi",
+        "csmar-fs-scombas",
+        "csmar-fs-scomins",
+        "csmar-fs-scomscfd",
+        "csmar-fs-scomscfi"
+      ],
+      "evidence": "reports/data-governance/csmar-33pkg-transactional-intake-20260729/VERIFICATION.json",
+      "purpose_ceiling": "INSPECTION_ONLY",
+      "formal_admission": false
+    }
+  ],
+  "raw_only_quarantine": [
+    {
+      "tables": [
+        "FIN_Audit",
+        "FIN_AuditDetail"
+      ],
+      "package_count": 2,
+      "reason": "MALFORMED_RFC4180_UNESCAPED_QUOTES_IN_MULTILINE_TEXT",
+      "candidate_built": false,
+      "evidence": "reports/data-governance/csmar-33pkg-transactional-intake-20260729/RAW_ONLY_QUARANTINE.json"
+    }
+  ],
+  "executed_candidate_runs": [
+    {
+      "run_id": "pilot-current-export-20260728-v2",
+      "namePhy": "TRD_Co",
+      "source_package": "tmp/csmar_pilot/company_file_20260728_pilot.zip",
+      "result_directory": "tmp/local-dataset-build/csmar-trd-co-pilot/pilot-current-export-20260728-v2",
+      "row_count": 6013,
+      "source_field_count": 3,
+      "partition_count": 1,
+      "candidate_bytes": 360677,
+      "content_hash": "2bb196be1fb880b6dc17a8a25c3fd945c4e0f494b61648f14255f84e1f16f152",
+      "purpose_ceiling": "INSPECTION_ONLY",
+      "formal_admission": false
+    },
+    {
+      "run_id": "pilot-current-export-20260728-v2",
+      "namePhy": "TRD_Dalyr",
+      "source_package": "tmp/csmar_pilot/daily_2025_01_all_fields_pilot.zip",
+      "result_directory": "tmp/local-dataset-build/csmar-trd-dalyr-pilot/pilot-current-export-20260728-v2",
+      "date_min": "2025-01-02",
+      "date_max": "2025-01-27",
+      "row_count": 98229,
+      "source_field_count": 24,
+      "partition_count": 1,
+      "candidate_bytes": 12367911,
+      "content_hash": "65d66b1199cffba5630684417ba5da51ddccb7fe2d73fe771e0155a61499a7fe",
+      "purpose_ceiling": "INSPECTION_ONLY",
+      "formal_admission": false
+    },
+    {
+      "run_id": "d2a02-2020-2024-20260728-v1",
+      "namePhy": "TRD_Dalyr",
+      "source_package": "tmp/csmar_pilot/daily_2020_2024_all_fields_pilot.zip",
+      "source_package_bytes": 340147343,
+      "source_package_sha256": "b3ac4f3f540d24628776056aef5bac51e651fb09a90b55b2ed202c2f9504bc83",
+      "result_directory": "tmp/local-dataset-build/csmar-trd-dalyr-pilot/d2a02-2020-2024-20260728-v1",
+      "date_min": "2020-01-02",
+      "date_max": "2024-12-31",
+      "row_count": 5852287,
+      "distinct_security_count": 5659,
+      "source_field_count": 24,
+      "partition_count": 60,
+      "candidate_bytes": 693892239,
+      "content_hash": "319eaff543125fb41a5b5bc2790591df92909233da37cd685244ae923b1bd266",
+      "mechanical_status": "PASS",
+      "purpose_ceiling": "INSPECTION_ONLY",
+      "formal_admission": false
+    }
+  ],
+  "blocked_attempts": [
+    {
+      "work_package": "L1-D2A-03_OFFICIAL_DISCLOSURE_PIT_AND_MINIMUM_CORE_CANDIDATE_SLICE",
+      "target": "CSMAR_FINANCIAL_MICRO_SAMPLE",
+      "status": "BLOCKED__PORTAL_UI_AUTOMATION_TIMEOUT__NO_FILE_DOWNLOADED",
+      "evidence": "reports/data-governance/d2a-03-official-pit-min-core-slice-20260728/CSMAR_MICRO_SAMPLE_STATUS.json"
+    }
+  ],
+  "tables": [
+    {
+      "table_id": null,
+      "table_id_status": "PENDING_FROM_ACTUAL_CSMAR_EXPORT_OR_AUTHORIZED_METADATA_RESPONSE",
+      "namePhy": "TRD_Co",
+      "logical_name": "Company file",
+      "identity_gate": "Do not invent a numeric/internal table_id; bind it after the actual export metadata is captured",
+      "full_field_request_template": "data/catalog/contracts/local_download_build_v1/csmar_trd_co.request.template.json",
+      "full_field_template_status": "REFERENCE_ONLY__NOT_VALIDATED_AGAINST_CURRENT_PILOT_EXPORT",
+      "current_export_pilot_request": "data/catalog/contracts/local_download_build_v1/csmar_trd_co.current-pilot.request.json",
+      "current_export_package": "tmp/csmar_pilot/company_file_20260728_pilot.zip",
+      "current_export_observed_header": [
+        "Stkcd",
+        "Stknme",
+        "Listdt"
+      ],
+      "current_export_pilot_result": {
+        "run_id": "pilot-current-export-20260728-v2",
+        "status": "CANDIDATE_BUILT__INSPECTION_ONLY",
+        "result_directory": "tmp/local-dataset-build/csmar-trd-co-pilot/pilot-current-export-20260728-v2",
+        "source_package_bytes": 288294,
+        "selected_csv_unpacked_bytes": 224958,
+        "row_count": 6013,
+        "source_column_count": 3,
+        "lineage_column_count": 1,
+        "partition_count": 1,
+        "candidate_total_bytes": 360677,
+        "raw_bytes": 288294,
+        "parquet_bytes": 63835,
+        "duplicate_rows": 0,
+        "date_min": null,
+        "date_max": null,
+        "listdt_0000_00_00_rows": 23,
+        "content_hash": "2bb196be1fb880b6dc17a8a25c3fd945c4e0f494b61648f14255f84e1f16f152",
+        "catalog_registered": false,
+        "source_admission": false,
+        "quality_promotion": false
+      },
+      "expected_fields": [
+        "Cuntrycd",
+        "Stkcd",
+        "Stknme",
+        "Conme",
+        "Conme_en",
+        "Indcd",
+        "Indnme",
+        "Nindcd",
+        "Nindnme",
+        "Nnindcd",
+        "Nnindnme",
+        "Estbdt",
+        "Listdt",
+        "PROVINCE",
+        "PROVINCECODE",
+        "CITY",
+        "CITYCODE",
+        "OWNERSHIPTYPE",
+        "OWNERSHIPTYPECODE",
+        "Favaldt",
+        "Curtrd",
+        "Ipoprm",
+        "Ipoprc",
+        "Ipocur",
+        "Nshripo",
+        "Parvcur",
+        "Ipodt",
+        "Parval",
+        "Sctcd",
+        "Statco"
+      ],
+      "primary_key": [
+        "Stkcd"
+      ],
+      "date_columns": {
+        "partition_and_coverage_date": null,
+        "retained_date_like_fields": [
+          "Listdt",
+          "Estbdt",
+          "Favaldt",
+          "Ipodt"
+        ],
+        "partial_date_warning": "The current pilot contains 23 Listdt values equal to 0000-00-00. Static-table pilot intake therefore keeps Listdt as VARCHAR and does not compute date_min/date_max. Estbdt may also contain YYYY-MM-00 in wider exports."
+      },
+      "partition_mode": "single",
+      "batch_boundary": {
+        "strategy": "FULL_TABLE_SINGLE_EXPORT",
+        "date_filter": null,
+        "expected_overlap": "NONE",
+        "completion_check": "one row per Stkcd after duplicate-key validation"
+      },
+      "source_and_authorization_note": "Manual CSMAR export only; user confirms approved local academic research access. The builder does not log in, download, or verify licence scope.",
+      "input_directory": "inbox/csmar/TRD_Co",
+      "result_directory_template": "tmp/local-dataset-build/csmar-trd-co/<run_id>",
+      "formal_result_directory": null,
+      "formal_result_status": "NOT_AUTHORIZED"
+    },
+    {
+      "table_id": null,
+      "table_id_status": "PENDING_FROM_ACTUAL_CSMAR_EXPORT_OR_AUTHORIZED_METADATA_RESPONSE",
+      "namePhy": "TRD_Dalyr",
+      "logical_name": "Daily individual stock return file",
+      "identity_gate": "Do not invent a numeric/internal table_id; bind it after the actual export metadata is captured",
+      "full_field_request_template": "data/catalog/contracts/local_download_build_v1/csmar_trd_dalyr.request.template.json",
+      "full_field_template_status": "REFERENCE_ONLY__NOT_VALIDATED_AGAINST_CURRENT_PILOT_EXPORT",
+      "current_export_pilot_request": "data/catalog/contracts/local_download_build_v1/csmar_trd_dalyr.current-pilot.request.json",
+      "current_export_package": "tmp/csmar_pilot/daily_2025_01_all_fields_pilot.zip",
+      "current_export_observed_header": [
+        "Stkcd",
+        "Trddt",
+        "Opnprc",
+        "Hiprc",
+        "Loprc",
+        "Clsprc",
+        "Dnshrtrd",
+        "Dnvaltrd",
+        "Dsmvosd",
+        "Dsmvtll",
+        "Dretwd",
+        "Dretnd",
+        "Adjprcwd",
+        "Adjprcnd",
+        "Markettype",
+        "Capchgdt",
+        "Trdsta",
+        "Ahshrtrd_D",
+        "Ahvaltrd_D",
+        "PreClosePrice",
+        "ChangeRatio",
+        "LimitDown",
+        "LimitUp",
+        "LimitStatus"
+      ],
+      "current_export_pilot_result": {
+        "run_id": "pilot-current-export-20260728-v2",
+        "status": "CANDIDATE_BUILT__INSPECTION_ONLY",
+        "result_directory": "tmp/local-dataset-build/csmar-trd-dalyr-pilot/pilot-current-export-20260728-v2",
+        "source_package_bytes": 6371895,
+        "selected_csv_unpacked_bytes": 22773276,
+        "row_count": 98229,
+        "source_column_count": 24,
+        "lineage_column_count": 1,
+        "partition_count": 1,
+        "candidate_total_bytes": 12367911,
+        "raw_bytes": 6371895,
+        "parquet_bytes": 5984914,
+        "duplicate_rows": 0,
+        "date_min": "2025-01-02",
+        "date_max": "2025-01-27",
+        "content_hash": "65d66b1199cffba5630684417ba5da51ddccb7fe2d73fe771e0155a61499a7fe",
+        "catalog_registered": false,
+        "source_admission": false,
+        "quality_promotion": false
+      },
+      "expected_fields": [
+        "Stkcd",
+        "Trddt",
+        "Trdsta",
+        "Opnprc",
+        "Hiprc",
+        "Loprc",
+        "Clsprc",
+        "Dnshrtrd",
+        "Dnvaltrd",
+        "Dsmvosd",
+        "Dsmvtll",
+        "Dretwd",
+        "Dretnd",
+        "Adjprcwd",
+        "Adjprcnd",
+        "Markettype",
+        "Capchgdt",
+        "Ahshrtrd_D",
+        "Ahvaltrd_D",
+        "PreClosePrice",
+        "ChangeRatio"
+      ],
+      "primary_key": [
+        "Stkcd",
+        "Trddt"
+      ],
+      "date_columns": {
+        "partition_and_coverage_date": "Trddt",
+        "additional_dates": [
+          "Capchgdt"
+        ]
+      },
+      "partition_mode": "year_month",
+      "batch_boundary": {
+        "strategy": "CALENDAR_YEAR_PACKAGES",
+        "start_inclusive": "1990-01-01",
+        "end_inclusive": "EXPORT_DATE",
+        "one_package_per": "calendar_year",
+        "expected_overlap": "NONE",
+        "boundary_validation_rule": "Trddt must remain within the package's declared calendar year; final candidate key uniqueness is global across all packages",
+        "boundary_validation_enforced_by_v1_builder": false,
+        "boundary_validation_status": "RECORDED_FOR_MANUAL_EXPORT_REVIEW__AUTOMATED_FILENAME_TO_YEAR_BINDING_NOT_IMPLEMENTED",
+        "reason": "keeps manual exports reviewable and resumable without creating one file per trading day"
+      },
+      "source_and_authorization_note": "Manual CSMAR export only; user confirms approved local academic research access. The builder does not log in, download, or verify licence scope.",
+      "input_directory": "inbox/csmar/TRD_Dalyr",
+      "result_directory_template": "tmp/local-dataset-build/csmar-trd-dalyr/<run_id>",
+      "formal_result_directory": null,
+      "formal_result_status": "NOT_AUTHORIZED"
+    }
+  ],
+  "unresolved_before_formal_use": [
+    "actual CSMAR table_id values and export metadata hashes",
+    "account/institution-specific retention and sharing terms",
+    "field semantics and units against the exact exported version",
+    "PIT and revision-chain behavior",
+    "coverage and multi-source conflict checks",
+    "formal atomic publication and datasets.json registration"
+  ]
+}

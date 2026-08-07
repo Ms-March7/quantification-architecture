@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://quantification.local/schemas/factor-registry-v1.json",
+  "title": "Quantification unified factor registry",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "registry_id",
+    "status",
+    "protocol_id",
+    "source_artifacts",
+    "record_count",
+    "summary",
+    "records"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "registry_id": {"type": "string", "minLength": 1},
+    "status": {"type": "string", "minLength": 1},
+    "protocol_id": {"type": "string", "minLength": 1},
+    "source_artifacts": {"type": "array", "items": {"type": "object"}},
+    "record_count": {"type": "integer", "minimum": 0},
+    "summary": {"type": "object"},
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "factor_id",
+          "source",
+          "source_key",
+          "namespace",
+          "display_name",
+          "definition",
+          "definition_sha256",
+          "dependency_level",
+          "dependency_fields",
+          "local_compute_status",
+          "classification_basis",
+          "availability_status",
+          "value_status",
+          "admission_status"
+        ],
+        "properties": {
+          "factor_id": {"type": "string", "minLength": 1},
+          "source": {"enum": ["local", "joinquant", "ricequant"]},
+          "source_key": {"type": "string", "minLength": 1},
+          "namespace": {"type": "string", "minLength": 1},
+          "display_name": {"type": "string"},
+          "definition": {"type": ["string", "null"]},
+          "definition_sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+          "dependency_level": {"type": "string", "minLength": 1},
+          "dependency_fields": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+          "local_compute_status": {"type": "string", "minLength": 1},
+          "classification_basis": {"type": "string", "minLength": 1},
+          "availability_status": {"type": "string", "minLength": 1},
+          "value_status": {"type": "string", "minLength": 1},
+          "admission_status": {"type": "string", "minLength": 1}
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": false
+}

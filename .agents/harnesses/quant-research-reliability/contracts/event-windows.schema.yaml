@@ -1,0 +1,39 @@
+version: 0.1
+name: event-windows
+description: Event-study retained event-window output contract.
+type: csv
+artifact: outputs/event-study/event_windows.csv
+
+required_columns:
+  - symbol
+  - event_date
+  - status
+
+recommended_columns:
+  - name
+  - reaction_date
+  - category
+  - board
+  - industry
+  - theme
+  - reaction_date_used
+  - ret_1d
+  - max_drawdown_1d
+  - excess_ret_1d
+
+required_non_empty:
+  - symbol
+  - event_date
+  - status
+
+date_columns:
+  - event_date
+  - reaction_date
+  - reaction_date_used
+  - base_date
+
+status_values:
+  - ok
+  - missing_price_series
+  - no_reaction_date
+  - no_base_close

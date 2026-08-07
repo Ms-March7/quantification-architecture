@@ -1,0 +1,2818 @@
+{
+    "schema_version":  1,
+    "source_root":  "${QUANTIFICATION_ROOT}",
+    "destination":  "${PUBLISH_MIRROR}",
+    "generated_at_utc":  "2026-08-07T06:42:05.5093931+00:00",
+    "copied_file_count":  632,
+    "copied_bytes":  20489398,
+    "copied":  [
+                   {
+                       "path":  "多因子/factor_factory/expressions.py",
+                       "bytes":  17236
+                   },
+                   {
+                       "path":  "多因子/factor_factory/evaluation.py",
+                       "bytes":  30895
+                   },
+                   {
+                       "path":  "多因子/factor_factory/factor_safety.py",
+                       "bytes":  3378
+                   },
+                   {
+                       "path":  "多因子/factor_factory/factor_dependencies.py",
+                       "bytes":  5095
+                   },
+                   {
+                       "path":  "多因子/factor_factory/ensemble_first.py",
+                       "bytes":  11631
+                   },
+                   {
+                       "path":  "多因子/factor_factory/backtest.py",
+                       "bytes":  21145
+                   },
+                   {
+                       "path":  "多因子/factor_factory/attempts.py",
+                       "bytes":  26427
+                   },
+                   {
+                       "path":  "多因子/factor_factory/ensemble.py",
+                       "bytes":  2898
+                   },
+                   {
+                       "path":  "多因子/factor_factory/cli.py",
+                       "bytes":  21340
+                   },
+                   {
+                       "path":  "多因子/factor_factory/generation.py",
+                       "bytes":  10370
+                   },
+                   {
+                       "path":  "多因子/factor_factory/r0_classic_specs.py",
+                       "bytes":  52819
+                   },
+                   {
+                       "path":  "多因子/factor_factory/r0_classic_engine.py",
+                       "bytes":  53031
+                   },
+                   {
+                       "path":  "多因子/factor_factory/r0_shsz_panel_input.py",
+                       "bytes":  51156
+                   },
+                   {
+                       "path":  "多因子/factor_factory/r0_dense_panel.py",
+                       "bytes":  20255
+                   },
+                   {
+                       "path":  "多因子/factor_factory/qmt_source.py",
+                       "bytes":  7277
+                   },
+                   {
+                       "path":  "多因子/factor_factory/pipeline.py",
+                       "bytes":  137141
+                   },
+                   {
+                       "path":  "多因子/factor_factory/governance.py",
+                       "bytes":  19129
+                   },
+                   {
+                       "path":  "多因子/factor_factory/qlib_store.py",
+                       "bytes":  23296
+                   },
+                   {
+                       "path":  "多因子/factor_factory/qdata_input.py",
+                       "bytes":  32453
+                   },
+                   {
+                       "path":  "多因子/factor_factory/accelerator.py",
+                       "bytes":  28132
+                   },
+                   {
+                       "path":  "多因子/configs/factor_factory_real_2018_2026.json",
+                       "bytes":  1314
+                   },
+                   {
+                       "path":  "多因子/requirements-gpu.txt",
+                       "bytes":  107
+                   },
+                   {
+                       "path":  "多因子/configs/factor_factory_real_2018_2026_v4_gpu.json",
+                       "bytes":  1838
+                   },
+                   {
+                       "path":  "多因子/configs/factor_factory_real_2018_2026_v3.json",
+                       "bytes":  1790
+                   },
+                   {
+                       "path":  "多因子/requirements.txt",
+                       "bytes":  56
+                   },
+                   {
+                       "path":  "多因子/PROTOCOL_V6.md",
+                       "bytes":  2250
+                   },
+                   {
+                       "path":  "多因子/PROTOCOL_V3.md",
+                       "bytes":  5316
+                   },
+                   {
+                       "path":  "多因子/SHORT_CYCLE_RUNBOOK_20260716.md",
+                       "bytes":  7058
+                   },
+                   {
+                       "path":  "多因子/PROTOCOL_V7_ENSEMBLE_FIRST.md",
+                       "bytes":  2607
+                   },
+                   {
+                       "path":  "多因子/configs/factor_factory_real_2018_2026_v5_gpu_batched.json",
+                       "bytes":  1846
+                   },
+                   {
+                       "path":  "多因子/configs/r0_shsz_pv_factor_catalog_512_v1.json",
+                       "bytes":  147741
+                   },
+                   {
+                       "path":  "多因子/configs/r0_shsz_pv_c_v1_1_discovery_20260805.json",
+                       "bytes":  3853
+                   },
+                   {
+                       "path":  "多因子/configs/factor_sets/r0_full_market_engineering_smoke_10_v1.json",
+                       "bytes":  2002
+                   },
+                   {
+                       "path":  "多因子/configs/r0_shsz_pv_single_factor_screen_v1.json",
+                       "bytes":  1886
+                   },
+                   {
+                       "path":  "多因子/configs/r0_shsz_pv_classic_factor_catalog_v1.json",
+                       "bytes":  508689
+                   },
+                   {
+                       "path":  "多因子/configs/full_market_layered_factor_research_c_v1_1.json",
+                       "bytes":  3938
+                   },
+                   {
+                       "path":  "多因子/configs/factor_factory_real_2018_2026_v6_discovery_first_gpu.json",
+                       "bytes":  2144
+                   },
+                   {
+                       "path":  "多因子/configs/r0_shsz_pv_classic_discovery_20260806.json",
+                       "bytes":  5190
+                   },
+                   {
+                       "path":  "多因子/configs/l2-p0-qdata-factor-input-engineering-v1.json",
+                       "bytes":  3002
+                   },
+                   {
+                       "path":  "多因子/factor_factory/registry.py",
+                       "bytes":  11109
+                   },
+                   {
+                       "path":  "多因子/ml/short_cycle_champion_challenger.py",
+                       "bytes":  31848
+                   },
+                   {
+                       "path":  "多因子/ml/qmt_broker_cli.py",
+                       "bytes":  10108
+                   },
+                   {
+                       "path":  "多因子/ml/short_cycle_live_monitor.py",
+                       "bytes":  19771
+                   },
+                   {
+                       "path":  "多因子/ml/short_cycle_dashboard.py",
+                       "bytes":  10318
+                   },
+                   {
+                       "path":  "多因子/ml/cn_market_data.py",
+                       "bytes":  15332
+                   },
+                   {
+                       "path":  "多因子/factor_factory/validation.py",
+                       "bytes":  1916
+                   },
+                   {
+                       "path":  "多因子/factor_factory/total_return_projection.py",
+                       "bytes":  6883
+                   },
+                   {
+                       "path":  "多因子/ml/broker_gateway.py",
+                       "bytes":  18817
+                   },
+                   {
+                       "path":  "多因子/factor_factory/__init__.py",
+                       "bytes":  879
+                   },
+                   {
+                       "path":  "多因子/ml/test_broker_gateway.py",
+                       "bytes":  4963
+                   },
+                   {
+                       "path":  "多因子/research_reporting/README.md",
+                       "bytes":  744
+                   },
+                   {
+                       "path":  "多因子/research_reporting/cli.py",
+                       "bytes":  1920
+                   },
+                   {
+                       "path":  "多因子/research_reporting/test_reporting.py",
+                       "bytes":  15126
+                   },
+                   {
+                       "path":  "多因子/research_reporting/reporting.py",
+                       "bytes":  51448
+                   },
+                   {
+                       "path":  "多因子/ml/__init__.py",
+                       "bytes":  248
+                   },
+                   {
+                       "path":  "多因子/ml/test_qmt_broker_cli.py",
+                       "bytes":  1048
+                   },
+                   {
+                       "path":  "多因子/ml/test_cn_market_data.py",
+                       "bytes":  2587
+                   },
+                   {
+                       "path":  "多因子/ml/test_short_cycle_live_monitor.py",
+                       "bytes":  5923
+                   },
+                   {
+                       "path":  "多因子/ml/test_short_cycle_champion_challenger.py",
+                       "bytes":  4082
+                   },
+                   {
+                       "path":  "多因子/factor_factory/test_supplier_formula_engine.py",
+                       "bytes":  2641
+                   },
+                   {
+                       "path":  "多因子/factor_factory/test_factor_dependencies.py",
+                       "bytes":  1914
+                   },
+                   {
+                       "path":  "多因子/factor_factory/test_ensemble_first.py",
+                       "bytes":  10677
+                   },
+                   {
+                       "path":  "多因子/factor_factory/test_gpu_accelerator.py",
+                       "bytes":  7423
+                   },
+                   {
+                       "path":  "多因子/factor_factory/test_factor_factory.py",
+                       "bytes":  82863
+                   },
+                   {
+                       "path":  "多因子/factor_factory/test_cli.py",
+                       "bytes":  2672
+                   },
+                   {
+                       "path":  "多因子/factor_factory/selection.py",
+                       "bytes":  9944
+                   },
+                   {
+                       "path":  "多因子/factor_factory/schema.py",
+                       "bytes":  6561
+                   },
+                   {
+                       "path":  "多因子/factor_factory/synthetic.py",
+                       "bytes":  2427
+                   },
+                   {
+                       "path":  "多因子/factor_factory/supplier_formula_engine.py",
+                       "bytes":  10142
+                   },
+                   {
+                       "path":  "多因子/factor_factory/test_qdata_input.py",
+                       "bytes":  10520
+                   },
+                   {
+                       "path":  "多因子/factor_factory/test_r0_input_bundle.py",
+                       "bytes":  13857
+                   },
+                   {
+                       "path":  "多因子/factor_factory/test_r0_discovery_safety.py",
+                       "bytes":  8315
+                   },
+                   {
+                       "path":  "多因子/factor_factory/test_r0_stability_splits.py",
+                       "bytes":  2127
+                   },
+                   {
+                       "path":  "多因子/factor_factory/test_r0_shsz_panel_input.py",
+                       "bytes":  31272
+                   },
+                   {
+                       "path":  "多因子/factor_factory/test_r0_classic_specs.py",
+                       "bytes":  13756
+                   },
+                   {
+                       "path":  "多因子/factor_factory/test_qmt_source.py",
+                       "bytes":  911
+                   },
+                   {
+                       "path":  "多因子/factor_factory/test_qlib_store.py",
+                       "bytes":  12465
+                   },
+                   {
+                       "path":  "多因子/factor_factory/test_r0_classic_engine.py",
+                       "bytes":  16213
+                   },
+                   {
+                       "path":  "多因子/factor_factory/test_r0_classic_discovery_contract.py",
+                       "bytes":  13963
+                   },
+                   {
+                       "path":  "data/catalog/contracts/local_download_build_v1/README.md",
+                       "bytes":  10540
+                   },
+                   {
+                       "path":  "data/catalog/contracts/local_download_build_v1/example.request.json",
+                       "bytes":  1323
+                   },
+                   {
+                       "path":  "data/catalog/contracts/local_download_build_v1/resset_comnmhis.intake-20260802-v1.request.json",
+                       "bytes":  2310
+                   },
+                   {
+                       "path":  "data/catalog/contracts/local_download_build_v1/request.schema.json",
+                       "bytes":  3999
+                   },
+                   {
+                       "path":  "data/catalog/contracts/local_download_build_v1/csmar_trd_nolimit.request.template.json",
+                       "bytes":  1647
+                   },
+                   {
+                       "path":  "data/catalog/contracts/local_download_build_v1/csmar_trd_dalyr.d2a04b-2022-2026.request.json",
+                       "bytes":  2586
+                   },
+                   {
+                       "path":  "data/catalog/contracts/local_download_build_v1/csmar_trd_dalyr.d2a04b-2015-2019.request.json",
+                       "bytes":  2505
+                   },
+                   {
+                       "path":  "data/catalog/contracts/local_download_build_v1/csmar_trd_nolimit.d2a04b-full-1990-2026.request.json",
+                       "bytes":  1817
+                   },
+                   {
+                       "path":  "data/catalog/contracts/local_download_build_v1/csmar_trd_dalyr.request.template.json",
+                       "bytes":  2260
+                   },
+                   {
+                       "path":  "data/catalog/contracts/local_download_build_v1/resset_delinfo.intake-20260802-v1.request.json",
+                       "bytes":  3100
+                   },
+                   {
+                       "path":  "data/catalog/contracts/local_daily_orchestration_v1/request.schema.json",
+                       "bytes":  1761
+                   },
+                   {
+                       "path":  "data/catalog/contracts/local_daily_orchestration_v1/README.md",
+                       "bytes":  4055
+                   },
+                   {
+                       "path":  "data/catalog/contracts/g_data_core_v1/CONTRACT.md",
+                       "bytes":  6749
+                   },
+                   {
+                       "path":  "data/catalog/contracts/g_data_core_v1/contract.json",
+                       "bytes":  8470
+                   },
+                   {
+                       "path":  "data/catalog/contracts/local_daily_orchestration_v1/example.request.json",
+                       "bytes":  537
+                   },
+                   {
+                       "path":  "data/catalog/contracts/local_daily_update_v1/example.request.json",
+                       "bytes":  1459
+                   },
+                   {
+                       "path":  "data/catalog/contracts/local_download_build_v1/resset_suspnsnresmptn.intake-20260802-v1.request.json",
+                       "bytes":  2728
+                   },
+                   {
+                       "path":  "data/catalog/contracts/local_daily_update_v1/request.schema.json",
+                       "bytes":  3967
+                   },
+                   {
+                       "path":  "data/catalog/contracts/local_daily_update_v1/README.md",
+                       "bytes":  4463
+                   },
+                   {
+                       "path":  "data/catalog/contracts/local_download_build_v1/csmar_trd_dalyr.d2a04b-2010-2014.request.json",
+                       "bytes":  2546
+                   },
+                   {
+                       "path":  "data/catalog/contracts/local_download_build_v1/csmar_trd_capchg.d2a04b-full-history.request.json",
+                       "bytes":  2708
+                   },
+                   {
+                       "path":  "data/catalog/contracts/local_download_build_v1/csmar_trd_cale.d2a04b-full-1990-2026.request.json",
+                       "bytes":  1660
+                   },
+                   {
+                       "path":  "data/catalog/contracts/local_download_build_v1/csmar_trd_co.current-pilot.request.json",
+                       "bytes":  1326
+                   },
+                   {
+                       "path":  "data/catalog/contracts/local_download_build_v1/csmar_trd_capchg.request.template.json",
+                       "bytes":  2532
+                   },
+                   {
+                       "path":  "data/catalog/contracts/local_download_build_v1/csmar_trd_adjustfactor.request.template.json",
+                       "bytes":  1959
+                   },
+                   {
+                       "path":  "data/catalog/contracts/local_download_build_v1/csmar_idx_chgsmp.d2a04d-future-effective-pilot.request.json",
+                       "bytes":  3049
+                   },
+                   {
+                       "path":  "data/catalog/contracts/local_download_build_v1/csmar_fs_comscfi.request.template.json",
+                       "bytes":  3666
+                   },
+                   {
+                       "path":  "data/catalog/contracts/local_download_build_v1/csmar_trd_adjustfactor.d2a04b-full-1991-2026.request.json",
+                       "bytes":  2182
+                   },
+                   {
+                       "path":  "data/catalog/contracts/local_download_build_v1/csmar_idx_chgsmp.request.template.json",
+                       "bytes":  2264
+                   },
+                   {
+                       "path":  "data/catalog/contracts/local_download_build_v1/csmar_trd_co.d2a04b-full-current.request.json",
+                       "bytes":  3086
+                   },
+                   {
+                       "path":  "data/catalog/contracts/local_download_build_v1/csmar_trd_dalyr.d2a04b-1995-1999.request.json",
+                       "bytes":  2507
+                   },
+                   {
+                       "path":  "data/catalog/contracts/local_download_build_v1/csmar_trd_dalyr.d2a04b-1990-1994.request.json",
+                       "bytes":  2505
+                   },
+                   {
+                       "path":  "data/catalog/contracts/local_download_build_v1/csmar_trd_dalyr.d2a04b-2005-2009.request.json",
+                       "bytes":  2545
+                   },
+                   {
+                       "path":  "data/catalog/contracts/local_download_build_v1/csmar_trd_dalyr.d2a04b-2000-2004.request.json",
+                       "bytes":  2545
+                   },
+                   {
+                       "path":  "data/catalog/contracts/local_download_build_v1/csmar_trd_dalyr.d2a02-2020-2024.request.json",
+                       "bytes":  2377
+                   },
+                   {
+                       "path":  "data/catalog/contracts/local_download_build_v1/csmar_trd_cptl.d2a04b-full-1990-2026.request.json",
+                       "bytes":  2254
+                   },
+                   {
+                       "path":  "data/catalog/contracts/local_download_build_v1/csmar_trd_co.request.template.json",
+                       "bytes":  2619
+                   },
+                   {
+                       "path":  "data/catalog/contracts/local_download_build_v1/csmar_trd_dalyr.current-pilot.request.json",
+                       "bytes":  2345
+                   },
+                   {
+                       "path":  "data/catalog/contracts/local_download_build_v1/csmar_trd_cptl.request.template.json",
+                       "bytes":  1839
+                   },
+                   {
+                       "path":  "data/catalog/contracts/g_data_core_v1/core_01_08_market_reference.json",
+                       "bytes":  106819
+                   },
+                   {
+                       "path":  "data/catalog/contracts/candidate_asset_index_v1/contract.json",
+                       "bytes":  584
+                   },
+                   {
+                       "path":  "data/catalog/contracts/candidate_daily_maintenance_v1/README.md",
+                       "bytes":  1797
+                   },
+                   {
+                       "path":  "data/catalog/contracts/atomic_publish_v1/README.md",
+                       "bytes":  4371
+                   },
+                   {
+                       "path":  "data/catalog/contracts/candidate_asset_index_v1/README.md",
+                       "bytes":  816
+                   },
+                   {
+                       "path":  "data/catalog/contracts/candidate_daily_maintenance_v1/contract.json",
+                       "bytes":  2508
+                   },
+                   {
+                       "path":  "data/catalog/contracts/daily_pipeline_health_v1/contract.json",
+                       "bytes":  1669
+                   },
+                   {
+                       "path":  "data/catalog/contracts/dual_source_reconcile_v1/README.md",
+                       "bytes":  1829
+                   },
+                   {
+                       "path":  "data/catalog/contracts/daily_pipeline_health_v1/request.schema.json",
+                       "bytes":  2685
+                   },
+                   {
+                       "path":  "data/catalog/contracts/daily_pipeline_health_v1/README.md",
+                       "bytes":  1521
+                   },
+                   {
+                       "path":  "data/catalog/contracts/atomic_publish_v1/request.schema.json",
+                       "bytes":  2120
+                   },
+                   {
+                       "path":  "多因子/FACTOR_FACTORY_ARCHITECTURE.md",
+                       "bytes":  5501
+                   },
+                   {
+                       "path":  "多因子/DATA_LAKE.md",
+                       "bytes":  3348
+                   },
+                   {
+                       "path":  "多因子/PROTOCOL_C_V1_1_FULL_MARKET_LAYERED_FACTOR_RESEARCH.md",
+                       "bytes":  8392
+                   },
+                   {
+                       "path":  "多因子/MIGRATION_20260716.md",
+                       "bytes":  747
+                   },
+                   {
+                       "path":  "多因子/BROKER_DATA_ACCESS.md",
+                       "bytes":  3155
+                   },
+                   {
+                       "path":  "data/catalog/contracts/adapter_gate_v1/tencent_daily_inspection.json",
+                       "bytes":  1507
+                   },
+                   {
+                       "path":  "data/catalog/contracts/adapter_gate_v1/README.md",
+                       "bytes":  1362
+                   },
+                   {
+                       "path":  "多因子/README.md",
+                       "bytes":  17276
+                   },
+                   {
+                       "path":  "多因子/.gitignore",
+                       "bytes":  191
+                   },
+                   {
+                       "path":  "data/catalog/contracts/dual_source_reconcile_v1/contract.json",
+                       "bytes":  2072
+                   },
+                   {
+                       "path":  "data/catalog/contracts/free_web_daily_inspection_v1/README.md",
+                       "bytes":  3078
+                   },
+                   {
+                       "path":  "data/catalog/contracts/free_web_daily_inspection_v1/contract.json",
+                       "bytes":  2186
+                   },
+                   {
+                       "path":  "data/catalog/contracts/formal_publisher_preflight_v1/README.md",
+                       "bytes":  1834
+                   },
+                   {
+                       "path":  "data/catalog/contracts/formal_publisher_preflight_v1/contract.json",
+                       "bytes":  737
+                   },
+                   {
+                       "path":  "data/catalog/contracts/free_web_daily_run_health_v1/README.md",
+                       "bytes":  1774
+                   },
+                   {
+                       "path":  "data/catalog/contracts/g_data_core_v1/core_13_20_fundamental_risk.json",
+                       "bytes":  98181
+                   },
+                   {
+                       "path":  "data/catalog/contracts/g_data_core_v1/core_09_12_index_industry.json",
+                       "bytes":  63312
+                   },
+                   {
+                       "path":  "data/catalog/contracts/free_web_daily_run_health_v1/contract.json",
+                       "bytes":  1431
+                   },
+                   {
+                       "path":  "data/catalog/contracts/g_data_core_v1/sources.json",
+                       "bytes":  17555
+                   },
+                   {
+                       "path":  "data/catalog/contracts/formal_publisher_preflight_v1/request.schema.json",
+                       "bytes":  3218
+                   },
+                   {
+                       "path":  "data/catalog/contracts/formal_atomic_publish_execution_v1/prepared_execution_receipt.schema.json",
+                       "bytes":  1777
+                   },
+                   {
+                       "path":  "data/catalog/contracts/formal_atomic_publish_execution_v1/isolated_execution_receipt.schema.json",
+                       "bytes":  1434
+                   },
+                   {
+                       "path":  "data/catalog/contracts/formal_atomic_publish_execution_v1/request.schema.json",
+                       "bytes":  5450
+                   },
+                   {
+                       "path":  "data/catalog/contracts/formal_atomic_publish_execution_v1/README.md",
+                       "bytes":  4473
+                   },
+                   {
+                       "path":  "data/catalog/contracts/formal_atomic_publish_execution_v1/contract.json",
+                       "bytes":  2088
+                   },
+                   {
+                       "path":  "data/catalog/contracts/formal_atomic_publish_workspace_v1/README.md",
+                       "bytes":  5062
+                   },
+                   {
+                       "path":  "data/catalog/contracts/formal_atomic_publish_workspace_v1/contract.json",
+                       "bytes":  1347
+                   },
+                   {
+                       "path":  "data/catalog/contracts/formal_atomic_publish_execution_v2/request.schema.json",
+                       "bytes":  5477
+                   },
+                   {
+                       "path":  "data/catalog/contracts/formal_atomic_publish_execution_v2/contract.json",
+                       "bytes":  393
+                   },
+                   {
+                       "path":  "news-signal-agent/backend/app/workflow/__init__.py",
+                       "bytes":  33
+                   },
+                   {
+                       "path":  "news-signal-agent/backend/app/workflow/schemas.py",
+                       "bytes":  1112
+                   },
+                   {
+                       "path":  "news-signal-agent/backend/app/workflow/nodes/__init__.py",
+                       "bytes":  37
+                   },
+                   {
+                       "path":  "news-signal-agent/backend/app/workflow/nodes/base.py",
+                       "bytes":  334
+                   },
+                   {
+                       "path":  "news-signal-agent/backend/app/workflow/news.py",
+                       "bytes":  43148
+                   },
+                   {
+                       "path":  "news-signal-agent/backend/app/workflow/demo.py",
+                       "bytes":  13786
+                   },
+                   {
+                       "path":  "news-signal-agent/backend/app/workflow/cluster.py",
+                       "bytes":  9002
+                   },
+                   {
+                       "path":  "news-signal-agent/backend/app/workflow/event_cards.py",
+                       "bytes":  4700
+                   },
+                   {
+                       "path":  "news-signal-agent/backend/app/workflow/engine.py",
+                       "bytes":  1188
+                   },
+                   {
+                       "path":  "news-signal-agent/backend/app/web/index.html",
+                       "bytes":  58673
+                   },
+                   {
+                       "path":  "news-signal-agent/backend/app/scoring/__init__.py",
+                       "bytes":  34
+                   },
+                   {
+                       "path":  "news-signal-agent/backend/app/scoring/explainable.py",
+                       "bytes":  895
+                   },
+                   {
+                       "path":  "news-signal-agent/backend/app/report/__init__.py",
+                       "bytes":  24
+                   },
+                   {
+                       "path":  "news-signal-agent/backend/app/report/render.py",
+                       "bytes":  8455
+                   },
+                   {
+                       "path":  "news-signal-agent/backend/app/scoring/calibration.py",
+                       "bytes":  3103
+                   },
+                   {
+                       "path":  "news-signal-agent/backend/app/validation/__init__.py",
+                       "bytes":  83
+                   },
+                   {
+                       "path":  "news-signal-agent/backend/app/validation/backtest.py",
+                       "bytes":  4339
+                   },
+                   {
+                       "path":  "news-signal-agent/backend/app/storage/__init__.py",
+                       "bytes":  25
+                   },
+                   {
+                       "path":  "news-signal-agent/backend/app/storage/sqlite.py",
+                       "bytes":  40821
+                   },
+                   {
+                       "path":  "news-signal-agent/backend/app/__init__.py",
+                       "bytes":  49
+                   },
+                   {
+                       "path":  "news-signal-agent/.env.example",
+                       "bytes":  353
+                   },
+                   {
+                       "path":  "news-signal-agent/.gitignore",
+                       "bytes":  409
+                   },
+                   {
+                       "path":  "news-signal-agent/backend/.env.example",
+                       "bytes":  361
+                   },
+                   {
+                       "path":  "news-signal-agent/README.md",
+                       "bytes":  4297
+                   },
+                   {
+                       "path":  "capital-flow-attribution/tests/fixtures/bad/input.json",
+                       "bytes":  306
+                   },
+                   {
+                       "path":  "capital-flow-attribution/tests/test_open_source_adapters.py",
+                       "bytes":  3691
+                   },
+                   {
+                       "path":  "capital-flow-attribution/tests/test_g1_and_research.py",
+                       "bytes":  9047
+                   },
+                   {
+                       "path":  "capital-flow-attribution/tests/fixtures/good/input.json",
+                       "bytes":  296
+                   },
+                   {
+                       "path":  "capital-flow-attribution/tests/test_s1r_components.py",
+                       "bytes":  4230
+                   },
+                   {
+                       "path":  "news-signal-agent/backend/pyproject.toml",
+                       "bytes":  579
+                   },
+                   {
+                       "path":  "news-signal-agent/backend/app/main.py",
+                       "bytes":  1160
+                   },
+                   {
+                       "path":  "news-signal-agent/backend/app/config.py",
+                       "bytes":  3165
+                   },
+                   {
+                       "path":  "news-signal-agent/backend/app/scheduler.py",
+                       "bytes":  1256
+                   },
+                   {
+                       "path":  "news-signal-agent/backend/app/models.py",
+                       "bytes":  3241
+                   },
+                   {
+                       "path":  "news-signal-agent/backend/app/cli.py",
+                       "bytes":  1855
+                   },
+                   {
+                       "path":  "news-signal-agent/frontend/package.json",
+                       "bytes":  592
+                   },
+                   {
+                       "path":  "news-signal-agent/frontend/index.html",
+                       "bytes":  306
+                   },
+                   {
+                       "path":  "news-signal-agent/frontend/vite.config.ts",
+                       "bytes":  192
+                   },
+                   {
+                       "path":  "news-signal-agent/frontend/tsconfig.json",
+                       "bytes":  524
+                   },
+                   {
+                       "path":  "news-signal-agent/backend/app/ranking/__init__.py",
+                       "bytes":  48
+                   },
+                   {
+                       "path":  "news-signal-agent/config/sources.yaml",
+                       "bytes":  2285
+                   },
+                   {
+                       "path":  "news-signal-agent/config/scoring.yaml",
+                       "bytes":  1663
+                   },
+                   {
+                       "path":  "news-signal-agent/config/[USER_WATCHLIST_REMOVED]",
+                       "bytes":  606
+                   },
+                   {
+                       "path":  "news-signal-agent/config/watchlist.example.yaml",
+                       "bytes":  316
+                   },
+                   {
+                       "path":  "news-signal-agent/config/notify.yaml",
+                       "bytes":  1012
+                   },
+                   {
+                       "path":  "news-signal-agent/backend/app/api/__init__.py",
+                       "bytes":  18
+                   },
+                   {
+                       "path":  "news-signal-agent/backend/app/api/routes.py",
+                       "bytes":  12857
+                   },
+                   {
+                       "path":  "news-signal-agent/backend/tests/test_scoring.py",
+                       "bytes":  1044
+                   },
+                   {
+                       "path":  "news-signal-agent/backend/tests/test_news_rules.py",
+                       "bytes":  1787
+                   },
+                   {
+                       "path":  "news-signal-agent/config/workflow.yaml",
+                       "bytes":  1266
+                   },
+                   {
+                       "path":  "news-signal-agent/frontend/src/signals/README.md",
+                       "bytes":  219
+                   },
+                   {
+                       "path":  "news-signal-agent/frontend/src/watchlist/README.md",
+                       "bytes":  228
+                   },
+                   {
+                       "path":  "news-signal-agent/scripts/sync-to-github.ps1",
+                       "bytes":  1864
+                   },
+                   {
+                       "path":  "news-signal-agent/frontend/src/api/README.md",
+                       "bytes":  243
+                   },
+                   {
+                       "path":  "news-signal-agent/frontend/src/workflow/README.md",
+                       "bytes":  342
+                   },
+                   {
+                       "path":  "news-signal-agent/frontend/src/App.tsx",
+                       "bytes":  14990
+                   },
+                   {
+                       "path":  "news-signal-agent/docs/ARCHITECTURE.md",
+                       "bytes":  6626
+                   },
+                   {
+                       "path":  "news-signal-agent/frontend/src/vite-env.d.ts",
+                       "bytes":  38
+                   },
+                   {
+                       "path":  "news-signal-agent/frontend/src/styles.css",
+                       "bytes":  11031
+                   },
+                   {
+                       "path":  "news-signal-agent/backend/app/classify/__init__.py",
+                       "bytes":  77
+                   },
+                   {
+                       "path":  "news-signal-agent/backend/app/linker/__init__.py",
+                       "bytes":  77
+                   },
+                   {
+                       "path":  "news-signal-agent/backend/app/linker/rules.py",
+                       "bytes":  4103
+                   },
+                   {
+                       "path":  "news-signal-agent/backend/app/dedup/__init__.py",
+                       "bytes":  50
+                   },
+                   {
+                       "path":  "news-signal-agent/backend/app/feedback/__init__.py",
+                       "bytes":  41
+                   },
+                   {
+                       "path":  "news-signal-agent/backend/app/llm/__init__.py",
+                       "bytes":  44
+                   },
+                   {
+                       "path":  "news-signal-agent/backend/app/notify/__init__.py",
+                       "bytes":  29
+                   },
+                   {
+                       "path":  "news-signal-agent/backend/app/notify/dispatcher.py",
+                       "bytes":  8320
+                   },
+                   {
+                       "path":  "news-signal-agent/backend/app/llm/client.py",
+                       "bytes":  12128
+                   },
+                   {
+                       "path":  "news-signal-agent/backend/app/normalize/__init__.py",
+                       "bytes":  59
+                   },
+                   {
+                       "path":  "news-signal-agent/backend/app/collectors/cninfo.py",
+                       "bytes":  6539
+                   },
+                   {
+                       "path":  "news-signal-agent/backend/app/collectors/__init__.py",
+                       "bytes":  40
+                   },
+                   {
+                       "path":  "news-signal-agent/backend/app/collectors/search.py",
+                       "bytes":  3470
+                   },
+                   {
+                       "path":  "news-signal-agent/backend/app/classify/rules.py",
+                       "bytes":  7921
+                   },
+                   {
+                       "path":  "news-signal-agent/backend/app/classify/llm.py",
+                       "bytes":  3183
+                   },
+                   {
+                       "path":  "news-signal-agent/backend/app/collectors/rss.py",
+                       "bytes":  3754
+                   },
+                   {
+                       "path":  "news-signal-agent/backend/app/collectors/global_markets.py",
+                       "bytes":  3516
+                   },
+                   {
+                       "path":  "news-signal-agent/backend/app/collectors/eastmoney.py",
+                       "bytes":  4296
+                   },
+                   {
+                       "path":  "news-signal-agent/backend/app/collectors/quotes.py",
+                       "bytes":  11658
+                   },
+                   {
+                       "path":  "news-signal-agent/backend/app/collectors/mock.py",
+                       "bytes":  1018
+                   },
+                   {
+                       "path":  "多因子/quant_data_core/__init__.py",
+                       "bytes":  1231
+                   },
+                   {
+                       "path":  "多因子/quant_data_core/test_quant_data_core.py",
+                       "bytes":  5965
+                   },
+                   {
+                       "path":  "capital-flow-attribution/.gitignore",
+                       "bytes":  64
+                   },
+                   {
+                       "path":  "多因子/quant_data_core/__main__.py",
+                       "bytes":  50
+                   },
+                   {
+                       "path":  "多因子/quant_data_core/test_github_ingest.py",
+                       "bytes":  22042
+                   },
+                   {
+                       "path":  "多因子/quant_data_core/cli.py",
+                       "bytes":  10336
+                   },
+                   {
+                       "path":  "多因子/quant_data_core/catalog.py",
+                       "bytes":  28502
+                   },
+                   {
+                       "path":  "多因子/quant_data_core/README.md",
+                       "bytes":  4486
+                   },
+                   {
+                       "path":  "多因子/quant_data_core/github_ingest.py",
+                       "bytes":  47316
+                   },
+                   {
+                       "path":  "capital-flow-attribution/README.md",
+                       "bytes":  7873
+                   },
+                   {
+                       "path":  "capital-flow-attribution/configs/s1_pilot.json",
+                       "bytes":  1474
+                   },
+                   {
+                       "path":  "capital-flow-attribution/configs/g1_research.json",
+                       "bytes":  1791
+                   },
+                   {
+                       "path":  "capital-flow-attribution/docs/G1_RESEARCH_V22_ACCEPTANCE.md",
+                       "bytes":  3518
+                   },
+                   {
+                       "path":  "capital-flow-attribution/configs/source_policy.json",
+                       "bytes":  2486
+                   },
+                   {
+                       "path":  "capital-flow-attribution/pyproject.toml",
+                       "bytes":  707
+                   },
+                   {
+                       "path":  "capital-flow-attribution/DECISIONS.md",
+                       "bytes":  6663
+                   },
+                   {
+                       "path":  "capital-flow-attribution/DATA_CATALOG.md",
+                       "bytes":  11292
+                   },
+                   {
+                       "path":  "capital-flow-attribution/STATUS.md",
+                       "bytes":  6167
+                   },
+                   {
+                       "path":  "capital-flow-attribution/ROADMAP.md",
+                       "bytes":  12779
+                   },
+                   {
+                       "path":  "多因子/tools/test_replay_discovery_v6_equal5_ensemble.py",
+                       "bytes":  4716
+                   },
+                   {
+                       "path":  "多因子/tools/build_r0_shsz_factor_catalog.py",
+                       "bytes":  4320
+                   },
+                   {
+                       "path":  "多因子/tools/build_r0_classic_factor_catalog.py",
+                       "bytes":  3831
+                   },
+                   {
+                       "path":  "多因子/tools/probe_rqdata_factor_catalog.py",
+                       "bytes":  5531
+                   },
+                   {
+                       "path":  "多因子/tools/build_unified_factor_registry.py",
+                       "bytes":  8556
+                   },
+                   {
+                       "path":  "多因子/tools/build_factor_data_unlock_matrix.py",
+                       "bytes":  9844
+                   },
+                   {
+                       "path":  "多因子/research_reporting/__main__.py",
+                       "bytes":  81
+                   },
+                   {
+                       "path":  "多因子/research_reporting/__init__.py",
+                       "bytes":  357
+                   },
+                   {
+                       "path":  "多因子/tools/audit_tmp_factor_cache_cleanup.py",
+                       "bytes":  12289
+                   },
+                   {
+                       "path":  "多因子/tools/audit_factor_cache_cleanup.py",
+                       "bytes":  15579
+                   },
+                   {
+                       "path":  "多因子/tools/replay_discovery_under_v6.py",
+                       "bytes":  29761
+                   },
+                   {
+                       "path":  "多因子/tools/start-short-cycle-dashboard.ps1",
+                       "bytes":  949
+                   },
+                   {
+                       "path":  "多因子/tools/smoke_r0_shsz_panel_input.py",
+                       "bytes":  5256
+                   },
+                   {
+                       "path":  "多因子/tools/test_replay_discovery_under_v6.py",
+                       "bytes":  7554
+                   },
+                   {
+                       "path":  "多因子/tools/start-short-cycle-monitor.ps1",
+                       "bytes":  1772
+                   },
+                   {
+                       "path":  "多因子/tools/run_r0_full_market_factor_smoke.py",
+                       "bytes":  7618
+                   },
+                   {
+                       "path":  "多因子/tools/run_r0_classic_discovery.py",
+                       "bytes":  75459
+                   },
+                   {
+                       "path":  "多因子/tools/replay_discovery_v6_equal5_ensemble.py",
+                       "bytes":  15573
+                   },
+                   {
+                       "path":  "多因子/tools/run_r0_c_v1_1_stability.py",
+                       "bytes":  19855
+                   },
+                   {
+                       "path":  "多因子/tools/run_r0_c_v1_1_discovery.py",
+                       "bytes":  16338
+                   },
+                   {
+                       "path":  "capital-flow-attribution/docs/OPEN_SOURCE_COMPONENTS.md",
+                       "bytes":  2282
+                   },
+                   {
+                       "path":  "capital-flow-attribution/src/capital_flow_attribution/pipeline.py",
+                       "bytes":  10862
+                   },
+                   {
+                       "path":  "capital-flow-attribution/src/capital_flow_attribution/open_source_adapters.py",
+                       "bytes":  8333
+                   },
+                   {
+                       "path":  "capital-flow-attribution/src/capital_flow_attribution/reconciliation.py",
+                       "bytes":  3035
+                   },
+                   {
+                       "path":  "capital-flow-attribution/src/capital_flow_attribution/qlib.py",
+                       "bytes":  8783
+                   },
+                   {
+                       "path":  "capital-flow-attribution/src/capital_flow_attribution/ledger.py",
+                       "bytes":  7181
+                   },
+                   {
+                       "path":  "capital-flow-attribution/src/capital_flow_attribution/exchange_adapters.py",
+                       "bytes":  21250
+                   },
+                   {
+                       "path":  "capital-flow-attribution/src/capital_flow_attribution/comparison.py",
+                       "bytes":  3478
+                   },
+                   {
+                       "path":  "capital-flow-attribution/src/capital_flow_attribution/historical.py",
+                       "bytes":  2713
+                   },
+                   {
+                       "path":  "capital-flow-attribution/src/capital_flow_attribution/g1_adapters.py",
+                       "bytes":  18036
+                   },
+                   {
+                       "path":  "capital-flow-attribution/src/capital_flow_attribution/reporting.py",
+                       "bytes":  3427
+                   },
+                   {
+                       "path":  "capital-flow-attribution/tests/test_accounting.py",
+                       "bytes":  1680
+                   },
+                   {
+                       "path":  "capital-flow-attribution/src/capital_flow_attribution/__init__.py",
+                       "bytes":  72
+                   },
+                   {
+                       "path":  "capital-flow-attribution/tests/test_comparison.py",
+                       "bytes":  2358
+                   },
+                   {
+                       "path":  "capital-flow-attribution/tests/test_collector.py",
+                       "bytes":  3310
+                   },
+                   {
+                       "path":  "capital-flow-attribution/src/capital_flow_attribution/validation.py",
+                       "bytes":  3468
+                   },
+                   {
+                       "path":  "capital-flow-attribution/src/capital_flow_attribution/source_policy.py",
+                       "bytes":  3520
+                   },
+                   {
+                       "path":  "capital-flow-attribution/src/capital_flow_attribution/research_pipeline.py",
+                       "bytes":  16196
+                   },
+                   {
+                       "path":  "capital-flow-attribution/src/capital_flow_attribution/utils.py",
+                       "bytes":  1005
+                   },
+                   {
+                       "path":  "capital-flow-attribution/src/capital_flow_attribution/storage.py",
+                       "bytes":  2234
+                   },
+                   {
+                       "path":  "capital-flow-attribution/src/capital_flow_attribution/collector.py",
+                       "bytes":  7100
+                   },
+                   {
+                       "path":  "capital-flow-attribution/protocol/DATA_CONTRACT.md",
+                       "bytes":  5784
+                   },
+                   {
+                       "path":  "capital-flow-attribution/protocol/DAILY_LOOP_CONTRACT.md",
+                       "bytes":  5140
+                   },
+                   {
+                       "path":  "capital-flow-attribution/protocol/REPORTING_CONTRACT.md",
+                       "bytes":  4024
+                   },
+                   {
+                       "path":  "capital-flow-attribution/protocol/POINT_IN_TIME_CONTRACT.md",
+                       "bytes":  3649
+                   },
+                   {
+                       "path":  "capital-flow-attribution/protocol/ACCOUNTING_CONTRACT.md",
+                       "bytes":  4735
+                   },
+                   {
+                       "path":  "capital-flow-attribution/docs/S1R_ARCHITECTURE.md",
+                       "bytes":  5706
+                   },
+                   {
+                       "path":  "capital-flow-attribution/docs/S1R_ACCEPTANCE.md",
+                       "bytes":  4491
+                   },
+                   {
+                       "path":  "capital-flow-attribution/docs/S1_SOURCE_PROBE.md",
+                       "bytes":  1779
+                   },
+                   {
+                       "path":  "capital-flow-attribution/docs/S1_ACCEPTANCE.md",
+                       "bytes":  1311
+                   },
+                   {
+                       "path":  "capital-flow-attribution/protocol/RESEARCH_PROTOCOL.md",
+                       "bytes":  5044
+                   },
+                   {
+                       "path":  "capital-flow-attribution/src/capital_flow_attribution/accounting.py",
+                       "bytes":  3266
+                   },
+                   {
+                       "path":  "capital-flow-attribution/scripts/run_s1.py",
+                       "bytes":  1271
+                   },
+                   {
+                       "path":  "capital-flow-attribution/src/capital_flow_attribution/backtest.py",
+                       "bytes":  7189
+                   },
+                   {
+                       "path":  "capital-flow-attribution/src/capital_flow_attribution/attribution.py",
+                       "bytes":  4346
+                   },
+                   {
+                       "path":  "capital-flow-attribution/scripts/run_research.py",
+                       "bytes":  919
+                   },
+                   {
+                       "path":  "capital-flow-attribution/scripts/audit_research_run.py",
+                       "bytes":  3546
+                   },
+                   {
+                       "path":  "capital-flow-attribution/protocol/VALIDATION_CONTRACT.md",
+                       "bytes":  4147
+                   },
+                   {
+                       "path":  "capital-flow-attribution/scripts/probe_optional_sources.py",
+                       "bytes":  5115
+                   },
+                   {
+                       "path":  "capital-flow-attribution/scripts/compare_s1_runs.py",
+                       "bytes":  2317
+                   },
+                   {
+                       "path":  "control/tools/recycle_verified_csmar_sources.ps1",
+                       "bytes":  14600
+                   },
+                   {
+                       "path":  "control/tools/reconcile_ricequant_csmar_r0_actions.py",
+                       "bytes":  18713
+                   },
+                   {
+                       "path":  "control/tools/run_baostock_daily_coverage_pilot.py",
+                       "bytes":  57575
+                   },
+                   {
+                       "path":  "control/tools/replay_revision_event_ledger.py",
+                       "bytes":  21721
+                   },
+                   {
+                       "path":  "control/tools/recompute_r0_stage_a_current.py",
+                       "bytes":  21893
+                   },
+                   {
+                       "path":  "control/tools/qdata_build_downloaded.cmd",
+                       "bytes":  132
+                   },
+                   {
+                       "path":  "control/tools/probe_ricequant_r1_market_reference.py",
+                       "bytes":  19191
+                   },
+                   {
+                       "path":  "control/tools/recompute_layered_research_gates.py",
+                       "bytes":  23214
+                   },
+                   {
+                       "path":  "control/tools/qdata_build_downloaded.ps1",
+                       "bytes":  1656
+                   },
+                   {
+                       "path":  "control/tools/run_bounded_official_source_probe.py",
+                       "bytes":  16009
+                   },
+                   {
+                       "path":  "control/tools/run_data_capacity_pipeline_pilot.py",
+                       "bytes":  42077
+                   },
+                   {
+                       "path":  "control/tools/run_daily_update_local_smoke.py",
+                       "bytes":  67872
+                   },
+                   {
+                       "path":  "control/tools/run_formal_publisher_preflight.py",
+                       "bytes":  31409
+                   },
+                   {
+                       "path":  "control/tools/run_dual_source_reconcile.py",
+                       "bytes":  27891
+                   },
+                   {
+                       "path":  "control/tools/run_daily_pipeline_health.py",
+                       "bytes":  38830
+                   },
+                   {
+                       "path":  "control/tools/run_candidate_daily_maintenance.py",
+                       "bytes":  12619
+                   },
+                   {
+                       "path":  "control/tools/run_candidate_daily_maintenance.cmd",
+                       "bytes":  589
+                   },
+                   {
+                       "path":  "control/tools/run_d2a04_candidate_closure.py",
+                       "bytes":  77619
+                   },
+                   {
+                       "path":  "control/tools/run_core12_core19_bounded_source_evidence.py",
+                       "bytes":  32147
+                   },
+                   {
+                       "path":  "control/tools/probe_ricequant_r1_financial_pit.py",
+                       "bytes":  12845
+                   },
+                   {
+                       "path":  "control/tools/parse_csmar_audit_text_candidate.py",
+                       "bytes":  46582
+                   },
+                   {
+                       "path":  "control/tools/migrate_csmar_downloads_transactional.ps1",
+                       "bytes":  11530
+                   },
+                   {
+                       "path":  "control/tools/parse_csmar_idx_chgsmp_multicsv_zero_loss_candidate.py",
+                       "bytes":  57048
+                   },
+                   {
+                       "path":  "control/tools/parse_csmar_bdt_zero_loss_candidate.py",
+                       "bytes":  45247
+                   },
+                   {
+                       "path":  "control/tools/intake_resset_arrivals_20260802.ps1",
+                       "bytes":  20819
+                   },
+                   {
+                       "path":  "control/tools/generate_windows_scheduler_plan.py",
+                       "bytes":  37889
+                   },
+                   {
+                       "path":  "control/tools/generate_csmar_financial_candidate_requests.py",
+                       "bytes":  9124
+                   },
+                   {
+                       "path":  "control/tools/intake_csmar_downloads_non_destructive.ps1",
+                       "bytes":  16033
+                   },
+                   {
+                       "path":  "control/tools/intake_csmar_arrivals_20260730.ps1",
+                       "bytes":  15795
+                   },
+                   {
+                       "path":  "control/tools/parse_csmar_idx_chgsmp_zero_loss_candidate.py",
+                       "bytes":  33614
+                   },
+                   {
+                       "path":  "control/tools/probe_ricequant_environment.py",
+                       "bytes":  4928
+                   },
+                   {
+                       "path":  "control/tools/probe_ricequant_core_minimal.py",
+                       "bytes":  6164
+                   },
+                   {
+                       "path":  "control/tools/probe_ricequant_r0_coverage.py",
+                       "bytes":  19648
+                   },
+                   {
+                       "path":  "control/tools/probe_ricequant_r0_closure.py",
+                       "bytes":  14713
+                   },
+                   {
+                       "path":  "control/tools/prepare_ricequant_r0_action_inputs.py",
+                       "bytes":  5839
+                   },
+                   {
+                       "path":  "control/tools/parse_resset_dist_candidate.py",
+                       "bytes":  32865
+                   },
+                   {
+                       "path":  "control/tools/parse_csmar_idx_idxinfo_zero_loss_candidate.py",
+                       "bytes":  28626
+                   },
+                   {
+                       "path":  "control/tools/parse_resset_suspnsnresmptn_candidate.py",
+                       "bytes":  35050
+                   },
+                   {
+                       "path":  "control/tools/parse_resset_stkspctrmt_candidate.py",
+                       "bytes":  38523
+                   },
+                   {
+                       "path":  "control/tools/run_free_web_daily_probe.py",
+                       "bytes":  32358
+                   },
+                   {
+                       "path":  "control/tests/test_audit_core01_02_03_06_local_evidence.py",
+                       "bytes":  2621
+                   },
+                   {
+                       "path":  "control/tests/test_atomic_snapshot_publish.py",
+                       "bytes":  31044
+                   },
+                   {
+                       "path":  "control/tests/test_audit_csmar_33pkg_local_closure.py",
+                       "bytes":  6309
+                   },
+                   {
+                       "path":  "control/tests/test_audit_core01_official_identity_closure.py",
+                       "bytes":  5439
+                   },
+                   {
+                       "path":  "control/tests/test_adapter_gate.py",
+                       "bytes":  9390
+                   },
+                   {
+                       "path":  "control/tools/verify_free_web_daily_probe_run.py",
+                       "bytes":  27678
+                   },
+                   {
+                       "path":  "control/tools/validate_planned_dataset_catalog.py",
+                       "bytes":  12901
+                   },
+                   {
+                       "path":  "control/tools/verify_r0_shsz_pv_v2_acceptance.py",
+                       "bytes":  6122
+                   },
+                   {
+                       "path":  "control/tools/verify_r0_shsz_pv_gate.py",
+                       "bytes":  16342
+                   },
+                   {
+                       "path":  "control/tests/test_audit_csmar_idx_idxtrd_intake.py",
+                       "bytes":  6302
+                   },
+                   {
+                       "path":  "control/tests/test_bounded_official_source_probe.py",
+                       "bytes":  7084
+                   },
+                   {
+                       "path":  "control/tests/test_baostock_daily_coverage_pilot.py",
+                       "bytes":  8156
+                   },
+                   {
+                       "path":  "control/tests/test_build_core01_official_identity_closure_v2.py",
+                       "bytes":  8319
+                   },
+                   {
+                       "path":  "control/tests/test_build_candidate_asset_index.py",
+                       "bytes":  3170
+                   },
+                   {
+                       "path":  "control/tests/test_audit_trd_dalyr_null_zero_semantics.py",
+                       "bytes":  3098
+                   },
+                   {
+                       "path":  "control/tests/test_audit_selected_core_two_stage_admission.py",
+                       "bytes":  13636
+                   },
+                   {
+                       "path":  "control/tests/test_audit_selected_core_formal_admission.py",
+                       "bytes":  8255
+                   },
+                   {
+                       "path":  "control/tests/test_audit_stage_a_closure_evidence_v3.py",
+                       "bytes":  13590
+                   },
+                   {
+                       "path":  "control/tests/test_audit_stage_a_closure_evidence.py",
+                       "bytes":  5998
+                   },
+                   {
+                       "path":  "control/tools/validate_formal_atomic_publish_execution.py",
+                       "bytes":  32088
+                   },
+                   {
+                       "path":  "control/tools/run_rqdata_b_path_daily_update.py",
+                       "bytes":  35880
+                   },
+                   {
+                       "path":  "control/tools/run_rqdata_b_path_daily_update.cmd",
+                       "bytes":  588
+                   },
+                   {
+                       "path":  "control/tools/run_rqdata_financial_pit_daily_update.py",
+                       "bytes":  37640
+                   },
+                   {
+                       "path":  "control/tools/run_rqdata_financial_pit_daily_update.cmd",
+                       "bytes":  718
+                   },
+                   {
+                       "path":  "control/tools/run_public_official_api_inspection.py",
+                       "bytes":  33663
+                   },
+                   {
+                       "path":  "control/tools/run_local_daily_inspection_worker.py",
+                       "bytes":  21381
+                   },
+                   {
+                       "path":  "control/tools/run_layered_research_gate_recompute_tests.py",
+                       "bytes":  11081
+                   },
+                   {
+                       "path":  "control/tools/run_local_raw_seal.py",
+                       "bytes":  18224
+                   },
+                   {
+                       "path":  "control/tools/run_local_daily_orchestration.py",
+                       "bytes":  46319
+                   },
+                   {
+                       "path":  "control/tools/run_rqdata_shsz_daily_update.cmd",
+                       "bytes":  589
+                   },
+                   {
+                       "path":  "control/tools/validate_adapter_sample.py",
+                       "bytes":  1371
+                   },
+                   {
+                       "path":  "control/tools/test_run_d2a04_candidate_closure.py",
+                       "bytes":  6255
+                   },
+                   {
+                       "path":  "control/tools/validate_dataset_catalog.py",
+                       "bytes":  25816
+                   },
+                   {
+                       "path":  "control/tools/validate_core_data_contract.py",
+                       "bytes":  17629
+                   },
+                   {
+                       "path":  "control/tools/run_stage_a_core02_calendar_session_closure_v3_clean_tests.py",
+                       "bytes":  1988
+                   },
+                   {
+                       "path":  "control/tools/run_source_admission_pilot.py",
+                       "bytes":  36177
+                   },
+                   {
+                       "path":  "control/tools/run_rqdata_shsz_daily_update.py",
+                       "bytes":  27996
+                   },
+                   {
+                       "path":  "control/tools/run_stage_a_core02_calendar_session_closure_v2_tests.py",
+                       "bytes":  2546
+                   },
+                   {
+                       "path":  "control/tools/run_source_normalization_adapter.py",
+                       "bytes":  32383
+                   },
+                   {
+                       "path":  "control/WORKSPACE_INDEX.md",
+                       "bytes":  34644
+                   },
+                   {
+                       "path":  ".agents/tools/set-skill-state.ps1",
+                       "bytes":  3608
+                   },
+                   {
+                       "path":  "control/projects.yaml",
+                       "bytes":  70606
+                   },
+                   {
+                       "path":  "control/ROADMAP.md",
+                       "bytes":  100700
+                   },
+                   {
+                       "path":  ".agents/harnesses/quant-research-reliability/adapters/__init__.py",
+                       "bytes":  63
+                   },
+                   {
+                       "path":  ".agents/harnesses/quant-research-reliability/adapters/mcp_probe_adapter.py",
+                       "bytes":  471
+                   },
+                   {
+                       "path":  ".agents/harnesses/quant-research-reliability/contracts/symbol-date.schema.yaml",
+                       "bytes":  755
+                   },
+                   {
+                       "path":  ".agents/harnesses/quant-research-reliability/adapters/skill_script_adapter.py",
+                       "bytes":  4512
+                   },
+                   {
+                       "path":  ".agents/harnesses/quant-research-reliability/adapters/report_audit_adapter.py",
+                       "bytes":  1082
+                   },
+                   {
+                       "path":  "control/FILE_DISPOSITION.yaml",
+                       "bytes":  8463
+                   },
+                   {
+                       "path":  "control/tools/audit_core01_official_identity_closure.py",
+                       "bytes":  70186
+                   },
+                   {
+                       "path":  "control/tools/audit_core01_02_03_06_local_evidence.py",
+                       "bytes":  68120
+                   },
+                   {
+                       "path":  "control/tools/audit_csmar_33pkg_local_closure.py",
+                       "bytes":  100329
+                   },
+                   {
+                       "path":  "control/tools/audit_core_capacity_evidence.py",
+                       "bytes":  9969
+                   },
+                   {
+                       "path":  "control/tools/audit_company_action_field_solvability.py",
+                       "bytes":  41483
+                   },
+                   {
+                       "path":  "control/STORAGE_POLICY.md",
+                       "bytes":  11814
+                   },
+                   {
+                       "path":  "control/DEPENDENCY_AUDIT.md",
+                       "bytes":  10630
+                   },
+                   {
+                       "path":  "control/tools/atomic_snapshot_publish.py",
+                       "bytes":  83823
+                   },
+                   {
+                       "path":  "control/MIGRATION_PLAN.md",
+                       "bytes":  3498
+                   },
+                   {
+                       "path":  ".agents/harnesses/quant-research-reliability/contracts/report-safety.schema.yaml",
+                       "bytes":  481
+                   },
+                   {
+                       "path":  ".agents/harnesses/quant-research-reliability/targets.yaml",
+                       "bytes":  9086
+                   },
+                   {
+                       "path":  ".agents/harnesses/quant-research-reliability/run_harness.py",
+                       "bytes":  15080
+                   },
+                   {
+                       "path":  ".agents/harnesses/quant-research-reliability/oracles/report_assertions.py",
+                       "bytes":  6991
+                   },
+                   {
+                       "path":  ".agents/harnesses/quant-research-reliability/oracles/finance_assertions.py",
+                       "bytes":  5282
+                   },
+                   {
+                       "path":  ".agents/harnesses/quant-research-reliability/ROADMAP.md",
+                       "bytes":  11434
+                   },
+                   {
+                       "path":  ".agents/SKILL_STATES.md",
+                       "bytes":  2444
+                   },
+                   {
+                       "path":  "AGENTS.md",
+                       "bytes":  10895
+                   },
+                   {
+                       "path":  ".agents/harnesses/quant-research-reliability/HARNESS.md",
+                       "bytes":  9401
+                   },
+                   {
+                       "path":  ".agents/harnesses/quant-research-reliability/cases.yaml",
+                       "bytes":  7864
+                   },
+                   {
+                       "path":  ".agents/harnesses/quant-research-reliability/oracles/safety_assertions.py",
+                       "bytes":  2589
+                   },
+                   {
+                       "path":  ".agents/harnesses/quant-research-reliability/contracts/capital-flow.schema.yaml",
+                       "bytes":  571
+                   },
+                   {
+                       "path":  ".agents/harnesses/quant-research-reliability/contracts/capital-flow-attribution.schema.yaml",
+                       "bytes":  431
+                   },
+                   {
+                       "path":  ".agents/harnesses/quant-research-reliability/contracts/ranking.schema.yaml",
+                       "bytes":  664
+                   },
+                   {
+                       "path":  ".agents/harnesses/quant-research-reliability/contracts/event-windows.schema.yaml",
+                       "bytes":  608
+                   },
+                   {
+                       "path":  ".agents/harnesses/quant-research-reliability/fixtures/contract/report-overclaim-samples/weak_report.md",
+                       "bytes":  388
+                   },
+                   {
+                       "path":  ".agents/harnesses/quant-research-reliability/oracles/__init__.py",
+                       "bytes":  77
+                   },
+                   {
+                       "path":  ".agents/harnesses/quant-research-reliability/oracles/schema_assertions.py",
+                       "bytes":  8779
+                   },
+                   {
+                       "path":  ".agents/harnesses/quant-research-reliability/fixtures/failure/capital-flow-attribution-conflict/input.json",
+                       "bytes":  306
+                   },
+                   {
+                       "path":  ".agents/harnesses/quant-research-reliability/fixtures/golden/capital-flow-attribution-good/input.json",
+                       "bytes":  296
+                   },
+                   {
+                       "path":  "control/tools/audit_csmar_idx_idxtrd_intake.py",
+                       "bytes":  46597
+                   },
+                   {
+                       "path":  "control/tools/build_stage_a_core03_core06_official_rules_closure.py",
+                       "bytes":  69151
+                   },
+                   {
+                       "path":  "control/tools/build_stage_a_core02_calendar_session_closure_v3_clean.py",
+                       "bytes":  17001
+                   },
+                   {
+                       "path":  "control/tools/capture_stage_a_core02_iso_mic_evidence.py",
+                       "bytes":  18336
+                   },
+                   {
+                       "path":  "control/tools/build_stage_a_core03_core06_semantic_closure_v2.py",
+                       "bytes":  54672
+                   },
+                   {
+                       "path":  "control/tools/build_stage_a_core02_calendar_session_closure_v2.py",
+                       "bytes":  101313
+                   },
+                   {
+                       "path":  "control/tools/build_ricequant_tail_return_calibration.py",
+                       "bytes":  6927
+                   },
+                   {
+                       "path":  "control/tools/build_ricequant_r1_index_market_candidate.py",
+                       "bytes":  10081
+                   },
+                   {
+                       "path":  "control/tools/build_stage_a_closure_control.py",
+                       "bytes":  41282
+                   },
+                   {
+                       "path":  "control/tools/build_rqdata_r0_shsz_core01_core02_candidate.py",
+                       "bytes":  23900
+                   },
+                   {
+                       "path":  "control/tools/classify_schema_evolution.py",
+                       "bytes":  20392
+                   },
+                   {
+                       "path":  "control/tools/execute_formal_atomic_publish_isolated.py",
+                       "bytes":  35694
+                   },
+                   {
+                       "path":  "control/tools/configure_candidate_daily_maintenance_task.ps1",
+                       "bytes":  3735
+                   },
+                   {
+                       "path":  "control/tools/export_github_architecture_mirror.ps1",
+                       "bytes":  12805
+                   },
+                   {
+                       "path":  "control/tools/execute_formal_atomic_publish_workspace.py",
+                       "bytes":  52507
+                   },
+                   {
+                       "path":  "control/tools/collect_r0_official_calendar_rules_intake.py",
+                       "bytes":  20908
+                   },
+                   {
+                       "path":  "control/tools/close_stage_a_core02_calendar_sessions.py",
+                       "bytes":  61714
+                   },
+                   {
+                       "path":  "control/tools/close_core02_official_calendar_sessions.py",
+                       "bytes":  53609
+                   },
+                   {
+                       "path":  "control/tools/collect_r0_minimum_calendar_session_gap_evidence.py",
+                       "bytes":  17484
+                   },
+                   {
+                       "path":  "control/tools/collect_r0_core02_session_event_supplement_20260801.py",
+                       "bytes":  24520
+                   },
+                   {
+                       "path":  "control/tools/build_ricequant_r0_pv_tail_delta.py",
+                       "bytes":  50221
+                   },
+                   {
+                       "path":  "control/tools/audit_trd_dalyr_null_zero_semantics.py",
+                       "bytes":  25873
+                   },
+                   {
+                       "path":  "control/tools/audit_stage_a_closure_evidence_v3.py",
+                       "bytes":  78284
+                   },
+                   {
+                       "path":  "control/tools/build_core01_official_identity_closure_v2.py",
+                       "bytes":  119174
+                   },
+                   {
+                       "path":  "control/tools/build_candidate_asset_index.py",
+                       "bytes":  9622
+                   },
+                   {
+                       "path":  "control/tools/audit_stage_a_closure_evidence.py",
+                       "bytes":  48545
+                   },
+                   {
+                       "path":  "control/tools/audit_selected_core_formal_admission.py",
+                       "bytes":  46822
+                   },
+                   {
+                       "path":  "control/tools/audit_resset_stkspctrmt_tail_v2.py",
+                       "bytes":  26694
+                   },
+                   {
+                       "path":  "control/tools/audit_source_admission_evidence.py",
+                       "bytes":  12496
+                   },
+                   {
+                       "path":  "control/tools/audit_selected_core_two_stage_admission.py",
+                       "bytes":  46285
+                   },
+                   {
+                       "path":  "control/tools/build_csmar_user_attested_rights_receipt.py",
+                       "bytes":  41940
+                   },
+                   {
+                       "path":  "control/tools/build_r0_shsz_pv_publication_package.py",
+                       "bytes":  46732
+                   },
+                   {
+                       "path":  "control/tools/build_r0_shsz_pv_panel_candidate.py",
+                       "bytes":  76921
+                   },
+                   {
+                       "path":  "control/tools/build_ricequant_r0_action_candidate.py",
+                       "bytes":  25955
+                   },
+                   {
+                       "path":  "control/tools/build_ricequant_core11_industry_history_candidate.py",
+                       "bytes":  14933
+                   },
+                   {
+                       "path":  "control/tools/build_r0_official_calendar_rules_normalized_stagea.py",
+                       "bytes":  24353
+                   },
+                   {
+                       "path":  "control/tools/build_joinquant_share_capital_pit_candidate.py",
+                       "bytes":  25066
+                   },
+                   {
+                       "path":  "control/tools/build_downloaded_dataset.py",
+                       "bytes":  59210
+                   },
+                   {
+                       "path":  "control/tools/build_r0_core02_bounded_calendar_skeleton_2005_2024.py",
+                       "bytes":  31573
+                   },
+                   {
+                       "path":  "control/tools/build_r0_action_pit_normalized_candidate.py",
+                       "bytes":  11964
+                   },
+                   {
+                       "path":  "data/catalog/contracts/ricequant_r0_pv_tail_delta_v1/contract.json",
+                       "bytes":  3188
+                   },
+                   {
+                       "path":  "data/catalog/contracts/ricequant_r1_financial_pit_probe_v1/README.md",
+                       "bytes":  1335
+                   },
+                   {
+                       "path":  "data/catalog/contracts/ricequant_r0_coverage_probe_v1/contract.json",
+                       "bytes":  2083
+                   },
+                   {
+                       "path":  "data/catalog/contracts/ricequant_r0_pv_tail_delta_v1/README.md",
+                       "bytes":  1019
+                   },
+                   {
+                       "path":  "data/catalog/contracts/ricequant_r1_financial_pit_probe_v1/contract.json",
+                       "bytes":  2889
+                   },
+                   {
+                       "path":  "data/catalog/contracts/rqdata_b_path_daily_candidate_v1/README.md",
+                       "bytes":  1646
+                   },
+                   {
+                       "path":  "data/catalog/contracts/rqdata_b_path_daily_candidate_v1/contract.json",
+                       "bytes":  1822
+                   },
+                   {
+                       "path":  "data/catalog/contracts/ricequant_r1_index_market_candidate_v1/contract.json",
+                       "bytes":  1286
+                   },
+                   {
+                       "path":  "data/catalog/contracts/ricequant_r1_market_reference_probe_v1/contract.json",
+                       "bytes":  3464
+                   },
+                   {
+                       "path":  "data/catalog/contracts/ricequant_r0_coverage_probe_v1/README.md",
+                       "bytes":  1311
+                   },
+                   {
+                       "path":  "data/catalog/contracts/ricequant_capability_probe_v1/contract.json",
+                       "bytes":  3646
+                   },
+                   {
+                       "path":  "data/catalog/contracts/ricequant_core11_industry_history_candidate_v1/README.md",
+                       "bytes":  368
+                   },
+                   {
+                       "path":  "data/catalog/contracts/revision_event_ledger_v1/contract.json",
+                       "bytes":  1071
+                   },
+                   {
+                       "path":  "data/catalog/contracts/ricequant_capability_probe_v1/README.md",
+                       "bytes":  1333
+                   },
+                   {
+                       "path":  "data/catalog/contracts/ricequant_core11_industry_history_candidate_v1/contract.json",
+                       "bytes":  1344
+                   },
+                   {
+                       "path":  "data/catalog/contracts/ricequant_r0_core04_core05_candidate_v1/README.md",
+                       "bytes":  1661
+                   },
+                   {
+                       "path":  "data/catalog/contracts/ricequant_r0_core04_core05_candidate_v1/contract.json",
+                       "bytes":  3102
+                   },
+                   {
+                       "path":  "data/catalog/contracts/ricequant_r0_closure_probe_v1/README.md",
+                       "bytes":  1015
+                   },
+                   {
+                       "path":  "data/catalog/contracts/ricequant_r0_closure_probe_v1/contract.json",
+                       "bytes":  3361
+                   },
+                   {
+                       "path":  "data/catalog/contracts/rqdata_financial_pit_daily_candidate_v1/README.md",
+                       "bytes":  3031
+                   },
+                   {
+                       "path":  "data/catalog/contracts/source_admission_v1/execution_plans/d2a04b_official_identity_calendar_action_status_source_closure_v1.json",
+                       "bytes":  18862
+                   },
+                   {
+                       "path":  "data/catalog/contracts/source_admission_v1/execution_plans/d2a03_official_pit_request_spec_v1.json",
+                       "bytes":  3694
+                   },
+                   {
+                       "path":  "data/catalog/contracts/schema_evolution_v1/README.md",
+                       "bytes":  3160
+                   },
+                   {
+                       "path":  "data/catalog/contracts/source_admission_v1/execution_plans/d2a04_core01_to_core06_candidate_closure_v1.json",
+                       "bytes":  5320
+                   },
+                   {
+                       "path":  "data/catalog/contracts/source_admission_v1/execution_plans/d2a03_official_pit_min_core_slice_v1.json",
+                       "bytes":  5625
+                   },
+                   {
+                       "path":  "data/catalog/contracts/source_admission_v1/source_matrix.json",
+                       "bytes":  15174
+                   },
+                   {
+                       "path":  "data/catalog/contracts/source_admission_v1/README.md",
+                       "bytes":  8786
+                   },
+                   {
+                       "path":  "data/catalog/contracts/source_admission_v1/execution_plans/d2a03_core_slice_selection_v1.json",
+                       "bytes":  4667
+                   },
+                   {
+                       "path":  "data/catalog/contracts/source_admission_v1/execution_plans/baostock_daily_coverage_v1.json",
+                       "bytes":  11155
+                   },
+                   {
+                       "path":  "data/catalog/contracts/schema_evolution_v1/schema.schema.json",
+                       "bytes":  1803
+                   },
+                   {
+                       "path":  "data/catalog/contracts/rqdata_r0_shsz_core01_core02_candidate_v1/contract.json",
+                       "bytes":  2072
+                   },
+                   {
+                       "path":  "data/catalog/contracts/scheduler_plan_generator_v1/request.schema.json",
+                       "bytes":  2638
+                   },
+                   {
+                       "path":  "data/catalog/contracts/rqdata_financial_pit_daily_candidate_v1/contract.json",
+                       "bytes":  2628
+                   },
+                   {
+                       "path":  "data/catalog/contracts/rqdata_r0_shsz_core01_core02_candidate_v1/README.md",
+                       "bytes":  558
+                   },
+                   {
+                       "path":  "data/catalog/contracts/scheduler_plan_generator_v1/README.md",
+                       "bytes":  2652
+                   },
+                   {
+                       "path":  "data/catalog/contracts/schema_evolution_v1/examples/old.schema.json",
+                       "bytes":  643
+                   },
+                   {
+                       "path":  "data/catalog/contracts/schema_evolution_v1/examples/compatible-add.schema.json",
+                       "bytes":  781
+                   },
+                   {
+                       "path":  "data/catalog/contracts/scheduler_plan_generator_v1/example.update-20260730.request.json",
+                       "bytes":  948
+                   },
+                   {
+                       "path":  "data/catalog/contracts/scheduler_plan_generator_v1/example.request.json",
+                       "bytes":  1060
+                   },
+                   {
+                       "path":  "data/catalog/contracts/revision_event_ledger_v1/event.schema.json",
+                       "bytes":  2160
+                   },
+                   {
+                       "path":  "data/catalog/contracts/local_download_build_v1/csmar-fs-icomscfi.csmar-33pkg-20260729.request.json",
+                       "bytes":  4088
+                   },
+                   {
+                       "path":  "data/catalog/contracts/local_download_build_v1/csmar-fs-icomscfd.csmar-33pkg-20260729.request.json",
+                       "bytes":  5058
+                   },
+                   {
+                       "path":  "data/catalog/contracts/local_download_build_v1/csmar-fs-scomins.csmar-33pkg-20260729.request.json",
+                       "bytes":  5420
+                   },
+                   {
+                       "path":  "data/catalog/contracts/local_download_build_v1/csmar-fs-scombas.csmar-33pkg-20260729.request.json",
+                       "bytes":  7256
+                   },
+                   {
+                       "path":  "data/catalog/contracts/local_download_build_v1/csmar-fs-icomins.csmar-33pkg-20260729.request.json",
+                       "bytes":  5648
+                   },
+                   {
+                       "path":  "data/catalog/contracts/local_download_build_v1/csmar-fs-bcomscfd.csmar-33pkg-20260729.request.json",
+                       "bytes":  5514
+                   },
+                   {
+                       "path":  "data/catalog/contracts/local_download_build_v1/csmar-fs-bcomins.csmar-33pkg-20260729.request.json",
+                       "bytes":  5135
+                   },
+                   {
+                       "path":  "data/catalog/contracts/local_download_build_v1/csmar-fs-icombas.csmar-33pkg-20260729.request.json",
+                       "bytes":  7142
+                   },
+                   {
+                       "path":  "data/catalog/contracts/local_download_build_v1/csmar-fs-bcomscfi.csmar-33pkg-20260729.request.json",
+                       "bytes":  4089
+                   },
+                   {
+                       "path":  "data/catalog/contracts/local_download_build_v1/csmar-fs-scomscfd.csmar-33pkg-20260729.request.json",
+                       "bytes":  5343
+                   },
+                   {
+                       "path":  "data/catalog/contracts/local_download_build_v1/csmar_fs_comscfd.d2a04b-full-history.request.json",
+                       "bytes":  6152
+                   },
+                   {
+                       "path":  "data/catalog/contracts/local_download_build_v1/csmar_fs_comins.request.template.json",
+                       "bytes":  6334
+                   },
+                   {
+                       "path":  "data/catalog/contracts/local_download_build_v1/csmar_fs_comscfi.d2a04b-full-history.request.json",
+                       "bytes":  4294
+                   },
+                   {
+                       "path":  "data/catalog/contracts/local_download_build_v1/csmar_fs_comscfd.request.template.json",
+                       "bytes":  5629
+                   },
+                   {
+                       "path":  "data/catalog/contracts/local_download_build_v1/csmar_fs_comins.d2a04b-full-history.request.json",
+                       "bytes":  6516
+                   },
+                   {
+                       "path":  "data/catalog/contracts/local_download_build_v1/csmar.intake-manifest.json",
+                       "bytes":  13805
+                   },
+                   {
+                       "path":  "data/catalog/contracts/local_download_build_v1/csmar-fs-scomscfi.csmar-33pkg-20260729.request.json",
+                       "bytes":  4089
+                   },
+                   {
+                       "path":  "data/catalog/contracts/local_download_build_v1/csmar_fs_combas.request.template.json",
+                       "bytes":  10481
+                   },
+                   {
+                       "path":  "data/catalog/contracts/local_download_build_v1/csmar_fs_combas.d2a04b-full-history.request.json",
+                       "bytes":  10738
+                   },
+                   {
+                       "path":  "data/catalog/contracts/local_download_build_v1/csmar-fs-bcombas.csmar-33pkg-20260729.request.json",
+                       "bytes":  6857
+                   },
+                   {
+                       "path":  "data/catalog/contracts/r0_shsz_pv_publication_package_v2/README.md",
+                       "bytes":  739
+                   },
+                   {
+                       "path":  "data/catalog/contracts/r0_shsz_pv_publication_package_v2/contract.json",
+                       "bytes":  545
+                   },
+                   {
+                       "path":  "data/catalog/contracts/r0_shsz_pv_publication_package_v1/contract.json",
+                       "bytes":  970
+                   },
+                   {
+                       "path":  "data/catalog/contracts/r0_shsz_pv_publication_package_v2/request.schema.json",
+                       "bytes":  2690
+                   },
+                   {
+                       "path":  "data/catalog/contracts/r0_shsz_pv_v1/README.md",
+                       "bytes":  949
+                   },
+                   {
+                       "path":  "data/catalog/contracts/r0_shsz_pv_v2/contract.json",
+                       "bytes":  5564
+                   },
+                   {
+                       "path":  "data/catalog/contracts/revision_event_ledger_v1/README.md",
+                       "bytes":  1785
+                   },
+                   {
+                       "path":  "data/catalog/contracts/r0_shsz_pv_v1/contract.json",
+                       "bytes":  4605
+                   },
+                   {
+                       "path":  "data/catalog/contracts/r0_shsz_pv_v2/README.md",
+                       "bytes":  1470
+                   },
+                   {
+                       "path":  "data/catalog/contracts/r0_shsz_pv_publication_package_v1/README.md",
+                       "bytes":  1756
+                   },
+                   {
+                       "path":  "data/catalog/contracts/local_download_intake_v1/csmar_downloads_cleanup_20260730.request.json",
+                       "bytes":  627
+                   },
+                   {
+                       "path":  "data/catalog/contracts/local_raw_seal_v1/README.md",
+                       "bytes":  2631
+                   },
+                   {
+                       "path":  "data/catalog/contracts/local_download_build_v1/csmar-fin-auditstats.csmar-33pkg-20260729.request.json",
+                       "bytes":  2399
+                   },
+                   {
+                       "path":  "data/catalog/contracts/local_download_intake_v1/csmar_idx_idxtrd_20260730.intake.json",
+                       "bytes":  4369
+                   },
+                   {
+                       "path":  "data/catalog/contracts/local_raw_seal_v1/contract.json",
+                       "bytes":  1433
+                   },
+                   {
+                       "path":  "data/catalog/contracts/public_official_api_inspection_v1/contract.json",
+                       "bytes":  7033
+                   },
+                   {
+                       "path":  "data/catalog/contracts/r0_shsz_pv_publication_package_v1/request.schema.json",
+                       "bytes":  3330
+                   },
+                   {
+                       "path":  "data/catalog/contracts/public_official_api_inspection_v1/fixtures/hkma.json",
+                       "bytes":  257
+                   },
+                   {
+                       "path":  "data/catalog/contracts/public_official_api_inspection_v1/README.md",
+                       "bytes":  1901
+                   },
+                   {
+                       "path":  "control/tests/test_execute_formal_atomic_publish_isolated.py",
+                       "bytes":  21191
+                   },
+                   {
+                       "path":  "control/tests/test_dual_source_reconcile.py",
+                       "bytes":  12236
+                   },
+                   {
+                       "path":  "control/tests/test_formal_atomic_publish_execution.py",
+                       "bytes":  21143
+                   },
+                   {
+                       "path":  "control/tests/test_execute_formal_atomic_publish_workspace.py",
+                       "bytes":  28616
+                   },
+                   {
+                       "path":  "control/tests/test_data_engineering_runtime.py",
+                       "bytes":  6830
+                   },
+                   {
+                       "path":  "control/tests/test_daily_pipeline_health.py",
+                       "bytes":  14691
+                   },
+                   {
+                       "path":  "control/tests/test_company_action_field_solvability.py",
+                       "bytes":  3014
+                   },
+                   {
+                       "path":  "control/tests/test_dataset_catalog_access_guard.py",
+                       "bytes":  7530
+                   },
+                   {
+                       "path":  "control/tests/test_daily_update_local_smoke.py",
+                       "bytes":  13532
+                   },
+                   {
+                       "path":  "control/tests/test_formal_publisher_preflight.py",
+                       "bytes":  13588
+                   },
+                   {
+                       "path":  "control/tests/test_parse_csmar_bdt_zero_loss_candidate.py",
+                       "bytes":  12299
+                   },
+                   {
+                       "path":  "control/tests/test_parse_csmar_audit_text_candidate.py",
+                       "bytes":  15032
+                   },
+                   {
+                       "path":  "control/tests/test_parse_csmar_idx_chgsmp_zero_loss_candidate.py",
+                       "bytes":  3778
+                   },
+                   {
+                       "path":  "control/tests/test_parse_csmar_idx_chgsmp_multicsv_zero_loss_candidate.py",
+                       "bytes":  5828
+                   },
+                   {
+                       "path":  "control/tests/test_local_raw_seal.py",
+                       "bytes":  8487
+                   },
+                   {
+                       "path":  "control/tests/test_local_daily_inspection_worker.py",
+                       "bytes":  15218
+                   },
+                   {
+                       "path":  "control/tests/test_free_web_daily_probe.py",
+                       "bytes":  10507
+                   },
+                   {
+                       "path":  "control/tests/test_local_daily_update_engine.py",
+                       "bytes":  18510
+                   },
+                   {
+                       "path":  "control/tests/test_local_daily_orchestration.py",
+                       "bytes":  12486
+                   },
+                   {
+                       "path":  "control/tests/test_close_core02_official_calendar_sessions.py",
+                       "bytes":  4444
+                   },
+                   {
+                       "path":  "control/tests/test_build_ricequant_core11_industry_history_candidate.py",
+                       "bytes":  1974
+                   },
+                   {
+                       "path":  "control/tests/test_build_r0_shsz_pv_publication_package.py",
+                       "bytes":  17578
+                   },
+                   {
+                       "path":  "control/tests/test_build_ricequant_r0_pv_tail_delta.py",
+                       "bytes":  3481
+                   },
+                   {
+                       "path":  "control/tests/test_build_ricequant_r0_action_candidate.py",
+                       "bytes":  3417
+                   },
+                   {
+                       "path":  "control/tests/test_build_r0_shsz_pv_panel_candidate.py",
+                       "bytes":  11332
+                   },
+                   {
+                       "path":  "control/tests/test_build_downloaded_dataset.py",
+                       "bytes":  14261
+                   },
+                   {
+                       "path":  "control/tests/test_build_csmar_user_attested_rights_receipt.py",
+                       "bytes":  12363
+                   },
+                   {
+                       "path":  "control/tests/test_build_r0_action_pit_normalized_candidate.py",
+                       "bytes":  3173
+                   },
+                   {
+                       "path":  "control/tests/test_build_joinquant_share_capital_pit_candidate.py",
+                       "bytes":  7571
+                   },
+                   {
+                       "path":  "control/tests/test_build_ricequant_r1_index_market_candidate.py",
+                       "bytes":  1299
+                   },
+                   {
+                       "path":  "control/tests/test_build_stage_a_core03_core06_semantic_closure_v2.py",
+                       "bytes":  6295
+                   },
+                   {
+                       "path":  "control/tests/test_build_stage_a_core03_core06_official_rules_closure.py",
+                       "bytes":  3459
+                   },
+                   {
+                       "path":  "control/tests/test_capture_stage_a_core02_iso_mic_evidence.py",
+                       "bytes":  2656
+                   },
+                   {
+                       "path":  "control/tests/test_candidate_daily_maintenance.py",
+                       "bytes":  8495
+                   },
+                   {
+                       "path":  "control/tests/test_build_stage_a_core02_calendar_session_closure_v3_clean.py",
+                       "bytes":  2953
+                   },
+                   {
+                       "path":  "control/tests/test_build_rqdata_r0_shsz_core01_core02_candidate.py",
+                       "bytes":  5362
+                   },
+                   {
+                       "path":  "control/tests/test_build_ricequant_tail_return_calibration.py",
+                       "bytes":  1467
+                   },
+                   {
+                       "path":  "control/tests/test_build_stage_a_core02_calendar_session_closure_v2.py",
+                       "bytes":  14829
+                   },
+                   {
+                       "path":  "control/tests/test_build_stage_a_closure_control.py",
+                       "bytes":  5607
+                   },
+                   {
+                       "path":  "control/tests/test_parse_csmar_idx_idxinfo_zero_loss_candidate.py",
+                       "bytes":  2494
+                   },
+                   {
+                       "path":  "data/catalog/candidate_assets.schema.json",
+                       "bytes":  1129
+                   },
+                   {
+                       "path":  "data/catalog/dataset.schema.json",
+                       "bytes":  7083
+                   },
+                   {
+                       "path":  "data/catalog/datasets.json",
+                       "bytes":  26627
+                   },
+                   {
+                       "path":  "data/catalog/factor_registry.schema.json",
+                       "bytes":  2319
+                   },
+                   {
+                       "path":  "data/catalog/ACCESS_POLICY.md",
+                       "bytes":  9142
+                   },
+                   {
+                       "path":  "data/catalog/MAINTENANCE_RUNBOOK.md",
+                       "bytes":  34457
+                   },
+                   {
+                       "path":  "data/catalog/DATABASE_MANUAL.md",
+                       "bytes":  52140
+                   },
+                   {
+                       "path":  "data/catalog/DATA_QUALITY_POLICY.md",
+                       "bytes":  9723
+                   },
+                   {
+                       "path":  "data/catalog/SOURCE_POLICY.md",
+                       "bytes":  18021
+                   },
+                   {
+                       "path":  "data/catalog/planned_datasets.json",
+                       "bytes":  47246
+                   },
+                   {
+                       "path":  "data/catalog/contracts/source_normalization_adapter_v1/README.md",
+                       "bytes":  2299
+                   },
+                   {
+                       "path":  "data/catalog/contracts/source_normalization_adapter_v1/contract.json",
+                       "bytes":  1946
+                   },
+                   {
+                       "path":  "data/catalog/contracts/source_admission_v1/current_source_registry.json",
+                       "bytes":  81038
+                   },
+                   {
+                       "path":  "data/catalog/contracts/source_normalization_adapter_v1/request.schema.json",
+                       "bytes":  2511
+                   },
+                   {
+                       "path":  "data/catalog/qdata.cmd",
+                       "bytes":  722
+                   },
+                   {
+                       "path":  "data/catalog/dataset_cli.py",
+                       "bytes":  20693
+                   },
+                   {
+                       "path":  "data/catalog/factors.json",
+                       "bytes":  12181365
+                   },
+                   {
+                       "path":  "data/catalog/adapter_gate.py",
+                       "bytes":  19803
+                   },
+                   {
+                       "path":  "data/catalog/snapshot_contract.py",
+                       "bytes":  14843
+                   },
+                   {
+                       "path":  "data/catalog/README.md",
+                       "bytes":  30636
+                   },
+                   {
+                       "path":  "control/tests/test_r0_minimum_calendar_session_gap_evidence.py",
+                       "bytes":  4727
+                   },
+                   {
+                       "path":  "control/tests/test_public_official_api_inspection.py",
+                       "bytes":  10687
+                   },
+                   {
+                       "path":  "control/tests/test_recompute_r0_stage_a_current.py",
+                       "bytes":  3327
+                   },
+                   {
+                       "path":  "control/tests/test_r0_official_calendar_rules_normalized_stagea.py",
+                       "bytes":  5088
+                   },
+                   {
+                       "path":  "control/tests/test_probe_ricequant_r1_market_reference.py",
+                       "bytes":  3899
+                   },
+                   {
+                       "path":  "control/tests/test_probe_ricequant_r0_closure.py",
+                       "bytes":  3140
+                   },
+                   {
+                       "path":  "control/tests/test_probe_ricequant_environment.py",
+                       "bytes":  1583
+                   },
+                   {
+                       "path":  "control/tests/test_probe_ricequant_r1_financial_pit.py",
+                       "bytes":  3411
+                   },
+                   {
+                       "path":  "control/tests/test_probe_ricequant_r0_coverage.py",
+                       "bytes":  2752
+                   },
+                   {
+                       "path":  "control/tests/test_reconcile_ricequant_csmar_r0_actions.py",
+                       "bytes":  2765
+                   },
+                   {
+                       "path":  "control/tests/test_source_normalization_adapter.py",
+                       "bytes":  12261
+                   },
+                   {
+                       "path":  "control/tests/test_source_admission_pilot.py",
+                       "bytes":  10725
+                   },
+                   {
+                       "path":  "control/tests/test_verify_r0_shsz_pv_gate.py",
+                       "bytes":  3867
+                   },
+                   {
+                       "path":  "control/tests/test_verify_free_web_daily_probe_run.py",
+                       "bytes":  9163
+                   },
+                   {
+                       "path":  "control/tests/test_schema_evolution_classifier.py",
+                       "bytes":  10195
+                   },
+                   {
+                       "path":  "control/tests/test_rqdata_b_path_daily_update.py",
+                       "bytes":  9237
+                   },
+                   {
+                       "path":  "control/tests/test_revision_event_ledger.py",
+                       "bytes":  6427
+                   },
+                   {
+                       "path":  "control/tests/test_scheduler_plan_generator.py",
+                       "bytes":  11537
+                   },
+                   {
+                       "path":  "control/tests/test_rqdata_financial_pit_daily_update.py",
+                       "bytes":  14418
+                   }
+               ],
+    "skipped_count":  67,
+    "skipped":  [
+                    {
+                        "path":  "多因子/quant_data_core/catalog.sqlite3",
+                        "reason":  "BLOCKED_FILE_NAME"
+                    },
+                    {
+                        "path":  "capital-flow-attribution/scripts/__pycache__",
+                        "reason":  "BLOCKED_DIRECTORY"
+                    },
+                    {
+                        "path":  "多因子/quant_data_core/releases",
+                        "reason":  "BLOCKED_DIRECTORY"
+                    },
+                    {
+                        "path":  "多因子/quant_data_core/__pycache__",
+                        "reason":  "BLOCKED_DIRECTORY"
+                    },
+                    {
+                        "path":  "capital-flow-attribution/tests/__pycache__",
+                        "reason":  "BLOCKED_DIRECTORY"
+                    },
+                    {
+                        "path":  "news-signal-agent/backend/app/__pycache__",
+                        "reason":  "BLOCKED_DIRECTORY"
+                    },
+                    {
+                        "path":  "capital-flow-attribution/src/capital_flow_attribution.egg-info",
+                        "reason":  "BLOCKED_DIRECTORY"
+                    },
+                    {
+                        "path":  "capital-flow-attribution/src/capital_flow_attribution/__pycache__",
+                        "reason":  "BLOCKED_DIRECTORY"
+                    },
+                    {
+                        "path":  "data/catalog/contracts/public_official_api_inspection_v1/fixtures/us_treasury_atom.xml",
+                        "reason":  "EXTENSION_NOT_ALLOWLISTED"
+                    },
+                    {
+                        "path":  "多因子/factor_factory/__pycache__",
+                        "reason":  "BLOCKED_DIRECTORY"
+                    },
+                    {
+                        "path":  "data/catalog/contracts/public_official_api_inspection_v1/fixtures/bis_sdmx.xml",
+                        "reason":  "EXTENSION_NOT_ALLOWLISTED"
+                    },
+                    {
+                        "path":  "data/catalog/contracts/public_official_api_inspection_v1/fixtures/ecb_sdmx_csv.csv",
+                        "reason":  "BLOCKED_DATA_OR_BINARY_EXTENSION"
+                    },
+                    {
+                        "path":  "多因子/tools/__pycache__",
+                        "reason":  "BLOCKED_DIRECTORY"
+                    },
+                    {
+                        "path":  "多因子/quant_data_core/bootstrap",
+                        "reason":  "BLOCKED_DIRECTORY"
+                    },
+                    {
+                        "path":  "多因子/ml/__pycache__",
+                        "reason":  "BLOCKED_DIRECTORY"
+                    },
+                    {
+                        "path":  "多因子/research_reporting/__pycache__",
+                        "reason":  "BLOCKED_DIRECTORY"
+                    },
+                    {
+                        "path":  "news-signal-agent/backend/app/workflow/__pycache__",
+                        "reason":  "BLOCKED_DIRECTORY"
+                    },
+                    {
+                        "path":  "news-signal-agent/backend/app/feedback/__pycache__",
+                        "reason":  "BLOCKED_DIRECTORY"
+                    },
+                    {
+                        "path":  "news-signal-agent/backend/app/dedup/__pycache__",
+                        "reason":  "BLOCKED_DIRECTORY"
+                    },
+                    {
+                        "path":  "news-signal-agent/backend/app/llm/__pycache__",
+                        "reason":  "BLOCKED_DIRECTORY"
+                    },
+                    {
+                        "path":  "news-signal-agent/backend/app/linker/__pycache__",
+                        "reason":  "BLOCKED_DIRECTORY"
+                    },
+                    {
+                        "path":  "news-signal-agent/backend/app/api/__pycache__",
+                        "reason":  "BLOCKED_DIRECTORY"
+                    },
+                    {
+                        "path":  "news-signal-agent/backend/tests/__pycache__",
+                        "reason":  "BLOCKED_DIRECTORY"
+                    },
+                    {
+                        "path":  "news-signal-agent/backend/app/collectors/__pycache__",
+                        "reason":  "BLOCKED_DIRECTORY"
+                    },
+                    {
+                        "path":  "news-signal-agent/backend/app/classify/__pycache__",
+                        "reason":  "BLOCKED_DIRECTORY"
+                    },
+                    {
+                        "path":  "news-signal-agent/backend/app/storage/__pycache__",
+                        "reason":  "BLOCKED_DIRECTORY"
+                    },
+                    {
+                        "path":  "news-signal-agent/backend/app/scoring/__pycache__",
+                        "reason":  "BLOCKED_DIRECTORY"
+                    },
+                    {
+                        "path":  "news-signal-agent/backend/app/workflow/nodes/__pycache__",
+                        "reason":  "BLOCKED_DIRECTORY"
+                    },
+                    {
+                        "path":  "news-signal-agent/backend/app/validation/__pycache__",
+                        "reason":  "BLOCKED_DIRECTORY"
+                    },
+                    {
+                        "path":  "news-signal-agent/backend/app/notify/__pycache__",
+                        "reason":  "BLOCKED_DIRECTORY"
+                    },
+                    {
+                        "path":  "news-signal-agent/backend/app/normalize/__pycache__",
+                        "reason":  "BLOCKED_DIRECTORY"
+                    },
+                    {
+                        "path":  "news-signal-agent/backend/app/report/__pycache__",
+                        "reason":  "BLOCKED_DIRECTORY"
+                    },
+                    {
+                        "path":  "news-signal-agent/backend/app/ranking/__pycache__",
+                        "reason":  "BLOCKED_DIRECTORY"
+                    },
+                    {
+                        "path":  "data/catalog/contracts/r0_local_prep_no_promotion_v1/fixtures/candidate_payload/core06_tradability.csv",
+                        "reason":  "BLOCKED_DATA_OR_BINARY_EXTENSION"
+                    },
+                    {
+                        "path":  ".agents/harnesses/quant-research-reliability/adapters/__pycache__",
+                        "reason":  "BLOCKED_DIRECTORY"
+                    },
+                    {
+                        "path":  "control/tools/__pycache__",
+                        "reason":  "BLOCKED_DIRECTORY"
+                    },
+                    {
+                        "path":  ".agents/harnesses/quant-research-reliability/fixtures/failure/duplicate-announcements/events.csv",
+                        "reason":  "BLOCKED_DATA_OR_BINARY_EXTENSION"
+                    },
+                    {
+                        "path":  ".agents/harnesses/quant-research-reliability/fixtures/failure/duplicate-announcements/prices.csv",
+                        "reason":  "BLOCKED_DATA_OR_BINARY_EXTENSION"
+                    },
+                    {
+                        "path":  "data/catalog/contracts/revision_event_ledger_v1/fixtures/conflicting_duplicate.jsonl",
+                        "reason":  "EXTENSION_NOT_ALLOWLISTED"
+                    },
+                    {
+                        "path":  "data/catalog/contracts/revision_event_ledger_v1/fixtures/missing_withdrawal_target.jsonl",
+                        "reason":  "EXTENSION_NOT_ALLOWLISTED"
+                    },
+                    {
+                        "path":  "control/tests/__pycache__",
+                        "reason":  "BLOCKED_DIRECTORY"
+                    },
+                    {
+                        "path":  "control/tests/fixtures/local_download_build/example.csv",
+                        "reason":  "BLOCKED_DATA_OR_BINARY_EXTENSION"
+                    },
+                    {
+                        "path":  ".agents/harnesses/quant-research-reliability/fixtures/golden/event-study-basic/events.csv",
+                        "reason":  "BLOCKED_DATA_OR_BINARY_EXTENSION"
+                    },
+                    {
+                        "path":  ".agents/harnesses/quant-research-reliability/fixtures/golden/event-study-basic/prices.csv",
+                        "reason":  "BLOCKED_DATA_OR_BINARY_EXTENSION"
+                    },
+                    {
+                        "path":  ".agents/harnesses/quant-research-reliability/oracles/__pycache__",
+                        "reason":  "BLOCKED_DIRECTORY"
+                    },
+                    {
+                        "path":  ".agents/harnesses/quant-research-reliability/fixtures/golden/relative-dominance-etf-pair/prices.csv",
+                        "reason":  "BLOCKED_DATA_OR_BINARY_EXTENSION"
+                    },
+                    {
+                        "path":  ".agents/harnesses/quant-research-reliability/fixtures/failure/missing-prices-event-study/events.csv",
+                        "reason":  "BLOCKED_DATA_OR_BINARY_EXTENSION"
+                    },
+                    {
+                        "path":  ".agents/harnesses/quant-research-reliability/fixtures/failure/missing-prices-event-study/prices.csv",
+                        "reason":  "BLOCKED_DATA_OR_BINARY_EXTENSION"
+                    },
+                    {
+                        "path":  ".agents/harnesses/quant-research-reliability/fixtures/golden/capital-flow-basic/capital_flow.csv",
+                        "reason":  "BLOCKED_DATA_OR_BINARY_EXTENSION"
+                    },
+                    {
+                        "path":  ".agents/harnesses/quant-research-reliability/fixtures/failure/stale-capital-flow/capital_flow.csv",
+                        "reason":  "BLOCKED_DATA_OR_BINARY_EXTENSION"
+                    },
+                    {
+                        "path":  "data/catalog/contracts/revision_event_ledger_v1/fixtures/valid.jsonl",
+                        "reason":  "EXTENSION_NOT_ALLOWLISTED"
+                    },
+                    {
+                        "path":  "data/catalog/contracts/r0_local_prep_no_promotion_v1/fixtures/formal_payload/core06_tradability.csv",
+                        "reason":  "BLOCKED_DATA_OR_BINARY_EXTENSION"
+                    },
+                    {
+                        "path":  "data/catalog/contracts/r0_local_prep_no_promotion_v1/fixtures/candidate_payload/core01_security_master.csv",
+                        "reason":  "BLOCKED_DATA_OR_BINARY_EXTENSION"
+                    },
+                    {
+                        "path":  "data/catalog/contracts/r0_local_prep_no_promotion_v1/fixtures/formal_payload/core04_corporate_actions.csv",
+                        "reason":  "BLOCKED_DATA_OR_BINARY_EXTENSION"
+                    },
+                    {
+                        "path":  "data/catalog/contracts/r0_local_prep_no_promotion_v1/fixtures/formal_payload/core05_daily_adjusted.csv",
+                        "reason":  "BLOCKED_DATA_OR_BINARY_EXTENSION"
+                    },
+                    {
+                        "path":  "data/catalog/contracts/r0_local_prep_no_promotion_v1/fixtures/candidate_payload/core04_corporate_actions.csv",
+                        "reason":  "BLOCKED_DATA_OR_BINARY_EXTENSION"
+                    },
+                    {
+                        "path":  "data/catalog/contracts/r0_local_prep_no_promotion_v1/fixtures/candidate_payload/core05_daily_adjusted.csv",
+                        "reason":  "BLOCKED_DATA_OR_BINARY_EXTENSION"
+                    },
+                    {
+                        "path":  "data/catalog/contracts/r0_local_prep_no_promotion_v1/fixtures/candidate_payload/core02_calendar.csv",
+                        "reason":  "BLOCKED_DATA_OR_BINARY_EXTENSION"
+                    },
+                    {
+                        "path":  "data/catalog/contracts/r0_local_prep_no_promotion_v1/fixtures/candidate_payload/core03_daily_raw.csv",
+                        "reason":  "BLOCKED_DATA_OR_BINARY_EXTENSION"
+                    },
+                    {
+                        "path":  "data/catalog/contracts/r0_local_prep_no_promotion_v1/fixtures/ledgers/exclusion.jsonl",
+                        "reason":  "EXTENSION_NOT_ALLOWLISTED"
+                    },
+                    {
+                        "path":  "data/catalog/contracts/r0_local_prep_no_promotion_v1/fixtures/ledgers/revision.jsonl",
+                        "reason":  "EXTENSION_NOT_ALLOWLISTED"
+                    },
+                    {
+                        "path":  "data/catalog/contracts/r0_local_prep_no_promotion_v1/fixtures/external_evidence_queue.jsonl",
+                        "reason":  "EXTENSION_NOT_ALLOWLISTED"
+                    },
+                    {
+                        "path":  "data/catalog/contracts/r0_local_prep_no_promotion_v1/fixtures/ledgers/conflict.jsonl",
+                        "reason":  "EXTENSION_NOT_ALLOWLISTED"
+                    },
+                    {
+                        "path":  "data/catalog/contracts/r0_local_prep_no_promotion_v1/fixtures/formal_payload/core02_calendar.csv",
+                        "reason":  "BLOCKED_DATA_OR_BINARY_EXTENSION"
+                    },
+                    {
+                        "path":  "data/catalog/contracts/r0_local_prep_no_promotion_v1/fixtures/formal_payload/core03_daily_raw.csv",
+                        "reason":  "BLOCKED_DATA_OR_BINARY_EXTENSION"
+                    },
+                    {
+                        "path":  "data/catalog/contracts/r0_local_prep_no_promotion_v1/fixtures/ledgers/unknown.jsonl",
+                        "reason":  "EXTENSION_NOT_ALLOWLISTED"
+                    },
+                    {
+                        "path":  "data/catalog/contracts/r0_local_prep_no_promotion_v1/fixtures/formal_payload/core01_security_master.csv",
+                        "reason":  "BLOCKED_DATA_OR_BINARY_EXTENSION"
+                    }
+                ],
+    "policy":  "ALLOWLISTED_SOURCE_AND_GOVERNANCE_ONLY__NO_DATA_NO_SECRETS_NO_RUNTIME",
+    "measurement_stage":  "PRE_SANITIZATION_COPY",
+    "post_copy_transforms":  [
+                                  "WORKSTATION_PATH_REDACTION_AND_PORTABILITY_PATCH",
+                                  "PUBLIC_API_FIXTURE_REPLACED_WITH_SYNTHETIC_VALUES",
+                                  "USER_WATCHLIST_REPLACED_WITH_PLACEHOLDER_TEMPLATE",
+                                  "PUBLISHING_DOCUMENTS_AND_FINAL_FILE_MANIFEST_ADDED"
+                              ],
+    "final_content_authority":  "FILE_MANIFEST.json"
+}

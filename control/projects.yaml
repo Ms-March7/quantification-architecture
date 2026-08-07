@@ -1,0 +1,975 @@
+schema_version: 1
+updated: "2026-08-05"
+workspace_root: "${QUANTIFICATION_ROOT}"
+mode: "federated_data_catalog_with_central_shared_roots"
+physical_migration_started: true
+workspace_roadmap: "${QUANTIFICATION_ROOT}/control/ROADMAP.md"
+active_roadmap_layer: "L1_DATA__L2_R0_SHSZ_PV_DISCOVERY_COMPLETE"
+active_workspace_gate: "G_DATA_REVIEW"
+roadmap_execution_policy: "DETAIL_AND_EXECUTE_ONE_LAYER_AT_A_TIME"
+roadmap_maintenance:
+  require_update_for_every_l2_l5_batch: true
+  update_before_execution: true
+  update_after_execution: true
+  replace_or_delete_stale_outline: true
+  preserve_conflicting_old_plan: false
+  block_next_layer_if_unsynchronized: true
+data_catalog: "${QUANTIFICATION_ROOT}/data/catalog/datasets.json"
+data_catalog_mode: "federated_logical_catalog_with_partial_physical_migration"
+database_manual: "${QUANTIFICATION_ROOT}/data/catalog/DATABASE_MANUAL.md"
+data_maintenance_runbook: "${QUANTIFICATION_ROOT}/data/catalog/MAINTENANCE_RUNBOOK.md"
+data_source_policy: "${QUANTIFICATION_ROOT}/data/catalog/SOURCE_POLICY.md"
+data_quality_policy: "${QUANTIFICATION_ROOT}/data/catalog/DATA_QUALITY_POLICY.md"
+planned_dataset_catalog: "${QUANTIFICATION_ROOT}/data/catalog/planned_datasets.json"
+planned_dataset_validator: "${QUANTIFICATION_ROOT}/control/tools/validate_planned_dataset_catalog.py"
+core_data_contract: "${QUANTIFICATION_ROOT}/data/catalog/contracts/g_data_core_v1/contract.json"
+core_data_contract_status: "D3A_COMPLETE_CONTRACT_ONLY__NO_DATA_INGESTED"
+core_data_contract_counts:
+  sources: 27
+  datasets: 20
+  tables: 45
+  local_field_definitions: 565
+  field_definitions_including_inherited_sets: 588
+  blocked_source_bindings: 19
+atomic_publish_contract: "${QUANTIFICATION_ROOT}/data/catalog/contracts/atomic_publish_v1/README.md"
+atomic_publish_tool: "${QUANTIFICATION_ROOT}/control/tools/atomic_snapshot_publish.py"
+workspace_formal_publish_tool: "${QUANTIFICATION_ROOT}/control/tools/execute_formal_atomic_publish_workspace.py"
+atomic_publish_status: "L1_D12A_01_DONE__WORKSPACE_PUBLISHER_FIRST_NARROW_FORMAL_SNAPSHOT_PASS"
+atomic_publish_parent_status: "L1_D12A_PARTIAL__R0_SHSZ_PV_PASS__GENERAL_FORMAL_AUTOMATION_NOT_IMPLEMENTED"
+data_engineering_runtime_lock: "${QUANTIFICATION_ROOT}/control/runtime/data-engineering/runtime-lock.json"
+data_engineering_runtime_status: "VERSION_LOCKED_CENTRAL_VENV_INSTALLED_AND_VERIFIED__44_PACKAGES_PASS"
+data_engineering_runtime_path: "${QUANTIFICATION_ROOT}/control/runtime/data-engineering/.venv"
+data_engineering_runtime_verified_at: "2026-07-28"
+ricequant_runtime_lock: "${QUANTIFICATION_ROOT}/control/runtime/ricequant-rqsdk/runtime-lock.json"
+ricequant_runtime_path: "${QUANTIFICATION_ROOT}/control/runtime/ricequant-rqsdk/.venv"
+ricequant_runtime_status: "VERSION_LOCKED_RQSDK_RQDATA_INSTALLED_AND_VERIFIED__33_PACKAGES_PASS__PROCESS_ENV_AUTH_PASS_VALUE_NOT_CAPTURED__R0_SCHEMA_COVERAGE_PIT_VOLUME_BOUNDED_PROBES_COMPLETE"
+ricequant_capability_probe_contract: "${QUANTIFICATION_ROOT}/data/catalog/contracts/ricequant_capability_probe_v1/contract.json"
+ricequant_offline_probe_evidence: "${QUANTIFICATION_ROOT}/tmp/ricequant-capability-probe/offline-install-20260803-v1/environment.json"
+ricequant_live_probe_evidence: "${QUANTIFICATION_ROOT}/reports/data-governance/ricequant-live-capability-probe-20260803-v1/RESULT.json"
+ricequant_r0_closure_probe_contract: "${QUANTIFICATION_ROOT}/data/catalog/contracts/ricequant_r0_closure_probe_v1/contract.json"
+ricequant_r0_closure_probe_result: "${QUANTIFICATION_ROOT}/tmp/ricequant-capability-probe/live-r0-closure-20260803-v1/result.json"
+ricequant_r0_live_closure_receipt: "${QUANTIFICATION_ROOT}/reports/data-governance/ricequant-r0-live-closure-probe-20260803-v1/RESULT.json"
+ricequant_r0_coverage_probe_contract: "${QUANTIFICATION_ROOT}/data/catalog/contracts/ricequant_r0_coverage_probe_v1/contract.json"
+ricequant_r0_coverage_probe_result: "${QUANTIFICATION_ROOT}/tmp/ricequant-capability-probe/live-r0-coverage-pit-volume-20260803-v1/result.json"
+ricequant_r0_coverage_receipt: "${QUANTIFICATION_ROOT}/reports/data-governance/ricequant-r0-coverage-probe-20260803-v1/RESULT.json"
+ricequant_source_role: "R0_SHSZ_PV_PRIMARY_STRUCTURED_SOURCE__OTHER_DATA_FAMILIES_CANDIDATE_ONLY"
+ricequant_source_status: "R0_SHSZ_PV_FORMAL_BASE_PASS__XSHG_XSHE_DAILY_DELTA_AUTOMATION_PASS__BJSE_DAILY_FUND_ETF_COMPONENTS_DENIED__OTHER_RIGHTS_AND_PIT_SCOPE_UNRESOLVED__CORE_0_OF_6"
+ricequant_r0_shsz_pv_dataset_id: "cn-a-share-r0-shsz-pv-panel"
+ricequant_r0_shsz_pv_snapshot_id: "20050104-20260803-v1"
+ricequant_r0_shsz_pv_content_hash: "26309d36b7c08096fff55df100f1d27df8412b106ea48f282ce0f7caad37084b"
+ricequant_r0_shsz_pv_acceptance: "${QUANTIFICATION_ROOT}/reports/data-governance/r0-shsz-pv-v2-formal-acceptance-20260804-v1/RESULT.json"
+ricequant_r0_shsz_pv_status: "PASS__NARROW_RESEARCH_INPUT_OPEN__CANONICAL_CORE_R0_R1_R2_UNCHANGED"
+ricequant_daily_update_program: "${QUANTIFICATION_ROOT}/control/tools/run_rqdata_shsz_daily_update.py"
+ricequant_daily_update_launcher: "${QUANTIFICATION_ROOT}/control/tools/run_rqdata_shsz_daily_update.cmd"
+ricequant_daily_update_task: "Quantification-RQData-SHSZ-Daily"
+ricequant_daily_update_status: "PASS__LEGACY_TASK_DISABLED__COMPONENT_CALLED_BY_UNIFIED_WEEKDAYS_1920_MAINTENANCE__QUARANTINE_DELTA_ONLY__FORMAL_PROMOTION_MANUAL"
+ricequant_daily_update_receipt: "${QUANTIFICATION_ROOT}/reports/data-governance/rqdata-shsz-daily-updater-20260804-v1/RESULT.json"
+ricequant_b_path_daily_update_program: "${QUANTIFICATION_ROOT}/control/tools/run_rqdata_b_path_daily_update.py"
+ricequant_b_path_daily_update_launcher: "${QUANTIFICATION_ROOT}/control/tools/run_rqdata_b_path_daily_update.cmd"
+ricequant_b_path_daily_update_contract: "${QUANTIFICATION_ROOT}/data/catalog/contracts/rqdata_b_path_daily_candidate_v1/contract.json"
+ricequant_b_path_daily_update_task: "Quantification-RQData-B-Path-Daily"
+ricequant_b_path_daily_update_status: "PASS__LEGACY_TASK_DISABLED__COMPONENT_CALLED_BY_UNIFIED_WEEKDAYS_1920_MAINTENANCE__LIVE_20260804_20260805__IDENTITY_STATUS_ACTION_SWS_INDEX__FINANCIAL_QUEUE_ONLY__QUARANTINE_ONLY"
+ricequant_b_path_daily_update_receipt: "${QUANTIFICATION_ROOT}/reports/data-governance/rqdata-b-path-daily-updater-20260805-v1/RESULT.json"
+candidate_asset_index: "${QUANTIFICATION_ROOT}/data/catalog/candidate_assets.json"
+candidate_asset_index_contract: "${QUANTIFICATION_ROOT}/data/catalog/contracts/candidate_asset_index_v1/contract.json"
+candidate_asset_index_status: "PASS__28_ROOTS__107_EVIDENCE__82_MANIFESTS__INSPECTION_ONLY__FORMAL_EFFECT_NONE"
+candidate_daily_maintenance_program: "${QUANTIFICATION_ROOT}/control/tools/run_candidate_daily_maintenance.py"
+candidate_daily_maintenance_launcher: "${QUANTIFICATION_ROOT}/control/tools/run_candidate_daily_maintenance.cmd"
+candidate_daily_maintenance_contract: "${QUANTIFICATION_ROOT}/data/catalog/contracts/candidate_daily_maintenance_v1/contract.json"
+candidate_daily_maintenance_task: "Quantification-Candidate-Daily-Maintenance"
+candidate_daily_maintenance_status: "PASS__WEEKDAYS_1920__FIVE_STEP_REAL_RUN__FOUR_DATA_STEPS_NO_CHANGE_NO_NETWORK__31_TESTS__28_ROOTS_107_EVIDENCE_82_MANIFESTS__CANDIDATE_ONLY__FORMAL_CATALOG_UNCHANGED"
+candidate_daily_maintenance_receipt: "${QUANTIFICATION_ROOT}/data/market/transactions/candidate-daily-maintenance/candidate-maintenance-20260806-030308-a5bd09a9-v1.json"
+joinquant_company_action_download_cleanup_receipt: "${QUANTIFICATION_ROOT}/reports/data-governance/joinquant-download-duplicate-cleanup-20260805-v1/CLEANUP_RECEIPT.json"
+ricequant_financial_pit_daily_worker: "${QUANTIFICATION_ROOT}/control/tools/run_rqdata_financial_pit_daily_update.py"
+ricequant_financial_pit_daily_contract: "${QUANTIFICATION_ROOT}/data/catalog/contracts/rqdata_financial_pit_daily_candidate_v1/contract.json"
+ricequant_financial_pit_daily_smoke: "${QUANTIFICATION_ROOT}/reports/data-governance/rqdata-financial-pit-daily-smoke-20260805-v1/RESULT.json"
+ricequant_financial_pit_daily_state: "${QUANTIFICATION_ROOT}/data/market/transactions/rqdata-financial-pit-daily/rqdata-financial-pit-20260805-v1/state.json"
+ricequant_financial_pit_daily_status: "PASS__QUEUE_14_OF_14__131777_RAW_ROWS__263554_LOCAL_REVISION_EVENTS__5202_SECURITIES__REVENUE_NET_PROFIT_12_QUARTERS__INSPECTION_ONLY_NOT_ADMITTED"
+joinquant_share_capital_pit_candidate: "${QUANTIFICATION_ROOT}/data/market/quarantine/cn-a-share-capital-pit/joinquant-share-capital-pit-intervals-20260806-v1/manifest.json"
+joinquant_share_capital_pit_candidate_status: "PASS__232015_SOURCE_ROWS__231909_USABLE__196693_PIT_INTERVALS__5507_SECURITIES__INSPECTION_ONLY_NOT_ADMITTED"
+ricequant_r1_market_reference_probe: "${QUANTIFICATION_ROOT}/reports/data-governance/ricequant-r1-market-reference-probe-20260804-v1/RECEIPT.json"
+ricequant_core11_industry_candidate_contract: "${QUANTIFICATION_ROOT}/data/catalog/contracts/ricequant_core11_industry_history_candidate_v1/contract.json"
+ricequant_core11_industry_candidate: "${QUANTIFICATION_ROOT}/data/market/quarantine/cn-industry-classification-pit/ricequant-citics2019-level1-history-20260805-v1/manifest.json"
+ricequant_core11_industry_candidate_status: "PASS__30_LEVEL1__9222_INTERVALS__5496_SECURITIES__INSPECTION_ONLY__AVAILABLE_AT_REVISION_AND_SWS_PRIMARY_OPEN"
+ricequant_r1_index_market_candidate_contract: "${QUANTIFICATION_ROOT}/data/catalog/contracts/ricequant_r1_index_market_candidate_v1/contract.json"
+ricequant_r1_index_market_candidate: "${QUANTIFICATION_ROOT}/data/market/quarantine/r1-market-reference/ricequant-index-market-20050104-20220131-20260805-v1/manifest.json"
+ricequant_r1_index_market_candidate_status: "PASS__7385_LATEST_INDEX_MASTER__8_BENCHMARK_DAILY__CHINABOND_YIELD_CURVE__INSPECTION_ONLY__R1_NOT_MET"
+factor_research_gpu_runtime_lock: "${QUANTIFICATION_ROOT}/control/runtime/factor-research-gpu/runtime-lock.json"
+factor_research_gpu_runtime_path: "${QUANTIFICATION_ROOT}/control/runtime/factor-research-gpu/.venv"
+factor_research_gpu_runtime_status: "REBUILDABLE__RTX3060_6GB__CUPY136__CPU_GPU_EQUIVALENCE_PASS__RESEARCH_COMPUTE_ONLY"
+factor_c_v1_1_discovery_run: "${QUANTIFICATION_ROOT}/多因子/research_runs/factor_factory/r0-shsz-pv-c-v1-1-discovery-512-20260805-v1/manifest.json"
+factor_c_v1_1_discovery_status: "COMMITTED__512_OF_512__68_ACTION_INVARIANT__50_ACTION_INVARIANT_BY_FDR_0_10__DISCOVERY_ONLY"
+factor_c_v1_1_stability_run: "${QUANTIFICATION_ROOT}/多因子/research_runs/factor_factory/r0-shsz-pv-c-v1-1-stability-20260805-v1/manifest.json"
+factor_c_v1_1_stability_status: "COMMITTED__50_TESTED__45_DIRECTION_STABLE__6_POSITIVE_MEAN_AFTER_30BPS_ALL_FOUR_SCHEMES__NO_VALIDATION_NO_HOLDOUT"
+factor_c_v1_1_receipt: "${QUANTIFICATION_ROOT}/reports/data-governance/r0-shsz-pv-c-v1-1-discovery-20260805-v1/RESULT.json"
+factor_classic_catalog: "${QUANTIFICATION_ROOT}/多因子/configs/r0_shsz_pv_classic_factor_catalog_v1.json"
+factor_classic_catalog_status: "PASS__426_DEDUPLICATED_TRANSPARENT_LOCAL_SPECS__OLD_512_NOT_RERUN__VENDOR_NAME_REFERENCE_NOT_FORMULA_EQUIVALENCE"
+factor_classic_discovery_run: "${QUANTIFICATION_ROOT}/多因子/research_runs/factor_factory/r0-shsz-pv-classic-discovery-426-20260806-v1/manifest.json"
+factor_classic_discovery_status: "COMMITTED__426_OF_426__376_BY_FDR__281_ACTION_SAFE_FDR__186_30BPS__130_ACTION_SAFE_30BPS__43_SAFE_COST_CLUSTERS__77_STRICT_SPECS_27_CLUSTERS__NO_VALIDATION_NO_HOLDOUT_NO_TRADABLE_CONCLUSION"
+factor_classic_discovery_receipt: "${QUANTIFICATION_ROOT}/reports/data-governance/abc-classic-factor-discovery-20260806-v1/RESULT.json"
+local_download_candidate_contract: "${QUANTIFICATION_ROOT}/data/catalog/contracts/local_download_build_v1/README.md"
+local_download_candidate_builder: "${QUANTIFICATION_ROOT}/control/tools/build_downloaded_dataset.py"
+local_download_candidate_launcher: "${QUANTIFICATION_ROOT}/control/tools/qdata_build_downloaded.cmd"
+local_download_audit_text_parser: "${QUANTIFICATION_ROOT}/control/tools/parse_csmar_audit_text_candidate.py"
+local_download_audit_text_parser_test: "${QUANTIFICATION_ROOT}/control/tests/test_parse_csmar_audit_text_candidate.py"
+local_download_33pkg_closure_auditor: "${QUANTIFICATION_ROOT}/control/tools/audit_csmar_33pkg_local_closure.py"
+local_download_33pkg_closure_auditor_test: "${QUANTIFICATION_ROOT}/control/tests/test_audit_csmar_33pkg_local_closure.py"
+local_download_candidate_status: "PASS__CSMAR_33PKG_32_CANDIDATES_PLUS_1_OVERLAP_CALIBRATION__AUDIT_TEXT_V2_PROVENANCE_BOUND__INSPECTION_ONLY__NO_CATALOG_WRITE"
+csmar_local_research_report: "${QUANTIFICATION_ROOT}/reports/data-governance/csmar-local-research-bootstrap-20260728/README.md"
+csmar_local_research_measurements: "${QUANTIFICATION_ROOT}/reports/data-governance/csmar-local-research-bootstrap-20260728/MEASUREMENTS.json"
+csmar_download_plan: "${QUANTIFICATION_ROOT}/reports/data-governance/csmar-local-research-bootstrap-20260728/CSMAR_DOWNLOAD_PLAN.json"
+csmar_company_candidate: "${QUANTIFICATION_ROOT}/tmp/local-dataset-build/csmar-trd-co-pilot/pilot-current-export-20260728-v2"
+csmar_daily_candidate: "${QUANTIFICATION_ROOT}/tmp/local-dataset-build/csmar-trd-dalyr-pilot/d2a02-2020-2024-20260728-v1"
+csmar_daily_candidate_prior_month_sample: "${QUANTIFICATION_ROOT}/tmp/local-dataset-build/csmar-trd-dalyr-pilot/pilot-current-export-20260728-v2"
+csmar_d2a_02_measurements: "${QUANTIFICATION_ROOT}/reports/data-governance/d2a-02-csmar-priority-table-pilot-20260728/PILOT_MEASUREMENTS.json"
+csmar_d2a_02_request: "${QUANTIFICATION_ROOT}/data/catalog/contracts/local_download_build_v1/csmar_trd_dalyr.d2a02-2020-2024.request.json"
+csmar_d2a_04b_structured_report: "${QUANTIFICATION_ROOT}/reports/data-governance/d2a-04b-csmar-structured-candidates-20260729/README.md"
+csmar_d2a_04b_structured_measurements: "${QUANTIFICATION_ROOT}/reports/data-governance/d2a-04b-csmar-structured-candidates-20260729/MEASUREMENTS.json"
+csmar_d2a_04c_closure_report: "${QUANTIFICATION_ROOT}/reports/data-governance/csmar-33pkg-local-closure-20260729/README.md"
+csmar_d2a_04c_closure_audit: "${QUANTIFICATION_ROOT}/reports/data-governance/csmar-33pkg-local-closure-20260729/CLOSURE_AUDIT.json"
+csmar_d2a_04c_verification: "${QUANTIFICATION_ROOT}/reports/data-governance/csmar-33pkg-local-closure-20260729/VERIFICATION.json"
+csmar_d2a_04c_hash_bindings: "${QUANTIFICATION_ROOT}/reports/data-governance/csmar-33pkg-local-closure-20260729/HASH_BINDINGS.json"
+csmar_supplemental_arrival_report: "${QUANTIFICATION_ROOT}/reports/data-governance/csmar-arrival-intake-20260730-v1/README.md"
+csmar_supplemental_arrival_verification: "${QUANTIFICATION_ROOT}/reports/data-governance/csmar-arrival-intake-20260730-v1/VERIFICATION.json"
+csmar_supplemental_evidence_report: "${QUANTIFICATION_ROOT}/reports/data-governance/csmar-intake-supplemental-evidence-20260730-v1/README.md"
+csmar_supplemental_evidence_map: "${QUANTIFICATION_ROOT}/reports/data-governance/csmar-intake-supplemental-evidence-20260730-v1/EVIDENCE_MAP.json"
+csmar_supplemental_evidence_verification: "${QUANTIFICATION_ROOT}/reports/data-governance/csmar-intake-supplemental-evidence-20260730-v1/VERIFICATION.json"
+adapter_gate_contract: "${QUANTIFICATION_ROOT}/data/catalog/contracts/adapter_gate_v1/tencent_daily_inspection.json"
+adapter_gate_tool: "${QUANTIFICATION_ROOT}/control/tools/validate_adapter_sample.py"
+adapter_gate_status: "DONE__SMOKE_ONLY__SOURCE_ADMISSION_FALSE__RAW_MAPPING_SEMANTICS_BLOCKED"
+d12a_01_acceptance_receipt: "${QUANTIFICATION_ROOT}/reports/data-governance/d12a-01-atomic-guard-runtime-repair-20260727/README.md"
+d12a_01_verification_record: "${QUANTIFICATION_ROOT}/reports/data-governance/d12a-01-atomic-guard-runtime-repair-20260727/VERIFICATION.json"
+capacity_estimate_legacy: "${QUANTIFICATION_ROOT}/reports/data-governance/data-capacity-estimate-20260721/README.md"
+capacity_validation: "${QUANTIFICATION_ROOT}/reports/data-governance/data-capacity-validation-20260724/README.md"
+capacity_validation_status: "CORE_20_ONLY__OLD_1_5_TO_6_TIB_REJECTED_AS_MEASURED_OR_HARD_UPPER__REAL_PILOTS_BLOCKED"
+capacity_pipeline_pilot: "${QUANTIFICATION_ROOT}/reports/data-governance/data-capacity-pipeline-pilot-20260726/README.md"
+capacity_pipeline_pilot_status: "PRELIMINARY_SCENARIO_ENVELOPE__LOCAL_MECHANICS_PASS__SOURCE_ADMISSION_AND_END_TO_END_NOT_TESTED"
+capacity_pipeline_pilot_runner: "${QUANTIFICATION_ROOT}/control/tools/run_data_capacity_pipeline_pilot.py"
+capacity_pipeline_authoritative_run: "${QUANTIFICATION_ROOT}/tmp/data-capacity-pipeline-pilot/pilot-20260726-v6/RESULTS.json"
+required_35_main_disk_scenario_tb:
+  low: 1.17
+  base: 3.31
+  stress: 9.49
+non_news_non_hf_46_main_disk_scenario_tb:
+  low: 1.63
+  base: 5.28
+  stress: 17.09
+non_hf_48_with_news_main_disk_scenario_tb:
+  low: 2.09
+  base: 11.55
+  stress: 43.09
+capacity_scenario_semantics: "LOW_BASE_STRESS_POINTS_ONLY__NOT_P50_P95_OR_BOUNDS"
+observed_g_drive_available_gib_2026_07_24: 390.67
+observed_g_drive_available_gib_2026_07_26_after_pilot: 386.577
+observed_g_drive_available_gib_2026_07_28_after_csmar_pilot: 384.873
+observed_g_drive_total_gib_2026_07_28_d2a_02_start: 453.853
+observed_g_drive_used_gib_2026_07_28_d2a_02_start: 69.167
+observed_g_drive_available_gib_2026_07_28_d2a_02_start: 384.686
+observed_g_drive_available_gib_2026_07_28_d2a_02_pause: 383.634
+observed_g_drive_available_gib_2026_07_29_after_structured_candidates: 378.307
+observed_g_drive_available_gib_2026_07_29_after_d2a_04c: 373.801
+g_drive_operating_guard:
+  measured_at: "2026-07-28T12:20:32+08:00"
+  maximum_batch_footprint_gib: 240.0
+  minimum_free_fraction: 0.25
+  minimum_free_gib_at_start: 113.463
+  free_gib_after_full_batch_cap_at_start: 144.686
+  included_bytes:
+    - "PERSISTENT_NEW_DATA"
+    - "CANDIDATE_OUTPUTS"
+    - "UNPACK_AND_CONVERSION_PEAK"
+    - "SPILL"
+    - "ACTIVE_PROJECTION"
+  enforcement: "STOP_BEFORE_EITHER_GUARD_IS_EXCEEDED"
+  automatic_cleanup: false
+core_20_temporary_engineering_envelope_tib: 8
+core_20_minimum_nominal_disk_tb: 12
+core_20_recommended_nominal_disk_tb: 16
+legacy_core_procurement_rule_status: "HISTORICAL_ONLY__SUPERSEDED_FOR_CURRENT_PLANNING_BY_2026_07_26_SCENARIO_REPORT"
+independent_backup_policy: "DISABLED_BY_USER_2026_07_26"
+independent_backup_stage_gate_required: false
+backup_rights_source_admission_policy: "RECORD_IF_KNOWN__NOT_A_CURRENT_BLOCKER"
+authoritative_storage_topology: "SINGLE_PRIMARY_DISK"
+single_primary_disk_unrecoverable_loss_risk: "EXPLICITLY_ACCEPTED_BY_USER"
+logical_recovery_policy: "REQUIRED_ON_PRIMARY__IMMUTABLE_SNAPSHOTS_PIT_HASHES_ATOMIC_PUBLISH_AND_REBUILD_TESTS"
+complete_52_capacity_status: "UNDETERMINED__TICK_L2_SCOPE_AND_HISTORY_NOT_FROZEN"
+active_data_work_package: "L1-D2A-04B_OFFICIAL_IDENTITY_CALENDAR_ACTION_STATUS_SOURCE_CLOSURE"
+active_data_work_package_status: "ACTIVE_AUTHORIZED_BOUNDED_SOURCE_CLOSURE__LEGACY_COMBINED_AUDIT_POST_ADMISSION__STAGE_A_PRE_ADMISSION_0_OF_4__CORE02_Q1_FAIL_Q2_FAIL_Q3_UNKNOWN_Q4_PASS__FORMAL_ADMISSIONS_0__D2B_BLOCKED__NO_PAID_NO_NEW_KEY_NO_BULK_BACKFILL__INSPECTION_ONLY_NOT_ADMITTED"
+active_data_work_package_user_approved: true
+execution_authorization_active: true
+resume_requires_user_start: false
+current_data_work_package: "L1-D2A-04B_OFFICIAL_IDENTITY_CALENDAR_ACTION_STATUS_SOURCE_CLOSURE"
+current_data_work_package_status: "ACTIVE_AUTHORIZED_BOUNDED_SOURCE_CLOSURE__LEGACY_COMBINED_AUDIT_POST_ADMISSION__STAGE_A_PRE_ADMISSION_0_OF_4__CORE02_Q1_FAIL_Q2_FAIL_Q3_UNKNOWN_Q4_PASS__FORMAL_ADMISSIONS_0__D2B_BLOCKED__NO_PAID_NO_NEW_KEY_NO_BULK_BACKFILL__INSPECTION_ONLY_NOT_ADMITTED"
+current_data_work_package_prior_execution_user_approved: true
+d2a_04b_started_at: "2026-07-28T21:38:20+08:00"
+d2a_04b_paused_at: "2026-07-29T16:41:18+08:00"
+d2a_04b_historical_permission_preflight_paused_at: "2026-07-28T21:57:06+08:00"
+d2a_04b_restarted_on: "2026-07-28"
+d2a_04b_authorization_basis: "USER_2026_07_28__COLLECT_AND_CHECK_SUFFICIENCY__USER_2026_07_29__EXPAND_STRUCTURED_LOW_FREQUENCY_DOWNLOADS__USER_2026_07_29__EXACT_33PKG_VERIFY_THEN_DELETE_C_F_ORIGINALS"
+d2a_04b_status: "ACTIVE_AUTHORIZED_BOUNDED_SOURCE_CLOSURE__HISTORICAL_33PKG_INTAKE_SEALED__D2A04C_LOCAL_CLOSURE_COMPLETE__LEGACY_COMBINED_AUDIT_POST_ADMISSION__STAGE_A_PRE_ADMISSION_0_OF_4__CORE02_Q1_FAIL_Q2_FAIL_Q3_UNKNOWN_Q4_PASS__FORMAL_ADMISSIONS_0__D2B_BLOCKED__INSPECTION_ONLY_NOT_ADMITTED"
+d2a_04b_portal_preflight_receipt: "${QUANTIFICATION_ROOT}/reports/data-governance/d2a-04b-source-closure-20260728/d2a04b-portal-preflight-20260728-v1/"
+d2a_04b_portal_preflight_status: "HISTORICAL_ONLY__PRE_RESTART_NO_PERMISSION_OBSERVATION__NOT_CURRENT_BLOCKER"
+d2a_04b_portal_status: "HISTORICAL_INCIDENT__TSINGHUA_EPROXY_ACCESS_VIOLATION_CODE_27__DISPLAYED_UNBLOCK_2026_07_30_00_00__NO_RETRY_OR_BYPASS"
+d2a_04b_portal_pause_receipt: "${QUANTIFICATION_ROOT}/reports/data-governance/d2a-04b-csmar-structured-candidates-20260729/PORTAL_PAUSE.md"
+d2a_04b_portal_login_status: "PASS__AUTHENTICATED_TSINGHUA_INSTITUTIONAL_SESSION"
+d2a_04b_trd_dalyr_permission_status: "CONFIRMED__TSINGHUA_INSTITUTIONAL_PERMISSION"
+d2a_04b_historical_trd_dalyr_permission_observation: "NO_PERMISSION__CONTROL_DISABLED__PURCHASE_ACTION_VISIBLE"
+d2a_04b_purchase_action_clicked: false
+d2a_04b_csmar_2015_2019_export_status: "DOWNLOADED__BUILT__MECHANICAL_PASS__INSPECTION_ONLY_NOT_ADMITTED"
+d2a_04b_csmar_local_download_file_count: 33
+d2a_04b_csmar_local_download_bytes: 2038345395
+d2a_04b_csmar_intake_root: "${QUANTIFICATION_ROOT}/data/market/quarantine/csmar-manual-export/intake-20260729-33pkg-v1/"
+d2a_04b_csmar_intake_manifest_sha256: "c156608a8d1087b2cd58baf39ccbe04c5278fa9e33b7800234f90eea4f17e8c2"
+d2a_04b_csmar_source_deletion_receipt_sha256: "a9159aa3d332caed947a7b1ab73d9059661d272feedf43e75d83c17fc6e927c9"
+d2a_04b_csmar_source_deleted_file_count: 33
+d2a_04b_csmar_daily_union_rows: 18691664
+d2a_04b_csmar_daily_union_securities: 5990
+d2a_04b_csmar_daily_union_trading_dates: 8741
+d2a_04b_csmar_daily_union_date_min: "1990-12-19"
+d2a_04b_csmar_daily_union_date_max: "2026-07-28"
+d2a_04b_csmar_daily_candidate_bytes: 2629656346
+d2a_04b_csmar_daily_overlap_field_mismatches: 0
+d2a_04b_csmar_action_constraint_rows:
+  TRD_Cptl: 71514
+  TRD_Capchg: 141157
+  TRD_NoLimit: 13226
+  TRD_AdjustFactor: 61663
+d2a_04b_csmar_action_constraint_candidate_bytes: 16033830
+d2a_04b_csmar_financial_fact_rows:
+  FS_Combas: 691546
+  FS_Comins: 693242
+  FS_Comscfd: 668828
+d2a_04b_csmar_additional_financial_audit_candidate_rows: 80109
+d2a_04b_csmar_additional_financial_audit_candidate_partitions: 1303
+d2a_04b_csmar_additional_financial_audit_candidate_bytes: 33113057
+d2a_04b_csmar_financial_candidate_table_count: 16
+d2a_04b_csmar_raw_only_audit_text_table_count_at_pause: 2
+d2a_04b_csmar_financial_fact_total_rows: 2133725
+d2a_04b_csmar_financial_fact_zip_bytes: 372190937
+d2a_04b_csmar_financial_fact_candidate_bytes: 717988691
+d2a_04b_csmar_financial_pit_status_at_pause: "SIXTEEN_FINANCIAL_AUDIT_CANDIDATES_BUILT__TWO_AUDIT_TEXT_TABLES_RAW_ONLY__INITIAL_AVAILABLE_AT_REVISION_CHAIN_AND_PRIOR_VALUES_MISSING"
+d2a_04b_local_dataset_build_bytes_at_pause: 3390251317
+d2a_04b_inbox_bytes: 0
+d2a_04b_observed_g_drive_free_gib_2026_07_29: 375.059
+d2a_04c_started_on: "2026-07-29"
+d2a_04c_completed_at: "2026-07-29T19:50:32+08:00"
+d2a_04c_authorization_basis: "USER_APPROVED_FIRST_STAGE__SEALED_33PKG_LOCAL_ONLY__PARSER_CANDIDATE_EVIDENCE_AND_CONTROL_SYNC__NO_NETWORK_NO_DELETE_NO_ADMISSION_NO_RESEARCH"
+d2a_04c_status: "COMPLETED__33PKG_INVENTORY__AUDIT_TEXT_ZERO_DROP_PROVENANCE_BOUND_V2__PIT_GAP_AUDIT_COMPLETE__PIT_NOT_CLOSED__CORE_TOUCHED_14_OF_20__FORMAL_CORE_0_OF_20__INSPECTION_ONLY"
+d2a_04c_sealed_package_count: 33
+d2a_04c_logical_table_count: 25
+d2a_04c_unique_observed_field_count: 559
+d2a_04c_unique_observed_field_count_semantics: "CASE_SENSITIVE_RAW_FIELD_NAME_DISTINCT_COUNT"
+d2a_04c_unique_observed_field_name_count_case_sensitive: 559
+d2a_04c_unique_observed_field_name_count_casefold: 474
+d2a_04c_table_field_occurrence_count: 1197
+d2a_04c_candidate_run_count: 32
+d2a_04c_overlap_calibration_package_count: 1
+d2a_04c_financial_audit_candidate_table_count: 18
+d2a_04c_financial_audit_candidate_rows: 2296290
+d2a_04c_financial_audit_authoritative_candidate_bytes: 803059261
+d2a_04c_audit_text_candidates:
+  FIN_Audit:
+    rows: 80301
+    repaired_rows: 238
+    semantic_review_rows: 1
+    candidate_root: "${QUANTIFICATION_ROOT}/tmp/local-dataset-build/csmar-fin-audit/csmar-33pkg-fin-audit-text-closure-20260729-v2-parquet-v1/"
+    content_hash: "b9186d3448dcfa2a98ff540b8cdcbec03540418f7eeecc831f9d705ce23f0c4d"
+    provenance_zip_sha256: "a407150ae8964e581effe42963b8e187cd22ef7311fa7553a18c4bf2c69c2fb7"
+  FIN_AuditDetail:
+    rows: 82264
+    repaired_rows: 103
+    semantic_review_rows: 0
+    candidate_root: "${QUANTIFICATION_ROOT}/tmp/local-dataset-build/csmar-fin-auditdetail/csmar-33pkg-fin-auditdetail-text-closure-20260729-v2-parquet-v1/"
+    content_hash: "be55d9243093006dc2f18ee827d35361eac6cc0f9e6ce1e19c210c0fd933d4eb"
+    provenance_zip_sha256: "09cc71a9adf565c4cc58286a51906f9472c414877ddc26ab11f84735871efe7e"
+d2a_04c_audit_parser_sha256: "3d6c580aaad882b1e3764d396a641bf1eec6f41f8b9f8bb1d6fe03cfc17226f2"
+d2a_04c_audit_three_table_reconciliation:
+  FIN_AuditStats_rows: 41178
+  FIN_Audit_rows: 80301
+  FIN_AuditDetail_rows: 82264
+  stats_without_detail_keys: 0
+  detail_without_stats_keys: 0
+  auditno_detail_count_mismatch_keys: 0
+  stats_without_audit_keys: 1
+  stats_without_audit_example: "302132/2024-12-31"
+d2a_04c_financial_pit_status: "CONTENT_CANDIDATES_CLOSED_LOCALLY__INITIAL_AVAILABLE_AT_PRIOR_VALUES_AND_COMPLETE_REVISION_CHAINS_MISSING__PIT_NOT_CLOSED"
+d2a_04c_core_touched_count: 14
+d2a_04c_formal_core_count: 0
+d2a_04c_formal_catalog_sha256: "debdbea74d3597dab66efc850517d3ab8ed6062a58229a61303556351883be00"
+d2a_04c_local_dataset_build_bytes: 3750325676
+d2a_04c_audit_text_candidate_workspace_bytes: 721763921
+d2a_04c_report_bytes: 398786
+d2a_04c_report: "${QUANTIFICATION_ROOT}/reports/data-governance/csmar-33pkg-local-closure-20260729/README.md"
+d2a_04c_forbidden:
+  - "NETWORK_OR_NEW_DOWNLOAD"
+  - "SEALED_INTAKE_MUTATION"
+  - "V1_OR_SOURCE_DELETION"
+  - "FORMAL_DATASET_CATALOG_REGISTRATION_OR_ADMISSION"
+  - "FORMAL_QUALITY_PROMOTION_OR_WAIVER"
+  - "FACTOR_RESEARCH_BACKTEST_OR_EFFICACY_CLAIM"
+d2a_04b_supplemental_intake_20260730_status: "PASS__QUARANTINE_INTAKE_AND_EVIDENCE_BINDING_ONLY__INSPECTION_ONLY__NOT_ADMITTED"
+d2a_04b_supplemental_intake_20260730_root: "${QUANTIFICATION_ROOT}/data/market/quarantine/csmar-manual-export/intake-20260730-08pkg-03manual-v1/"
+d2a_04b_supplemental_intake_20260730_source_count: 17
+d2a_04b_supplemental_intake_20260730_source_bytes: 196558974
+d2a_04b_supplemental_intake_20260730_source_retained_count: 17
+d2a_04b_supplemental_intake_20260730_source_retained_count_semantics: "AT_INTAKE_SEAL_TIME__SUPERSEDED_BY_POST_INTAKE_RECYCLE_BIN_CLEANUP_RECEIPT"
+d2a_04b_supplemental_intake_20260730_source_deleted_count: 0
+d2a_04b_supplemental_intake_20260730_unique_blob_count: 10
+d2a_04b_supplemental_intake_20260730_unique_blob_bytes: 149771704
+d2a_04b_supplemental_intake_20260730_unique_zip_count: 7
+d2a_04b_supplemental_intake_20260730_unique_pdf_count: 3
+d2a_04b_supplemental_intake_20260730_zip_member_count: 31
+d2a_04b_supplemental_intake_20260730_candidate_binding_count: 7
+d2a_04b_supplemental_intake_20260730_manifest_sha256: "9d4785ffd243cecb4c122f63984168db143ab8385f1e7c6169bd91a7faddb149"
+d2a_04b_supplemental_intake_20260730_retention_receipt_sha256: "83ddd647e0789672976a19aa0c6ee17969b887a9de222c5a44039a6e37ce31a5"
+d2a_04b_supplemental_intake_20260730_evidence_map_sha256: "9467dd7ee7b32adf9a32c102ba102923faf1cf5b5db0ba95ac2fd1a3e0489ba8"
+d2a_04b_supplemental_candidate_projection: "16/20"
+d2a_04b_supplemental_formal_core: "0/20"
+d2a_04b_supplemental_stage_a_ready: "0/4"
+d2a_04b_index_daily_intake_20260730_status: "PASS__18_SOURCE_ALIASES_TO_12_UNIQUE_ZIPS__QUARANTINE_ONLY__INSPECTION_ONLY__NOT_ADMITTED"
+d2a_04b_index_daily_intake_20260730_root: "${QUANTIFICATION_ROOT}/data/market/quarantine/csmar-manual-export/intake-20260730-18src-12blob-idx-idxtrd-v1/"
+d2a_04b_index_daily_intake_20260730_source_alias_count: 18
+d2a_04b_index_daily_intake_20260730_source_bytes: 435572489
+d2a_04b_index_daily_intake_20260730_unique_zip_count: 12
+d2a_04b_index_daily_intake_20260730_unique_zip_bytes: 397397885
+d2a_04b_index_daily_intake_20260730_manifest_sha256: "10439a5e5857fd9cf5c00c36aa2cd3d5fcfaac52bd11a67efff4e31f451eff23"
+d2a_04b_index_daily_intake_20260730_retention_receipt_sha256: "36b8fc683cef53a460883813f4f21b3265db4c06833892dc550b53945299051c"
+d2a_04b_downloads_cleanup_20260730_status: "COMPLETED__35_VERIFIED_SOURCES_SENT_TO_WINDOWS_RECYCLE_BIN__RECYCLE_BIN_NOT_EMPTIED"
+d2a_04b_downloads_cleanup_20260730_source_count: 35
+d2a_04b_downloads_cleanup_20260730_source_bytes: 632131463
+d2a_04b_downloads_cleanup_20260730_unique_destination_object_count: 22
+d2a_04b_downloads_cleanup_20260730_unique_destination_zip_count: 19
+d2a_04b_downloads_cleanup_20260730_unique_destination_pdf_count: 3
+d2a_04b_downloads_cleanup_20260730_action: "SEND_TO_RECYCLE_BIN"
+d2a_04b_downloads_cleanup_20260730_recycle_bin_emptied: false
+d2a_04b_downloads_cleanup_20260730_receipt: "${QUANTIFICATION_ROOT}/reports/data-governance/csmar-downloads-cleanup-20260730-v1/CLEANUP_RECEIPT.json"
+d2a_04b_downloads_cleanup_20260730_receipt_sha256: "91e97ee9d188b4e5c52030009cb82191b672032404d6e7e698ed300700a3f731"
+d2a_04b_csmar_rights_receipt_20260730_status: "PASS__EXACT_ASSET_USER_ATTESTATION_RECORDED__LOCAL_RETENTION_CAMPUS_NONCOMMERCIAL_RESEARCH_INTERNAL_DERIVATIVES_ONLY__NO_FORMAL_ADMISSION"
+d2a_04b_csmar_rights_receipt_20260730_manifest_count: 3
+d2a_04b_csmar_rights_receipt_20260730_source_alias_count: 68
+d2a_04b_csmar_rights_receipt_20260730_canonical_blob_count: 55
+d2a_04b_csmar_rights_receipt_20260730_canonical_bytes: 2585514984
+d2a_04b_csmar_rights_receipt_20260730_allowed:
+  - "LOCAL_LONG_TERM_RETENTION_ON_THIS_MACHINE"
+  - "CAMPUS_INTERNAL_NONCOMMERCIAL_ACADEMIC_RESEARCH"
+  - "INTERNAL_DERIVED_FACTORS_AND_STATISTICS"
+d2a_04b_csmar_rights_receipt_20260730_prohibited:
+  - "RAW_EXTERNAL_REDISTRIBUTION"
+  - "COMMERCIAL_USE"
+d2a_04b_csmar_rights_receipt_20260730_not_covered:
+  - "API_OR_AUTOMATED_BULK_COLLECTION"
+  - "POST_AFFILIATION_DISPOSITION"
+  - "OFFICIAL_SOURCE_RIGHTS"
+  - "INDEPENDENT_CONTRACT_VERIFICATION"
+d2a_04b_csmar_rights_receipt_20260730_rights_receipt_sha256: "1d07b07304fe767ce7edda2d2563d816c73e52fe7b1c21ef30bccb1db9498661"
+d2a_04b_csmar_rights_receipt_20260730_report_manifest_sha256: "fcb22330aeec0731ee29562bfceb32312a37c1ab365b24d9c00bef20c3bdcded"
+d2a_04b_library_source_census_status: "DISCOVERY_ONLY__OTHER_LIBRARY_DATABASES_AVAILABLE__NO_DOWNLOAD__NO_PLAN_SCOPE_CHANGE"
+d2a_04b_library_source_census_report: "${QUANTIFICATION_ROOT}/reports/data-governance/library-economic-financial-source-census-20260729/README.md"
+d2a_04b_official_package_root: "${QUANTIFICATION_ROOT}/tmp/d2a04b-source-closure/d2a04b-official-track-a-20260728-v1/"
+d2a_04b_sse_status: "PARTIAL__CURRENT_IDENTITY_AND_HOLIDAY_NOTICE_INDEX_COLLECTED__SEALED__INSPECTION_ONLY"
+d2a_04b_sse_raw_file_count: 21
+d2a_04b_sse_raw_bytes: 1165667
+d2a_04b_szse_status: "PARTIAL__23_RAW_FILES_SEALED__OLD_2023_RULE_URL_404_STOP__INSPECTION_ONLY"
+d2a_04b_szse_raw_file_count: 23
+d2a_04b_szse_raw_bytes: 1004095
+d2a_04b_bse_status: "PAUSED__HTTP_403_WAF_BLOCKED__NO_BUSINESS_DATA__INSPECTION_ONLY"
+d2a_04b_bse_business_data_bytes: 0
+d2a_04b_formal_admissions: 0
+resset_manual_export_intake_20260802:
+  run_id: "intake-20260802-04pkg-v1"
+  status: "COMPLETED__04PKG_SEALED__04_CANDIDATES_AVAILABLE__FORMAL_EFFECT_NONE"
+  intake_root: "${QUANTIFICATION_ROOT}/data/market/quarantine/resset-manual-export/intake-20260802-04pkg-v1/"
+  intake_manifest: "${QUANTIFICATION_ROOT}/data/market/quarantine/resset-manual-export/intake-20260802-04pkg-v1/INTAKE_MANIFEST.json"
+  intake_manifest_sha256: "d7a8bdacbe8ed8d4876179a0e0c0be293b2a15a0fab39daf8ccb2ffea7d0c969"
+  source_package_count: 4
+  source_total_bytes: 4524042
+  candidate_count: 4
+  candidates:
+    COMNMHIS:
+      row_count: 9778
+      manifest: "${QUANTIFICATION_ROOT}/tmp/local-dataset-build/resset-comnmhis-candidate/intake-20260802-04pkg-v1/manifest.json"
+      manifest_sha256: "0e8ca873e3e9f5c367bf659fbed45ada62e9829b3c6e2a7b489942034441882f"
+      content_hash: "1bbd6040f187b3fb2f1804e40fab8906ac74e27a312e26ece05aab4c5218bf26"
+    DELINFO:
+      row_count: 8936
+      manifest: "${QUANTIFICATION_ROOT}/tmp/local-dataset-build/resset-delinfo-candidate/intake-20260802-04pkg-v1/manifest.json"
+      manifest_sha256: "128f0592826ba14fab9b3ab7cb742cebbf37e7e35cc2b8e46b540bdc173a0d76"
+      content_hash: "f9f2e160b048e6b8fb69452ec69726840d082647a56a089dc7afd5ed654d2bdd"
+    STKSPCTRMT:
+      row_count: 4105
+      manifest: "${QUANTIFICATION_ROOT}/tmp/local-dataset-build/resset-stkspctrmt/manual-export-20260802-zero-loss-v1/manifest.json"
+      manifest_sha256: "dbbf8e2a3095c86ab1865c7fbe742bc789e88452fa3b607cb4c5622d1ac5b63e"
+      content_hash: "8c5833369e1eab78171425747a107ede7f2edb466c4ba9cc00a767aa40d537d5"
+    SUSPNSNRESMPTN:
+      row_count: 81535
+      manifest: "${QUANTIFICATION_ROOT}/tmp/local-dataset-build/resset-suspnsnresmptn/intake-20260802-04pkg-v1-zero-loss-v1/manifest.json"
+      manifest_sha256: "14a79f6f5a4a7542b76b0a6e18e81d86206d27f80c4f2a862b9dd41e4ecc3703"
+      content_hash: "8f11c34e317dc124ccfd4a0a12b12e3fd9bca5a5950b7ab1b0f760614251105a"
+  report_root: "${QUANTIFICATION_ROOT}/reports/data-governance/resset-r0-core01-core06-arrival-intake-20260802-v2/"
+  verification_sha256: "3aa133b526a360e963862bafd7105c0c29fc1cc080fcfc98673b232717a1bd95"
+  vendor_dictionary_report: "${QUANTIFICATION_ROOT}/reports/data-governance/resset-vendor-dictionary-evidence-20260802-v1/README.md"
+  vendor_dictionary_report_sha256: "9da09726ce1fca08767f3aa5f71a0b0ad2fc99c4e7f22bfe08a1eecc34fa20d9"
+  affected_plan_ids:
+    - "CORE-01"
+    - "CORE-03"
+    - "CORE-06"
+  no_candidate_closure:
+    - "CORE-02"
+    - "CORE-04"
+    - "CORE-05"
+  purpose_ceiling: "INSPECTION_ONLY"
+  admission_decision: "NOT_ADMITTED"
+  formal_effect: "NONE"
+  stage_a_ready: "0/4"
+  formal_core_01_06: "0/6"
+  formal_core_20: "0/20"
+  r0_pv: "NOT_MET"
+  r1_classic_cn: "NOT_MET"
+  r2_a_share_global: "NOT_MET"
+  formal_catalog_write: false
+  quality_promotion: false
+  snapshot_write: false
+  research_use: false
+d2a_04b_current_wait_and_gaps:
+  - "PERMANENT_IDENTITY_NAME_CODE_DELISTING_AND_HISTORICAL_STATUS_CHAIN_NOT_CLOSED"
+  - "MARKETTYPE_64_CALENDAR_GAP_2020_07_27_TO_2021_11_12"
+  - "CORPORATE_ACTION_AVAILABLE_AT_REVISION_CHAIN_AND_SENTINELS_NOT_CLOSED"
+  - "EIGHTEEN_FINANCIAL_AUDIT_CANDIDATES_LOCALLY_CLOSED__INITIAL_AVAILABLE_AT_PRIOR_REVISIONS_AND_PUBLICATION_DATES_PENDING"
+  - "SSE_SZSE_OFFICIAL_PACKAGES_PARTIAL__CORE01_02_04_06_NOT_CLOSED"
+  - "BSE_HTTP_403_WAF_HARD_STOP"
+  - "D2A_04_COMPLETION_GATE_NOT_MET__D2B_BLOCKED"
+user_fixed_free_gib: null
+d2a_04b_planned_batch_envelope_gib: 150.0
+d2a_04b_retains_global_hard_maximum_batch_footprint_gib: 240.0
+d2a_04b_retains_global_minimum_free_fraction: 0.25
+d2a_04b_scope:
+  - "CSMAR_TRD_DALYR_1990_TO_LATEST_AVAILABLE_SEGMENTED"
+  - "CSMAR_TRD_CO_COMPLETE_CURRENT_CROSS_SECTION"
+  - "CSMAR_TRD_CALE"
+  - "CSMAR_TRD_CPTL_TRD_CAPCHG_TRD_NOLIMIT_TRD_ADJUSTFACTOR"
+  - "CSMAR_PIT_FINANCIAL_CORE_TABLES_PUBLICATION_DATES_AND_AUDIT_OPINIONS"
+  - "OFFICIAL_IDENTITY_CALENDAR_ACTION_AND_RULE_EVIDENCE"
+d2a_04b_conditional_scope:
+  status: "SUPERSEDED_BY_USER_DIRECT_FULL_HISTORY_STRUCTURED_COLLECTION_2026_07_29"
+d2a_04b_acceptance:
+  - "PRICE_VOLUME_CANDIDATE_SUFFICIENCY_ONLY"
+  - "IDENTITY_CALENDAR_ACTION_STATUS_COVERAGE_REPORTED"
+  - "ALL_OUTPUTS_INSPECTION_ONLY_NOT_ADMITTED"
+d2a_04b_forbidden:
+  - "CSMAR_48_DATABASE_BULK_COLLECTION"
+  - "PAID_SOURCE_OR_NEW_SUBSCRIPTION"
+  - "NEW_CREDENTIAL_KEY_OR_SECRET"
+  - "FORMAL_DATASET_CATALOG_REGISTRATION_OR_ADMISSION"
+  - "FORMAL_QUALITY_PROMOTION_OR_WAIVER"
+  - "FACTOR_RESEARCH_BACKTEST_OR_EFFICACY_CLAIM"
+d2a_04_started_at: "2026-07-28T19:40:00+08:00"
+d2a_04_paused_at: "2026-07-28T20:00:14+08:00"
+d2a_04_status: "COMPLETED__PHASE_A_LOCAL_ENGINEERING__D2A_04_COMPLETION_GATE_NOT_MET__PAUSED"
+d2a_04_execution_plan: "${QUANTIFICATION_ROOT}/data/catalog/contracts/source_admission_v1/execution_plans/d2a04_core01_to_core06_candidate_closure_v1.json"
+d2a_04_phase_a_network_requests_authorized: false
+d2a_04_output_root: "${QUANTIFICATION_ROOT}/tmp/d2a04-core01-to-core06-candidate"
+d2a_04_report_root: "${QUANTIFICATION_ROOT}/reports/data-governance/d2a-04-core01-to-core06-candidate-20260728"
+d2a_04_work_package_receipt: "${QUANTIFICATION_ROOT}/reports/data-governance/d2a-04-core01-to-core06-candidate-20260728/WORK_PACKAGE.json"
+d2a_04_verification: "${QUANTIFICATION_ROOT}/reports/data-governance/d2a-04-core01-to-core06-candidate-20260728/VERIFICATION.json"
+d2a_04_candidate_run: "d2a04-phase-a-20260728-v1"
+d2a_04_candidate_bytes: 568246
+d2a_04_candidate_content_hash: "f228a3a8b55aec100291b21e32e6fa2b6aacf1c58866d89dc884c096a52ab1f3"
+d2a_04_candidate_tree_sha256: "0f506154fe1870c1bb10c0cd8d810c8d73a4bde9c380b5de7091373e5ef448f1"
+d2a_04_referenced_daily_rows: 5852287
+d2a_04_referenced_daily_partitions: 60
+d2a_04_core05_output_rows: 0
+d2a_04_formal_admissions: 0
+d2a_04_failed_staging_path: "${QUANTIFICATION_ROOT}/tmp/d2a04-core01-to-core06-candidate/.d2a04-phase-a-20260728-v1.staging-d27055c6415741e3873948506c7068ad"
+d2a_04_failed_staging_bytes: 214961
+d2a_04_failed_staging_cleanup_status: "RETAINED__AUTOMATIC_CLEANUP_FALSE"
+d2a_03_started_at: "2026-07-28T14:37:58+08:00"
+d2a_03_paused_at: "2026-07-28T15:25:21+08:00"
+d2a_03_status: "PAUSED__PARTIAL__BSE_BUSINESS_AND_CSMAR_FINANCIAL_PIT_BLOCKED__CORE03_SOURCE_SLICE_ONLY__FORMAL_ADMISSIONS_0"
+d2a_03_work_package_receipt: "${QUANTIFICATION_ROOT}/reports/data-governance/d2a-03-official-pit-min-core-slice-20260728/WORK_PACKAGE.json"
+d2a_03_execution_plan: "${QUANTIFICATION_ROOT}/data/catalog/contracts/source_admission_v1/execution_plans/d2a03_official_pit_min_core_slice_v1.json"
+d2a_03_request_spec: "${QUANTIFICATION_ROOT}/data/catalog/contracts/source_admission_v1/execution_plans/d2a03_official_pit_request_spec_v1.json"
+d2a_03_core_selection: "${QUANTIFICATION_ROOT}/data/catalog/contracts/source_admission_v1/execution_plans/d2a03_core_slice_selection_v1.json"
+d2a_03_output_root: "${QUANTIFICATION_ROOT}/tmp/d2a03-official-pit-core-slice"
+d2a_03_official_pit_current_run: "d2a03-official-pit-20260728-v2"
+d2a_03_official_pit_requests: 4
+d2a_03_official_pit_response_bytes: 41794
+d2a_03_official_pit_candidates: 14
+d2a_03_official_pit_available_at_created: 0
+d2a_03_csmar_financial_sample_status: "BLOCKED__PORTAL_UI_AUTOMATION_TIMEOUT__NO_FILE_DOWNLOADED"
+d2a_03_core_slice_run: "d2a03-core-slice-20260728-v1"
+d2a_03_core_slice_selected_securities: 16
+d2a_03_core_slice_securities_with_rows: 15
+d2a_03_core_slice_rows: 509
+d2a_03_core_slice_content_hash: "e0b6690a3f24521994d41e978c7c679cf921b7825eb5c90ea11f44289a38c77d"
+d2a_03_formal_admissions: 0
+d2a_03_scope:
+  - "LOW_FREQUENCY_EXCHANGE_AND_CNINFO_OFFICIAL_DISCLOSURE_METADATA"
+  - "MATCHED_PDF_ONLY_WHEN_REQUIRED_FOR_ORIGINAL_REVISION_EVIDENCE"
+  - "ONE_SMALL_CSMAR_FINANCIAL_FACT_PACKAGE"
+  - "CORE01_TO_CORE06_EVENT_CANDIDATE_SLICE_12_TO_18_SECURITIES"
+d2a_03_forbidden:
+  - "PAID_SOURCE_OR_NEW_SUBSCRIPTION"
+  - "AUTOMATED_LOGIN_OR_PERSISTED_CREDENTIAL_COOKIE_TOKEN"
+  - "FULL_HISTORY_OR_FULL_DATABASE_BACKFILL"
+  - "CONCURRENT_CRAWLING_OR_SCHEDULER"
+  - "FORMAL_DATA_MARKET_OR_DATA_PUBLISHED_WRITE"
+  - "DATASETS_OR_PLANNED_DATASETS_MODIFICATION"
+  - "FORMAL_QUALITY_PROMOTION_OR_WAIVER"
+  - "FACTOR_IC_BACKTEST_OR_EFFICACY_CLAIM"
+  - "AUTOMATIC_DELETION"
+d2a_03_stop_conditions:
+  - "LICENSE_RETENTION_OR_INTERNAL_RESEARCH_SCOPE_UNCLEAR"
+  - "CAPTCHA_HTTP429_OR_AUTHENTICATION_LOSS"
+  - "TIMESTAMP_TIMEZONE_OR_PRECISION_CANNOT_BE_CONSERVATIVELY_RESOLVED"
+  - "FINANCIAL_FACT_CANNOT_BE_UNIQUELY_MAPPED_TO_DISCLOSURE_VERSION"
+  - "REVISION_CHAIN_HAS_NO_DIRECT_EVIDENCE"
+  - "SECURITY_EXCHANGE_DATE_OR_UNIT_MAPPING_AMBIGUOUS"
+  - "PRIMARY_KEY_OHLC_OR_OFFICIAL_RULE_CRITICAL_CONFLICT"
+  - "REQUEST_RESPONSE_PDF_OR_DISK_GUARD_EXCEEDED"
+  - "FORMAL_CATALOG_HASH_CHANGED"
+d2a_03_guards:
+  official_business_requests_max: 18
+  rows_per_request_max: 100
+  official_total_response_mib_max: 50
+  matched_pdf_count_max: 12
+  matched_pdf_total_mib_max: 100
+  csmar_financial_issuer_max: 3
+  csmar_financial_report_periods_per_issuer_max: 2
+  candidate_security_count_min: 12
+  candidate_security_count_max: 18
+  maximum_batch_footprint_gib: 20.0
+  minimum_free_fraction: 0.25
+d2a_02_started_at: "2026-07-28T12:20:32+08:00"
+d2a_02_paused_at: "2026-07-28T14:21:26+08:00"
+d2a_02_status: "PARTIAL__DAILY_MULTIPACK_PASS__FINANCIAL_PIT_PERMISSION_BLOCKED"
+d2a_02_work_package_receipt: "${QUANTIFICATION_ROOT}/reports/data-governance/d2a-02-csmar-priority-table-pilot-20260728/WORK_PACKAGE.json"
+d2a_02_measurements: "${QUANTIFICATION_ROOT}/reports/data-governance/d2a-02-csmar-priority-table-pilot-20260728/PILOT_MEASUREMENTS.json"
+d2a_02_daily_rows: 5852287
+d2a_02_daily_securities: 5659
+d2a_02_daily_source_fields: 24
+d2a_02_daily_partitions: 60
+d2a_02_daily_candidate_bytes: 693892239
+d2a_02_formal_admissions: 0
+d2a_02_scope:
+  - "CSMAR_PRIORITY_TABLE_METADATA_CENSUS"
+  - "ONE_NON_OVERLAPPING_FIVE_YEAR_TRD_DALYR_PACKAGE"
+  - "ONE_VERIFIED_PIT_FINANCIAL_SAMPLE_PACKAGE"
+  - "LOCAL_UNPACK_PARQUET_CAPACITY_AND_RATE_LIMIT_MEASUREMENT"
+d2a_02_forbidden:
+  - "PAID_SOURCE_OR_SUBSCRIPTION"
+  - "PERSISTED_CREDENTIAL_COOKIE_TOKEN_OR_BROWSER_STATE"
+  - "FULL_DATABASE_OR_FULL_HISTORY_BACKFILL"
+  - "NEWS_OR_HIGH_FREQUENCY_BRANCH"
+  - "FORMAL_DATASET_CATALOG_REGISTRATION"
+  - "FORMAL_QUALITY_PROMOTION_OR_WAIVER"
+  - "AUTOMATIC_DELETION"
+d2a_02_stop_conditions:
+  - "UNCLEAR_LICENSE_FOR_LOCAL_RETENTION_OR_INTERNAL_RESEARCH_USE"
+  - "CRITICAL_FIELD_OR_UNIT_SEMANTIC_CONFLICT"
+  - "MISSING_PIT_OR_REVISION_EVIDENCE"
+  - "HTTP_429_EXPLICIT_COOLDOWN_OR_UNEXPLAINED_AUTHENTICATION_LOSS"
+  - "PACKAGE_HEADER_ROW_COUNT_OR_DATE_RANGE_MISMATCH"
+  - "DUPLICATE_BUSINESS_KEYS"
+  - "G_DRIVE_GUARD_WOULD_BE_EXCEEDED"
+paused_data_work_package: "L1-D2A-04_CORE01_TO_CORE06_CANDIDATE_CLOSURE_AND_SELECTED_SOURCE_PILOT"
+paused_data_work_package_status: "COMPLETED__PHASE_A_LOCAL_ENGINEERING__D2A_04_COMPLETION_GATE_NOT_MET__PAUSED"
+paused_data_work_package_started_at: "2026-07-28T19:40:00+08:00"
+paused_data_work_package_paused_at: "2026-07-28T20:00:14+08:00"
+paused_data_work_package_prior_execution_user_approved: true
+paused_data_work_package_scope: "LOCAL_CORE01_TO_CORE06_EVIDENCE_CLOSURE__UPSTREAM_PARTITION_REFERENCES__TMP_AND_REPORTS_ONLY"
+paused_data_work_package_forbidden:
+  - "NETWORK_LOGIN_OR_DOWNLOAD"
+  - "PAID_SOURCE_OR_SUBSCRIPTION"
+  - "CREDENTIAL_OR_SECRET"
+  - "FULL_HISTORY_OR_BULK_BACKFILL"
+  - "FORMAL_DATASET_CATALOG_REGISTRATION"
+  - "FORMAL_QUALITY_PROMOTION_OR_WAIVER"
+  - "FACTOR_RESEARCH_BACKTEST_OR_EFFICACY_CLAIM"
+  - "SCHEDULER_OR_UNATTENDED_UPDATE"
+paused_data_work_package_stop_conditions:
+  - "CORE01_PERMANENT_IDENTITY_NOT_AVAILABLE"
+  - "CORE02_Q1_FAIL_Q2_FAIL_Q3_UNKNOWN_Q4_PASS__SSE_SZSE_2015_2026_CANDIDATE__ISO_MIC_XSHG_XSHE_BJSE_SUBCHECK_PASS__BSE_FULL_HISTORICAL_SESSION_REVISION_AND_RIGHTS_OPEN__NOT_ADMITTED"
+  - "CORE03_LIMIT_FIELDS_AND_MULTI_SOURCE_SEMANTICS_UNRESOLVED"
+  - "CORE04_CORPORATE_ACTION_TERMS_AND_REVISION_CHAIN_NOT_AVAILABLE"
+  - "CORE05_QUALIFIED_CORE03_AND_CORE04_INPUTS_NOT_AVAILABLE"
+  - "CORE06_OPEN_STATE_AND_HISTORICAL_RULE_VERSIONS_NOT_AVAILABLE"
+  - "INDEPENDENT_RETENTION_TERMS_OPEN"
+prior_paused_data_work_package: "L1-D2A-01_SOURCE_ADMISSION_AND_PILOT_ADAPTERS"
+prior_paused_data_work_package_status: "PAUSED__BLOCKING_CONFLICTS_REPORTED__NO_FORMAL_ADMISSION"
+prior_paused_data_work_package_started_at: "2026-07-27T19:09:35+08:00"
+prior_paused_data_work_package_paused_at: "2026-07-27T19:28:25+08:00"
+prior_completed_local_bootstrap_work_package: "L1-D2A-01B_CSMAR_LOCAL_RESEARCH_BOOTSTRAP"
+prior_completed_local_bootstrap_work_package_status: "DONE__LOCAL_CANDIDATE_PIPELINE_ONLY__TWO_REAL_ZIPS_PASS__FORMAL_ADMISSION_0"
+prior_completed_local_bootstrap_work_package_completed_at: "2026-07-28"
+last_completed_data_work_package: "L1-D2A-04C_33PKG_LOCAL_SCHEMA_PIT_AND_TEXT_CLOSURE"
+last_completed_data_work_package_status: "DONE__LOCAL_EVIDENCE_ONLY__32_CANDIDATES_PLUS_1_OVERLAP_CALIBRATION__FORMAL_ADMISSIONS_0__PARENT_COMPLETION_GATE_NOT_MET"
+last_completed_data_work_package_completed_at: "2026-07-29"
+legacy_selected_core_combined_audit: "L1-D2B_SELECTED_CORE_FORMAL_ADMISSION_GATE__CORE01_CORE02_CORE03_CORE06"
+legacy_selected_core_combined_audit_status: "COMPLETED__RECLASSIFIED_POST_ADMISSION_AUDIT__HISTORICAL_0_OF_4__BLOCK_GATES_PASS_1_FAIL_12_UNKNOWN_3__FORMAL_STATE_UNCHANGED"
+legacy_selected_core_combined_audit_completed_at: "2026-07-30"
+legacy_selected_core_combined_audit_report: "${QUANTIFICATION_ROOT}/reports/data-governance/d2b-selected-core-formal-admission-gate-20260730-v1/README.md"
+last_completed_formal_admission_gate: "L1-D2B_SELECTED_CORE_FORMAL_ADMISSION_GATE__CORE01_CORE02_CORE03_CORE06"
+last_completed_formal_admission_gate_status: "LEGACY_COMPATIBILITY_ALIAS__RECLASSIFIED_POST_ADMISSION_AUDIT__HISTORICAL_0_OF_4__FORMAL_STATE_UNCHANGED"
+last_completed_formal_admission_gate_completed_at: "2026-07-30"
+last_completed_formal_admission_gate_report: "${QUANTIFICATION_ROOT}/reports/data-governance/d2b-selected-core-formal-admission-gate-20260730-v1/README.md"
+current_selected_core_pre_admission_gate: "L1-D2A-04B_SELECTED_CORE_TWO_STAGE_ADMISSION_ARCHITECTURE_AUDIT"
+current_selected_core_pre_admission_gate_status: "STAGE_A_BLOCKED__0_OF_4_READY__CORE01_11_CORE02_9_CORE03_12_CORE06_11_BLOCKERS__STAGE_B_BLOCKED_PHASE_A_NOT_READY__NO_FORMAL_MUTATION"
+current_selected_core_pre_admission_gate_completed_at: "2026-07-30"
+current_selected_core_pre_admission_gate_report: "${QUANTIFICATION_ROOT}/reports/data-governance/selected-core-two-stage-admission-architecture-audit-20260730-v1/README.md"
+stage_a_closure_control_v2_status: "PASS__26_QUEUE_ITEMS__25_NONPASS__22_BLOCKING_NONPASS__FORMAL_STAGE_A_0_OF_4_UNCHANGED"
+stage_a_closure_control_v2_report: "${QUANTIFICATION_ROOT}/reports/data-governance/stage-a-closure-control-20260730-v2/README.md"
+stage_a_closure_control_v2_manifest_sha256: "d9c4189cd3a7b6f2cfd2f991f5aefc0eeab3e90000c86034add1fd858f344e1a"
+stage_a_evidence_consolidation_v4_status: "SEALED_PASS__AUDITOR_CONTRACT_V3__FOURTH_20260731_PACKAGING_SEAL_ONLY__9_UPSTREAM_PACKAGES_STRICTLY_AUDITED__SEALED_VERIFY_ONLY_PASS__POST_AUTHORITY_SYNC_LIVE_VERIFY_EXPECTED_FAIL__STRICT_UPSTREAM_9_OF_9_UNCHANGED__QUEUE_STATUS_CHANGES_0__CORE02_Q1_FAIL_Q2_FAIL_Q3_UNKNOWN_Q4_PASS__FORMAL_EFFECT_NONE__FORMAL_STAGE_A_0_OF_4_UNCHANGED__FORMAL_ADMISSIONS_0__D2B_BLOCKED__NOT_ADMITTED"
+stage_a_evidence_consolidation_v4_report: "${QUANTIFICATION_ROOT}/reports/data-governance/stage-a-evidence-consolidation-20260731-v4/README.md"
+stage_a_evidence_consolidation_v4_manifest: "${QUANTIFICATION_ROOT}/reports/data-governance/stage-a-evidence-consolidation-20260731-v4/REPORT_MANIFEST.json"
+stage_a_evidence_consolidation_v4_manifest_sha256: "751ecff9d6bb39cbb88c919c01a910b92c3e8e50fd65676d0472c3f868bfc4d3"
+stage_a_evidence_consolidation_v4_internal_run_id: "stage-a-evidence-consolidation-20260730-v3"
+stage_a_evidence_consolidation_v4_path_semantics: "BOUND_PACKAGING_PATH_ONLY__NOT_FORMAL_EVIDENCE_ROOT__NOT_GATE_TRANSITION"
+stage_a_evidence_consolidation_v4_alias_receipt: "${QUANTIFICATION_ROOT}/reports/data-governance/stage-a-evidence-consolidation-20260731-v4-alias-receipt-v1/ALIAS_RECEIPT.json"
+stage_a_evidence_consolidation_v4_alias_manifest: "${QUANTIFICATION_ROOT}/reports/data-governance/stage-a-evidence-consolidation-20260731-v4-alias-receipt-v1/REPORT_MANIFEST.json"
+stage_a_evidence_consolidation_v4_alias_manifest_sha256: "587077cc0871960398bf4ec3ae4069c071410e81a3ced8212945f950f6dd4435"
+stage_a_authority_sync_post_verification_status: "EXPECTED_AUTHORITY_GUARD_DRIFT__LIVE_VERIFY_FAIL__ERROR_SET_EXACT_MATCH__STRICT_UPSTREAM_9_OF_9__FORMAL_EFFECT_NONE__FORMAL_STAGE_A_0_OF_4"
+stage_a_authority_sync_post_verification_receipt: "${QUANTIFICATION_ROOT}/reports/data-governance/stage-a-authority-sync-post-verification-20260731-v1/POST_SYNC_VERIFICATION.json"
+stage_a_authority_sync_post_verification_manifest: "${QUANTIFICATION_ROOT}/reports/data-governance/stage-a-authority-sync-post-verification-20260731-v1/REPORT_MANIFEST.json"
+stage_a_authority_sync_post_verification_manifest_sha256: "46652312bb20fe021c013b7bc06581c359fd324d525b192b7d9e826a89a03f75"
+stage_a_core01_official_identity_status: "PASS_EVIDENCE_BINDING_ONLY__47_OF_47_SOURCE_FILES_VERIFIED__4_OF_5_CURRENT_GATES_NONPASS__11_BLOCKERS__BSE_BUSINESS_ROWS_0__NOT_ADMITTED"
+stage_a_core01_official_identity_report: "${QUANTIFICATION_ROOT}/reports/data-governance/stage-a-core01-official-identity-closure-20260730-v1/README.md"
+stage_a_core02_gate_status: "FAIL_CLOSED__Q1_FAIL_Q2_FAIL_Q3_UNKNOWN_Q4_PASS__FORMAL_ADMISSION_0__NOT_ADMITTED"
+stage_a_core02_gate_report: "${QUANTIFICATION_ROOT}/reports/data-governance/stage-a-evidence-consolidation-20260731-v4/README.md"
+stage_a_core02_iso_mic_status: "PASS_SUBCHECK_ONLY__XSHG_XSHE_BJSE_ACTIVE__NO_STAGE_A_TRANSITION"
+stage_a_core02_iso_mic_report: "${QUANTIFICATION_ROOT}/reports/data-governance/stage-a-core02-iso-mic-evidence-20260730-v1/README.md"
+stage_a_core03_core06_rules_status: "FAIL_CLOSED__19_SOURCE_BINDINGS__41_MARKERS__CORE03_Q2_Q3_UNKNOWN__CORE06_Q3_Q4_FAIL__NO_STAGE_A_TRANSITION"
+stage_a_core03_core06_rules_report: "${QUANTIFICATION_ROOT}/reports/data-governance/stage-a-core03-core06-official-rules-closure-20260730-v1/README.md"
+trd_dalyr_null_zero_semantics_audit_v2_status: "PASS_OBSERVED_AUDIT_ONLY__8_CANDIDATES__464_PARTITIONS__18691664_CLEAN_ROWS__0_KEY_CONFLICTS__5_VOLUME_AMOUNT_ZERO_ANOMALIES__OBSERVED_SEMANTICS_ASSESSMENT_PARTIAL__CURRENT_STAGE_A_CORE03_Q2_Q3_UNKNOWN__NO_GATE_TRANSITION__NOT_ADMITTED"
+trd_dalyr_null_zero_semantics_audit_v2_report: "${QUANTIFICATION_ROOT}/reports/data-governance/trd-dalyr-null-zero-semantics-audit-20260730-v2/README.md"
+trd_dalyr_null_zero_semantics_audit_v2_manifest_sha256: "25c90187a098e9f96637e3a383e84a934612d91847be6f1ff380f795d0e3326a"
+last_completed_selected_core_local_evidence_report: "${QUANTIFICATION_ROOT}/reports/data-governance/core01-02-03-06-local-evidence-closure-20260730-v1/README.md"
+daily_update_local_smoke_status: "PASS_SYNTHETIC_ONLY__NO_PRODUCTION_UPDATER__NO_SCHEDULER"
+daily_update_local_smoke_report: "${QUANTIFICATION_ROOT}/reports/data-governance/daily-update-local-smoke-20260730-v1/README.md"
+local_daily_update_engine_status: "PASS_INSPECTION_ONLY_LOCAL_INCREMENT_ENGINE__TESTS_14_OF_14__EXTRA_PAYLOAD_SHELL_META_AND_LINK_GUARDS_PASS__NO_PRODUCTION_UPDATER__NO_SCHEDULER"
+local_daily_update_engine_report: "${QUANTIFICATION_ROOT}/reports/data-governance/local-daily-update-engine-20260730-v1/README.md"
+local_daily_update_engine_formal_admissions: 0
+local_daily_orchestration_state_status: "PASS_INSPECTION_ONLY__STATE_TESTS_10_OF_10__BOUNDED_INSPECTION_WORKER_SHIPPED_SEPARATELY__NO_PRODUCTION_WORKER_NO_SCHEDULER_NO_FORMAL_WRITE"
+local_daily_orchestration_state_report: "${QUANTIFICATION_ROOT}/reports/data-governance/local-daily-orchestration-state-layer-20260730-v1/README.md"
+local_daily_inspection_worker_status: "PASS_INSPECTION_ONLY__34_OF_34_RELEVANT_REGRESSIONS__IDENTITY_DATE_REQUEST_AND_RESULT_HASH_BOUND__FAILURE_CLEARS_CLAIM__NO_DOWNLOADER_NO_NETWORK_NO_SCHEDULER_NO_FORMAL_WRITE"
+local_daily_inspection_worker_tool: "${QUANTIFICATION_ROOT}/control/tools/run_local_daily_inspection_worker.py"
+local_daily_inspection_worker_report: "${QUANTIFICATION_ROOT}/reports/data-governance/local-daily-inspection-worker-20260731-v1/README.md"
+local_daily_inspection_worker_formal_admissions: 0
+tsinghua_vendor_automation_preflight_status: "COMPLETED_READ_ONLY__CCER_TABLE_ENTITLEMENT_PRESENT__WEBAPI_ENTITLEMENT_NOT_CONFIRMED__NO_DATA_DOWNLOAD__NO_FORMAL_ADMISSION"
+tsinghua_vendor_automation_preflight_report: "${QUANTIFICATION_ROOT}/reports/data-governance/tsinghua-vendor-automation-preflight-20260731-v1/README.md"
+schema_evolution_classifier_status: "PASS_INSPECTION_ONLY__TESTS_14_OF_14__COMPATIBLE_ADDITION_CLASSIFIED__BREAKING_AND_UNKNOWN_FAIL_CLOSED"
+schema_evolution_classifier_report: "${QUANTIFICATION_ROOT}/reports/data-governance/schema-evolution-classifier-20260730-v1/README.md"
+revision_event_ledger_status: "PASS_INSPECTION_ONLY__TESTS_10_OF_10__PIT_VINTAGE_LATE_WITHDRAW_REINSTATE_REPLAY"
+revision_event_ledger_report: "${QUANTIFICATION_ROOT}/reports/data-governance/revision-event-ledger-inspection-20260730-v1/README.md"
+stage_a_mechanical_full_closure_count: 0
+stage_a_mechanical_full_closure_denominator: 43
+core02_official_calendar_session_closure_status: "INSPECTION_ONLY__8454_VENUE_DATES__28_NOTICE_LINEAGE__12_SESSION_ROWS__FINAL_Q1_FAIL_Q2_FAIL_Q3_UNKNOWN_Q4_PASS__FORMAL_ADMISSION_0__D2B_BLOCKED__NOT_ADMITTED"
+core02_official_calendar_session_closure_report: "${QUANTIFICATION_ROOT}/reports/data-governance/core02-official-calendar-session-closure-20260730-v1/README.md"
+core02_official_calendar_session_closure_formal_admissions: 0
+csmar_python_api_status: "AUTHENTICATION_PASS__DATA_ENTITLEMENT_DENIED__NOT_A_DAILY_UPDATE_SOURCE"
+csmar_python_api_report: "${QUANTIFICATION_ROOT}/reports/data-governance/csmar-python-api-entitlement-probe-20260730-v1/README.md"
+official_automatable_source_inventory_status: "PASS__35_OF_35_MAPPED__FORMAL_ADMISSION_READY_0"
+official_automatable_source_inventory_report: "${QUANTIFICATION_ROOT}/reports/data-governance/official-automatable-source-inventory-20260730-v1/README.md"
+library_vendor_coverage_status: "PASS__35_OF_35_MAPPED__NO_SINGLE_VENDOR_CLOSES_ALL__ENTITLEMENT_STILL_REQUIRED"
+library_vendor_coverage_report: "${QUANTIFICATION_ROOT}/reports/data-governance/library-structured-vendor-coverage-20260730-v1/README.md"
+public_official_api_preflight_status: "PREFLIGHT_ONLY__4_OF_7_LIVE_STRUCTURE_PASS__FORMAL_ADMISSIONS_0"
+public_official_api_preflight_report: "${QUANTIFICATION_ROOT}/reports/data-governance/public-official-api-preflight-20260730-v1/README.md"
+public_official_no_key_api_inspection_status: "FIXTURE_4_OF_4_PASS__LIVE_3_OF_4_STRUCTURE_PASS__ECB_TLS_FAIL_CLOSED_QUARANTINED__INSPECTION_ONLY_NOT_ADMITTED"
+public_official_no_key_api_inspection_report: "${QUANTIFICATION_ROOT}/reports/data-governance/public-official-api-inspection-adapters-20260730-v1/README.md"
+public_official_no_key_api_fixture_pass: 4
+public_official_no_key_api_live_structure_pass: 3
+public_official_no_key_api_formal_admissions: 0
+nightly_standardization_and_blockers_status: "PASS__FOUR_UPSTREAM_REPORTS_HASH_BOUND__SECURITY_REGRESSION_27_OF_27__CREDENTIAL_PATTERN_HITS_0__FORMAL_CORE_0_OF_20__FORMAL_GCTX_0_OF_8"
+nightly_standardization_and_blockers_report: "${QUANTIFICATION_ROOT}/reports/data-governance/nightly-standardization-and-blockers-20260730-v1/README.md"
+last_completed_data_subpackage: "L1-D2A-04C_33PKG_LOCAL_SCHEMA_PIT_AND_TEXT_CLOSURE"
+last_completed_data_subpackage_status: "DONE__LOCAL_EVIDENCE_ONLY__32_CANDIDATES_PLUS_1_OVERLAP_CALIBRATION__FORMAL_ADMISSIONS_0__PARENT_COMPLETION_GATE_NOT_MET"
+last_completed_data_subpackage_completed_at: "2026-07-29"
+d2a_04_phase_a_scope:
+  - "CORE01_PERMANENT_SECURITY_IDENTITY_AND_CODE_HISTORY_CANDIDATES"
+  - "CORE02_OFFICIAL_CALENDAR_AND_SESSION_HISTORY_CANDIDATES"
+  - "CORE03_CSMAR_DAILY_TO_PERMANENT_IDENTITY_MAPPING_AND_SOURCE_CALIBRATION"
+  - "CORE04_REAL_CORPORATE_ACTION_TERMS_AND_REVISION_CHAIN_CANDIDATES"
+  - "CORE06_HISTORICAL_TRADING_STATUS_AND_RULE_VERSION_CANDIDATES"
+  - "SELECTED_CSMAR_CORE_TABLE_PILOTS_AFTER_FIELD_AND_PIT_REVIEW"
+d2a_04_phase_a_forbidden:
+  - "AUTOMATED_LOGIN_OR_PERSISTED_CREDENTIAL_COOKIE_TOKEN"
+  - "PAID_SOURCE_OR_NEW_SUBSCRIPTION"
+  - "FULL_DATABASE_OR_FULL_HISTORY_BACKFILL"
+  - "FORMAL_DATASET_CATALOG_REGISTRATION"
+  - "FORMAL_QUALITY_PROMOTION_OR_WAIVER"
+  - "FACTOR_RESEARCH_BACKTEST_OR_EFFICACY_CLAIM"
+  - "SCHEDULER_OR_UNATTENDED_UPDATE"
+d2a_04_completion_gate:
+  - "CORE01_02_03_04_06_REQUIRED_SOURCE_CANDIDATES_COMPLETE"
+  - "PERMANENT_IDENTITY_DATE_UNIT_AND_REVISION_SEMANTICS_RESOLVED"
+  - "RIGHTS_AND_LOCAL_RETENTION_SCOPE_RECORDED"
+  - "NO_CRITICAL_MULTI_SOURCE_CONFLICT"
+  - "FORMAL_CATALOG_UNCHANGED"
+next_formal_snapshot_work_package: "L1-D2B_G_DRIVE_SELECTED_CORE_BUILD_AND_EXPLORATORY_PIPELINE_SMOKE"
+next_formal_snapshot_work_package_requires_user_start: true
+next_formal_snapshot_work_package_condition: "D2A_04_CANDIDATE_COMPLETION_GATE_PASS__ALL_FOUR_STAGE_A_PASS__HASH_BOUND_STAGE_B_USER_AUTHORIZATION__REAL_DATA_CAPABLE_ATOMIC_PUBLISHER"
+next_formal_snapshot_work_package_status: "BLOCKED__STAGE_A_0_OF_4__D2A_04_COMPLETION_GATE_NOT_MET__REAL_DATA_PUBLISHER_UNAVAILABLE"
+next_data_work_package: "L1-D2A-04B_OFFICIAL_IDENTITY_CALENDAR_ACTION_STATUS_SOURCE_CLOSURE"
+next_data_work_package_status: "ACTIVE_AUTHORIZED_BOUNDED_SOURCE_CLOSURE__STAGE_A_PRE_ADMISSION_0_OF_4__CORE02_Q1_FAIL_Q2_FAIL_Q3_UNKNOWN_Q4_PASS__FORMAL_ADMISSIONS_0__D2B_BLOCKED__OFFICIAL_RIGHTS_IDENTITY_CALENDAR_ACTION_STATUS_AND_FINANCIAL_PIT_GAPS_REMAIN__NO_PAID_NO_NEW_KEY_NO_BULK_BACKFILL__NOT_ADMITTED"
+next_data_work_package_requires_user_start: false
+source_admission_work_package_status: "D2A_01_PAUSED__D2A_02_DAILY_FIVE_YEAR_CANDIDATE_PASS__D2A_03_PARTIAL_PAUSED__D2A_04_PHASE_A_DONE__D2A_04B_BOUNDED_SOURCE_CLOSURE_ACTIVE__D2A_04C_LOCAL_CLOSURE_COMPLETE_32_CANDIDATES_1_OVERLAP_18_FINANCIAL_AUDIT_CANDIDATES__LEGACY_COMBINED_AUDIT_POST_ADMISSION__STAGE_A_PRE_ADMISSION_0_OF_4__CORE02_Q1_Q2_FAIL__CSMAR_API_ENTITLEMENT_DENIED__OFFICIAL_API_PREFLIGHT_4_OF_7__FORMAL_ADMISSIONS_0"
+current_source_registry: "${QUANTIFICATION_ROOT}/data/catalog/contracts/source_admission_v1/current_source_registry.json"
+current_source_registry_status: "BOUNDED_SOURCE_CLOSURE_ACTIVE__STAGE_A_PRE_ADMISSION_0_OF_4__CORE02_Q1_FAIL_Q2_FAIL_Q3_UNKNOWN_Q4_PASS__LOCAL_INCREMENT_ENGINE_INSPECTION_ONLY__CSMAR_API_ENTITLEMENT_DENIED__PUBLIC_OFFICIAL_API_LIVE_3_OF_4__FORMAL_ADMISSIONS_0__D2B_BLOCKED__NOT_ADMITTED"
+d2a_01_source_admission_authoritative_run: "tmp/source-admission-pilot/d2a01-20260727-v3"
+d2a_01_source_admission_report: "reports/data-governance/d2a-01-source-admission-pilot-20260727/README.md"
+d2a_01_source_admission_evidence_audit: "reports/data-governance/d2a-01-source-admission-pilot-20260727/EVIDENCE_AUDIT.json"
+baostock_daily_coverage_report: "reports/data-governance/baostock-daily-coverage-pilot-20260727/README.md"
+baostock_daily_coverage_authoritative_evidence: "tmp/source-admission-pilot/baostock-daily-coverage-v4-20260727/RESULTS.json"
+baostock_daily_coverage_status: "PAUSED__LOGIN_PASSED__FIRST_COMPRESSED_BUSINESS_RESPONSE_FRAME_UNRESOLVED__0_OF_25_ACCEPTED"
+d2a_01_source_admission_network_ledger:
+  runs: 3
+  attempted_http_requests: 37
+  successful_captures: 33
+  errors: 4
+  business_requests: 9
+  cninfo_metadata_requests: 3
+  exchange_daily_price_requests: 0
+  cninfo_pdf_body_downloads: 0
+d2a_01_source_admission_pause_reasons:
+  - "EXCHANGE_MARKET_DATA_RIGHTS_NOT_ADMITTED"
+  - "BSE_SECURITY_MASTER_RAW_SCHEMA_STATIC_ENDPOINT_AND_RIGHTS_UNVERIFIED"
+  - "TENCENT_RAW_FIELDS_05_TO_10_AND_DATE_BOUND_SEMANTICS_UNRESOLVED"
+  - "CNINFO_TIMESTAMP_PRECISION_REVISION_CHAIN_AND_BULK_RETENTION_RIGHTS_UNRESOLVED"
+  - "BAOSTOCK_COMPRESSED_RESPONSE_FRAME_LIVE_ROWS_RIGHTS_UNITS_AND_PIT_UNRESOLVED"
+formal_source_admissions_after_pilot: 0
+formal_core_snapshots_after_pilot: 0
+queued_global_scope_work_packages:
+  - "L1-D10A_GLOBAL_CONTEXT_CONTRACT"
+  - "L1-D10B_HK_EQUITY_CONTRACT"
+  - "L1-D10C_GLOBAL_LINKED_EQUITY_CONTRACT"
+database_target: "COMPREHENSIVE_A_SHARE_GLOBAL_CONTEXT_HK_AND_LINKED_GLOBAL_EQUITY_DATA_ESTATE"
+approved_data_architecture: "RAW_CURATED_SNAPSHOT_PROJECTION"
+incremental_update_model: "DAILY_DELTA_MONTHLY_COMPACTION"
+data_automation_status: "RQDATA_R0_SHSZ_PV_DAILY_QUARANTINE_UPDATER_AND_SCHEDULER_PASS__FORMAL_DELTA_PROMOTION_MANUAL__OTHER_DATA_FAMILIES_GENERAL_UPDATER_COMPACTION_AND_CONTINUOUS_AUDIT_NOT_IMPLEMENTED"
+source_strategy: "OFFICIAL_DIRECT_FIRST__ACADEMIC_CSMAR_MANUAL_EXPORT_CANDIDATE__OPEN_SOURCE_ADAPTERS__MULTI_SOURCE_CALIBRATION"
+current_core_budget_policy: "NO_PAID_DATA__SEPARATE_APPROVAL_REQUIRED"
+market_universe_policy: "MAXIMUM_A_SHARE_WITH_DELISTED_AND_CODE_HISTORY"
+global_context_policy: "GCTX_8_REQUIRED_FOR_R2_A_SHARE_GLOBAL__NOT_REQUIRED_FOR_R0_PV_OR_R1_CLASSIC_CN__FULL_DATABASE_SCOPE_UNCHANGED"
+formal_research_entry_gate: "LAYERED__L0_INSPECTION__INDEPENDENT_R0_SHSZ_PV__R0_PV__R1_CLASSIC_CN__R2_A_SHARE_GLOBAL"
+formal_research_entry_gate_status: "R0_SHSZ_PV_OPEN__CANONICAL_R0_CORE01_06_FORMAL_0_OF_6__R1_CORE20_0_OF_20__R2_GCTX8_0_OF_8"
+formal_research_gate_model:
+  L0_INSPECTION:
+    required_data: "INSPECTION_ONLY_OR_FORMAL_DATA_ALLOWED_FOR_INSPECTION"
+    required_l2: "NONE__NOT_A_RESEARCH_GATE"
+    allowed_scope: "DATA_FIELD_SOURCE_AND_PIPELINE_INSPECTION_ONLY"
+    forbidden_scope: "FACTOR_IC_BACKTEST_EFFICACY_OR_INVESTMENT_CLAIM"
+    status: "NOT_MET_AS_RESEARCH_GATE__INSPECTION_ONLY_CANDIDATES_AVAILABLE"
+  R0_SHSZ_PV:
+    required_data: "cn-a-share-r0-shsz-pv-panel@20050104-20260803-v1"
+    required_l2: "EXACT_QDATA_PANELDATA_LAG_AND_NO_LEAKAGE_ACCEPTANCE_PASS"
+    allowed_scope: "SHSZ_ORDINARY_A_UNADJUSTED_PRICE_VOLUME_SINGLE_FACTOR_DISCOVERY_AND_PREREGISTERED_VALIDATION_PREPARATION"
+    forbidden_scope: "BJSE_VALUE_QUALITY_GROWTH_INDUSTRY_ETF_GLOBAL_CONTEXT_AUTOMATIC_TRADING"
+    status: "OPEN__FACTOR_CATALOG_512_FROZEN__FACTOR_RUNS_0__VALIDATION_NOT_CONSUMED__HOLDOUT_NOT_OPENED"
+  R0_PV:
+    required_data: "CORE01_TO_CORE06_FORMAL_QUALIFIED_IMMUTABLE_SNAPSHOTS"
+    required_l2: "PV_PIT_QUALITY_RECOVERY_LEAKAGE_OOS_REPRODUCIBILITY_PASS"
+    allowed_scope: "MOMENTUM_REVERSAL_VOLATILITY_TURNOVER_LIQUIDITY_AND_PRICE_VOLUME_ONLY"
+    forbidden_scope: "VALUE_QUALITY_GROWTH_INDUSTRY_MACRO_OR_HIGHER_TIER_CLAIMS"
+    status: "NOT_MET__CORE01_06_FORMAL_0_OF_6"
+  R1_CLASSIC_CN:
+    required_data: "CORE20_FORMAL_QUALIFIED_IMMUTABLE_SNAPSHOTS"
+    required_l2: "CLASSIC_CN_PIT_QUALITY_RECOVERY_LEAKAGE_OOS_REPRODUCIBILITY_PASS"
+    allowed_scope: "R0_PV_PLUS_VALUE_QUALITY_GROWTH_SIZE_AND_INDUSTRY_NEUTRAL_RESEARCH"
+    forbidden_scope: "GCTX_DEPENDENT_MACRO_OR_GLOBAL_CONTEXT_CLAIMS"
+    status: "NOT_MET__CORE20_FORMAL_0_OF_20"
+  R2_A_SHARE_GLOBAL:
+    required_data: "CORE20_PLUS_GCTX8_FORMAL_QUALIFIED_IMMUTABLE_SNAPSHOTS"
+    required_l2: "A_SHARE_GLOBAL_PIT_QUALITY_RECOVERY_LEAKAGE_OOS_REPRODUCIBILITY_PASS"
+    allowed_scope: "FULL_A_SHARE_RESEARCH_WITH_RATE_FX_COMMODITY_AND_GLOBAL_MARKET_CONTEXT"
+    status: "NOT_MET__CORE20_FORMAL_0_OF_20__GCTX8_FORMAL_0_OF_8"
+formal_research_promotion_order:
+  - "INDEPENDENT_R0_SHSZ_PV_DISCOVERY"
+  - "L0_INSPECTION_TO_CANONICAL_R0_PV"
+  - "R0_PV_TO_R1_CLASSIC_CN"
+  - "R1_CLASSIC_CN_TO_R2_A_SHARE_GLOBAL"
+formal_research_calendar_estimate_status: "NOT_FROZEN__UPDATE_FROM_MEASURED_BATCH_THROUGHPUT_AND_EXTERNAL_BLOCKERS"
+formal_research_execution_rule: "START_ONLY_WITHIN_THE_HIGHEST_PASSED_LAYER__PARALLELIZE_INDEPENDENT_MECHANICAL_WORK__DO_NOT_BYPASS_RIGHTS_PIT_QUALITY_RECOVERY_LEAKAGE_OOS_OR_REPRODUCIBILITY_GATES"
+l2_engineering_work_package: "L2-P0_QDATA_FACTOR_INPUT_ENGINEERING"
+l2_engineering_work_package_status: "R0_SHSZ_PV_INPUT_OPEN__C_V1_1_DISCOVERY_AND_STABILITY_DESCRIPTION_COMPLETE__VALIDATION_NOT_CONSUMED__CANONICAL_R0_R1_R2_BLOCKED"
+l2_engineering_execution_plan: "${QUANTIFICATION_ROOT}/多因子/configs/l2-p0-qdata-factor-input-engineering-v1.json"
+l2_engineering_verification: "${QUANTIFICATION_ROOT}/reports/data-governance/l2-p0-qdata-factor-input-engineering-20260728/VERIFICATION.json"
+l2_engineering_real_data_gate: "PASS_FOR_EXACT_R0_SHSZ_PV_ONLY__BLOCKED_FOR_ALL_OTHER_INPUTS"
+l2_engineering_allowed_inputs:
+  - "FIXTURE"
+  - "SYNTHETIC"
+  - "cn-a-share-r0-shsz-pv-panel@20050104-20260803-v1"
+l2_engineering_forbidden:
+  - "DIRECT_READ_OF_INSPECTION_ONLY_CANDIDATE"
+  - "FACTOR_IC_OR_BACKTEST_ON_UNADMITTED_DATA"
+  - "VALIDATION_CONSUMPTION"
+  - "EFFICACY_OR_INVESTMENT_CLAIM"
+hk_equity_policy: "HK_4_REQUIRED_FOR_COMPLETE_DATABASE__FULL_MARKET_WITH_DELISTED_SUBJECT_TO_LICENSE"
+global_linked_equity_policy: "GLEQ_3_REQUIRED_FOR_COMPLETE_DATABASE__VERSIONED_CHINA_AND_INDUSTRY_LINKED_UNIVERSE"
+full_global_cross_section_policy: "OUTSIDE_CURRENT_DEFINED_GLEQ_SCOPE__SEPARATE_APPROVAL_REQUIRED"
+history_policy: "MAXIMUM_LAWFUL_VERIFIABLE_HISTORY"
+bulk_backfill_policy: "CAPACITY_REPORT_THEN_USER_APPROVAL"
+research_adjustment_projection: "FORWARD_ADJUSTED_QFQ"
+raw_price_policy: "UNADJUSTED_FACTS_PLUS_CORPORATE_ACTIONS"
+industry_policy: "CSRC_BASELINE__SHENWAN_RESEARCH_PRIMARY__MULTI_TAXONOMY_VERSIONED"
+share_capital_policy: "OFFICIAL_TRADABLE_SHARES_PLUS_SEPARATE_DERIVED_FREE_FLOAT"
+index_coverage_policy: "MAXIMUM_LAWFUL_VERIFIABLE_MULTI_PROVIDER__BROAD_INDUSTRY_THEME_REITS_RETURN_VARIANTS"
+risk_free_policy: "STORE_SHORT_GOVERNMENT_AND_INTERBANK__SELECT_PER_RESEARCH_CONFIG"
+quality_waiver_policy: "CRITICAL_CONFLICT_LICENSE_OR_PIT_BLOCKS__NO_AUTOMATIC_WAIVER"
+legacy_qlib_status: "PAYLOAD_DELETED__TOMBSTONES_AND_METADATA_RETAINED"
+internal_data_sharing_policy: "ONLY_FORMALLY_ADMITTED_DATA_WHEN_SOURCE_LICENSE_PERMITS"
+internal_data_sharing_default: false
+external_redistribution_requires_source_license: true
+news_data_status: "DEFERRED_BY_USER_2026_07_20"
+high_frequency_data_status: "DEFERRED_PENDING_SEPARATE_APPROVAL"
+required_research_database_status: "COMPLETE_DATABASE_SCOPE_35_FAMILIES__CORE_20_GCTX_8_HK_4_GLEQ_3__TIERED_RESEARCH_ENTRY_SEPARATE__ACTUAL_SNAPSHOTS_0_OF_35"
+full_domain_database_status: "ALL_52_FAMILIES_RETAINED_IN_ROADMAP__NO_PLANNED_ENTRY_COUNTS_AS_BUILT"
+planned_dataset_count: 52
+planned_gate_counts:
+  G_DATA_CORE: 20
+  G_DATA_GLOBAL_CONTEXT: 8
+  G_DATA_HK_EQUITY: 4
+  G_DATA_GLOBAL_EQUITY: 3
+  G_DATA_FUND: 4
+  G_DATA_EVENT: 7
+  G_DATA_XASSET: 2
+  G_DATA_HF: 4
+planned_dataset_policy: "PLANNING_ONLY_NOT_RESOLVABLE"
+data_resolver: "${QUANTIFICATION_ROOT}/data/catalog/dataset_cli.py"
+data_access_policy: "${QUANTIFICATION_ROOT}/data/catalog/ACCESS_POLICY.md"
+new_shared_market_root: "${QUANTIFICATION_ROOT}/data/market/snapshots"
+new_shared_source_snapshot_root: "${QUANTIFICATION_ROOT}/data/market/snapshots"
+planned_raw_root: "${QUANTIFICATION_ROOT}/data/market/raw"
+planned_curated_root: "${QUANTIFICATION_ROOT}/data/market/curated"
+planned_quarantine_root: "${QUANTIFICATION_ROOT}/data/market/quarantine"
+published_feature_root: "${QUANTIFICATION_ROOT}/data/published"
+
+projects:
+  - id: "capital-flow-attribution"
+    path: "${QUANTIFICATION_ROOT}/capital-flow-attribution"
+    kind: "active_project"
+    role: "capital_flow_feature_producer"
+    status: "G1_REVIEW"
+    authority_files:
+      - "README.md"
+      - "STATUS.md"
+      - "DATA_CATALOG.md"
+    storage:
+      durable_data: "${QUANTIFICATION_ROOT}/data/capital-flow-attribution"
+      durable_reports: "${QUANTIFICATION_ROOT}/reports/capital-flow-attribution"
+      temporary: "${QUANTIFICATION_ROOT}/tmp/capital-flow-attribution"
+    dependencies:
+      - target: "${QUANTIFICATION_ROOT}/多因子/data/market/snapshots/2026-07-14/qlib_bin"
+        dataset_id: "cn-a-share-qlib-daily"
+        snapshot_id: "2026-07-14"
+        mode: "read_only"
+        migration_blocker: false
+        status: "HISTORICAL_FROZEN_REFERENCE__PAYLOAD_DELETED__NOT_REPRODUCIBLE_AT_ORIGINAL_PATH"
+    publication_gate: "G3_NOT_EVALUATED"
+    workspace_layer_links:
+      - "L1_DATA_DOMAIN_PARTIAL"
+      - "L2_FEATURE_PRODUCER_PROTOTYPE"
+      - "L3_PROJECT_GATE_G1_REVIEW"
+
+  - id: "multi-factor"
+    path: "${QUANTIFICATION_ROOT}/多因子"
+    kind: "active_project"
+    role: "data_catalog_and_factor_research_factory"
+    status: "V6_NO_FACTOR__V7_CODE_ONLY__R0_SHSZ_PV_C_V1_1_512_DISCOVERY_COMMITTED__50_STABILITY_TESTED__6_COST_DESCRIPTIVE_SURVIVORS__NO_VALIDATION_NO_HOLDOUT"
+    authority_files:
+      - "README.md"
+      - "FACTOR_FACTORY_ARCHITECTURE.md"
+      - "PROTOCOL_V6.md"
+      - "configs/r0_shsz_pv_single_factor_screen_v1.json"
+      - "configs/r0_shsz_pv_c_v1_1_discovery_20260805.json"
+      - "configs/r0_shsz_pv_factor_catalog_512_v1.json"
+    storage:
+      retired_market_metadata_only: "${QUANTIFICATION_ROOT}/多因子/data/market/snapshots"
+      new_shared_market_data: "${QUANTIFICATION_ROOT}/data/market/snapshots"
+      immutable_runs: "${QUANTIFICATION_ROOT}/多因子/research_runs"
+      temporary: "${QUANTIFICATION_ROOT}/多因子/.tmp"
+    historical_origin: "${QUANTIFICATION_ROOT}/CWOPT相关/CWOPT"
+    independent_from_cwopt_now: true
+    workspace_layer_links:
+      - "L1_DAILY_MARKET_SNAPSHOT_OWNER"
+      - "L2_R0_SHSZ_PV_INPUT_OPEN__512_DISCOVERY_AND_50_STABILITY_DESCRIPTION_COMPLETE__6_COST_DESCRIPTIVE_SURVIVORS__VALIDATION_NOT_CONSUMED"
+      - "L3_V6_NO_FACTOR__V7_NOT_REGISTERED"
+
+  - id: "news-signal-agent"
+    path: "${QUANTIFICATION_ROOT}/news-signal-agent"
+    kind: "active_project"
+    role: "news_collection_structuring_and_event_feature_candidate"
+    status: "V0_6_LOCAL_WORKING_COPY"
+    authority_files:
+      - "README.md"
+    release_mirror: "${QUANTIFICATION_ROOT}/news-signal-agent-github"
+    sync_contract: "${QUANTIFICATION_ROOT}/news-signal-agent/scripts/sync-to-github.ps1"
+    working_database: "${QUANTIFICATION_ROOT}/news-signal-agent/data/news_signal_agent.sqlite3"
+    archived_release_database_copy: "${QUANTIFICATION_ROOT}/archive/data-duplicates/news-signal-agent-github/20260628-news_signal_agent.sqlite3"
+    migration_blocker: true
+    workspace_layer_links:
+      - "L1_MUTABLE_SOURCE_NOT_ADMITTED"
+      - "L2_EVENT_FEATURE_CANDIDATE"
+
+  - id: "cwopt"
+    path: "${QUANTIFICATION_ROOT}/CWOPT相关/CWOPT"
+    kind: "independent_experimental_repository"
+    role: "optimization_and_research_lab"
+    status: "RESEARCH_ONLY"
+    independent_line: true
+    development_owner: "external_collaborator"
+    local_role: "github_pull_only"
+    owns_git_repository: true
+    preserve_user_worktree: true
+    git_sync:
+      remote_name: "origin"
+      remote_url: "https://github.com/jingyuanlm/CWOPT-v0.git"
+      local_branch: "finally"
+      upstream: "origin/finally"
+      mode: "MANUAL_REVIEWED_FAST_FORWARD_ONLY"
+      auto_fetch: false
+      auto_pull: false
+      require_clean_worktree: true
+      verify_after_pull: true
+      current_status: "SYNC_BLOCKED_DIRTY_WORKTREE_2026-07-20"
+    storage:
+      history_cache: "${QUANTIFICATION_ROOT}/CWOPT相关/CWOPT/data/history"
+      router_cache: "${QUANTIFICATION_ROOT}/CWOPT相关/CWOPT/data/router"
+      mainline_auto_publish: false
+    workspace_layer_links:
+      - "EXTERNAL_SIDE_LINE"
+
+infrastructure:
+  - id: "quant-research-reliability"
+    path: "${QUANTIFICATION_ROOT}/.agents/harnesses/quant-research-reliability"
+    kind: "harness"
+    status: "ACTIVE"
+  - id: "project-skills"
+    path: "${QUANTIFICATION_ROOT}/.agents/skills"
+    kind: "skill_root"
+    status: "EMPTY"
+  - id: "disabled-project-skills"
+    path: "${QUANTIFICATION_ROOT}/.agents/skills-disabled"
+    kind: "disabled_skill_root"
+    status: "DO_NOT_AUTO_INVOKE"
+
+non_project_containers:
+  - id: "misc"
+    path: "${QUANTIFICATION_ROOT}/杂"
+    kind: "mixed_non_core_materials"
+    status: "USER_CHOSEN_LOCATION"
+    runtime_policy: "EXPLICIT_REQUEST_ONLY"
+    notable_contents:
+      - "${QUANTIFICATION_ROOT}/杂/紫荆路口_AI分享_PPT"
+      - "${QUANTIFICATION_ROOT}/杂/汇丰相关"
+      - "${QUANTIFICATION_ROOT}/杂/多因子概要.txt"
+      - "${QUANTIFICATION_ROOT}/杂/设计方案.docx"
+      - "${QUANTIFICATION_ROOT}/杂/问题整理.txt"
+
+planned_only:
+  - id: "quant_data_mcp"
+    status: "DEFERRED_NOT_IMPLEMENTED"
+
+workspace_git:
+  path: "${QUANTIFICATION_ROOT}/.git"
+  status: "UNMANAGED_EMPTY_HISTORY_WITH_UNTRACKED_WORKSPACE"
+  action: "FREEZE_UNTIL_SEPARATE_APPROVAL"

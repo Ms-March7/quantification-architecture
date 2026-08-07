@@ -1,0 +1,1715 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>News Signal Agent</title>
+    <style>
+      :root {
+        color: #17212b;
+        background: #eef2f3;
+        font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+      }
+      button,
+      input {
+        font: inherit;
+      }
+      button {
+        cursor: pointer;
+      }
+      .shell {
+        display: grid;
+        grid-template-columns: 300px minmax(0, 1fr);
+        min-height: 100vh;
+      }
+      .side {
+        padding: 22px;
+        border-right: 1px solid #d6dee2;
+        background: #f7f9fa;
+      }
+      .brand {
+        display: grid;
+        grid-template-columns: 44px minmax(0, 1fr);
+        gap: 12px;
+        align-items: center;
+        margin-bottom: 18px;
+      }
+      .mark {
+        display: grid;
+        width: 44px;
+        height: 44px;
+        place-items: center;
+        border: 1px solid #b9ceca;
+        border-radius: 8px;
+        color: #006b62;
+        font-weight: 900;
+        background: #e7f3f1;
+      }
+      .eyebrow {
+        color: #63717b;
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0;
+      }
+      h1,
+      h2,
+      h3 {
+        margin: 0;
+        letter-spacing: 0;
+      }
+      h1,
+      h2 {
+        font-size: 24px;
+        line-height: 1.15;
+      }
+      h3 {
+        font-size: 16px;
+      }
+      .panel,
+      .metric,
+      .workflow,
+      .board,
+      .detail {
+        border: 1px solid #d8dee2;
+        border-radius: 8px;
+        background: #fff;
+      }
+      .panel {
+        padding: 14px;
+        margin-bottom: 16px;
+      }
+      .panel-title,
+      .section-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        color: #33434d;
+        font-weight: 900;
+      }
+      .watch-form {
+        display: grid;
+        gap: 8px;
+        margin-top: 12px;
+      }
+      .input {
+        width: 100%;
+        min-width: 0;
+        height: 38px;
+        padding: 0 10px;
+        border: 1px solid #cdd7dc;
+        border-radius: 7px;
+        outline: 0;
+        color: #17212b;
+        background: #fbfcfc;
+      }
+      .row {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 78px;
+        gap: 8px;
+      }
+      .form-actions {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 78px;
+        gap: 8px;
+      }
+      .hidden {
+        display: none !important;
+      }
+      .secondary,
+      .primary {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 78px;
+        height: 38px;
+        border-radius: 7px;
+        font-weight: 900;
+      }
+      .primary {
+        border: 1px solid #007a72;
+        color: #fff;
+        background: #007a72;
+      }
+      .secondary {
+        border: 1px solid #cdd7dc;
+        color: #31434d;
+        background: #fff;
+      }
+      .primary:disabled,
+      .secondary:disabled {
+        cursor: wait;
+        opacity: 0.7;
+      }
+      .watchlist {
+        display: grid;
+        gap: 8px;
+        margin-top: 12px;
+      }
+      .watch {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 8px;
+        align-items: center;
+        min-height: 54px;
+        padding: 9px 10px;
+        border: 1px solid #dde5e8;
+        border-radius: 7px;
+        text-align: left;
+        background: #fbfcfc;
+      }
+      .watch.selected {
+        border-color: #007a72;
+        background: #f0faf7;
+      }
+      .watch-buttons {
+        display: flex;
+        gap: 4px;
+      }
+      .mini {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        height: 28px;
+        min-width: 42px;
+        padding: 0 8px;
+        border: 1px solid #cdd7dc;
+        border-radius: 6px;
+        color: #31434d;
+        font-size: 12px;
+        font-weight: 900;
+        background: #fff;
+      }
+      .mini.danger {
+        border-color: #efc3bb;
+        color: #9f1d13;
+        background: #fff7f5;
+      }
+      .watch strong,
+      .watch em,
+      .signal-main strong,
+      .signal-main em {
+        display: block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .watch em,
+      .signal-main em {
+        color: #687781;
+        font-size: 12px;
+        font-style: normal;
+      }
+      .watch small {
+        padding: 4px 7px;
+        border-radius: 999px;
+        color: #006b62;
+        font-weight: 800;
+        background: #e7f3f1;
+      }
+      .workspace {
+        display: flex;
+        min-width: 0;
+        flex-direction: column;
+        gap: 12px;
+        padding: 22px;
+      }
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+      }
+      .run-controls {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .mode-switch {
+        display: inline-grid;
+        grid-template-columns: repeat(2, 62px);
+        overflow: hidden;
+        border: 1px solid #cdd7dc;
+        border-radius: 7px;
+        background: #fff;
+      }
+      .mode-switch button {
+        height: 38px;
+        border: 0;
+        color: #53646e;
+        font-weight: 900;
+        background: transparent;
+      }
+      .mode-switch button + button {
+        border-left: 1px solid #cdd7dc;
+      }
+      .mode-switch button.active {
+        color: #fff;
+        background: #3f5561;
+      }
+      .run-progress {
+        display: grid;
+        gap: 8px;
+        padding: 12px;
+        border: 1px solid #c9ddda;
+        border-radius: 8px;
+        background: #f4fbfa;
+      }
+      .run-progress.hidden {
+        display: none;
+      }
+      .progress-line {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        color: #354650;
+        font-size: 13px;
+        font-weight: 900;
+      }
+      .progress-line span {
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .progress-line b {
+        color: #006b62;
+      }
+      .progress-track {
+        height: 9px;
+        overflow: hidden;
+        border-radius: 999px;
+        background: #dce8e7;
+      }
+      .progress-track i {
+        display: block;
+        width: 0;
+        height: 100%;
+        border-radius: inherit;
+        background: linear-gradient(90deg, #007a72, #2aa889);
+        transition: width 220ms ease;
+      }
+      .progress-meta {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        color: #63717b;
+        font-size: 12px;
+        font-weight: 800;
+      }
+      .progress-meta span:first-child {
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .progress-meta span:last-child {
+        flex: 0 0 auto;
+      }
+      .metrics {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 8px;
+      }
+      .metric {
+        min-height: 58px;
+        padding: 10px 12px;
+      }
+      .metric span {
+        display: block;
+        color: #63717b;
+        font-size: 13px;
+        font-weight: 800;
+      }
+      .metric strong {
+        display: block;
+        margin-top: 5px;
+        color: #1e2c35;
+        font-size: 22px;
+        line-height: 1;
+      }
+      .metric.good strong,
+      .positive {
+        color: #007a3b;
+      }
+      .metric.bad strong,
+      .negative {
+        color: #b42318;
+      }
+      .workflow {
+        padding: 12px;
+      }
+      .audit {
+        padding: 0;
+        overflow: hidden;
+      }
+      .audit summary {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px;
+        color: #33434d;
+        font-weight: 900;
+        cursor: pointer;
+      }
+      .audit .nodes {
+        margin: 0 12px 12px;
+      }
+      .nodes {
+        display: flex;
+        gap: 8px;
+        margin-top: 12px;
+        overflow-x: auto;
+        padding-bottom: 3px;
+      }
+      .node {
+        display: grid;
+        flex: 0 0 112px;
+        min-height: 48px;
+        align-content: center;
+        gap: 3px;
+        padding: 7px 9px;
+        border: 1px solid #d7dee3;
+        border-radius: 7px;
+        color: #344550;
+        text-align: left;
+        background: #fbfcfc;
+      }
+      .node span {
+        overflow: hidden;
+        font-size: 12px;
+        font-weight: 900;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .node b {
+        color: #007a72;
+        font-size: 16px;
+      }
+      .node.success {
+        border-color: #b7d8d0;
+        background: #f0faf7;
+      }
+      .node.failed {
+        border-color: #efb3a5;
+        background: #fff7ed;
+      }
+      .node.selected {
+        outline: 2px solid #007a72;
+        outline-offset: 1px;
+      }
+      .main-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 430px;
+        gap: 16px;
+        align-items: start;
+      }
+      .toolbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 12px;
+        border-bottom: 1px solid #e3e8eb;
+      }
+      .segmented {
+        display: inline-grid;
+        grid-template-columns: repeat(3, 68px);
+        min-width: 204px;
+        overflow: hidden;
+        border: 1px solid #cdd7dc;
+        border-radius: 7px;
+      }
+      .segmented button {
+        height: 34px;
+        border: 0;
+        color: #53646e;
+        font-weight: 900;
+        background: #fff;
+      }
+      .segmented button + button {
+        border-left: 1px solid #cdd7dc;
+      }
+      .segmented .active {
+        color: #fff;
+        background: #3f5561;
+      }
+      .segmented .active.good {
+        background: #007a3b;
+      }
+      .segmented .active.bad {
+        background: #b42318;
+      }
+      .search {
+        width: min(320px, 100%);
+      }
+      .signal-list {
+        display: grid;
+        align-content: start;
+        min-height: 420px;
+      }
+      .signal {
+        display: grid;
+        grid-template-columns: 36px minmax(0, 1fr) 76px;
+        align-items: start;
+        gap: 12px;
+        min-height: 118px;
+        padding: 13px 14px;
+        border: 0;
+        border-bottom: 1px solid #edf1f3;
+        color: #17212b;
+        text-align: left;
+        background: #fff;
+      }
+      .signal:hover,
+      .signal.selected {
+        background: #f6f9f9;
+      }
+      .signal.selected {
+        box-shadow: inset 3px 0 0 #007a72;
+      }
+      .rank {
+        display: grid;
+        width: 30px;
+        height: 30px;
+        place-items: center;
+        border-radius: 7px;
+        color: #53646e;
+        font-weight: 900;
+        background: #edf2f3;
+      }
+      .signal-main {
+        display: grid;
+        gap: 6px;
+        min-width: 0;
+      }
+      .signal-main p {
+        display: -webkit-box;
+        margin: 0;
+        overflow: hidden;
+        color: #475963;
+        font-size: 13px;
+        line-height: 1.45;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+      }
+      .signal-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+      .signal-tags span {
+        padding: 4px 7px;
+        border-radius: 999px;
+        color: #53646e;
+        font-size: 12px;
+        font-weight: 800;
+        background: #eef3f4;
+      }
+      .event-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        color: #687781;
+        font-size: 12px;
+        font-weight: 800;
+      }
+      .horizon,
+      .score {
+        font-weight: 900;
+      }
+      .horizon {
+        color: #596a74;
+        font-size: 13px;
+      }
+      .score {
+        text-align: right;
+      }
+      .score-cell {
+        display: grid;
+        justify-items: end;
+        gap: 8px;
+      }
+      .inspector {
+        display: grid;
+        align-content: start;
+        overflow: hidden;
+        border: 1px solid #d8dee2;
+        border-radius: 8px;
+        background: #fff;
+      }
+      .inspector-tabs {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        border-bottom: 1px solid #dfe6e9;
+        background: #f7f9fa;
+      }
+      .inspector-tabs button {
+        height: 42px;
+        border: 0;
+        border-right: 1px solid #dfe6e9;
+        color: #53646e;
+        font-weight: 900;
+        background: transparent;
+      }
+      .inspector-tabs button:last-child {
+        border-right: 0;
+      }
+      .inspector-tabs button.active {
+        color: #005e57;
+        background: #fff;
+        box-shadow: inset 0 -2px 0 #007a72;
+      }
+      .detail {
+        padding: 14px;
+        border: 0;
+        border-radius: 0;
+        background: transparent;
+      }
+      .inspector-panel {
+        display: none;
+      }
+      .inspector-panel.active {
+        display: block;
+      }
+      .node-title,
+      .signal-title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+      }
+      .pill {
+        padding: 5px 8px;
+        border-radius: 999px;
+        color: #006b3a;
+        font-size: 12px;
+        font-weight: 900;
+        background: #e9f7ed;
+      }
+      .facts {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 8px;
+        margin-top: 12px;
+      }
+      .facts div,
+      .decision div {
+        padding: 9px;
+        border-radius: 7px;
+        background: #f5f8f8;
+      }
+      .facts span {
+        color: #62727b;
+        font-size: 12px;
+        font-weight: 800;
+      }
+      .facts b {
+        display: block;
+        margin-top: 5px;
+        font-size: 13px;
+      }
+      .decision {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 7px;
+        margin-top: 12px;
+      }
+      .decision div {
+        display: grid;
+        gap: 10px;
+        color: #5b6b74;
+      }
+      .decision b {
+        overflow: hidden;
+        color: #25333b;
+        font-size: 13px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .brief {
+        margin: 12px 0;
+        color: #3a4a53;
+        line-height: 1.55;
+      }
+      .bars {
+        display: grid;
+        gap: 8px;
+      }
+      .bar {
+        display: grid;
+        grid-template-columns: 76px minmax(0, 1fr) 42px;
+        align-items: center;
+        gap: 9px;
+        min-height: 24px;
+        color: #5d6d76;
+        font-size: 13px;
+        font-weight: 900;
+      }
+      .track {
+        height: 8px;
+        overflow: hidden;
+        border-radius: 999px;
+        background: #e7edef;
+      }
+      .track i {
+        display: block;
+        height: 100%;
+        border-radius: inherit;
+        background: #007a72;
+      }
+      .track i.penalty {
+        background: #b7791f;
+      }
+      .bar b {
+        color: #25333b;
+        text-align: right;
+      }
+      .horizons {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 8px;
+        margin-top: 14px;
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 12px;
+      }
+      .retained-list {
+        display: grid;
+        gap: 8px;
+        margin-top: 12px;
+      }
+      .retained-item {
+        display: grid;
+        gap: 4px;
+        padding: 10px;
+        border: 1px solid #e0e6e8;
+        border-radius: 7px;
+        background: #fbfcfc;
+      }
+      .retained-item strong,
+      .retained-item span {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .retained-item small {
+        color: #667780;
+      }
+      .horizons span {
+        padding: 9px;
+        border-radius: 7px;
+        color: #34454e;
+        font-size: 13px;
+        font-weight: 900;
+        text-align: center;
+        background: #f3f6f7;
+      }
+      .evidence {
+        display: grid;
+        gap: 8px;
+        margin-top: 14px;
+      }
+      .evidence a {
+        display: grid;
+        gap: 4px;
+        padding: 10px;
+        border: 1px solid #e0e6e8;
+        border-radius: 7px;
+        color: #1f3944;
+        text-decoration: none;
+        background: #fbfcfc;
+      }
+      .evidence span {
+        overflow: hidden;
+        font-size: 13px;
+        font-weight: 900;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .evidence small {
+        color: #6a7880;
+      }
+      .warnings {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-top: 12px;
+      }
+      .warnings span {
+        padding: 5px 7px;
+        border-radius: 999px;
+        color: #8a4b09;
+        font-size: 12px;
+        font-weight: 900;
+        background: #fff4dc;
+      }
+      .market-box {
+        display: grid;
+        gap: 8px;
+        margin-top: 12px;
+        padding: 10px;
+        border: 1px solid #e0e6e8;
+        border-radius: 7px;
+        background: #fbfcfc;
+      }
+      .market-line {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        color: #34454e;
+        font-size: 13px;
+        font-weight: 900;
+      }
+      .sparkline {
+        width: 100%;
+        height: 120px;
+        border-radius: 7px;
+        background: #f2f6f7;
+      }
+      .empty,
+      .error,
+      .ok {
+        display: grid;
+        min-height: 44px;
+        place-items: center;
+        border-radius: 8px;
+        font-weight: 900;
+      }
+      .empty {
+        min-height: 120px;
+        color: #687780;
+      }
+      .error {
+        border: 1px solid #efb3a5;
+        color: #9a3412;
+        background: #fff7ed;
+      }
+      .ok {
+        border: 1px solid #b7d8d0;
+        color: #006b3a;
+        background: #f0faf7;
+      }
+      @media (max-width: 1180px) {
+        .shell {
+          grid-template-columns: 1fr;
+        }
+        .side {
+          border-right: 0;
+          border-bottom: 1px solid #d6dee2;
+        }
+        .main-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      @media (max-width: 760px) {
+        .workspace,
+        .side {
+          padding: 14px;
+        }
+        .topbar,
+        .toolbar {
+          align-items: stretch;
+          flex-direction: column;
+        }
+        .metrics {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        .inspector-tabs {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        .signal {
+          grid-template-columns: 30px minmax(0, 1fr) 78px;
+        }
+        .signal .horizon {
+          display: none;
+        }
+        .segmented,
+        .search {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="shell">
+      <aside class="side">
+        <div class="brand">
+          <div class="mark">N</div>
+          <div>
+            <div class="eyebrow">NEWS SIGNAL</div>
+            <h1>盯盘 Agent</h1>
+          </div>
+        </div>
+        <section class="panel">
+          <div class="panel-title">自选池</div>
+          <form id="watch-form" class="watch-form">
+            <div class="row">
+              <input id="symbol-input" class="input" inputmode="numeric" maxlength="6" placeholder="输入代码" />
+              <button id="watch-submit" class="secondary" type="submit">添加</button>
+            </div>
+            <input id="name-input" class="input" placeholder="名称，可选" />
+            <input id="tags-input" class="input" placeholder="标签，可选，用逗号分隔" />
+            <div id="watch-edit-actions" class="form-actions hidden">
+              <button id="watch-cancel" class="secondary" type="button">取消编辑</button>
+              <button id="watch-delete-current" class="secondary" type="button">删除</button>
+            </div>
+          </form>
+          <div id="watch-status"></div>
+          <div id="watchlist" class="watchlist"></div>
+        </section>
+        <section class="panel">
+          <div class="panel-title">提醒通道</div>
+          <div class="decision">
+            <div><span>企业微信</span><b>可配置</b></div>
+            <div><span>PushPlus</span><b>可配置</b></div>
+            <div><span>Server 酱</span><b>可配置</b></div>
+          </div>
+        </section>
+      </aside>
+
+      <section class="workspace">
+        <header class="topbar">
+          <div>
+            <div id="run-id" class="eyebrow">READY</div>
+            <h2>新闻信号工作台</h2>
+          </div>
+          <div class="run-controls">
+            <div class="mode-switch" title="快速模式不跑LLM；深度模式只对少量候选调用Codex">
+              <button data-run-mode="fast" class="active" type="button">快速</button>
+              <button data-run-mode="deep" type="button">深度</button>
+            </div>
+            <button id="refresh" class="primary" title="刷新新闻工作流">刷新</button>
+          </div>
+        </header>
+        <section id="run-progress" class="run-progress hidden" aria-live="polite">
+          <div class="progress-line">
+            <span id="progress-stage">准备中</span>
+            <b id="progress-percent">0%</b>
+          </div>
+          <div class="progress-track"><i id="progress-bar"></i></div>
+          <div class="progress-meta">
+            <span id="progress-node">等待任务启动</span>
+            <span id="progress-count">0/0</span>
+          </div>
+        </section>
+        <div id="error"></div>
+
+        <section class="metrics">
+          <div class="metric"><span>新闻</span><strong id="m-news">0</strong></div>
+          <div class="metric"><span>事件</span><strong id="m-events">0</strong></div>
+          <div class="metric"><span>事件卡</span><strong id="m-cards">0</strong></div>
+          <div class="metric"><span>信号</span><strong id="m-signals">0</strong></div>
+          <div class="metric good"><span>利好榜</span><strong id="m-bullish">0</strong></div>
+          <div class="metric bad"><span>利空榜</span><strong id="m-bearish">0</strong></div>
+          <div class="metric"><span>留存</span><strong id="m-retained">0</strong></div>
+          <div class="metric"><span>通知</span><strong id="m-notify">0</strong></div>
+        </section>
+
+        <section class="main-grid">
+          <div class="board">
+            <div class="toolbar">
+              <div class="segmented">
+                <button data-filter="all" class="active">全部</button>
+                <button data-filter="bullish">利好</button>
+                <button data-filter="bearish">利空</button>
+              </div>
+              <input id="query" class="input search" placeholder="事件 / 代码 / 名称 / 判断" />
+            </div>
+            <div id="signals" class="signal-list"></div>
+          </div>
+          <aside class="inspector">
+            <div class="inspector-tabs">
+              <button data-panel="signal" class="active">事件</button>
+              <button data-panel="node">审计</button>
+              <button data-panel="retained">留存</button>
+              <button data-panel="history">历史</button>
+            </div>
+            <section class="detail inspector-panel active" data-panel-content="signal">
+              <div id="signal-detail"></div>
+            </section>
+            <section class="detail inspector-panel" data-panel-content="node">
+              <div class="section-head"><h3>节点</h3></div>
+              <div id="node-detail"></div>
+            </section>
+            <section class="detail inspector-panel" data-panel-content="retained">
+              <div class="section-head"><h3>留存事件</h3></div>
+              <div id="retained-events"></div>
+            </section>
+            <section class="detail inspector-panel" data-panel-content="history">
+              <div class="section-head"><h3>历史榜</h3></div>
+              <div id="rank-history"></div>
+            </section>
+          </aside>
+        </section>
+
+        <details class="workflow audit">
+          <summary><span>工作流审计</span><small>展开查看每个节点</small></summary>
+          <div id="nodes" class="nodes"></div>
+        </details>
+      </section>
+    </main>
+
+    <script>
+      const state = {
+        snapshot: null,
+        filter: "all",
+        query: "",
+        selectedSignalId: null,
+        selectedNodeName: "collect",
+        selectedPanel: "signal",
+        currentJobId: null,
+        pollTimer: null,
+        liveNodes: [],
+        runMode: "fast",
+        editingSymbol: null,
+      };
+      const scoreLabels = [
+        ["direction_confidence", "方向置信"],
+        ["relevance", "关联度"],
+        ["source_credibility", "来源可信"],
+        ["impact", "影响强度"],
+        ["freshness", "新鲜度"],
+        ["corroboration", "多源确认"],
+        ["market_validation", "市场验证"],
+        ["uncertainty_penalty", "不确定性"],
+      ];
+      const nodeLabels = {
+        collect: "采集",
+        normalize: "清洗",
+        dedup: "去重",
+        update_event_store: "事件存储",
+        generate_event_card: "事件卡",
+        entity_link: "关联自选",
+        rule_classification: "规则判断",
+        llm_classification: "LLM判断",
+        classification_merge: "判断合并",
+        feedback_override: "人工修正",
+        score: "解释打分",
+        market_validate: "行情验证",
+        backtest_validate: "历史验证",
+        rank: "排序",
+        memory_store: "事件留存",
+        notify: "通知",
+        render_report: "生成报告",
+      };
+      const horizonText = { short: "短期", mid: "中期", long: "长期" };
+      const jobStatusText = {
+        queued: "排队中",
+        running: "运行中",
+        complete: "已完成",
+        failed: "失败",
+      };
+      const runModeText = {
+        fast: "快速",
+        deep: "深度",
+        balanced: "平衡",
+      };
+      const $ = (id) => document.getElementById(id);
+
+      async function refresh() {
+        const button = $("refresh");
+        if (state.pollTimer) {
+          clearTimeout(state.pollTimer);
+          state.pollTimer = null;
+        }
+        button.disabled = true;
+        button.textContent = "运行中";
+        $("error").innerHTML = "";
+        state.liveNodes = [];
+        renderRunProgress({
+          status: "queued",
+          mode: state.runMode,
+          progress: 0,
+          current_node: null,
+          completed_nodes: 0,
+          total_nodes: 0,
+        });
+        try {
+          const response = await fetch("/api/workflow/run-news/async", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ mode: state.runMode }),
+          });
+          if (!response.ok) throw new Error("HTTP " + response.status);
+          const job = await response.json();
+          state.currentJobId = job.id;
+          renderRunProgress(job);
+          pollWorkflowJob(job.id);
+        } catch (error) {
+          $("error").innerHTML = `<div class="error">${escapeHtml(error.message || "刷新失败")}</div>`;
+          button.disabled = false;
+          button.textContent = "刷新";
+        }
+      }
+
+      async function pollWorkflowJob(jobId) {
+        if (!jobId || state.currentJobId !== jobId) return;
+        try {
+          const response = await fetch(`/api/workflow/run-news/jobs/${jobId}`);
+          if (!response.ok) throw new Error("HTTP " + response.status);
+          const job = await response.json();
+          renderRunProgress(job);
+          state.liveNodes = job.nodes || [];
+          if (state.liveNodes.length) {
+            state.selectedNodeName = job.current_node || state.liveNodes[state.liveNodes.length - 1]?.node_name || state.selectedNodeName;
+            renderNodes(state.liveNodes);
+            renderNodeDetail();
+          }
+          if (job.status === "complete" || job.status === "failed") {
+            if (job.result) {
+              state.snapshot = job.result;
+              state.liveNodes = state.snapshot.nodes || [];
+              state.selectedNodeName = state.snapshot.nodes[0]?.node_name || "collect";
+              state.selectedSignalId = state.snapshot.bullish_top[0]?.id || state.snapshot.bearish_top[0]?.id || null;
+              render();
+            }
+            if (job.status === "failed") {
+              $("error").innerHTML = `<div class="error">${escapeHtml(job.error || "工作流运行失败")}</div>`;
+            }
+            $("refresh").disabled = false;
+            $("refresh").textContent = "刷新";
+            state.currentJobId = null;
+            state.pollTimer = null;
+            return;
+          }
+          state.pollTimer = setTimeout(() => pollWorkflowJob(jobId), 900);
+        } catch (error) {
+          $("error").innerHTML = `<div class="error">${escapeHtml(error.message || "进度查询失败")}</div>`;
+          $("refresh").disabled = false;
+          $("refresh").textContent = "刷新";
+          state.currentJobId = null;
+          state.pollTimer = null;
+        }
+      }
+
+      function renderRunProgress(job) {
+        const box = $("run-progress");
+        if (!box || !job) return;
+        box.classList.remove("hidden");
+        const status = jobStatusText[job.status] || job.status || "运行中";
+        const mode = runModeText[job.mode || state.runMode] || job.mode || state.runMode;
+        const percent = Math.max(0, Math.min(100, Math.round(Number(job.progress || 0))));
+        const nodeName = job.current_node ? nodeLabels[job.current_node] || job.current_node : job.status === "complete" ? "完成" : "准备中";
+        $("progress-stage").textContent = `${mode} · ${status} · ${nodeName}`;
+        $("progress-percent").textContent = `${percent}%`;
+        $("progress-bar").style.width = `${percent}%`;
+        const timing = renderTiming(job);
+        $("progress-node").textContent = job.detail
+          ? `${job.detail}${timing ? " · " + timing : ""}`
+          : job.current_node
+            ? `当前节点：${nodeName}${timing ? " · " + timing : ""}`
+            : job.status === "complete"
+              ? "工作流已完成"
+              : "等待任务启动";
+        $("progress-count").textContent = job.item_total
+          ? `${job.item_index || 0}/${job.item_total}`
+          : `${job.completed_nodes || 0}/${job.total_nodes || 0}`;
+      }
+
+      function renderTiming(job) {
+        const parts = [];
+        if (Number.isFinite(Number(job.elapsed_seconds)) && Number(job.elapsed_seconds) > 0) {
+          parts.push(`已用${formatDuration(job.elapsed_seconds)}`);
+        }
+        if (Number.isFinite(Number(job.eta_seconds)) && Number(job.eta_seconds) > 0) {
+          parts.push(`预计剩余${formatDuration(job.eta_seconds)}`);
+        }
+        if (Number.isFinite(Number(job.max_wait_seconds)) && Number(job.max_wait_seconds) > 0) {
+          parts.push(`最坏≤${formatDuration(job.max_wait_seconds)}`);
+        }
+        if (Number(job.llm_calls || 0) || Number(job.llm_cache_hits || 0)) {
+          parts.push(`LLM ${job.llm_calls || 0}次/缓存${job.llm_cache_hits || 0}`);
+        }
+        return parts.join("，");
+      }
+
+      async function addWatch(event) {
+        event.preventDefault();
+        const submit = $("watch-submit");
+        const symbol = $("symbol-input").value.trim();
+        const name = $("name-input").value.trim();
+        const tags = $("tags-input").value
+          .split(/[,，/、]/)
+          .map((item) => item.trim())
+          .filter(Boolean);
+        if (!symbol) return;
+        submit.disabled = true;
+        $("watch-status").innerHTML = "";
+        try {
+          const response = await fetch("/api/watchlist", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ symbol, name: name || null, tags }),
+          });
+          const payload = await response.json();
+          if (!response.ok) throw new Error(payload.detail || "保存失败");
+          resetWatchForm();
+          $("watch-status").innerHTML = `<div class="ok">已保存 ${escapeHtml(payload.item.symbol)} ${escapeHtml(payload.item.name || "")}</div>`;
+          if (state.snapshot) {
+            state.snapshot.watchlist = payload.items;
+            renderWatchlist(payload.items);
+          }
+        } catch (error) {
+          $("watch-status").innerHTML = `<div class="error">${escapeHtml(error.message || "保存失败")}</div>`;
+        } finally {
+          submit.disabled = false;
+        }
+      }
+
+      function editWatch(item) {
+        state.editingSymbol = item.symbol;
+        $("symbol-input").value = item.symbol || "";
+        $("symbol-input").readOnly = true;
+        $("name-input").value = item.name || "";
+        $("tags-input").value = (item.tags || []).join("，");
+        $("watch-submit").textContent = "保存";
+        $("watch-edit-actions").classList.remove("hidden");
+        renderWatchlist(state.snapshot?.watchlist || []);
+      }
+
+      function resetWatchForm() {
+        state.editingSymbol = null;
+        $("symbol-input").value = "";
+        $("symbol-input").readOnly = false;
+        $("name-input").value = "";
+        $("tags-input").value = "";
+        $("watch-submit").textContent = "添加";
+        $("watch-edit-actions").classList.add("hidden");
+      }
+
+      async function deleteWatch(symbol) {
+        const target = symbol || state.editingSymbol;
+        if (!target) return;
+        if (!confirm(`删除自选 ${target}？`)) return;
+        $("watch-status").innerHTML = "";
+        try {
+          const response = await fetch(`/api/watchlist/${encodeURIComponent(target)}`, { method: "DELETE" });
+          const payload = await response.json();
+          if (!response.ok) throw new Error(payload.detail || "删除失败");
+          resetWatchForm();
+          $("watch-status").innerHTML = `<div class="ok">已删除 ${escapeHtml(payload.deleted)}</div>`;
+          if (state.snapshot) {
+            state.snapshot.watchlist = payload.items;
+            renderWatchlist(payload.items);
+          }
+        } catch (error) {
+          $("watch-status").innerHTML = `<div class="error">${escapeHtml(error.message || "删除失败")}</div>`;
+        }
+      }
+
+      function render() {
+        const data = state.snapshot;
+        if (!data) return;
+        $("run-id").textContent = "RUN " + data.run_id;
+        $("m-news").textContent = data.stats.news_items;
+        $("m-events").textContent = data.stats.events;
+        $("m-cards").textContent = data.stats.event_cards || 0;
+        $("m-signals").textContent = data.stats.signals;
+        $("m-bullish").textContent = data.stats.bullish;
+        $("m-bearish").textContent = data.stats.bearish;
+        $("m-retained").textContent = data.stats.retained || 0;
+        $("m-notify").textContent = data.stats.notifications || 0;
+        renderWatchlist(data.watchlist || []);
+        renderNodes(data.nodes || []);
+        renderSignals();
+        renderNodeDetail();
+        renderSignalDetail();
+        renderRetainedEvents();
+        renderRankHistory();
+        renderInspectorPanels();
+      }
+
+      function renderWatchlist(items) {
+        $("watchlist").innerHTML = items
+          .map(
+            (item) => `<div class="watch ${item.symbol === state.editingSymbol ? "selected" : ""}" title="${escapeHtml((item.tags || []).join(" / "))}">
+              <span><strong>${escapeHtml(item.symbol)}</strong><em>${escapeHtml(item.name || "")}</em></span>
+              <span class="watch-buttons">
+                <button class="mini" data-watch-edit="${escapeHtml(item.symbol)}" type="button">编辑</button>
+                <button class="mini danger" data-watch-delete="${escapeHtml(item.symbol)}" type="button">删除</button>
+              </span>
+            </div>`,
+          )
+          .join("");
+        document.querySelectorAll("[data-watch-edit]").forEach((button) => {
+          button.addEventListener("click", () => {
+            const item = items.find((row) => row.symbol === button.dataset.watchEdit);
+            if (item) editWatch(item);
+          });
+        });
+        document.querySelectorAll("[data-watch-delete]").forEach((button) => {
+          button.addEventListener("click", () => deleteWatch(button.dataset.watchDelete));
+        });
+      }
+
+      function renderNodes(nodes) {
+        $("nodes").innerHTML = nodes
+          .map(
+            (node) => `<button class="node ${escapeHtml(node.status)} ${
+              node.node_name === state.selectedNodeName ? "selected" : ""
+            }" data-node="${escapeHtml(node.node_name)}">
+              <span>${escapeHtml(nodeLabels[node.node_name] || node.node_name)}</span><b>${node.output_ids.length}</b>
+            </button>`,
+          )
+          .join("");
+        document.querySelectorAll("[data-node]").forEach((button) => {
+          button.addEventListener("click", () => {
+            state.selectedNodeName = button.dataset.node;
+            state.selectedPanel = "node";
+            renderNodes(state.snapshot?.nodes || state.liveNodes || nodes);
+            renderNodeDetail();
+            renderInspectorPanels();
+          });
+        });
+      }
+
+      function getVisibleSignals() {
+        if (!state.snapshot) return [];
+        const base =
+          state.filter === "bullish"
+            ? state.snapshot.bullish_top
+            : state.filter === "bearish"
+              ? state.snapshot.bearish_top
+              : [...state.snapshot.bullish_top, ...state.snapshot.bearish_top];
+        const query = state.query.trim().toLowerCase();
+        const filtered = query
+          ? base.filter((signal) =>
+              `${signal.symbol} ${signal.name || ""} ${signal.brief} ${signal.event?.title || ""} ${signal.event?.summary || ""}`
+                .toLowerCase()
+                .includes(query),
+            )
+          : base;
+        const byEvent = new Map();
+        filtered.forEach((signal) => {
+          const key = signal.event_id || signal.id;
+          const existing = byEvent.get(key);
+          if (!existing || Math.abs(signal.final_score) > Math.abs(existing.final_score)) {
+            byEvent.set(key, signal);
+          }
+        });
+        return [...byEvent.values()];
+      }
+
+      function renderSignals() {
+        const signals = getVisibleSignals();
+        if (!signals.length) {
+          $("signals").innerHTML = `<div class="empty">暂无入榜事件</div>`;
+          renderSignalDetail();
+          return;
+        }
+        if (!signals.some((signal) => signal.id === state.selectedSignalId)) {
+          state.selectedSignalId = signals[0].id;
+        }
+        $("signals").innerHTML = signals
+          .map(
+            (signal, index) => `<button class="signal ${signal.id === state.selectedSignalId ? "selected" : ""}" data-signal="${escapeHtml(signal.id)}">
+              <span class="rank">${index + 1}</span>
+              <span class="signal-main">
+                <strong>${escapeHtml(signal.event?.title || `${signal.symbol} ${signal.name || ""}`)}</strong>
+                <p>${escapeHtml(signal.event?.metadata?.event_card?.summary || signal.event?.summary || signal.brief)}</p>
+                <span class="event-meta">
+                  <span>影响 ${escapeHtml(impactSymbols(signal).join(" / ") || signal.symbol)}</span>
+                  <span>证据 ${signal.event?.news_ids?.length || signal.evidence?.length || 0}</span>
+                  <span>${escapeHtml(signal.event?.metadata?.latest_source || "-")}</span>
+                </span>
+                <span class="signal-tags">
+                  <span>${horizonText[signal.primary_horizon] || signal.primary_horizon}</span>
+                  <span>${escapeHtml(signal.event?.event_type || "-")}</span>
+                  <span>${escapeHtml(signal.metadata?.classification_merge?.final_source || "rule")}</span>
+                </span>
+              </span>
+              <span class="score-cell">
+                <span class="score ${signal.final_score >= 0 ? "positive" : "negative"}">${formatScore(signal.final_score)}</span>
+                <span class="horizon">${signal.final_score >= 0 ? "利好" : "利空"}</span>
+              </span>
+            </button>`,
+          )
+          .join("");
+        document.querySelectorAll("[data-signal]").forEach((button) => {
+          button.addEventListener("click", () => {
+            state.selectedSignalId = button.dataset.signal;
+            state.selectedPanel = "signal";
+            renderSignals();
+            renderSignalDetail();
+            renderInspectorPanels();
+          });
+        });
+      }
+
+      function impactSymbols(signal) {
+        return getAllSignals()
+          .filter((item) => item.event_id === signal.event_id)
+          .map((item) => `${item.symbol}${item.name ? " " + item.name : ""}`)
+          .filter((value, index, rows) => rows.indexOf(value) === index)
+          .slice(0, 4);
+      }
+
+      function renderInspectorPanels() {
+        document.querySelectorAll("[data-panel]").forEach((button) => {
+          button.classList.toggle("active", button.dataset.panel === state.selectedPanel);
+        });
+        document.querySelectorAll("[data-panel-content]").forEach((panel) => {
+          panel.classList.toggle("active", panel.dataset.panelContent === state.selectedPanel);
+        });
+      }
+
+      function renderNodeDetail() {
+        const nodePool = state.snapshot?.nodes || state.liveNodes || [];
+        const node = nodePool.find((item) => item.node_name === state.selectedNodeName);
+        if (!node) {
+          $("node-detail").innerHTML = `<div class="empty">暂无节点</div>`;
+          return;
+        }
+        $("node-detail").innerHTML = `<div class="node-title">
+            <strong>${escapeHtml(nodeLabels[node.node_name] || node.node_name)}</strong><span class="pill">${escapeHtml(node.status)}</span>
+          </div>
+          <div class="facts">
+            <div><span>产出</span><b>${node.output_ids.length}</b></div>
+            <div><span>开始</span><b>${formatDate(node.started_at)}</b></div>
+            <div><span>结束</span><b>${formatDate(node.finished_at)}</b></div>
+          </div>
+          <div class="decision">${
+            node.decisions.length
+              ? node.decisions
+                  .map((item) => `<div><span>${escapeHtml(item.label)}</span><b>${escapeHtml(formatDecisionValue(item.value))}</b></div>`)
+                  .join("")
+              : `<div><span>decision</span><b>none</b></div>`
+          }</div>
+          ${renderWarnings(node.warnings)}`;
+      }
+
+      function renderSignalDetail() {
+        const signal = getAllSignals().find((item) => item.id === state.selectedSignalId);
+        if (!signal) {
+          $("signal-detail").innerHTML = `<div class="empty">暂无事件详情</div>`;
+          return;
+        }
+        $("signal-detail").innerHTML = `<div class="signal-title">
+            <strong>${escapeHtml(signal.symbol)} ${escapeHtml(signal.name || "")}</strong>
+            <b class="score ${signal.final_score >= 0 ? "positive" : "negative"}">${formatScore(signal.final_score)}</b>
+          </div>
+          <p class="brief">${escapeHtml(signal.brief)}</p>
+          <p class="brief">${escapeHtml(signal.event?.metadata?.event_card?.summary || signal.event?.summary || "")}</p>
+          <div class="decision">
+            <div><span>聚合新闻</span><b>${signal.event?.news_ids?.length || 0}</b></div>
+            <div><span>事件类型</span><b>${escapeHtml(signal.event?.event_type || "-")}</b></div>
+            <div><span>最新来源</span><b>${escapeHtml(signal.event?.metadata?.latest_source || "-")}</b></div>
+            <div><span>事件卡</span><b>${escapeHtml(signal.event?.metadata?.event_card?.generator || "-")}</b></div>
+            <div><span>事件状态</span><b>${escapeHtml(signal.event?.metadata?.event_store_status || "-")}</b></div>
+            <div><span>总证据</span><b>${escapeHtml(signal.event?.metadata?.stored_evidence_count || "-")}</b></div>
+          </div>
+          ${renderClassificationAudit(signal)}
+          <div class="bars">${scoreLabels
+            .map(([key, label]) => {
+              const value = Number(signal.score_breakdown[key] || 0);
+              const width = Math.min(100, Math.abs(value));
+              return `<div class="bar"><span>${label}</span><span class="track"><i class="${
+                key === "uncertainty_penalty" ? "penalty" : ""
+              }" style="width:${width}%"></i></span><b>${key === "uncertainty_penalty" ? "-" : ""}${Math.round(value)}</b></div>`;
+            })
+            .join("")}</div>
+          <div class="horizons">
+            <span>短 ${formatScore(signal.horizon_scores.short || 0)}</span>
+            <span>中 ${formatScore(signal.horizon_scores.mid || 0)}</span>
+            <span>长 ${formatScore(signal.horizon_scores.long || 0)}</span>
+          </div>
+          ${renderBacktest(signal)}
+          <div class="actions">
+            <button class="secondary" data-override-direction="bullish">改为利好</button>
+            <button class="secondary" data-override-direction="bearish">改为利空</button>
+            <button class="secondary" data-market-symbol="${escapeHtml(signal.symbol)}">查看分时</button>
+          </div>
+          <div id="market-panel"></div>
+          <div class="evidence">${(signal.evidence || [])
+            .map(
+              (item) => `<a href="${escapeHtml(item.url || "#")}" target="_blank" rel="noreferrer">
+                <span>${escapeHtml(item.title)}</span>
+                <small>${escapeHtml(item.source)} · ${formatDate(item.published_at)}</small>
+              </a>`,
+            )
+            .join("")}</div>
+          ${renderWarnings(signal.warnings)}`;
+        document.querySelectorAll("[data-override-direction]").forEach((button) => {
+          button.addEventListener("click", () => overrideDirection(signal, button.dataset.overrideDirection));
+        });
+        document.querySelectorAll("[data-market-symbol]").forEach((button) => {
+          button.addEventListener("click", () => loadMarket(button.dataset.marketSymbol));
+        });
+      }
+
+      function renderRetainedEvents() {
+        const items = state.snapshot?.retained_events || [];
+        if (!items.length) {
+          $("retained-events").innerHTML = `<div class="empty">暂无留存事件</div>`;
+          return;
+        }
+        $("retained-events").innerHTML = `<div class="retained-list">${items
+          .slice(0, 8)
+          .map(
+            (item) => `<div class="retained-item">
+              <strong>${escapeHtml(item.symbol)} ${escapeHtml(item.name || "")}</strong>
+              <span>${escapeHtml(item.event_title || "")}</span>
+              <small>${escapeHtml(item.decay_state || "active")} · 当前 ${formatScore(item.current_score)} · 衰减 ${formatScore(item.decayed_score)}</small>
+            </div>`,
+          )
+          .join("")}</div>`;
+      }
+
+      function renderRankHistory() {
+        const items = [
+          ...(state.snapshot?.bullish_top || []).map((item, index) => ({ ...item, rank_type: "利好", rank_index: index + 1 })),
+          ...(state.snapshot?.bearish_top || []).map((item, index) => ({ ...item, rank_type: "利空", rank_index: index + 1 })),
+        ];
+        if (!items.length) {
+          $("rank-history").innerHTML = `<div class="empty">暂无历史榜</div>`;
+          return;
+        }
+        $("rank-history").innerHTML = `<div class="retained-list">${items
+          .slice(0, 8)
+          .map(
+            (item) => `<div class="retained-item">
+              <strong>${escapeHtml(item.rank_type)} #${item.rank_index} ${escapeHtml(item.symbol)}</strong>
+              <span>${escapeHtml(item.name || "")}</span>
+              <small>${formatScore(item.final_score)} · ${escapeHtml(item.primary_horizon)}</small>
+            </div>`,
+          )
+          .join("")}</div>`;
+      }
+
+      function renderBacktest(signal) {
+        const result = signal.metadata?.backtest;
+        if (!result || !result.windows) return "";
+        const rows = Object.entries(result.windows)
+          .map(([key, value]) => {
+            const abnormal = typeof value === "object" ? value.abnormal_return : value;
+            const raw = typeof value === "object" ? value.raw_return : value;
+            return `<span title="raw ${formatScore(raw)}">${escapeHtml(key)} AR ${formatScore(abnormal)}</span>`;
+          })
+          .join("");
+        return `<div class="horizons">${rows || "<span>历史验证不足</span>"}</div>`;
+      }
+
+      function renderClassificationAudit(signal) {
+        const rule = signal.metadata?.rule_classification || {};
+        const llm = signal.metadata?.llm_classification || {};
+        const merge = signal.metadata?.classification_merge || {};
+        const llmMeta = llm.meta || llm.raw?._llm_meta || {};
+        return `<div class="decision">
+          <div><span>规则方向</span><b>${escapeHtml(rule.direction || "-")} / ${Math.round(Number(rule.confidence || 0))}</b></div>
+          <div><span>规则命中</span><b>${escapeHtml([...(rule.bullish_hits || []), ...(rule.bearish_hits || [])].slice(0, 3).join("、") || "-")}</b></div>
+          <div><span>LLM方向</span><b>${escapeHtml(llm.direction || signal.metadata?.llm_classification_status || "-")} / ${Math.round(Number(llm.confidence || 0))}</b></div>
+          <div><span>LLM缓存</span><b>${llmMeta.cache_hit ? "命中" : llmMeta.model ? "新调用" : "-"}</b></div>
+          <div><span>最终来源</span><b>${escapeHtml(merge.final_source || "-")}</b></div>
+          <div><span>判断冲突</span><b>${merge.disagreement ? "是" : "否"}</b></div>
+        </div>`;
+      }
+
+      async function overrideDirection(signal, direction) {
+        if (!signal || !direction) return;
+        $("error").innerHTML = "";
+        try {
+          const response = await fetch("/api/workflow/rerun-from", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              from_node: "feedback_override",
+              override: {
+                target_type: "signal",
+                target_id: signal.id,
+                field: "direction",
+                old_value: signal.direction,
+                new_value: direction,
+                reason: "manual correction from web",
+                apply_scope: "this_event_only",
+              },
+            }),
+          });
+          if (!response.ok) throw new Error("HTTP " + response.status);
+          state.snapshot = await response.json();
+          state.selectedSignalId = signal.id;
+          render();
+        } catch (error) {
+          $("error").innerHTML = `<div class="error">${escapeHtml(error.message || "修正失败")}</div>`;
+        }
+      }
+
+      async function loadMarket(symbol) {
+        const panel = $("market-panel");
+        if (!panel || !symbol) return;
+        panel.innerHTML = `<div class="market-box"><div class="market-line"><span>行情加载中</span><b>${escapeHtml(symbol)}</b></div></div>`;
+        try {
+          const [quoteResponse, trendResponse] = await Promise.all([
+            fetch(`/api/market/quote/${symbol}`),
+            fetch(`/api/market/intraday/${symbol}`),
+          ]);
+          const quote = (await quoteResponse.json()).item || {};
+          const trends = (await trendResponse.json()).item || {};
+          panel.innerHTML = renderMarketBox(symbol, quote, trends);
+        } catch (error) {
+          panel.innerHTML = `<div class="market-box"><div class="market-line"><span>行情不可用</span><b>${escapeHtml(error.message || "")}</b></div></div>`;
+        }
+      }
+
+      function renderMarketBox(symbol, quote, trends) {
+        const bars = trends.bars || [];
+        const price = quote.price == null ? "-" : Number(quote.price).toFixed(3);
+        const pct = quote.pct_change == null ? "-" : `${Number(quote.pct_change).toFixed(2)}%`;
+        const chart = bars.length ? sparklineSvg(bars) : `<div class="empty">分时源暂不可用</div>`;
+        return `<div class="market-box">
+          <div class="market-line"><span>${escapeHtml(symbol)} ${escapeHtml(quote.name || "")}</span><b>${price} / ${pct}</b></div>
+          ${chart}
+          ${trends.error ? `<small>${escapeHtml(trends.error)}</small>` : ""}
+        </div>`;
+      }
+
+      function sparklineSvg(bars) {
+        const prices = bars.map((bar) => Number(bar.price)).filter((value) => Number.isFinite(value));
+        if (prices.length < 2) return `<div class="empty">分时数据不足</div>`;
+        const avgPrices = bars.map((bar) => Number(bar.avg_price)).filter((value) => Number.isFinite(value));
+        const volumes = bars.map((bar) => Number(bar.volume) || 0);
+        const min = Math.min(...prices);
+        const max = Math.max(...prices);
+        const range = max - min || 1;
+        const width = 360;
+        const height = 120;
+        const pricePoints = prices
+          .map((price, index) => {
+            const x = (index / Math.max(1, prices.length - 1)) * width;
+            const y = height - 36 - ((price - min) / range) * (height - 48) - 6;
+            return `${x.toFixed(1)},${y.toFixed(1)}`;
+          })
+          .join(" ");
+        const avgPoints = avgPrices.length === prices.length
+          ? avgPrices
+              .map((price, index) => {
+                const x = (index / Math.max(1, avgPrices.length - 1)) * width;
+                const y = height - 36 - ((price - min) / range) * (height - 48) - 6;
+                return `${x.toFixed(1)},${y.toFixed(1)}`;
+              })
+              .join(" ")
+          : "";
+        const maxVolume = Math.max(...volumes, 1);
+        const barsSvg = volumes
+          .map((volume, index) => {
+            const x = (index / Math.max(1, volumes.length - 1)) * width;
+            const h = (volume / maxVolume) * 26;
+            return `<rect x="${x.toFixed(1)}" y="${(height - h).toFixed(1)}" width="1.2" height="${h.toFixed(1)}" fill="#9fb8bd" opacity="0.65" />`;
+          })
+          .join("");
+        return `<svg class="sparkline" viewBox="0 0 ${width} ${height}" preserveAspectRatio="none">
+          ${barsSvg}
+          ${avgPoints ? `<polyline fill="none" stroke="#b7791f" stroke-width="1.5" points="${avgPoints}" />` : ""}
+          <polyline fill="none" stroke="#007a72" stroke-width="2.5" points="${pricePoints}" />
+        </svg>`;
+      }
+
+      function getAllSignals() {
+        if (!state.snapshot) return [];
+        const seen = new Set();
+        const items = [...state.snapshot.bullish_top, ...state.snapshot.bearish_top, ...state.snapshot.signals];
+        return items.filter((item) => {
+          if (seen.has(item.id)) return false;
+          seen.add(item.id);
+          return true;
+        });
+      }
+
+      function renderWarnings(warnings) {
+        if (!warnings || !warnings.length) return "";
+        return `<div class="warnings">${warnings.map((warning) => `<span>${escapeHtml(warning)}</span>`).join("")}</div>`;
+      }
+
+      function formatDecisionValue(value) {
+        if (value && typeof value === "object") {
+          const text = JSON.stringify(value);
+          return text.length > 120 ? text.slice(0, 117) + "..." : text;
+        }
+        return String(value ?? "");
+      }
+
+      function formatScore(value) {
+        const number = Number(value || 0);
+        return number > 0 ? `+${number.toFixed(2)}` : number.toFixed(2);
+      }
+
+      function formatDate(value) {
+        if (!value) return "-";
+        return new Date(value).toLocaleString("zh-CN", {
+          month: "2-digit",
+          day: "2-digit",
+          hour: "2-digit",
+          minute: "2-digit",
+        });
+      }
+
+      function formatDuration(seconds) {
+        const total = Math.max(0, Math.round(Number(seconds) || 0));
+        const minutes = Math.floor(total / 60);
+        const rest = total % 60;
+        if (minutes <= 0) return `${rest}秒`;
+        if (minutes < 60) return rest ? `${minutes}分${rest}秒` : `${minutes}分`;
+        const hours = Math.floor(minutes / 60);
+        const minuteRest = minutes % 60;
+        return minuteRest ? `${hours}小时${minuteRest}分` : `${hours}小时`;
+      }
+
+      function escapeHtml(value) {
+        return String(value ?? "")
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;")
+          .replaceAll("'", "&#039;");
+      }
+
+      document.querySelectorAll("[data-filter]").forEach((button) => {
+        button.addEventListener("click", () => {
+          state.filter = button.dataset.filter;
+          document.querySelectorAll("[data-filter]").forEach((item) => {
+            item.classList.toggle("active", item === button);
+            item.classList.toggle("good", item.dataset.filter === "bullish" && item === button);
+            item.classList.toggle("bad", item.dataset.filter === "bearish" && item === button);
+          });
+          renderSignals();
+          renderSignalDetail();
+        });
+      });
+      document.querySelectorAll("[data-panel]").forEach((button) => {
+        button.addEventListener("click", () => {
+          state.selectedPanel = button.dataset.panel;
+          renderInspectorPanels();
+        });
+      });
+      document.querySelectorAll("[data-run-mode]").forEach((button) => {
+        button.addEventListener("click", () => {
+          if (state.currentJobId) return;
+          state.runMode = button.dataset.runMode || "fast";
+          document.querySelectorAll("[data-run-mode]").forEach((item) => {
+            item.classList.toggle("active", item === button);
+          });
+        });
+      });
+      $("query").addEventListener("input", (event) => {
+        state.query = event.target.value;
+        renderSignals();
+        renderSignalDetail();
+      });
+      $("refresh").addEventListener("click", refresh);
+      $("watch-form").addEventListener("submit", addWatch);
+      $("watch-cancel").addEventListener("click", resetWatchForm);
+      $("watch-delete-current").addEventListener("click", () => deleteWatch(state.editingSymbol));
+      refresh();
+    </script>
+  </body>
+</html>

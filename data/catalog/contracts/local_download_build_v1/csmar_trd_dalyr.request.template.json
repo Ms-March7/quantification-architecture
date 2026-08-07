@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "mode": "local_download_candidate",
+  "dataset_id": "csmar-trd-dalyr",
+  "run_id": "REPLACE_WITH_RUN_ID",
+  "source_id": "CSMAR_MANUAL_EXPORT",
+  "dataset_schema_version": "csmar-manual-20240205-candidate-v1",
+  "authorized_local_research_download": true,
+  "source_access_note": "User confirms the TRD_Dalyr packages were manually downloaded under approved local academic research access; no redistribution or formal admission is asserted.",
+  "include_patterns": [
+    "*.csv",
+    "**/*.csv",
+    "*.zip",
+    "**/*.zip"
+  ],
+  "zip_member_patterns": [
+    "*TRD_Dalyr*.csv",
+    "**/*TRD_Dalyr*.csv",
+    "*.csv",
+    "**/*.csv"
+  ],
+  "table": {
+    "table_name": "trd_dalyr_candidate",
+    "expected_columns": [
+      "Stkcd",
+      "Trddt",
+      "Trdsta",
+      "Opnprc",
+      "Hiprc",
+      "Loprc",
+      "Clsprc",
+      "Dnshrtrd",
+      "Dnvaltrd",
+      "Dsmvosd",
+      "Dsmvtll",
+      "Dretwd",
+      "Dretnd",
+      "Adjprcwd",
+      "Adjprcnd",
+      "Markettype",
+      "Capchgdt",
+      "Ahshrtrd_D",
+      "Ahvaltrd_D",
+      "PreClosePrice",
+      "ChangeRatio"
+    ],
+    "column_types": {
+      "Stkcd": "VARCHAR",
+      "Trddt": "DATE",
+      "Trdsta": "INTEGER",
+      "Opnprc": "DOUBLE",
+      "Hiprc": "DOUBLE",
+      "Loprc": "DOUBLE",
+      "Clsprc": "DOUBLE",
+      "Dnshrtrd": "BIGINT",
+      "Dnvaltrd": "DOUBLE",
+      "Dsmvosd": "DOUBLE",
+      "Dsmvtll": "DOUBLE",
+      "Dretwd": "DOUBLE",
+      "Dretnd": "DOUBLE",
+      "Adjprcwd": "DOUBLE",
+      "Adjprcnd": "DOUBLE",
+      "Markettype": "INTEGER",
+      "Capchgdt": "DATE",
+      "Ahshrtrd_D": "BIGINT",
+      "Ahvaltrd_D": "DOUBLE",
+      "PreClosePrice": "DOUBLE",
+      "ChangeRatio": "DOUBLE"
+    },
+    "date_column": "Trddt",
+    "key_columns": [
+      "Stkcd",
+      "Trddt"
+    ],
+    "required_columns": [
+      "Stkcd",
+      "Trddt"
+    ],
+    "delimiter": ",",
+    "encoding": "utf-8-sig",
+    "allow_extra_columns": false,
+    "partition_mode": "year_month"
+  },
+  "limits": {
+    "max_packages": 1000,
+    "max_csv_sources": 10000,
+    "max_archive_members": 100000,
+    "max_total_input_bytes": 1099511627776,
+    "max_total_unpacked_bytes": 2199023255552,
+    "max_compression_ratio": 1000,
+    "max_rows": 1000000000
+  }
+}

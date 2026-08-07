@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "contract_id": "ricequant-r1-market-reference-probe-v1",
+  "authorized_on": "2026-08-04",
+  "status": "EXECUTED__9_CAPABILITY_CALLS__8_ALLOWED__1_PERMISSION_DENIED__FORMAL_EFFECT_NONE",
+  "executed_on": "2026-08-04",
+  "execution_receipt": "${QUANTIFICATION_ROOT}/reports/data-governance/ricequant-r1-market-reference-probe-20260804-v1/RECEIPT.json",
+  "purpose_ceiling": "INSPECTION_ONLY",
+  "formal_admission": false,
+  "formal_catalog_write": false,
+  "quality_promotion": false,
+  "research_use": false,
+  "factor_efficacy_use": false,
+  "backtest_use": false,
+  "bulk_download": false,
+  "automated_trading": false,
+  "security": {
+    "authentication_source": "EXISTING_RQDATA_RUNTIME_CONFIGURATION_ONLY",
+    "credential_value_capture": false,
+    "credential_value_persistence": false,
+    "account_identity_capture": false,
+    "api_payload_persistence": false
+  },
+  "request_budget": {
+    "maximum_total_business_api_calls": 11,
+    "fresh_process_quota_calls": 2,
+    "capability_calls": 9,
+    "maximum_order_book_ids_per_call": 1,
+    "maximum_calendar_days_per_call": 7,
+    "maximum_returned_rows_per_call": 2000,
+    "maximum_total_returned_rows": 4000,
+    "maximum_measured_incremental_flow_bytes": 5242880,
+    "summary_only": true,
+    "payload_persistence": false,
+    "retry_count": 0
+  },
+  "stop_policy": {
+    "permission_denied": "RECORD_AND_CONTINUE_TO_MEASURE_INDEPENDENT_ENTITLEMENTS",
+    "unexpected_error": "STOP_ALL_REMAINING_CAPABILITY_CALLS",
+    "row_bound_exceeded": "STOP_ALL_REMAINING_CAPABILITY_CALLS",
+    "automatic_fallback_endpoint": false
+  },
+  "bounded_samples": {
+    "stock": "603986.XSHG",
+    "index": "000300.XSHG",
+    "start_date": "2026-07-28",
+    "end_date": "2026-08-03",
+    "index_anchor_date": "2026-08-03",
+    "industry_source": "citics_2019",
+    "industry_label": "银行",
+    "industry_level": 1,
+    "yield_tenor": "1Y",
+    "risk_model": "v1",
+    "risk_industry_mapping": "sws_2021",
+    "risk_factors": ["beta", "size", "momentum"]
+  },
+  "allowed_api_calls": [
+    "user.get_quota",
+    "get_shares",
+    "get_turnover_rate",
+    "index_components",
+    "index_weights",
+    "get_industry_change",
+    "get_industry_mapping",
+    "get_price",
+    "get_yield_curve",
+    "get_factor_exposure"
+  ],
+  "persisted_summary_fields": [
+    "permission_status",
+    "returned_field_names",
+    "row_counts",
+    "date_coverage",
+    "canonical_sha256",
+    "cross_endpoint_difference_counts",
+    "sanitized_error_type_and_message",
+    "quota_numeric_fields"
+  ],
+  "formal_limits": [
+    "client_entrypoint_presence_does_not_prove_entitlement",
+    "bounded_positive_response_does_not_prove_complete_history",
+    "rice_create_tm_is_not_assumed_to_be_legal_available_at",
+    "vendor_index_weights_are_not_assumed_to_be_official_complete_provider_history",
+    "vendor_industry_history_is_not_assumed_to_close_official_csrc_or_sw_pit",
+    "vendor_risk_exposure_is_calibration_only_not_reproducible_internal_core20",
+    "source_retention_derivation_and_snapshot_rights_are_not_inferred"
+  ],
+  "prohibited_actions": [
+    "print_read_or_persist_credentials",
+    "persist_api_payload",
+    "bulk_history_request",
+    "retry_failed_api_call",
+    "write_datasets_json",
+    "modify_roadmap_or_current_source_registry",
+    "publish_formal_snapshot",
+    "promote_quality",
+    "run_factor_or_backtest",
+    "open_validation_or_holdout",
+    "connect_broker_or_trade"
+  ]
+}

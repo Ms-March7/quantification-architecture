@@ -1,0 +1,29 @@
+version: 0.1
+name: report-safety
+description: Minimal report safety contract for finance evidence reports.
+
+required_evidence_markers:
+  - source
+  - date
+  - sample
+
+weak_evidence_markers:
+  - stale
+  - missing
+  - incomplete
+  - small sample
+  - weak evidence
+  - limited evidence
+
+strong_claim_terms:
+  - must buy
+  - guaranteed
+  - certainly
+  - will definitely
+  - no risk
+  - all in
+
+advice_separation_terms:
+  - not investment advice
+  - historical observation
+  - evidence
