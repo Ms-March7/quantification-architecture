@@ -16,7 +16,7 @@ llm:
     command: "codex"
     sandbox: "read-only"
     model: ""
-    prompt_version: "event_card_v0.6"
+    prompt_version: "event_card_v0.7"
     cache: "on"
     timeout_seconds: 45
     max_calls_per_run: 3

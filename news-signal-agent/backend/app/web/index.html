@@ -639,6 +639,17 @@
         color: #3a4a53;
         line-height: 1.55;
       }
+      .source-quote {
+        margin: 8px 0 12px;
+        padding-left: 10px;
+        border-left: 3px solid #007a72;
+        line-height: 1.55;
+        overflow-wrap: anywhere;
+      }
+      .source-quote footer {
+        color: #6a7880;
+        font-size: 12px;
+      }
       .bars {
         display: grid;
         gap: 8px;
@@ -1395,17 +1406,29 @@
           $("signal-detail").innerHTML = `<div class="empty">暂无事件详情</div>`;
           return;
         }
+        const card = signal.event?.metadata?.event_card;
+        const quotes = Array.isArray(card?.source_quotes)
+          ? card.source_quotes.filter((item) => typeof item?.quote === "string" && item.quote.trim())
+          : [];
+        const question = typeof card?.follow_up_question === "string" ? card.follow_up_question.trim() : "";
         $("signal-detail").innerHTML = `<div class="signal-title">
             <strong>${escapeHtml(signal.symbol)} ${escapeHtml(signal.name || "")}</strong>
             <b class="score ${signal.final_score >= 0 ? "positive" : "negative"}">${formatScore(signal.final_score)}</b>
           </div>
           <p class="brief">${escapeHtml(signal.brief)}</p>
-          <p class="brief">${escapeHtml(signal.event?.metadata?.event_card?.summary || signal.event?.summary || "")}</p>
+          <p class="brief">${escapeHtml(card?.summary || signal.event?.summary || "")}</p>
+          ${quotes.length ? `<h3>来源摘录</h3>${quotes.map((item) => {
+            const date = item.published_at ? new Date(item.published_at) : null;
+            const dateLabel = date && Number.isFinite(date.getTime()) ? date.toLocaleDateString("zh-CN") : "";
+            const attribution = [item.source, item.title, dateLabel].filter(Boolean).join(" · ");
+            return `<blockquote class="source-quote">${escapeHtml(item.quote)}${attribution ? `<footer>${escapeHtml(attribution)}</footer>` : ""}</blockquote>`;
+          }).join("")}` : ""}
+          ${question ? `<h3>待核查问题</h3><p class="brief">${escapeHtml(question)}</p>` : ""}
           <div class="decision">
             <div><span>聚合新闻</span><b>${signal.event?.news_ids?.length || 0}</b></div>
             <div><span>事件类型</span><b>${escapeHtml(signal.event?.event_type || "-")}</b></div>
             <div><span>最新来源</span><b>${escapeHtml(signal.event?.metadata?.latest_source || "-")}</b></div>
-            <div><span>事件卡</span><b>${escapeHtml(signal.event?.metadata?.event_card?.generator || "-")}</b></div>
+            <div><span>事件卡</span><b>${escapeHtml(card?.generator || "-")}</b></div>
             <div><span>事件状态</span><b>${escapeHtml(signal.event?.metadata?.event_store_status || "-")}</b></div>
             <div><span>总证据</span><b>${escapeHtml(signal.event?.metadata?.stored_evidence_count || "-")}</b></div>
           </div>

@@ -1,6 +1,8 @@
 # Quantification Architecture
 
-这是本地 Quantification 工作区的**脱敏架构镜像**，用于私有 GitHub 仓库中的版本管理、代码审阅与协作。
+这是 Quantification 工作区的脱敏工程仓库，包含数据治理、因子研究与投研工具。
+
+**动态基本面投研 Agent**　推理缓存可以压缩，为什么还需要增加存储容量？用 2026 年上半年 NVIDIA 和 Google 的公开材料，按日期回放技术、应用需求与供应商收入之间的传导路径。[阅读案例和推理图](news-signal-agent/docs/memory-cycle-case.md) · [使用说明](news-signal-agent/README.md#动态基本面研判) · [在 GitHub 运行](https://github.com/Ms-March7/quantification-architecture/actions/workflows/fundamental-research.yml)
 
 本仓库包含：
 
@@ -32,7 +34,7 @@
 - 数据访问：`data/catalog/ACCESS_POLICY.md`
 - 多因子研究：`多因子/README.md`
 - 发布边界：`PUBLISH_SCOPE.md`
-- 复制审计：`COPY_AUDIT.json`（记录脱敏前白名单复制）；最终内容与哈希以 `FILE_MANIFEST.json` 为准。
+- 原始镜像的复制审计见 `COPY_AUDIT.json`，该批次的文件与哈希见 `FILE_MANIFEST.json`。后续改动可在 Git 历史中查看。
 
 ## 本地重建
 

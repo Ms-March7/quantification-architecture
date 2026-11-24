@@ -1,0 +1,83 @@
+# Standing analytical hypotheses, retrospectively tested with short public primary-source excerpts.
+# Dates use the end of the US Pacific publication day when only a date is known.
+target: 推理基础设施与存储产业链
+question: 单次推理所需缓存下降，是否足以调低存储硬件需求预期？
+sources:
+  - id: nvidia_ces
+    title: NVIDIA · CES 推理上下文存储平台发布
+    url: https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-BlueField-4-Powers-New-Class-of-AI-Native-Storage-Infrastructure-for-the-Next-Frontier-of-AI/default.aspx
+    available_at: '2026-01-05T23:59:59-08:00'
+    dimension: supply
+    scope: 平台设计公告；未披露该平台实际采购或部署量
+    excerpt: extending GPU memory capacity, enabling high-speed sharing across nodes
+  - id: google_research
+    title: Google Research · TurboQuant 长上下文实验
+    url: https://research.google/blog/turboquant-redefining-ai-efficiency-with-extreme-compression/
+    available_at: '2026-03-24T23:59:59-07:00'
+    dimension: competition
+    scope: 特定模型和长上下文评测的 KV 缓存大小；不覆盖整机显存或商业采用率
+    excerpt: reducing the key value memory size by a factor of at least 6x
+  - id: google_io
+    title: Google I/O · 跨服务月度 token 处理量
+    url: https://blog.google/innovation-and-ai/sundar-pichai-io-2026/
+    available_at: '2026-05-19T23:59:59-07:00'
+    dimension: demand
+    scope: 谷歌跨服务的月度流量；未披露峰值并发或 TurboQuant 部署率
+    excerpt: that number jumped 7x to over 3.2 quadrillion per month
+feeds:
+  - url: https://nvidianews.nvidia.com/releases.xml
+    dimension: supply
+    scope: NVIDIA 新闻稿（匹配上下文存储相关关键词）
+    keywords: [memory, storage, inference, BlueField]
+    max_items: 8
+branches:
+  - id: tiering
+    from_node: 跨节点复用上下文
+    to_node: 缓存可放在多个存储层
+    condition: 推理服务采用支持该设计的平台。
+    next_check: 核实部署量及 GPU 内存、主存和外部存储分别承担什么工作。
+    evidence:
+      - source_id: nvidia_ces
+        quote: extending GPU memory capacity, enabling high-speed sharing across nodes
+        stance: supports
+        interpretation: 平台提供了设计路径，出货量未知。
+  - id: compression
+    from_node: 推理缓存压缩
+    to_node: 单请求所需缓存下降
+    condition: 目标工作负载可复现论文测试的精度和性能，且实际启用该方法。
+    next_check: 生产环境的模型、上下文长度、采用率和每个驻留 token 的字节数。
+    evidence:
+      - {source_id: google_research, quote: reducing the key value memory size by a factor of at least 6x, stance: supports, interpretation: 该实验验证了技术可行性，效果限定在测试口径。}
+  - id: traffic
+    from_node: 谷歌披露月度 token 处理量
+    to_node: 推理服务使用增长
+    condition: 使用同一公司公开说明的跨服务统计口径比较。
+    next_check: 各应用的流量构成、峰值及外部客户使用比例。
+    evidence:
+      - {source_id: google_io, quote: jumped 7x to over 3.2 quadrillion per month, stance: supports, interpretation: 公司披露跨服务总量增长，口径是月度 token 流量。}
+  - id: residency
+    from_node: 推理服务使用增长
+    to_node: 峰值驻留上下文增加
+    condition: 使用量增长伴随更长的上下文或更多并发会话。
+    next_check: 峰值并发、驻留时长及缓存命中率。
+  - id: unit_to_total
+    from_node: 单请求所需缓存下降
+    to_node: 系统峰值缓存需求增加
+    effect: constrains
+    condition: 并发、上下文分布和缓存策略保持可比。
+    next_check: 同工作负载部署前后的系统级峰值缓存。
+  - id: scale_to_total
+    from_node: 峰值驻留上下文增加
+    to_node: 系统峰值缓存需求增加
+    condition: 并发增长超过压缩和跨请求复用带来的节省。
+    next_check: 同一部署范围内峰值驻留 token 与实际每 token 字节数。
+  - id: orders
+    from_node: 系统峰值缓存需求增加
+    to_node: 特定存储供应商收入增长
+    condition: 系统新增容量需要采购该供应商可交付的具体产品。
+    next_check: 客户配置、物料清单、认证、采购份额和交付。
+  - id: allocation
+    from_node: 缓存可放在多个存储层
+    to_node: 特定存储供应商收入增长
+    condition: 新增容量落在供应商对应的存储层，且已获得订单。
+    next_check: HBM、主存或外部存储的真实配比和订单。

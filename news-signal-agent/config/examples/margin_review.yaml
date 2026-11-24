@@ -1,0 +1,87 @@
+# Fictional teaching case. All documents, quotes and times are synthetic.
+synthetic: true
+question: 存储涨价能否持续改善示例厂商毛利，并支撑更高的估值？
+opened_at: &opened 2026-04-20T09:00:00+08:00
+nodes:
+  - {id: spot, kind: observation, label: 固定规格行业现货报价, recorded_at: *opened}
+  - {id: asp, kind: hypothesis, label: 公司合约售价上升, recorded_at: *opened}
+  - {id: margin, kind: hypothesis, label: 产品毛利改善可持续, recorded_at: *opened}
+  - {id: valuation, kind: conclusion, label: 估值能够由持续盈利支撑, recorded_at: *opened}
+  - {id: restocking, kind: observation, label: 客户提前备货, recorded_at: &buyer_review 2026-05-12T09:30:00+08:00}
+  - {id: shipments, kind: hypothesis, label: 本期出货增加, recorded_at: *buyer_review}
+  - {id: foundry, kind: observation, label: 晶圆采购成本调整, recorded_at: &later 2026-05-15T11:00:00+08:00}
+edges:
+  - {id: repricing, from_node: spot, to_node: asp, effect: supports, condition: 产品规格可比，现货变动传导到公司合约结算价。, next_check: 查同规格合约的实际结算价和客户覆盖范围。, recorded_at: *opened}
+  - {id: price_margin, from_node: asp, to_node: margin, effect: supports, condition: 产品结构稳定且单位成本增幅小于售价增幅。, recorded_at: *opened}
+  - {id: valuation_link, from_node: margin, to_node: valuation, effect: supports, condition: 利润改善的持续期足以支撑估值中隐含的盈利要求。, next_check: 按估值对应的盈利假设反推所需毛利水平，对照公司已披露的产品结构。, recorded_at: *opened}
+  - {id: pull_forward, from_node: restocking, to_node: shipments, effect: supports, condition: 订单已经交付并在本期确认收入。, recorded_at: *buyer_review}
+  - {id: demand_payback, from_node: restocking, to_node: margin, effect: constrains, condition: 备货透支下期需求且公司需降价消化库存。, recorded_at: *buyer_review}
+  - {id: cost_margin, from_node: foundry, to_node: margin, effect: constrains, condition: 较高采购成本进入当期销售成本且无法足额转嫁。, recorded_at: *later}
+sources:
+  - id: industry_note
+    title: 示例行业报价说明
+    scope: 单一规格、小批量现货
+    available_at: 2026-04-22T15:00:00+08:00
+    url: https://example.org/industry-note
+    excerpt: 本期固定规格现货报价上调。样本仅含小批量现货成交。
+  - id: company_update
+    title: 示例公司季度经营问答
+    scope: 公司部分存储产品、当季
+    available_at: 2026-04-29T17:00:00+08:00
+    url: https://example.org/company-update
+    excerpt: 部分合约客户已按新价结算。该批次产品的毛利随售价提高。
+  - id: buyer_note
+    title: 示例下游采购问答
+    scope: 单一下游采购方、下一交付周期
+    available_at: 2026-05-10T14:00:00+08:00
+    url: https://example.org/buyer-note
+    excerpt: 本轮提货含提前备货。下一批订单仍按原合约价执行。
+  - id: company_cost
+    title: 示例公司成本问答
+    scope: 公司新购晶圆、未来结转批次
+    available_at: 2026-05-15T10:00:00+08:00
+    url: https://example.org/company-cost
+    excerpt: 新采购晶圆的单位成本上升。本批次预计于下一季度结转成本。
+evidence:
+  - edge_id: repricing
+    source_id: industry_note
+    stance: supports
+    quote: 本期固定规格现货报价上调。
+    interpretation: 行业现货已有上行动因，公司的合约重定价仍待核实。
+    recorded_at: 2026-04-23T09:00:00+08:00
+  - edge_id: repricing
+    source_id: company_update
+    stance: supports
+    quote: 部分合约客户已按新价结算。
+    interpretation: 调价已传导到部分客户，全体客户的成交均价仍未知。
+    recorded_at: &q1_review 2026-04-29T18:00:00+08:00
+  - edge_id: price_margin
+    source_id: company_update
+    stance: supports
+    quote: 该批次产品的毛利随售价提高。
+    interpretation: 本批次已体现价格传导，持续期缺少证据。
+    recorded_at: *q1_review
+  - edge_id: repricing
+    source_id: buyer_note
+    stance: challenges
+    quote: 下一批订单仍按原合约价执行。
+    interpretation: 至少一名客户的合同尚未重定价，削弱了普遍传导的推断。
+    recorded_at: *buyer_review
+  - edge_id: pull_forward
+    source_id: buyer_note
+    stance: supports
+    quote: 本轮提货含提前备货。
+    interpretation: 提货节奏有利于本期出货，公司确认收入的时点待核。
+    recorded_at: *buyer_review
+  - edge_id: demand_payback
+    source_id: buyer_note
+    stance: supports
+    quote: 本轮提货含提前备货。
+    interpretation: 同一提前备货现象也提示后期需求可能被挪用，尚无普遍降价的证据。
+    recorded_at: *buyer_review
+  - edge_id: cost_margin
+    source_id: company_cost
+    stance: supports
+    quote: 新采购晶圆的单位成本上升。本批次预计于下一季度结转成本。
+    interpretation: 若销售价格不再上调，新成本结转会压缩后续批次毛利。
+    recorded_at: *later
